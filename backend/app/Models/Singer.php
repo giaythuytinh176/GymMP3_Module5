@@ -13,4 +13,8 @@ class Singer extends Model
         'image',
         'description'
       ];
+
+    public function Song(){
+        return $this->hasMany(Song::class,'singer_id');
+    }
 }

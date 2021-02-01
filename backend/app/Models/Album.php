@@ -12,4 +12,8 @@ class Album extends Model
         'album_name',
         'image'
       ];
+
+    public function Song(){
+        return $this->hasMany(Song::class,'album_id');
+    }
 }
