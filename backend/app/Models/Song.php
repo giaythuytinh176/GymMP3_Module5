@@ -21,4 +21,16 @@ class Song extends Model
     ];
 
     use HasFactory;
+
+    public function Album(){
+        return $this->belongsTo(Album::class,'album_id');
+    }
+
+    public function Category(){
+        return $this->belongsTo(Category::class,'category_id');
+    }
+
+    public function Singer(){
+        return $this->belongsTo(Singer::class,'singer_id');
+    }
 }
