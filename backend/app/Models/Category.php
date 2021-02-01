@@ -12,4 +12,8 @@ class Category extends Model
         'category_name',
         'image'
       ];
+
+    public function Song(){
+        return $this->hasMany(Song::class,'category_id');
+    }
 }
