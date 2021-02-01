@@ -19,6 +19,11 @@ class Playlist extends Model
         'view',
     ];
 
+    public function users(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+
+
 
 
 }
