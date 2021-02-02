@@ -71,11 +71,11 @@
 
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Phone</mat-label>
-      <input type="text" matInput formControlName="phone" placeholder="+84123456789">
+      <input type="text" matInput formControlName="phone" placeholder="0123456789">
       <mat-error
         *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched  || (registerForm.get('phone').untouched) && registerFormAttempt">
         <span *ngIf="registerForm.get('phone').hasError('required')">Phone is <strong>required</strong>.</span>
-        <span *ngIf="registerForm.get('phone').hasError('pattern')">Phone must start with +84 followed by 9 or 10 digits.</span>
+        <span *ngIf="registerForm.get('phone').hasError('pattern')">Phone must start with 0 followed by 9 or 10 digits.</span>
       </mat-error>
     </mat-form-field>
 

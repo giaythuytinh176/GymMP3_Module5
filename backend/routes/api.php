@@ -29,4 +29,3 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('/users/{id}', '\App\Http\Controllers\UserController@update')->name('users.update');
 
 });
-

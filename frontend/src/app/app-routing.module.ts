@@ -4,6 +4,7 @@ import {RegisterComponent} from './component/register/register.component';
 import {ProfileComponent} from "./component/profile/profile.component";
 import {AuthGuard} from "./services/userManager/auth.guard";
 import {NotGuardComponent} from "./component/layout/not-guard/not-guard/not-guard.component";
+import {LoginComponent} from "./component/login/login.component";
 
 const routes: Routes = [
   {
@@ -18,14 +19,16 @@ const routes: Routes = [
     path: 'error404',
     component: NotGuardComponent
   },
-
-
-
-
-
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  {
+    path: '**', redirectTo: '',
+    component: RegisterComponent,
+  },
 ];
 
 @NgModule({

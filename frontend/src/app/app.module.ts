@@ -64,7 +64,7 @@ import {
   AngularFireUploadTask,
 } from "@angular/fire/storage";
 import {FirebaseComponent} from "./component/firebase/firebase.component";
-
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +73,7 @@ import {FirebaseComponent} from "./component/firebase/firebase.component";
     ProfileComponent,
     NotGuardComponent,
     FirebaseComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

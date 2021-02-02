@@ -4,7 +4,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SignupInfo} from './signup-info';
 import {ToastrService} from "ngx-toastr";
-import {map} from "rxjs/operators";
+import {LoginInfo} from "./login-info";
+import {JwtResponse} from "./jwt-response";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -51,6 +52,10 @@ export class AuthService {
       this.toasrt.warning('You haven\'t login ...');
       return false;
     }
+  }
+
+  attemptAuth(credentials: LoginInfo): Observable<JwtResponse> {
+    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
 }
