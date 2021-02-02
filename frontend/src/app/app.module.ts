@@ -55,9 +55,16 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
-import {AngularFireStorageModule} from "@angular/fire/storage";
 import {environment} from "../environments/environment";
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { NotGuardComponent } from './component/layout/not-guard/not-guard/not-guard.component';
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from "@angular/fire/storage";
+import {FirebaseComponent} from "./component/firebase/firebase.component";
 import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
@@ -65,7 +72,10 @@ import { LoginComponent } from './component/login/login.component';
     AppComponent,
     RegisterComponent,
     ChangePasswordComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    NotGuardComponent,
+    FirebaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,8 +135,13 @@ import { LoginComponent } from './component/login/login.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    FirebaseComponent,
+  ],
+  bootstrap: [
+    AppComponent,
+  ]
 })
 export class AppModule { }
