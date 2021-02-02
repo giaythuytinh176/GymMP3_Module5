@@ -58,12 +58,14 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {environment} from "../environments/environment";
 import { ChangePasswordComponent } from './component/change-password/change-password.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

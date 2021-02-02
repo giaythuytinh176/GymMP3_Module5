@@ -5,6 +5,11 @@ import { Observable } from 'rxjs';
 import { ChangePassword } from './change-password';
 import { JwtResponse } from './jwt-response';
 import { SignupInfo } from './signup-info';
+import {LoginInfo} from "./login-info";
+
+const TOKEN_KEY = 'AuthToken';
+const USERNAME_KEY = 'AuthUsername';
+const AUTHORITIES_KEY = 'AuthAuthorities';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,10 +21,11 @@ const httpOptions = {
 export class AuthService {
   private signupUrl = 'http://127.0.0.1:8000/api/signup';
   private changePassUrl = 'http://localhost:8080/api/changePassword';
-
+  private loginUrl = 'http://127.0.0.1:8000/api/login';
 
   constructor(private http: HttpClient) {
-    }
+  }
+
 
     signUp(info: SignupInfo): Observable<string> {
       console.log(info);
@@ -29,4 +35,17 @@ export class AuthService {
     changePasswordAuth(info: ChangePassword): Observable<JwtResponse> {
       return this.http.put<JwtResponse>(this.changePassUrl, info, httpOptions);
     }
+    attemptAuth(credentials: LoginInfo): Observable<JwtResponse> {
+    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
+  }
+
+  loggined() {
+    const token = sessionStorage.getItem(TOKEN_KEY);
+    const username = sessionStorage.getItem(USERNAME_KEY);
+    const authority = sessionStorage.getItem(AUTHORITIES_KEY);
+    if (username && token && authority) {
+      return true;
+    }
+    return false;
+  }
 }
