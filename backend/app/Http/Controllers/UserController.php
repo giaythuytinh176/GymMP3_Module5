@@ -13,6 +13,23 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
+    public function authenticate(Request $request)
+    {
+
+        $credentials = $request->only('username', 'password');
+
+
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 400);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+
+        return response()->json(compact('token'));
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -59,4 +76,7 @@ class UserController extends Controller
 
         return response()->json(compact('user'));
     }
+
+
+
 }
