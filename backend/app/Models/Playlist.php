@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Playlist extends Model
 {
     use HasFactory;
-    protected $fillable=[
+
+    protected $fillable = [
         'name_playlist',
         'category_name',
         'description',
@@ -19,11 +20,10 @@ class Playlist extends Model
         'view',
     ];
 
-    public function users(){
-        return $this->belongsTo(User::class,'user_id');
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
-
-
 
 
 }

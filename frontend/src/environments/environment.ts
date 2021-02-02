@@ -3,7 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://127.0.0.1:8000/api',
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  firebaseConfig: {
+    apiKey: 'AIzaSyBBjVystZ5NskbWkWsuBdtLh6ntZdiAQqg',
+    authDomain: 'dataimagemusic.firebaseapp.com',
+    databaseURL: 'https://dataimagemusic-default-rtdb.firebaseio.com',
+    projectId: 'dataimagemusic',
+    storageBucket: 'dataimagemusic.appspot.com',
+    messagingSenderId: '1066682814538',
+    appId: '1:1066682814538:web:17e10bc6565189b29d56b3',
+    measurementId: 'G-VX010H87ZW'
+  },
 };
 
 /*
