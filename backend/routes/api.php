@@ -23,3 +23,4 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 });
 
 Route::post('signup', '\App\Http\Controllers\UserController@register');
+Route::put('changePassword/{id}', '\App\Http\Controllers\UserController@changePassword');
