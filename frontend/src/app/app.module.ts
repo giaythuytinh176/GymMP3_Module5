@@ -56,6 +56,7 @@ import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {environment} from "../environments/environment";
+import { ChangePasswordComponent } from './component/change-password/change-password.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { NotGuardComponent } from './component/layout/not-guard/not-guard/not-guard.component';
 import {
@@ -70,10 +71,11 @@ import { LoginComponent } from './component/login/login.component';
   declarations: [
     AppComponent,
     RegisterComponent,
+    ChangePasswordComponent,
+    LoginComponent,
     ProfileComponent,
     NotGuardComponent,
     FirebaseComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
