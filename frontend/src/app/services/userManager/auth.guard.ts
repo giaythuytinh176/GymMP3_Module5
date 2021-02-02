@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.token.saveToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYxMjI1NDY3NywiZXhwIjoxNjEyMjU4Mjc3LCJuYmYiOjE2MTIyNTQ2NzcsImp0aSI6IlBXbWlJMkhhcmhPUWo5ejEiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Y_nfNvKR4zKyIrJ6WPzp6tprSy9SmTE_CjmpNvWo928');
+    // this.token.saveToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYxMjI1NDY3NywiZXhwIjoxNjEyMjU4Mjc3LCJuYmYiOjE2MTIyNTQ2NzcsImp0aSI6IlBXbWlJMkhhcmhPUWo5ejEiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Y_nfNvKR4zKyIrJ6WPzp6tprSy9SmTE_CjmpNvWo928');
     // this.authService.loggined();
     // return true;
     // console.log(this.authService.loggined());
