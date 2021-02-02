@@ -1,0 +1,124 @@
+<div class="container" style="text-align: center; font-size: 40px;">
+  <b>
+    Cập nhật Profile
+  </b>
+</div>
+<div class="container" style="text-align: center; font-size: 24px;">
+</div>
+<div class="main-container" style="margin-top: 100px">
+  <div class="row section">
+    <div class="col-xl-4 col-md-10 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title mb-0" style="text-align: center">Edit User</h6>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="profileForm" class="ng-untouched ng-pristine ng-valid" (ngSubmit)="updateUser()">
+
+            <div class="form-row form-group">
+              <label class="col-lg-2 text-md-right col-form-label" for="username">Username</label>
+              <div class="col-lg-9">
+                <input class="form-control" id="username" value="{{ userinfo?.username }}" type="text" disabled>
+              </div>
+            </div>
+
+            <div class="form-row form-group">
+              <label class="col-lg-2 text-md-right col-form-label" for="name">Name</label>
+              <div class="col-lg-9">
+                <input class="form-control" id="name" type="text" formControlName="name">
+                <div *ngIf="profileForm.get('name').invalid && profileForm.get('name').touched" style="color: #ff0000">
+                  Name is <strong>required</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row form-group">
+              <label class="col-lg-2 text-md-right col-form-label" for="address">Address</label>
+              <div class="col-lg-9">
+                <input class="form-control" id="address" type="text" formControlName="address">
+                <div *ngIf="profileForm.get('address').invalid && profileForm.get('address').touched"
+                     style="color: #ff0000">
+                  Address is <strong>required</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row form-group">
+              <label class="col-lg-2 text-md-right col-form-label" for="email">Email</label>
+              <div class="col-lg-9">
+                <input class="form-control" id="email" type="text" formControlName="email">
+                <div *ngIf="profileForm.get('email').invalid && profileForm.get('email').touched" style="color: red">
+                  <div *ngIf="profileForm.get('email').hasError('required')">
+                    Email is <strong>required</strong>.
+                  </div>
+                  <div *ngIf="profileForm.get('email').hasError('email')" style="color: red">
+                    Please enter a <strong>valid email.</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row form-group">
+              <label class="col-lg-2 text-md-right col-form-label" for="phone">Phone Number</label>
+              <div class="col-lg-9">
+                <input class="form-control" id="phone" type="text" formControlName="phone">
+                <div *ngIf="profileForm.get('phone').invalid && profileForm.get('phone').touched"
+                     style="color: red">
+                  Phone is <strong>required</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row form-group">
+              <label class="col-lg-2 text-md-right col-form-label" for="phone">Avatar</label>
+              <div class="col-lg-9">
+                <label class="label-input" for="avatar">
+                  <div *ngIf="firebase.fileToUpload; else NoSelect">
+                    Filename: {{ firebase.fileToUpload.name }}
+                  </div>
+                  <ng-template #NoSelect>
+                    Choose File
+                  </ng-template>
+                  <input formControlName="avatar" class="form-control" id="avatar" type="file"
+                         (change)="firebase.handleFileInput($event)"
+                         autocomplete="off"
+                         accept="image/*"
+                  />
+                </label>
+
+                <div *ngIf="firebase.percentage | async as pct">
+                  <!--  <mat-progress-bar mode="determinate" [value]="pct"></mat-progress-bar>-->
+                  <div class="col-12">
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                           [ngStyle]="{ width: pct + '%' }" aria-valuenow="{{ pct | number }}" aria-valuemin="0"
+                           aria-valuemax="100"> {{ pct | number }}%
+                      </div>
+                    </div>
+                    {{ pct | number }}%
+                  </div>
+                  <img class="img-thumbnail img-fluid" [src]="firebase.fb"><br>
+                </div>
+
+                <div *ngIf="profileForm.get('avatar').invalid && profileForm.get('avatar').touched"
+                     style="color: red">
+                  Avatar is <strong>required</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3"></div>
+              <div class="col-lg-9 btn-inline">
+                <button class="btn btn-outline-secondary" type="button">Cancel</button>
+                &nbsp;
+                <button class="btn btn-outline-success" type="submit" [disabled]="!profileForm.valid">Update user
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

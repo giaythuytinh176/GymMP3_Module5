@@ -59,4 +59,38 @@ class UserController extends Controller
 
         return response()->json(compact('user'));
     }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 400);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+
+        return response()->json(compact('token'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'phone' => 'required|string|max:11',
+            'avatar' => 'required|regex:'.$regex,
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $user = User::findOrFail($id);
+        $user->fill($request->all());
+        $user->save();
+        return response()->json(compact('user'));
+    }
 }
