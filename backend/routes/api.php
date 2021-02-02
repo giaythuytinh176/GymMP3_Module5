@@ -18,10 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['jwt.verify']], function() {
-    Route::get('user', '\App\Http\Controllers\UserController@getAuthenticatedUser');
-});
 
 Route::post('signup', '\App\Http\Controllers\UserController@register');
 Route::post('login', '\App\Http\Controllers\UserController@authenticate');
 
+Route::group(['middleware' => ['jwt.verify']], function() {
+
+
+    Route::get('user', '\App\Http\Controllers\UserController@getAuthenticatedUser');
+    Route::put('/users/{id}', '\App\Http\Controllers\UserController@update')->name('users.update');
+
+});

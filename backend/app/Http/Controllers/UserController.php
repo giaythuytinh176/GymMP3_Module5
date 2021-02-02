@@ -15,9 +15,7 @@ class UserController extends Controller
 {
     public function authenticate(Request $request)
     {
-
         $credentials = $request->only('username', 'password');
-
 
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
@@ -77,6 +75,21 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
 
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'phone' => 'required|string|max:11',
+            'avatar' => 'required|url',
+        ]);
 
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
 
+        $user = User::findOrFail($id);
+        $user->fill($request->all());
+        $user->save();
+        return response()->json(compact('user'));
+    }
 }
