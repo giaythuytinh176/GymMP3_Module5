@@ -13,19 +13,19 @@
           <h6 class="card-title mb-0" style="text-align: center">Edit User</h6>
         </div>
         <div class="card-body">
-          <form [formGroup]="profileForm" class="ng-untouched ng-pristine ng-valid" (ngSubmit)="updateUser()">
+          <form (ngSubmit)="updateUser()" [formGroup]="profileForm" class="ng-untouched ng-pristine ng-valid">
 
             <div class="form-row form-group">
               <label class="col-lg-2 text-md-right col-form-label" for="username">Username</label>
               <div class="col-lg-9">
-                <input class="form-control" id="username" value="{{ userinfo?.username }}" type="text" disabled>
+                <input class="form-control" disabled id="username" type="text" value="{{ userinfo?.username }}">
               </div>
             </div>
 
             <div class="form-row form-group">
               <label class="col-lg-2 text-md-right col-form-label" for="name">Name</label>
               <div class="col-lg-9">
-                <input class="form-control" id="name" type="text" formControlName="name">
+                <input class="form-control" formControlName="name" id="name" type="text">
                 <div *ngIf="profileForm.get('name').invalid && profileForm.get('name').touched" style="color: #ff0000">
                   Name is <strong>required</strong>.
                 </div>
@@ -35,7 +35,7 @@
             <div class="form-row form-group">
               <label class="col-lg-2 text-md-right col-form-label" for="address">Address</label>
               <div class="col-lg-9">
-                <input class="form-control" id="address" type="text" formControlName="address">
+                <input class="form-control" formControlName="address" id="address" type="text">
                 <div *ngIf="profileForm.get('address').invalid && profileForm.get('address').touched"
                      style="color: #ff0000">
                   Address is <strong>required</strong>.
@@ -46,7 +46,7 @@
             <div class="form-row form-group">
               <label class="col-lg-2 text-md-right col-form-label" for="email">Email</label>
               <div class="col-lg-9">
-                <input class="form-control" id="email" type="text" formControlName="email">
+                <input class="form-control" formControlName="email" id="email" type="text">
                 <div *ngIf="profileForm.get('email').invalid && profileForm.get('email').touched" style="color: red">
                   <div *ngIf="profileForm.get('email').hasError('required')">
                     Email is <strong>required</strong>.
@@ -61,7 +61,7 @@
             <div class="form-row form-group">
               <label class="col-lg-2 text-md-right col-form-label" for="phone">Phone Number</label>
               <div class="col-lg-9">
-                <input class="form-control" id="phone" type="text" formControlName="phone">
+                <input class="form-control" formControlName="phone" id="phone" type="text">
                 <div *ngIf="profileForm.get('phone').invalid && profileForm.get('phone').touched"
                      style="color: red">
                   Phone is <strong>required</strong>.
@@ -79,10 +79,10 @@
                   <ng-template #NoSelect>
                     Choose File
                   </ng-template>
-                  <input formControlName="avatar" class="form-control" id="avatar" type="file"
-                         (change)="firebase.handleFileInput($event)"
-                         autocomplete="off"
-                         accept="image/*"
+                  <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
+                         formControlName="avatar"
+                         id="avatar"
+                         type="file"
                   />
                 </label>
 
@@ -90,14 +90,14 @@
                   <!--  <mat-progress-bar mode="determinate" [value]="pct"></mat-progress-bar>-->
                   <div class="col-12">
                     <div class="progress">
-                      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                           [ngStyle]="{ width: pct + '%' }" aria-valuenow="{{ pct | number }}" aria-valuemin="0"
-                           aria-valuemax="100"> {{ pct | number }}%
+                      <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100"
+                           aria-valuemin="0" aria-valuenow="{{ pct | number }}" class="progress-bar progress-bar-info progress-bar-striped"
+                           role="progressbar"> {{ pct | number }}%
                       </div>
                     </div>
                     {{ pct | number }}%
                   </div>
-                  <img class="img-thumbnail img-fluid" [src]="firebase.fb"><br>
+                  <img [src]="firebase.fb" class="img-thumbnail img-fluid"><br>
                 </div>
 
                 <div *ngIf="profileForm.get('avatar').invalid && profileForm.get('avatar').touched"
@@ -112,7 +112,7 @@
               <div class="col-lg-9 btn-inline">
                 <button class="btn btn-outline-secondary" type="button">Cancel</button>
                 &nbsp;
-                <button class="btn btn-outline-success" type="submit" [disabled]="!profileForm.valid">Update user
+                <button [disabled]="!profileForm.valid" class="btn btn-outline-success" type="submit">Update user
                 </button>
               </div>
             </div>

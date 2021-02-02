@@ -56,10 +56,10 @@
 <!--</div>-->
 
 <div class="container">
-  <form class="example-form" [formGroup]="registerForm">
+  <form [formGroup]="registerForm" class="example-form">
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Username</mat-label>
-      <input type="text" matInput formControlName="username" placeholder="Username">
+      <input formControlName="username" matInput placeholder="Username" type="text">
       <mat-error
         *ngIf="registerForm.get('username')!.invalid && registerForm.get('username')!.touched  || (registerForm.get('username').untouched) && registerFormAttempt">
         Username is <strong>required</strong>.
@@ -71,7 +71,7 @@
 
     <mat-form-field appearance="fill" class="example-full-width">
       <mat-label>Phone</mat-label>
-      <input type="text" matInput formControlName="phone" placeholder="0123456789">
+      <input formControlName="phone" matInput placeholder="0123456789" type="text">
       <mat-error
         *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched  || (registerForm.get('phone').untouched) && registerFormAttempt">
         <span *ngIf="registerForm.get('phone').hasError('required')">Phone is <strong>required</strong>.</span>
@@ -83,7 +83,7 @@
     <br>
 
     <mat-form-field appearance="fill" class="example-full-width">
-      <input matInput placeholder="New password" formControlName="password" required>
+      <input formControlName="password" matInput placeholder="New password" required>
       <mat-error *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched">
         <span
           *ngIf="registerForm.get('password').hasError('required')">Please enter <strong>your password</strong>.</span><br>
@@ -97,8 +97,8 @@
     <br>
 
     <mat-form-field appearance="fill" class="example-full-width">
-      <input matInput placeholder="Confirm password" formControlName="password_confirmation"
-             [errorStateMatcher]="matcher">
+      <input [errorStateMatcher]="matcher" formControlName="password_confirmation" matInput
+             placeholder="Confirm password">
       <mat-error
         *ngIf="registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched">
         <span *ngIf="registerForm.get('password_confirmation').hasError('required')">Password Confirm is <strong>required</strong>.</span><br>
@@ -112,10 +112,10 @@
     <br>
     <br>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!registerForm.valid">
+      <button (click)="onSubmit()" [disabled]="!registerForm.valid" color="primary" mat-raised-button type="submit">
         Add
       </button> &nbsp;
-      <button mat-raised-button color="warn" (click)="reset()">Reset</button>
+      <button (click)="reset()" color="warn" mat-raised-button>Reset</button>
     </mat-card-actions>
   </form>
 </div>
