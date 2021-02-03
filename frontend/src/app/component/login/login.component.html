@@ -24,14 +24,14 @@
                       </div>
                       <ng-template #loggedOut>
                         <div class="row col-sm-12" style="max-width:600px;">
-                          <form name="form" (ngSubmit)="f.form.valid && onSubmit()"
-                                #f="ngForm" novalidate>
+                          <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"
+                                name="form" novalidate>
                             <div class="form-group">
-                              <label for="username" class="username">Username</label>
+                              <label class="username" for="username">Username</label>
                               <br>
-                              <input type="text" style="width: 300px " class="form-control" name="username"
-                                     [(ngModel)]="form.username" #username="ngModel"
-                                     required/>
+                              <input #username="ngModel" [(ngModel)]="form.username" class="form-control" name="username"
+                                     required style="width: 300px "
+                                     type="text"/>
                               <div *ngIf="f.submitted && username.invalid">
                                 <div *ngIf="username.errors.required">Username is
                                   required
@@ -39,11 +39,11 @@
                               </div>
                             </div>
                             <div class="form-group">
-                              <label for="password" class="password">Password</label>
+                              <label class="password" for="password">Password</label>
                               <br>
-                              <input type="password" class="form-control" name="password"
-                                     [(ngModel)]="form.password" #password="ngModel"
-                                     required minlength="6"/>
+                              <input #password="ngModel" [(ngModel)]="form.password" class="form-control"
+                                     minlength="6" name="password"
+                                     required type="password"/>
                               <div *ngIf="f.submitted && password.invalid">
                                 <div *ngIf="password.errors.required">Password is
                                   required
@@ -54,7 +54,7 @@
                               </div>
                             </div>
                             <div class="form-group">
-                              <button class="btn btn-primary" style="" >Login</button>
+                              <button class="btn btn-primary">Login</button>
                               <div *ngIf="f.submitted && isLoginFailed"
                                    class="alert alert-danger">
                                 Login failed: {{errorMessage}}
@@ -63,7 +63,7 @@
                           </form>
                           <hr/>
                           <p>Don't have an account?</p>
-                          <a href="signup" class="btn btn-success">Sign Up</a>
+                          <a class="btn btn-success" href="signup">Sign Up</a>
                         </div>
                       </ng-template>
 

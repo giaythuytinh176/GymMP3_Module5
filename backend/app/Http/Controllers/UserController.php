@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
@@ -19,7 +17,7 @@ class UserController extends Controller
         $credentials = $request->only('username', 'password');
 
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);
             }
         } catch (JWTException $e) {
@@ -37,7 +35,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6|max:8|confirmed',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -49,14 +47,14 @@ class UserController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user','token'),201);
+        return response()->json(compact('user', 'token'), 201);
     }
 
     public function getAuthenticatedUser()
     {
         try {
 
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
 
@@ -76,32 +74,49 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
 
-    public function changePassword(Request $request){
-        
-        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-        //     // The passwords matches
-        //     return response()->json(['Your current password does not matches with the password you provided. Please try again.'], 400);
-        // }
-
-        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-        //     //Current password and new password are same
-        //     return response()->json(["New Password cannot be same as your current password. Please choose a different password."],201);
-        // }
-
-        $validatedData = $request->validate([
+    public function changePassword(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
             'password' => 'required',
             'new_password' => 'required|string|min:6|max:8',
         ]);
 
-        
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
 
-        //Change Password
-        $user = Auth::user();
-        $user->password = bcrypt($request->get('new_password'));
-        $user->save();
+        $check = $this->updatePasswordCheck($request) ? $this->resetPassword($request) : $this->tokenNotFoundError();
 
-        return response()->json(["Password changed successfully !"]);
+        return $check;
+    }
 
+    // Verify if token is valid
+    private function updatePasswordCheck($request)
+    {
+        return auth()->attempt(['username' => $request->username, 'password' => $request->password]);
+    }
+
+    // Token not found response
+    private function tokenNotFoundError()
+    {
+        return response()->json([
+            'error' => 'Either your email or token is wrong.'
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    // Reset password
+    private function resetPassword($request)
+    {
+        // find email
+        $userData = User::where('username', '=', $request->username)->first();
+        // update password
+        $userData->update([
+            'password' => bcrypt($request->new_password)
+        ]);
+        // reset password response
+        return response()->json([
+            'data' => 'Password has been updated.'
+        ], Response::HTTP_CREATED);
     }
 
     public function update(Request $request, $id)
@@ -112,7 +127,7 @@ class UserController extends Controller
             'avatar' => 'required|url',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 

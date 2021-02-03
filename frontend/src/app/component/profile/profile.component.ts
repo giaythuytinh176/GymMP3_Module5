@@ -7,7 +7,6 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {ToastrService} from "ngx-toastr";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
 import {FirebaseComponent} from "../firebase/firebase.component";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-profile',

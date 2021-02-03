@@ -1,15 +1,15 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 // import { info } from 'console';
-import { Observable } from 'rxjs';
-import { ChangePassword } from './change-password';
-import { JwtResponse } from './jwt-response';
-import { SignupInfo } from './signup-info';
-import { ToastrService } from "ngx-toastr";
-import { LoginInfo } from "./login-info";
+import {Observable} from 'rxjs';
+import {ChangePassword} from './change-password';
+import {JwtResponse} from './jwt-response';
+import {SignupInfo} from './signup-info';
+import {ToastrService} from "ngx-toastr";
+import {LoginInfo} from "./login-info";
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 const TOKEN_KEY = 'AuthToken';
@@ -33,7 +33,7 @@ export class AuthService {
   auth = false;
 
   constructor(private http: HttpClient,
-    private toasrt: ToastrService,
+              private toasrt: ToastrService,
   ) {
   }
 
@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   changePasswordAuth(info: ChangePassword): Observable<JwtResponse> {
-    return this.http.put<JwtResponse>(this.changePassUrl, info, httpOptions);
+    return this.http.post<JwtResponse>(this.changePassUrl, info, this.httpJson);
   }
 
   attemptAuth(credentials: LoginInfo): Observable<JwtResponse> {

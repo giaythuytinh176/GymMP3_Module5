@@ -67,6 +67,7 @@ import {
 import {FirebaseComponent} from "./component/firebase/firebase.component";
 import { LoginComponent } from './component/login/login.component';
 import { UpdateSongComponent } from './component/songManager/update-song/update-song.component';
+import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-user.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { UpdateSongComponent } from './component/songManager/update-song/update-
     NotGuardComponent,
     FirebaseComponent,
     UpdateSongComponent,
+    ShowSongsUserComponent,
   ],
   imports: [
     BrowserModule,

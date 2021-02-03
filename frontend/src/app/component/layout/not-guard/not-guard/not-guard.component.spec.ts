@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NotGuardComponent } from './not-guard.component';
+import {NotGuardComponent} from './not-guard.component';
 
 describe('NotGuardComponent', () => {
   let component: NotGuardComponent;
@@ -8,9 +8,9 @@ describe('NotGuardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotGuardComponent ]
+      declarations: [NotGuardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

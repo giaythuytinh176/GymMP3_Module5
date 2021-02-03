@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Song;
+use App\Models\Singer;
+use App\Models\Category;
+use App\Models\Album;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SongController extends Controller
 {
@@ -50,8 +55,16 @@ class SongController extends Controller
      */
     public function show($id)
     {
-        $song = Song::find($id);
-        return response()->json($song);
+        $songs = DB::table('songs')
+        ->select('songs.*','users.username','categories.category_name','singers.singer_name','albums.album_name')
+        ->join('users','users.id','=','songs.user_id')
+        ->join('categories','categories.id','=','songs.category_id')
+        ->join('singers','singers.id','=','songs.singer_id')
+        ->join('albums','albums.id','=','songs.album_id')
+        ->where('users.id','=',$id)
+        ->get();
+        return response()->json($songs, 200);
+
     }
 
     /**
