@@ -14,7 +14,8 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        $data = Album::all();
+        return response()->json(compact('data'));
     }
 
     /**

@@ -6,6 +6,8 @@ import { ProfileComponent } from "./component/profile/profile.component";
 import { AuthGuard } from "./services/userManager/auth.guard";
 import { NotGuardComponent } from "./component/layout/not-guard/not-guard/not-guard.component";
 import { LoginComponent } from "./component/login/login.component";
+import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song/all-list-song.component";
+import {CreateSongComponent} from "./component/songManager/create-song/create-song/create-song.component";
 
 const routes: Routes = [
   {
@@ -29,6 +31,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'browser',
+    component: AllListSongComponent,
+  },
+  {
+    path: 'create-song',
+    component: CreateSongComponent, canActivate: [AuthGuard]
   },
 
   // otherwise redirect to home

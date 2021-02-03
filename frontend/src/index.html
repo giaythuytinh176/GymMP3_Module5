@@ -1,16 +1,82 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Frontend</title>
+  <meta charset="utf-8"/>
+  <title>pulse - Music, Audio and Radio web application</title>
+  <meta name="description" content="Music, Musician, Bootstrap"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="images/logo.png">
+  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="196x196" href="images/logo.png">
+
+  <!-- style -->
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- style -->
+  <link rel="stylesheet" href="assets/css/animate.css/animate.min.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/css/glyphicons/glyphicons.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/css/font-awesome/css/font-awesome.min.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/css/material-design-icons/material-design-icons.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/css/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
+
+  <!-- build:css css/styles/app.min.css -->
+  <link rel="stylesheet" href="assets/css/styles/app.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/css/styles/style.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/css/styles/font.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/css/theme/primary.css" type="text/css"/>
+
+  <link rel="stylesheet" href="assets/libs/owl.carousel/dist/assets/owl.carousel.min.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/libs/owl.carousel/dist/assets/owl.theme.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/libs/mediaelement/build/mediaelementplayer.min.css" type="text/css"/>
+  <link rel="stylesheet" href="assets/libs/mediaelement/build/mep.css" type="text/css"/>
+
+  <!-- endbuild -->
 </head>
-<body class="mat-typography">
-  <app-root></app-root>
+<body><!--  class="mat-typography"-->
+<app-root></app-root>
+<div class="app-footer app-player grey bg">
+  <div class="playlist" style="width:100%"></div>
+</div>
+<!-- build:js scripts/app.min.js -->
+<!-- jQuery -->
+<script src="assets/libs/jquery/dist/jquery.js"></script>
+<!-- Bootstrap -->
+<script src="assets/libs/tether/dist/js/tether.min.js"></script>
+<script src="assets/libs/bootstrap/dist/js/bootstrap.js"></script>
+<!-- core -->
+<script src="assets/libs/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+<script src="assets/libs/jquery.stellar/jquery.stellar.min.js"></script>
+<script src="assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
+<script src="assets/libs/jscroll/jquery.jscroll.min.js"></script>
+<script src="assets/libs/PACE/pace.min.js"></script>
+<script src="assets/libs/jquery-pjax/jquery.pjax.js"></script>
+
+<script src="assets/libs/mediaelement/build/mediaelement-and-player.min.js"></script>
+<script src="assets/libs/mediaelement/build/mep.js"></script>
+<script src="assets/scripts/player.js"></script>
+
+<script src="assets/scripts/config.lazyload.js"></script>
+<script src="assets/scripts/ui-load.js"></script>
+<script src="assets/scripts/ui-jp.js"></script>
+<script src="assets/scripts/ui-include.js"></script>
+<script src="assets/scripts/ui-device.js"></script>
+<script src="assets/scripts/ui-form.js"></script>
+<script src="assets/scripts/ui-nav.js"></script>
+<script src="assets/scripts/ui-screenfull.js"></script>
+<script src="assets/scripts/ui-scroll-to.js"></script>
+<script src="assets/scripts/ui-toggle-class.js"></script>
+<script src="assets/scripts/ui-taburl.js"></script>
+<script src="assets/scripts/app.js"></script>
+<script src="assets/scripts/site.js"></script>
+<script src="assets/scripts/ajax.js"></script>
+<!-- endbuild -->
 </body>
 </html>

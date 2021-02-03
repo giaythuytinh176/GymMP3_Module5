@@ -66,6 +66,9 @@ import {
 } from "@angular/fire/storage";
 import {FirebaseComponent} from "./component/firebase/firebase.component";
 import { LoginComponent } from './component/login/login.component';
+import { AllListSongComponent } from './component/songManager/all-list-song/all-list-song/all-list-song.component';
+import { CreateSongComponent } from './component/songManager/create-song/create-song/create-song.component';
+import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.component";
 
 @NgModule({
   declarations: [
@@ -76,6 +79,9 @@ import { LoginComponent } from './component/login/login.component';
     ProfileComponent,
     NotGuardComponent,
     FirebaseComponent,
+    FirebaseMP3Component,
+    AllListSongComponent,
+    CreateSongComponent,
   ],
   imports: [
     BrowserModule,
@@ -139,6 +145,7 @@ import { LoginComponent } from './component/login/login.component';
   ],
   providers: [
     FirebaseComponent,
+    FirebaseMP3Component,
   ],
   bootstrap: [
     AppComponent,

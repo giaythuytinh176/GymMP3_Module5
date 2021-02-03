@@ -4,9 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SongController extends Controller
 {
+    public function createSong(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nameSong' => 'required|string',
+            'avatarUrl' => 'required|string',
+            'mp3Url' => 'required|string|unique:songs',
+            'describes' => 'required|string',
+            'author' => 'required|string',
+            'views' => 'required|integer',
+            'user_id' => 'required|integer',
+            'singer_id' => 'required|integer',
+            'category_id' => 'required|integer',
+            'album_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $data = new Song();
+        $data->fill($request->all());
+        $data->save();
+        return response()->json(compact('data'));
+    }
+
     /**
      * Display a listing of the resource.
      *

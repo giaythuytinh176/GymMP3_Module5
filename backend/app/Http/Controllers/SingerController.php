@@ -14,7 +14,8 @@ class SingerController extends Controller
      */
     public function index()
     {
-        //
+        $data = Singer::all();
+        return response()->json(compact('data'));
     }
 
     /**

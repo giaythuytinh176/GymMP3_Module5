@@ -14,13 +14,6 @@ import {AuthService} from 'src/app/auth/auth.service';
 import {SignupInfo} from 'src/app/auth/signup-info';
 import {ErrorStateMatcher} from "@angular/material/core";
 
-function comparePassword(c: AbstractControl) {
-  const v = c.value;
-  return (v.password === v.confirmPassword) ? null : {
-    passwordnotmatch: true
-  };
-}
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -57,6 +50,13 @@ export class RegisterComponent implements OnInit {
     const password = group.get('password').value;
     const password_confirmation = group.get('password_confirmation').value;
     return password === password_confirmation ? null : {passwordnotmatch: true}
+  }
+
+  comparePassword(c: AbstractControl) {
+    const v = c.value;
+    return (v.password === v.confirmPassword) ? null : {
+      passwordnotmatch: true
+    };
   }
 
   reset() {
@@ -96,8 +96,8 @@ export class RegisterComponent implements OnInit {
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const invalidCtrl = !!(control?.invalid && control?.parent?.dirty);
-    const invalidParent = !!(control?.parent?.invalid && control?.parent?.dirty);
+    const invalidCtrl = !!(control!.invalid && control!.parent!.dirty);
+    const invalidParent = !!(control!.parent!.invalid && control!.parent!.dirty);
 
     return invalidCtrl || invalidParent;
   }
