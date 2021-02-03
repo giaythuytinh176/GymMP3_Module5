@@ -55,6 +55,7 @@ class SongController extends Controller
      */
     public function show($id)
     {
+
         $songs = DB::table('songs')
         ->select('songs.*','users.username','categories.category_name','singers.singer_name','albums.album_name')
         ->join('users','users.id','=','songs.user_id')
@@ -65,6 +66,11 @@ class SongController extends Controller
         ->get();
         return response()->json($songs, 200);
 
+    }
+
+    public function showidsong($id){
+        $song = Song::find($id);
+        return response()->json($song);
     }
 
     /**

@@ -44,11 +44,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
+
   // otherwise redirect to home
   {
     path: '**', redirectTo: '',
     component: RegisterComponent,
   },
+
+
 
 
 ];

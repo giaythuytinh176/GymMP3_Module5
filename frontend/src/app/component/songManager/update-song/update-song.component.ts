@@ -3,6 +3,14 @@ import {SongService} from "../../../services/song.service";
 import {Song} from "../../../song/song";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CategoryService} from "../../../services/category/caterory.service";
+import {SingerService} from "../../../services/singer/singer.service";
+import {AlbumService} from "../../../services/album/album.service";
+import { environment } from 'src/environments/environment';
+import {Album} from "../../../album";
+import {Category} from "../../../category";
+import {Singer} from "../../singer";
+import {FirebaseComponent} from "../../firebase/firebase.component";
 
 @Component({
   selector: 'app-update-song',
@@ -10,6 +18,11 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./update-song.component.css']
 })
 export class UpdateSongComponent implements OnInit {
+  private readonly API_URL_CREATE = environment.apiUrl + '/song/update';
+  updateMusicForm: FormGroup
+  albums: Album[];
+  categories: Category[];
+  singers: Singer[];
   song: Song;
   user_id: any;
   singer_id: any;
@@ -18,13 +31,30 @@ export class UpdateSongComponent implements OnInit {
   songForm: FormGroup
   constructor(private songService:SongService,
               private route:Router,
-              private routes:ActivatedRoute) {
+              private routes:ActivatedRoute,
+              private categoryService:CategoryService,
+              private singerService:SingerService,
+              private albumService: AlbumService,
+              private firebase: FirebaseComponent,
+  ) {
     this.songForm = new FormGroup ({
       nameSong: new FormControl('', [Validators.required])
     });
   }
 
   ngOnInit() {
+    this.albumService.getAllAlbum().subscribe((albums: any) => {
+      this.albums = albums.data;
+      console.log(this.albums);
+    }, (error) => console.log(error));
+    this.categoryService.getAllCategories().subscribe((categories: any) => {
+      this.categories = categories.data;
+      console.log(this.categories);
+    }, (error) => console.log(error));
+    this.singerService.getAllSingers().subscribe((singers: any) => {
+      this.singers = singers.data;
+      console.log(this.singers);
+    }, (error) => console.log(error));
     console.log(111);
     this.routes.paramMap.subscribe(paramMap => {
       const id = +paramMap.get('id');
@@ -51,5 +81,6 @@ export class UpdateSongComponent implements OnInit {
         alert('Bạn chưa Sửa thành công');
     });
   }
+
 
 }
