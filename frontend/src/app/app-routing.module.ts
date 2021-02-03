@@ -6,6 +6,7 @@ import { ProfileComponent } from "./component/profile/profile.component";
 import { AuthGuard } from "./services/userManager/auth.guard";
 import { NotGuardComponent } from "./component/layout/not-guard/not-guard/not-guard.component";
 import { LoginComponent } from "./component/login/login.component";
+import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-user.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'listsongs',
+    component: ShowSongsUserComponent,
+    canActivate: [AuthGuard]
   },
 
   // otherwise redirect to home

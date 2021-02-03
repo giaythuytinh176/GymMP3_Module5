@@ -66,6 +66,7 @@ import {
 } from "@angular/fire/storage";
 import {FirebaseComponent} from "./component/firebase/firebase.component";
 import { LoginComponent } from './component/login/login.component';
+import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-user.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { LoginComponent } from './component/login/login.component';
     ProfileComponent,
     NotGuardComponent,
     FirebaseComponent,
+    ShowSongsUserComponent,
   ],
   imports: [
     BrowserModule,
