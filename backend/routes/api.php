@@ -28,7 +28,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/song/create', '\App\Http\Controllers\SongController@createSong');
     Route::get('/albums/list', '\App\Http\Controllers\AlbumController@index');
     Route::get('/categories/list', '\App\Http\Controllers\CategoryController@index');
-    Route::get('/singers/list', '\App\Http\Controllers\CategoryController@index');
+    Route::get('/singers/list', '\App\Http\Controllers\SingerController@index');
 
 
 

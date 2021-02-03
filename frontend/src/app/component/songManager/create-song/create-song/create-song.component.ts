@@ -11,7 +11,11 @@ import {Song} from "../../../../model/song/song";
 import {SongService} from "../../../../services/song/song.service";
 import {FirebaseMP3Component} from "../../../firebaseMP3/firebaseMP3.component";
 import {AlbumService} from "../../../../services/album.service";
-import { Album } from '../../../../model/album';
+import {Album} from '../../../../model/album';
+import {Category} from "../../../../model/category";
+import {Singer} from "../../../../model/singer";
+import {CategoryService} from "../../../../services/category.service";
+import {SingerService} from "../../../../services/singer.service";
 
 @Component({
   selector: 'app-create-song',
@@ -24,6 +28,8 @@ export class CreateSongComponent implements OnInit {
   createMusicForm: FormGroup;
   song: Song;
   albums: Album[];
+  categories: Category[];
+  singers: Singer[];
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -36,7 +42,9 @@ export class CreateSongComponent implements OnInit {
               public firebaseMP3: FirebaseMP3Component,
               private songService: SongService,
               private albumService: AlbumService,
-) {
+              private categoryService: CategoryService,
+              private singerService: SingerService,
+  ) {
     this.song = {
       nameSong: '',
       avatarUrl: '',
@@ -52,10 +60,19 @@ export class CreateSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.albumService.getAllAlbum().subscribe( (albums: any) => {
+    this.albumService.getAllAlbum().subscribe((albums: any) => {
       this.albums = albums.data;
       console.log(this.albums);
     }, (error) => console.log(error));
+    this.categoryService.getAllCategories().subscribe((categories: any) => {
+      this.categories = categories.data;
+      console.log(this.categories);
+    }, (error) => console.log(error));
+    this.singerService.getAllSingers().subscribe((singers: any) => {
+      this.singers = singers.data;
+      console.log(this.singers);
+    }, (error) => console.log(error));
+
     this.userService.getInfoUserToken().subscribe((data: any) => {
       console.log(data);
       if (data.status) {
@@ -81,18 +98,16 @@ export class CreateSongComponent implements OnInit {
   createSong() {
     this.createMusicForm.value.avatarUrl = this.firebase.fb;
     this.createMusicForm.value.mp3Url = this.firebaseMP3.fb;
-    console.log(this.createMusicForm.value);
     this.song = this.createMusicForm.value;
     this.song.user_id = this.userinfo.id;
-
     console.log(this.song);
     this.songService.createSong(this.song).subscribe((data: any) => {
         console.log(data);
-        alert('Bạn đã thêm thành công Bài Hát');
+        this.toastr.success('Bạn đã thêm thành công Bài Hát');
         // this.routes.navigate(['/']);
       }, error => {
-        console.log(error),
-          alert('Bạn chưa thêm thành công');
+        console.log(error);
+        this.toastr.success('Gặp lỗi xảy ra khi thêm bài hát này!');
       }
     );
   }
