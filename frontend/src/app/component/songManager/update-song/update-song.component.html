@@ -1,0 +1,71 @@
+<div class="main-content">
+  <div id="page-wrapper">
+    <div class="main-page">
+      <div class="tables">
+        <h3 class="title1">Update Song</h3>
+        <div class="panel-body widget-shadow">
+
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-11">
+                <label>Tên bài hát</label>
+                <input type="text" class="form-control" name="nameSong" [(ngModel)]="song.nameSong">
+              </div>
+              <div class="form-group col-md-11">
+                <label>Mô tả</label>
+                <input type="text" class="form-control" name="describes" [(ngModel)]="song.describes">
+              </div>
+              <div class="form-group col-md-11">
+                <label>File Mp3</label>
+<!--                <audio>-->
+<!--                  <source src="https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2F1612089505857_Dap-Mo-Cuoc-Tinh-Le-Sang.mp3?alt=media&token=ff4fd457-df41-46a9-8ea0-d46ba34f9517" type="audio/mpeg">-->
+<!--                </audio>-->
+                <input type="text" class="form-control" name="mp3Url" [(ngModel)]="song.mp3Url">
+              </div>
+              <div class="form-group col-md-11">
+                <label>Avatar</label>
+                <input type="text" class="form-control" name="avatarUrl" [(ngModel)]="song.avatarUrl">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Tác giả</label>
+                <input type="text" class="form-control" name="author" [(ngModel)]="song.author">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Lượt views</label>
+                <input type="number" class="form-control" name="views" [(ngModel)]="song.views">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Người đăng</label><br>
+                <select class="form-control" name="user_id" [(ngModel)]="song.user_id">
+                  <option *ngFor="let userid of user_id" value="{{userid.id}}">{{userid.user_id}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Ca sĩ</label><br>
+                <select class="form-control" name="singer_id" [(ngModel)]="song.singer_id">
+                  <option *ngFor="let singerid of singer_id" value="{{singerid.id}}">{{singerid.singer_id}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Thể loại</label><br>
+                <select class="form-control" name="category_id" [(ngModel)]="song.category_id">
+                  <option *ngFor="let categoryid of song.category_id" value="{{categoryid.id}}">{{categoryid.category_id}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Album</label><br>
+                <select class="form-control" name="album_id" [(ngModel)]="song.album_id">
+                  <option *ngFor="let albumid of album_id" value="{{albumid.id}}">{{albumid.album_id}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-12">
+                <button (click)="updateSong()" class="btn btn-primary">Update</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

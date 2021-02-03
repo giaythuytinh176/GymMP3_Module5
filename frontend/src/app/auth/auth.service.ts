@@ -19,7 +19,7 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class AuthService {
   private signupUrl = 'http://127.0.0.1:8000/api/signup';
-  private changePassUrl = 'http://localhost:8080/api/changePassword';
+  private changePassUrl = 'http://localhost:8000/api/changePassword';
   private loginUrl = 'http://127.0.0.1:8000/api/login';
   private authUrl = 'http://127.0.0.1:8000/api/user';
   error_msg = '';
@@ -46,7 +46,7 @@ export class AuthService {
   changePasswordAuth(info: ChangePassword): Observable<JwtResponse> {
     return this.http.put<JwtResponse>(this.changePassUrl, info, httpOptions);
   }
-  
+
   attemptAuth(credentials: LoginInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }

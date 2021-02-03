@@ -6,6 +6,7 @@ import { ProfileComponent } from "./component/profile/profile.component";
 import { AuthGuard } from "./services/userManager/auth.guard";
 import { NotGuardComponent } from "./component/layout/not-guard/not-guard/not-guard.component";
 import { LoginComponent } from "./component/login/login.component";
+import {UpdateSongComponent} from "./component/songManager/update-song/update-song.component";
 
 const routes: Routes = [
   {
@@ -31,11 +32,19 @@ const routes: Routes = [
     component: LoginComponent,
   },
 
+  {
+    path: 'songs/:id',
+    component: UpdateSongComponent,
+    canActivate: [AuthGuard],
+  },
+
   // otherwise redirect to home
   {
     path: '**', redirectTo: '',
     component: RegisterComponent,
   },
+
+
 ];
 
 @NgModule({
