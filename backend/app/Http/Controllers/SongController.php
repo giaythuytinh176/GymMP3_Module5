@@ -19,7 +19,8 @@ class SongController extends Controller
      */
     public function index()
     {
-        //
+        $songs= DB::table('songs')->join('categories','songs.category_id','=','categories.id')->select('songs.*','songs.category_id')->get();
+        return response()->json($songs);
     }
 
     /**
@@ -40,7 +41,10 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $song = new Song();
+        $song->fill($request->all());
+        $song->save();
+        return response()->json($song);
     }
 
     /**
@@ -51,6 +55,7 @@ class SongController extends Controller
      */
     public function show($id)
     {
+
         $songs = DB::table('songs')
         ->select('songs.*','users.username','categories.category_name','singers.singer_name','albums.album_name')
         ->join('users','users.id','=','songs.user_id')
@@ -60,6 +65,12 @@ class SongController extends Controller
         ->where('users.id','=',$id)
         ->get();
         return response()->json($songs, 200);
+
+    }
+
+    public function showidsong($id){
+        $song = Song::find($id);
+        return response()->json($song);
     }
 
     /**
@@ -80,9 +91,12 @@ class SongController extends Controller
      * @param  \App\Models\Song  $song
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Song $song)
+    public function update(Request $request, $id)
     {
-        //
+        $song = Song::find($id);
+        $song->fill($request->all());
+        $song->save();
+        return response()->json($song);
     }
 
     /**
@@ -91,8 +105,11 @@ class SongController extends Controller
      * @param  \App\Models\Song  $song
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Song $song)
+    public function destroy($id)
     {
-        //
+        $song = Song::find($id);
+        $song->delete();
+        return response()->json($song);
     }
+
 }
