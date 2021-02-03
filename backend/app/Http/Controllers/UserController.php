@@ -97,14 +97,7 @@ class UserController extends Controller
     }
 
     // Token not found response
-    private function tokenNotFoundError()
-    {
-        return response()->json([
-            'error' => 'Either your email or token is wrong.'
-        ], Response::HTTP_UNPROCESSABLE_ENTITY);
-    }
 
-    // Reset password
     private function resetPassword($request)
     {
         // find email
@@ -117,6 +110,15 @@ class UserController extends Controller
         return response()->json([
             'data' => 'Password has been updated.'
         ], Response::HTTP_CREATED);
+    }
+
+    // Reset password
+
+    private function tokenNotFoundError()
+    {
+        return response()->json([
+            'error' => 'Either your email or token is wrong.'
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function update(Request $request, $id)

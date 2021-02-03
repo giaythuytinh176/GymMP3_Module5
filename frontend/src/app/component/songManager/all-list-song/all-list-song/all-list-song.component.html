@@ -11,259 +11,201 @@
               All
             </button>
             <div class="dropdown-menu">
-              <a href="#" class="dropdown-item active">
+              <a class="dropdown-item active" href="#">
                 All
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 acoustic
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 ambient
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 blues
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 classical
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 country
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 electronic
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 emo
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 folk
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 hardcore
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 hip hop
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 indie
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 jazz
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 latin
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 metal
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 pop
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 pop punk
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 punk
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 reggae
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 rnb
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 rock
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 soul
               </a>
-              <a href="#" class="dropdown-item">
+              <a class="dropdown-item" href="#">
                 world
               </a>
             </div>
           </div>
         </div>
-        <div data-ui-jp="jscroll" class="jscroll-loading-center" data-ui-options="{
+        <div class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
             autoTrigger: true,
             loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
             padding: 50,
             nextSelector: 'a.jscroll-next:last'
           }">
           <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-3">
-              <div class="item r" data-id="item-3" data-src="https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2F1612089505857_Dap-Mo-Cuoc-Tinh-Le-Sang.mp3?alt=media&token=ff4fd457-df41-46a9-8ea0-d46ba34f9517">
-                <div class="item-media ">
-                  <a href="track.detail.html" class="item-media-content" style="background-image: url('assets/images/b2.jpg');"></a>
+            <div *ngFor="let song of allsongs" class="col-xs-4 col-sm-4 col-md-3">
+              <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+                <div class="item-media">
+                  <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
                   <div class="item-overlay center">
                     <button class="btn-playpause">Play</button>
                   </div>
                 </div>
                 <div class="item-info">
                   <div class="item-overlay bottom text-right">
-                    <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                    <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                    <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+                    <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
                     <div class="dropdown-menu pull-right black lt"></div>
                   </div>
                   <div class="item-title text-ellipsis">
-                    <a href="track.detail.html">Đắp mộ cuộc tình</a>
+                    <a href="track.detail.html">{{ song.nameSong }}</a>
                   </div>
                   <div class="item-author text-sm text-ellipsis ">
-                    <a href="artist.detail.html" class="text-muted">Lê Sang</a>
+                    <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                      {{ singer.singer_name }},
+                    </a>
                   </div>
-
-
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3">
-              <div class="item r" data-id="item-5" data-src="https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2F1612312536500_DuongTimBangLang-LeSangKimThoa-5908402.mp3?alt=media&token=1bb30a45-ed0a-40b8-9ed5-ce444dd48a60">
-                <div class="item-media ">
-                  <a href="track.detail.html" class="item-media-content" style="background-image: url('assets/images/b4.jpg');"></a>
-                  <div class="item-overlay center">
-                    <button class="btn-playpause">Play</button>
-                  </div>
-                </div>
-                <div class="item-info">
-                  <div class="item-overlay bottom text-right">
-                    <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                    <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                    <div class="dropdown-menu pull-right black lt"></div>
-                  </div>
-                  <div class="item-title text-ellipsis">
-                    <a href="track.detail.html">Đường Tím Bằng Lăng</a>
-                  </div>
-                  <div class="item-author text-sm text-ellipsis ">
-                    <a href="artist.detail.html" class="text-muted">Lê Sang- Kim Thoa</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-3">
-              <div class="item r" data-id="item-2" data-src="https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2FBoiBac-DuongHongLoan-4485885.mp3?alt=media&token=cc42d5de-1aa8-4a21-8f5c-88f1cb91887c">
-                <div class="item-media ">
-                  <a href="track.detail.html" class="item-media-content" style="background-image: url('assets/images/b1.jpg');"></a>
-                  <div class="item-overlay center">
-                    <button class="btn-playpause">Play</button>
-                  </div>
-                </div>
-                <div class="item-info">
-                  <div class="item-overlay bottom text-right">
-                    <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                    <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                    <div class="dropdown-menu pull-right black lt"></div>
-                  </div>
-                  <div class="item-title text-ellipsis">
-                    <a href="track.detail.html">Bội Bạc</a>
-                  </div>
-                  <div class="item-author text-sm text-ellipsis ">
-                    <a href="artist.detail.html" class="text-muted">Dương Hồng Loan</a>
-                  </div>
-
-
                 </div>
               </div>
             </div>
           </div>
           <div class="text-center">
-            <a href="scroll.item.html" class="btn btn-sm white rounded jscroll-next">Show More</a>
+            <a class="btn btn-sm white rounded jscroll-next" href="scroll.item.html">Show More</a>
           </div>
         </div>
 
       </div>
     </div>
     <div class="col-lg-3 w-xxl w-auto-md">
-      <div class="padding" style="bottom: 60px;" data-ui-jp="stick_in_parent">
+      <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
         <h6 class="text text-muted">5 Likes</h6>
         <div class="row item-list item-list-sm m-b">
           <div class="col-xs-12">
             <div class="item r" data-id="item-6" data-src="http://api.soundcloud.com/tracks/236107824/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
-                <a href="track.detail.html" class="item-media-content" style="background-image: url('assets/images/b5.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b5.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
                   <a href="track.detail.html">Body on me</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis ">
-                  <a href="artist.detail.html" class="text-muted">Rita Ora</a>
+                  <a class="text-muted" href="artist.detail.html">Rita Ora</a>
                 </div>
-
-
               </div>
             </div>
           </div>
           <div class="col-xs-12">
             <div class="item r" data-id="item-8" data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
-                <a href="track.detail.html" class="item-media-content" style="background-image: url('assets/images/b7.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b7.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
                   <a href="track.detail.html">Simple Place To Be</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis ">
-                  <a href="artist.detail.html" class="text-muted">RYD</a>
+                  <a class="text-muted" href="artist.detail.html">RYD</a>
                 </div>
-
-
               </div>
             </div>
           </div>
           <div class="col-xs-12">
             <div class="item r" data-id="item-5" data-src="http://streaming.radionomy.com/JamendoLounge">
               <div class="item-media ">
-                <a href="track.detail.html" class="item-media-content" style="background-image: url('assets/images/b4.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b4.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
                   <a href="track.detail.html">Live Radio</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis ">
-                  <a href="artist.detail.html" class="text-muted">Radionomy</a>
+                  <a class="text-muted" href="artist.detail.html">Radionomy</a>
                 </div>
-
-
               </div>
             </div>
           </div>
           <div class="col-xs-12">
             <div class="item r" data-id="item-11" data-src="http://api.soundcloud.com/tracks/218060449/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
-                <a href="track.detail.html" class="item-media-content" style="background-image: url('assets/images/b10.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b10.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
                   <a href="track.detail.html">Spring</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis ">
-                  <a href="artist.detail.html" class="text-muted">Pablo Nouvelle</a>
+                  <a class="text-muted" href="artist.detail.html">Pablo Nouvelle</a>
                 </div>
-
-
               </div>
             </div>
           </div>
           <div class="col-xs-12">
-            <div class="item r" data-id="item-10" data-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+            <div class="item r" data-id="item-10" data-ng-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
-                <a href="track.detail.html" class="item-media-content" style="background-image: url('assets/images/b9.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b9.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
                   <a href="track.detail.html">The Open Road</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis ">
-                  <a href="artist.detail.html" class="text-muted">Postiljonen</a>
+                  <a class="text-muted" href="artist.detail.html">Postiljonen</a>
                 </div>
-
-
               </div>
             </div>
           </div>
         </div>
         <h6 class="text text-muted">Go mobile</h6>
         <div class="btn-groups">
-          <a href="" class="btn btn-sm dark lt m-r-xs" style="width: 135px">
+          <a class="btn btn-sm dark lt m-r-xs" href="" style="width: 135px">
                 <span class="pull-left m-r-sm">
                   <i class="fa fa-apple fa-2x"></i>
                 </span>
@@ -272,7 +214,7 @@
                   <b class="block m-b-xs">App Store</b>
                 </span>
           </a>
-          <a href="" class="btn btn-sm dark lt" style="width: 133px">
+          <a class="btn btn-sm dark lt" href="" style="width: 133px">
                 <span class="pull-left m-r-sm">
                   <i class="fa fa-play fa-2x"></i>
                 </span>
@@ -284,12 +226,12 @@
         </div>
         <div class="b-b m-y"></div>
         <div class="nav text-sm _600">
-          <a href="#" class="nav-link text-muted m-r-xs">About</a>
-          <a href="#" class="nav-link text-muted m-r-xs">Contact</a>
-          <a href="#" class="nav-link text-muted m-r-xs">Legal</a>
-          <a href="#" class="nav-link text-muted m-r-xs">Policy</a>
+          <a class="nav-link text-muted m-r-xs" href="#">About</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Contact</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Legal</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Policy</a>
         </div>
-        <p class="text-muted text-xs p-b-lg">&copy; Copyright 2021</p>
+        <p class="text-muted text-xs p-b-lg">&copy; Copyright CodeGym 2021</p>
       </div>
     </div>
   </div>

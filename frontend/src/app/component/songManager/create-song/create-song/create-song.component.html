@@ -7,7 +7,7 @@
       <form (ngSubmit)="createSong()" [formGroup]="createMusicForm">
         <div class="form-group">
           <label>Tên bài hát: </label>
-          <input type="text" class="form-control" formControlName="nameSong">
+          <input class="form-control" formControlName="nameSong" type="text">
           <div *ngIf="createMusicForm.get('nameSong').invalid && createMusicForm.get('nameSong').touched"
                style="color: #ff0000">
             Name Song is <strong>required</strong>.
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div *ngIf="firebase.fb as url">
-          <img [src]="firebase.fb" class="img-thumbnail img-fluid" style="width: 120px; height: 120px;"><br>
+            <img [src]="firebase.fb" class="img-thumbnail img-fluid" style="width: 120px; height: 120px;"><br>
           </div>
 
           <div *ngIf="createMusicForm.get('avatarUrl').invalid && createMusicForm.get('avatarUrl').touched"
@@ -58,7 +58,7 @@
             <ng-template #NoSelect>
               Choose File
             </ng-template>
-            <input (change)="firebaseMP3.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control"  formControlName="mp3Url"
+            <input (change)="firebaseMP3.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control" formControlName="mp3Url"
                    id="mp3Url"
                    type="file"
             />
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div *ngIf="firebaseMP3.fb as urlMp3">
-            <audio id="audio" class="playlist" style="width:100%" controls="controls">
+            <audio class="playlist" controls="controls" id="audio" style="width:100%">
               <source src="{{ urlMp3 }}" type="audio/mpeg">
             </audio>
           </div>
@@ -89,7 +89,7 @@
 
         <div class="form-group">
           <label>Author: </label>
-          <input type="text" class="form-control" formControlName="author">
+          <input class="form-control" formControlName="author" type="text">
           <div *ngIf="createMusicForm.get('author').invalid && createMusicForm.get('author').touched"
                style="color: #ff0000">
             Author is <strong>required</strong>.
@@ -98,7 +98,7 @@
 
         <div class="form-group">
           <label>Views: </label>
-          <input type="number" class="form-control" formControlName="views">
+          <input class="form-control" formControlName="views" type="number">
           <div *ngIf="createMusicForm.get('views').invalid && createMusicForm.get('views').touched"
                style="color: #ff0000">
             Views is <strong>required</strong>.
@@ -107,8 +107,8 @@
 
         <div class="form-group">
           <label>Singer: </label>
-          <select class="form-control" formControlName="singer_id">
-            <option disabled selected value> -- select a Singer -- </option>
+          <select class="form-control" formControlName="singer_id" multiple>
+            <!--            <option disabled selected value> &#45;&#45; select a Singer &#45;&#45;</option>-->
             <option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</option>
           </select>
           <div *ngIf="createMusicForm.get('singer_id').invalid && createMusicForm.get('singer_id').touched"
@@ -120,7 +120,7 @@
         <div class="form-group">
           <label>Thể Loại: </label>
           <select class="form-control" formControlName="category_id">
-            <option disabled selected value> -- select a Category -- </option>
+            <option disabled selected value> -- select a Category --</option>
             <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
           </select>
           <div *ngIf="createMusicForm.get('category_id').invalid && createMusicForm.get('category_id').touched"
@@ -132,7 +132,7 @@
         <div class="form-group">
           <label>Album: </label>
           <select class="form-control" formControlName="album_id">
-            <option disabled selected value> -- select an Album -- </option>
+            <option disabled selected value> -- select an Album --</option>
             <option *ngFor="let album of albums" [value]="album.id">{{ album.album_name }}</option>
           </select>
           <div *ngIf="createMusicForm.get('album_id').invalid && createMusicForm.get('album_id').touched"
@@ -150,7 +150,7 @@
           </div>
         </div>
         <div style="margin-bottom: 20px">
-          <button type="submit" [disabled]="!createMusicForm.valid" class="btn btn-primary">Thêm Bài Hát</button>
+          <button [disabled]="!createMusicForm.valid" class="btn btn-primary" type="submit">Thêm Bài Hát</button>
         </div>
       </form>
     </div>

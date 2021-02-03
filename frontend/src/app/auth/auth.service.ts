@@ -18,10 +18,6 @@ const TOKEN_KEY = 'AuthToken';
   providedIn: 'root'
 })
 export class AuthService {
-  private signupUrl = 'http://127.0.0.1:8000/api/signup';
-  private changePassUrl = 'http://localhost:8000/api/changePassword';
-  private loginUrl = 'http://127.0.0.1:8000/api/login';
-  private authUrl = 'http://127.0.0.1:8000/api/user';
   error_msg = '';
   token = sessionStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -31,6 +27,10 @@ export class AuthService {
     })
   }
   auth = false;
+  private signupUrl = 'http://127.0.0.1:8000/api/signup';
+  private changePassUrl = 'http://localhost:8000/api/changePassword';
+  private loginUrl = 'http://127.0.0.1:8000/api/login';
+  private authUrl = 'http://127.0.0.1:8000/api/user';
 
   constructor(private http: HttpClient,
               private toasrt: ToastrService,

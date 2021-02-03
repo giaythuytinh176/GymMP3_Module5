@@ -1,4 +1,4 @@
-import { ChangePassword } from './change-password';
+import {ChangePassword} from './change-password';
 
 describe('ChangePassword', () => {
   it('should create an instance', () => {

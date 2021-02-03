@@ -31,7 +31,7 @@ class SingerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +42,7 @@ class SingerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Singer  $singer
+     * @param \App\Models\Singer $singer
      * @return \Illuminate\Http\Response
      */
     public function show(Singer $singer)
@@ -53,7 +53,7 @@ class SingerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Singer  $singer
+     * @param \App\Models\Singer $singer
      * @return \Illuminate\Http\Response
      */
     public function edit(Singer $singer)
@@ -64,8 +64,8 @@ class SingerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Singer  $singer
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Singer $singer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Singer $singer)
@@ -76,7 +76,7 @@ class SingerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Singer  $singer
+     * @param \App\Models\Singer $singer
      * @return \Illuminate\Http\Response
      */
     public function destroy(Singer $singer)

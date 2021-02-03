@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Category} from "../model/category";
+import {Album} from "../../model/album";
 
 const TOKEN_KEY = 'AuthToken';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class AlbumService {
 
-  apiGetAllCategories = 'http://127.0.0.1:8000/api/categories/list';
+  apiGetAllAlbum = 'http://127.0.0.1:8000/api/albums/list';
 
   token = sessionStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -19,9 +19,12 @@ export class CategoryService {
       'Authorization': 'Bearer ' + this.token
     })
   }
-  constructor(private http: HttpClient) {}
 
-  getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.apiGetAllCategories, this.httpJson);
+  constructor(private http: HttpClient) {
   }
+
+  getAllAlbum(): Observable<Album[]> {
+    return this.http.get<Album[]>(this.apiGetAllAlbum, this.httpJson);
+  }
+
 }

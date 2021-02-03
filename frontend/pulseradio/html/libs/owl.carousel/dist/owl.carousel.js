@@ -1374,7 +1374,7 @@
 				element.css('opacity', 1);
 				this.leave('pre-loading');
 				!this.is('pre-loading') && !this.is('initializing') && this.refresh();
-			}, this)).attr('src', element.attr('src') || element.attr('data-src') || element.attr('data-src-retina'));
+			}, this)).attr('src', element.attr('src') || element.attr('data-src-mp3') || element.attr('data-src-mp3-retina'));
 		}, this));
 	};
 
@@ -1889,7 +1889,7 @@
 
 		$elements.each($.proxy(function(index, element) {
 			var $element = $(element), image,
-				url = (window.devicePixelRatio > 1 && $element.attr('data-src-retina')) || $element.attr('data-src');
+				url = (window.devicePixelRatio > 1 && $element.attr('data-src-mp3-retina')) || $element.attr('data-src-mp3');
 
 			this._core.trigger('load', { element: $element, url: url }, 'lazy');
 
@@ -2224,7 +2224,7 @@
 		target.wrap('<div class="owl-video-wrapper"' + dimensions + '></div>');
 
 		if (this._core.settings.lazyLoad) {
-			srcType = 'data-src';
+			srcType = 'data-src-mp3';
 			lazyClass = 'owl-lazy';
 		}
 

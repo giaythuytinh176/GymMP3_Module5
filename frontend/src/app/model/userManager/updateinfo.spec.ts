@@ -1,4 +1,4 @@
-import { Updateinfo } from './updateinfo';
+import {Updateinfo} from './updateinfo';
 
 describe('Updateinfo', () => {
   it('should create an instance', () => {

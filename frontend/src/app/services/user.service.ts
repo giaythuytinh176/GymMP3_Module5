@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UpdateInfo} from "../model/userManager/updateinfo";
@@ -19,10 +19,11 @@ export class UserService {
   private getUserUrl = 'http://localhost:8000/api/user';
   private updateUserUrl = 'http://localhost:8000/api/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   updateUser(data: any, id: number): Observable<any> {
-    return this.http.put<any>(`${this.updateUserUrl}/${id}`,  data, this.httpJson);
+    return this.http.put<any>(`${this.updateUserUrl}/${id}`, data, this.httpJson);
   }
 
   getInfoUserToken(): Observable<UpdateInfo> {

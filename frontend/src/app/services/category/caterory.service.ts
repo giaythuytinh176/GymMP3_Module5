@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Singer} from "../model/singer";
+import {Category} from "../../model/category";
 
 const TOKEN_KEY = 'AuthToken';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SingerService {
+export class CategoryService {
 
-  apiGetAllSingers = 'http://127.0.0.1:8000/api/singers/list';
+  apiGetAllCategories = 'http://127.0.0.1:8000/api/categories/list';
 
   token = sessionStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -19,9 +19,11 @@ export class SingerService {
       'Authorization': 'Bearer ' + this.token
     })
   }
-  constructor(private http: HttpClient) {}
 
-  getAllSingers(): Observable<Singer[]> {
-    return this.http.get<Singer[]>(this.apiGetAllSingers, this.httpJson);
+  constructor(private http: HttpClient) {
+  }
+
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.apiGetAllCategories, this.httpJson);
   }
 }

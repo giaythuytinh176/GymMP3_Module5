@@ -5,11 +5,13 @@ export class Song {
   mp3Url?: string;
   describes?: string;
   author?: string;
-  views?: string;
-  user_id?: any;
+  views?: number;
+  user_id?: number;
   singer_id?: any;
-  category_id?: any;
-  album_id?: any;
+  category_id?: number;
+  album_id?: number;
+  singer_name?: any;
+  singers?: [{singer_name: string}];
 
   constructor(
     id: number,
@@ -18,11 +20,12 @@ export class Song {
     mp3Url: string,
     describes: string,
     author: string,
-    views: string,
-    user_id: any,
+    views: number,
+    user_id: number,
     singer_id: any,
-    category_id: any,
-    album_id: any,
+    category_id: number,
+    album_id: number,
+    singers: [{singer_name: string}],
   ) {
     this.id = id;
     this.nameSong = nameSong;

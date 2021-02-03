@@ -15,7 +15,6 @@ class Song extends Model
         'author',
         'views',
         'user_id',
-        'singer_id',
         'category_id',
         'album_id',
     ];
@@ -32,8 +31,8 @@ class Song extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function Singer()
+    public function singers()
     {
-        return $this->belongsTo(Singer::class, 'singer_id');
+        return $this->belongsToMany(Singer::class, 'song_singer', 'song_id', 'singer_id');
     }
 }

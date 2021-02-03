@@ -46,7 +46,7 @@
             "title": "Vùng Lá Me Bay",
             "except": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quamquam tu hanc copiosiorem etiam soles dicere. Nihil illinc huc pervenit.",
             "link": "track.detail.html",
-            "thumb": { "src": "images/b0.jpg" },
+            "thumb": { "src": "https://i.ytimg.com/vi/z8DLkLnemFY/mqdefault.jpg" },
             "src": "https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2FVungLaMeBay1-NhuQuynh-4453354.mp3?alt=media&token=8af81cc7-c90b-4a28-b48f-137884833541",
             "meta": {
                 "author": "Trần Quang Lộc",

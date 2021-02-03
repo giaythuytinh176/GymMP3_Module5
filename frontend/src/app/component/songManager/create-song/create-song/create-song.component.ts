@@ -10,12 +10,12 @@ import {UpdateInfo} from "../../../../model/userManager/updateinfo";
 import {Song} from "../../../../model/song/song";
 import {SongService} from "../../../../services/song/song.service";
 import {FirebaseMP3Component} from "../../../firebaseMP3/firebaseMP3.component";
-import {AlbumService} from "../../../../services/album.service";
-import {Album} from '../../../../model/album';
+import {Album} from "../../../../model/album";
+import {AlbumService} from '../../../../services/album/album.service';
 import {Category} from "../../../../model/category";
 import {Singer} from "../../../../model/singer";
-import {CategoryService} from "../../../../services/category.service";
-import {SingerService} from "../../../../services/singer.service";
+import {CategoryService} from "../../../../services/category/caterory.service";
+import {SingerService} from "../../../../services/singer/singer.service";
 
 @Component({
   selector: 'app-create-song',
@@ -45,18 +45,6 @@ export class CreateSongComponent implements OnInit {
               private categoryService: CategoryService,
               private singerService: SingerService,
   ) {
-    this.song = {
-      nameSong: '',
-      avatarUrl: '',
-      mp3Url: '',
-      describes: '',
-      author: '',
-      views: '',
-      user_id: '',
-      singer_id: '',
-      category_id: '',
-      album_id: '',
-    };
   }
 
   ngOnInit(): void {
@@ -99,12 +87,13 @@ export class CreateSongComponent implements OnInit {
     this.createMusicForm.value.avatarUrl = this.firebase.fb;
     this.createMusicForm.value.mp3Url = this.firebaseMP3.fb;
     this.song = this.createMusicForm.value;
+    this.song.singer_id = JSON.stringify(this.createMusicForm.value.singer_id);
     this.song.user_id = this.userinfo.id;
     console.log(this.song);
     this.songService.createSong(this.song).subscribe((data: any) => {
         console.log(data);
         this.toastr.success('Bạn đã thêm thành công Bài Hát');
-        // this.routes.navigate(['/']);
+        this.routes.navigate(['/browse']);
       }, error => {
         console.log(error);
         this.toastr.success('Gặp lỗi xảy ra khi thêm bài hát này!');
