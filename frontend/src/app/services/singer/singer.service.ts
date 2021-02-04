@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Singer} from "../../component/singer";
+import {Singer} from "../../model/singer";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -19,7 +19,9 @@ export class SingerService {
       'Authorization': 'Bearer ' + this.token
     })
   }
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  }
 
   getAllSingers(): Observable<Singer[]> {
     return this.http.get<Singer[]>(this.apiGetAllSingers, this.httpJson);

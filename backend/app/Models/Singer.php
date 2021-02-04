@@ -15,8 +15,8 @@ class Singer extends Model
         'description'
     ];
 
-    public function Song()
+    public function songs()
     {
-        return $this->hasMany(Song::class, 'singer_id');
+        return $this->belongsToMany(Song::class, 'song_singer', 'singer_id', 'song_id');
     }
 }

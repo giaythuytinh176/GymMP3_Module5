@@ -3,6 +3,7 @@ import {LoginInfo} from "../../auth/login-info";
 import {AuthService} from "../../auth/auth.service";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../../token-storage.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,17 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   private loginInfo: LoginInfo;
 
-  constructor(private authService: AuthService, private route: Router,
-              private tokenStorage: TokenStorageService) {
+  constructor(private authService: AuthService,
+              private route: Router,
+              private tokenStorage: TokenStorageService,
+              public toasrt: ToastrService,
+  ) {
   }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
+      this.route.navigate(['/browse']);
     }
   }
 
@@ -39,20 +44,19 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(data);
         this.tokenStorage.saveToken(data.token);
-
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.reloadPage();
-        alert('Login success!!!');
-        this.route.navigate(['/user']);
-        window.location.reload();
+        setTimeout( () => {
+          this.reloadPage();
+        }, 1000);
+        this.toasrt.success('Login sucessfully.');
       },
       error => {
         console.log(error);
         this.errorMessage = error.error.message;
         this.isLoginFailed = true;
-        alert('Login Failed!!! Please login again! ');
+        this.signOut();
+        this.toasrt.warning('Login Failed!!! Please login again!')
         this.reloadPage();
       }
     );
@@ -64,9 +68,11 @@ export class LoginComponent implements OnInit {
 
   signOut() {
     window.sessionStorage.clear();
-    window.location.reload();
-    this.route.navigate(['/login']);
-
+    setTimeout( () => {
+      this.reloadPage();
+    }, 1000);
+    this.toasrt.success('Logout sucessfully.');
+    // this.route.navigate(['/login']);
   }
 
 }

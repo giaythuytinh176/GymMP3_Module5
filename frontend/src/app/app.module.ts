@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import { RegisterComponent } from './component/register/register.component';
+import {RegisterComponent} from './component/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // angular meterial
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -56,19 +56,18 @@ import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {environment} from "../environments/environment";
-import { ChangePasswordComponent } from './component/change-password/change-password.component';
-import { ProfileComponent } from './component/profile/profile.component';
-import { NotGuardComponent } from './component/layout/not-guard/not-guard/not-guard.component';
-import {
-  AngularFireStorageModule,
-  AngularFireStorageReference,
-  AngularFireUploadTask,
-} from "@angular/fire/storage";
+import {ChangePasswordComponent} from './component/change-password/change-password.component';
+import {ProfileComponent} from './component/profile/profile.component';
+import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
+import {AngularFireStorageModule,} from "@angular/fire/storage";
 import {FirebaseComponent} from "./component/firebase/firebase.component";
-import { LoginComponent } from './component/login/login.component';
-import { UpdateSongComponent } from './component/songManager/update-song/update-song.component';
-import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-user.component';
-
+import {LoginComponent} from './component/login/login.component';
+import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song/all-list-song.component';
+import {CreateSongComponent} from './component/songManager/create-song/create-song/create-song.component';
+import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.component";
+import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
+import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
+import { SidebarComponent } from './component/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -79,8 +78,12 @@ import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-u
     ProfileComponent,
     NotGuardComponent,
     FirebaseComponent,
+    FirebaseMP3Component,
+    AllListSongComponent,
+    CreateSongComponent,
     UpdateSongComponent,
     ShowSongsUserComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,13 +143,16 @@ import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-u
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
-
   ],
   providers: [
     FirebaseComponent,
+    FirebaseMP3Component,
+    ShowSongsUserComponent,
+    LoginComponent,
   ],
   bootstrap: [
     AppComponent,
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

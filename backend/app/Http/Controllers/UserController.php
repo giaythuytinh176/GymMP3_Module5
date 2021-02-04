@@ -30,7 +30,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string|max:255|unique:users',
+            'username' => 'required|string|max:100|unique:users',
             'phone' => 'required|string|max:11',
             'password' => 'required|string|min:6|max:8|confirmed',
         ]);
@@ -97,14 +97,7 @@ class UserController extends Controller
     }
 
     // Token not found response
-    private function tokenNotFoundError()
-    {
-        return response()->json([
-            'error' => 'Either your email or token is wrong.'
-        ], Response::HTTP_UNPROCESSABLE_ENTITY);
-    }
 
-    // Reset password
     private function resetPassword($request)
     {
         // find email
@@ -117,6 +110,15 @@ class UserController extends Controller
         return response()->json([
             'data' => 'Password has been updated.'
         ], Response::HTTP_CREATED);
+    }
+
+    // Reset password
+
+    private function tokenNotFoundError()
+    {
+        return response()->json([
+            'error' => 'Either your email or token is wrong.'
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function update(Request $request, $id)

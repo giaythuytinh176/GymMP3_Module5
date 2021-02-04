@@ -1,33 +1,33 @@
 <table class="table">
-    <thead>
-        <th>STT</th>
-        <th>Name Song</th>
-        <th>Describes</th>
-        <th>Author</th>
-        <th>Views</th>
-        <th>Singer</th>
-        <th>Category</th>
-        <th>Album</th>
-        <th>Image</th>
-        <th>Mp3</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let i=index, let song of songs">
-            <td>{{i+1}}</td>
-            <td>{{song.nameSong}}</td>
-            <td>{{song.describes}}</td>
-            <td>{{song.author}}</td>
-            <td>{{song.views}}</td>
-            <td>{{song.singer_name}}</td>
-            <td>{{song.category_name}}</td>
-            <td>{{song?.album_name}}</td>
-            <td><img src="{{song?.avatarUrl}}" width="100px" height="100px" ></td>
-            <td>
-                <audio controls>
-                    <source src="{{song?.mp3Url}}" type="audio/mpeg">
-                </audio>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+  <th>STT</th>
+  <th>Name Song</th>
+  <th>Describes</th>
+  <th>Author</th>
+  <th>Views</th>
+  <th>Singer</th>
+  <th>Category</th>
+  <th>Album</th>
+  <th>Image</th>
+  <th>Mp3</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i=index, let song of songs">
+    <td>{{i + 1}}</td>
+    <td>{{song.nameSong}}</td>
+    <td>{{song.describes}}</td>
+    <td>{{song.author}}</td>
+    <td>{{song.views}}</td>
+    <td>{{song.singer_name}}</td>
+    <td>{{song.category_name}}</td>
+    <td>{{song?.album_name}}</td>
+    <td><img height="100px" src="{{song?.avatarUrl}}" width="100px"></td>
+    <td>
+      <audio controls>
+        <source src="{{song?.mp3Url}}" type="audio/mpeg">
+      </audio>
+    </td>
+  </tr>
+  </tbody>
 </table>
 <button (click)="getListSongs()">submit</button>

@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import {SongService} from "../../../services/song.service";
-import {Song} from "../../../song/song";
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../../services/category/caterory.service";
 import {SingerService} from "../../../services/singer/singer.service";
 import {AlbumService} from "../../../services/album/album.service";
-import { environment } from 'src/environments/environment';
-import {Album} from "../../../album";
-import {Category} from "../../../category";
-import {Singer} from "../../singer";
+import {environment} from 'src/environments/environment';
 import {FirebaseComponent} from "../../firebase/firebase.component";
+import {Album} from "../../../model/album";
+import {Category} from "../../../model/category";
+import {Singer} from "../../../model/singer";
+import {FirebaseMP3Component} from "../../firebaseMP3/firebaseMP3.component";
+import {SongService} from "../../../services/song/song.service";
+import {Song} from "../../../model/song/song";
 
 @Component({
   selector: 'app-update-song',
@@ -18,7 +19,6 @@ import {FirebaseComponent} from "../../firebase/firebase.component";
   styleUrls: ['./update-song.component.css']
 })
 export class UpdateSongComponent implements OnInit {
-  private readonly API_URL_CREATE = environment.apiUrl + '/song/update';
   updateMusicForm: FormGroup
   albums: Album[];
   categories: Category[];
@@ -29,15 +29,18 @@ export class UpdateSongComponent implements OnInit {
   category_id: any;
   album_id: any;
   songForm: FormGroup
-  constructor(private songService:SongService,
-              private route:Router,
-              private routes:ActivatedRoute,
-              private categoryService:CategoryService,
-              private singerService:SingerService,
+  private readonly API_URL_CREATE = environment.apiUrl + '/song/update';
+
+  constructor(private songService: SongService,
+              private route: Router,
+              private routes: ActivatedRoute,
+              private categoryService: CategoryService,
+              private singerService: SingerService,
               private albumService: AlbumService,
-              private firebase: FirebaseComponent,
+              public firebase: FirebaseComponent,
+              public firebaseMP3: FirebaseMP3Component,
   ) {
-    this.songForm = new FormGroup ({
+    this.songForm = new FormGroup({
       nameSong: new FormControl('', [Validators.required])
     });
   }

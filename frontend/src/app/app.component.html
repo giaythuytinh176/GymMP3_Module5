@@ -1,1 +1,413 @@
-<router-outlet></router-outlet>
+<div class="app dk" id="app">
+
+  <!-- ############ LAYOUT START-->
+
+  <!-- aside -->
+  <div class="app-aside modal fade nav-dropdown" id="aside">
+    <!-- fluid app aside -->
+    <div class="left navside grey dk" data-layout="column">
+      <div class="navbar no-radius">
+        <!-- brand -->
+        <a class="navbar-brand md" href="index.html">
+          <svg height="32" viewBox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" fill="rgba(255,255,255,0.2)" r="24"/>
+            <circle class="brand-color" cx="24" cy="24" fill="#1c202b" r="22"/>
+            <circle cx="24" cy="24" fill="#ffffff" r="10"/>
+            <circle class="brand-animate" cx="13" cy="13" fill="#ffffff" r="2"/>
+            <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF"/>
+            <circle cx="24" cy="24" fill="#000000" r="3"/>
+          </svg>
+
+          <img alt="." class="hide" src="assets/images/logo.png">
+          <span class="hidden-folded inline">pulse</span>
+        </a>
+        <!-- / brand -->
+      </div>
+      <div class="hide-scroll" data-flex>
+        <app-sidebar></app-sidebar>
+      </div>
+      <div data-flex-no-shrink>
+        <div class="nav-fold dropup">
+          <a data-toggle="dropdown">
+              <span class="pull-left">
+                <img alt="..." class="w-32 img-circle" src="https://media-exp1.licdn.com/dms/image/C510BAQEdjKl11NB6-g/company-logo_200_200/0/1519959194921?e=2159024400&v=beta&t=DDGPgnMddsArR4oUVxPcRnCXjIm7LqkMtAWlBkTmL1Y">
+              </span>
+            <span class="clear hidden-folded p-x p-y-xs">
+                <span class="block _500 text-ellipsis">CodeGym</span>
+              </span>
+          </a>
+          <div class="dropdown-menu w dropdown-menu-scale ">
+            <a class="dropdown-item" href="profile.html#profile">
+              <span>Profile</span>
+            </a>
+            <a class="dropdown-item" href="profile.html#tracks">
+              <span>Tracks</span>
+            </a>
+            <a class="dropdown-item" href="profile.html#playlists">
+              <span>Playlists</span>
+            </a>
+            <a class="dropdown-item" href="profile.html#likes">
+              <span>Likes</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="docs.html">
+              Need help?
+            </a>
+            <a class="dropdown-item" href="signin.html">Sign out</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- / -->
+
+  <!-- content -->
+  <div class="app-content white bg box-shadow-z2" id="content" role="main">
+    <div class="app-header hidden-lg-up white lt box-shadow-z1">
+      <div class="navbar">
+        <!-- brand -->
+        <a class="navbar-brand md" href="index.html">
+          <svg height="32" viewBox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" fill="rgba(255,255,255,0.2)" r="24"/>
+            <circle class="brand-color" cx="24" cy="24" fill="#1c202b" r="22"/>
+            <circle cx="24" cy="24" fill="#ffffff" r="10"/>
+            <circle class="brand-animate" cx="13" cy="13" fill="#ffffff" r="2"/>
+            <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF"/>
+            <circle cx="24" cy="24" fill="#000000" r="3"/>
+          </svg>
+
+          <img alt="." class="hide" src="assets/images/logo.png">
+          <span class="hidden-folded inline">pulse</span>
+        </a>
+        <!-- / brand -->
+        <!-- nabar right -->
+        <ul class="nav navbar-nav pull-right">
+          <li class="nav-item">
+            <!-- Open side - Naviation on mobile -->
+            <a class="nav-link" data-target="#aside" data-toggle="modal">
+              <i class="material-icons">menu</i>
+            </a>
+            <!-- / -->
+          </li>
+        </ul>
+        <!-- / navbar right -->
+      </div>
+    </div>
+    <div class="app-body" id="view">
+
+      <!-- ############ PAGE START-->
+
+      <router-outlet></router-outlet>
+
+      <!-- ############ PAGE END-->
+
+    </div>
+  </div>
+
+  <!-- / -->
+
+
+  <!-- ############ SWITHCHER START-->
+  <div id="switcher">
+    <div class="switcher white" id="sw-theme">
+      <a class="white sw-btn" data-ui-target="#sw-theme" data-ui-toggle-class="active" href="#">
+        <i class="fa fa-gear text-muted"></i>
+      </a>
+      <div class="box-header">
+        <strong>Theme Switcher</strong>
+      </div>
+      <div class="box-divider"></div>
+      <div class="box-body">
+        <p class="hidden-md-down" id="settingLayout">
+          <label class="md-check m-y-xs" data-target="folded">
+            <input type="checkbox">
+            <i class="green"></i>
+            <span>Folded Aside</span>
+          </label>
+          <label class="m-y-xs pointer" data-target="fullscreen" data-ui-fullscreen>
+            <span class="fa fa-expand fa-fw m-r-xs"></span>
+            <span>Fullscreen Mode</span>
+          </label>
+        </p>
+        <p>Colors:</p>
+        <p data-target="color">
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+            <input name="color" type="radio" value="primary">
+            <i class="primary"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+            <input name="color" type="radio" value="accent">
+            <i class="accent"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+            <input name="color" type="radio" value="warn">
+            <i class="warn"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+            <input name="color" type="radio" value="success">
+            <i class="success"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+            <input name="color" type="radio" value="info">
+            <i class="info"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+            <input name="color" type="radio" value="blue">
+            <i class="blue"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+            <input name="color" type="radio" value="warning">
+            <i class="warning"></i>
+          </label>
+          <label class="radio radio-inline m-a-0 ui-check ui-check-color ui-check-md">
+            <input name="color" type="radio" value="danger">
+            <i class="danger"></i>
+          </label>
+        </p>
+        <p>Themes:</p>
+        <div class="text-u-c text-center _600 clearfix" data-target="bg">
+          <label class="p-a col-xs-3 dark pointer m-a-0">
+            <input hidden name="theme" type="radio" value="dark">
+            <i class="active-checked fa fa-check"></i>
+          </label>
+          <label class="p-a col-xs-3 grey pointer m-a-0">
+            <input hidden name="theme" type="radio" value="grey">
+            <i class="active-checked fa fa-check"></i>
+          </label>
+          <label class="p-a col-xs-3 black pointer m-a-0">
+            <input hidden name="theme" type="radio" value="black">
+            <i class="active-checked fa fa-check"></i>
+          </label>
+          <label class="p-a col-xs-3 light pointer m-a-0">
+            <input hidden name="theme" type="radio" value="">
+            <i class="active-checked fa fa-check"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ############ SWITHCHER END-->
+  <!-- ############ SEARCH START -->
+  <div class="modal white lt fade" data-backdrop="false" id="search-modal">
+    <a class="text-muted text-lg p-x modal-close-btn" data-dismiss="modal">&times;</a>
+    <div class="row-col">
+      <div class="p-a-lg h-v row-cell v-m">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <form action="search.html" class="m-b-md">
+              <div class="input-group input-group-lg">
+                <input class="form-control" data-ui-target="#search-result" data-ui-toggle-class="hide" placeholder="Type keyword" type="text">
+                <span class="input-group-btn">
+                    <button class="btn b-a no-shadow white" type="submit">Search</button>
+                  </span>
+              </div>
+            </form>
+            <div class="animated fadeIn" id="search-result">
+              <p class="m-b-md"><strong>23</strong>
+                <span class="text-muted">Results found for: </span><strong>Keyword</strong></p>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row item-list item-list-sm item-list-by m-b">
+                    <div class="col-xs-12">
+                      <div class="item r" data-id="item-5" data-src="http://streaming.radionomy.com/JamendoLounge">
+                        <div class="item-media ">
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b4.jpg');"></a>
+                        </div>
+                        <div class="item-info">
+                          <div class="item-title text-ellipsis">
+                            <a href="track.detail.html">Live Radio</a>
+                          </div>
+                          <div class="item-author text-sm text-ellipsis ">
+                            <a class="text-muted" href="artist.detail.html">Radionomy</a>
+                          </div>
+                          <div class="item-meta text-sm text-muted">
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="item r" data-id="item-4" data-src-mp3="http://api.soundcloud.com/tracks/230791292/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                        <div class="item-media ">
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b3.jpg');"></a>
+                        </div>
+                        <div class="item-info">
+                          <div class="item-title text-ellipsis">
+                            <a href="track.detail.html">What A Time To Be Alive</a>
+                          </div>
+                          <div class="item-author text-sm text-ellipsis ">
+                            <a class="text-muted" href="artist.detail.html">Judith Garcia</a>
+                          </div>
+                          <div class="item-meta text-sm text-muted">
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="item r" data-id="item-8" data-src-mp3="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                        <div class="item-media ">
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b7.jpg');"></a>
+                        </div>
+                        <div class="item-info">
+                          <div class="item-title text-ellipsis">
+                            <a href="track.detail.html">Simple Place To Be</a>
+                          </div>
+                          <div class="item-author text-sm text-ellipsis ">
+                            <a class="text-muted" href="artist.detail.html">RYD</a>
+                          </div>
+                          <div class="item-meta text-sm text-muted">
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="item r" data-id="item-9" data-src-mp3="http://api.soundcloud.com/tracks/264094434/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                        <div class="item-media ">
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b8.jpg');"></a>
+                        </div>
+                        <div class="item-info">
+                          <div class="item-title text-ellipsis">
+                            <a href="track.detail.html">All I Need</a>
+                          </div>
+                          <div class="item-author text-sm text-ellipsis ">
+                            <a class="text-muted" href="artist.detail.html">Pablo Nouvelle</a>
+                          </div>
+                          <div class="item-meta text-sm text-muted">
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row item-list item-list-sm item-list-by m-b">
+                    <div class="col-xs-12">
+                      <div class="item">
+                        <div class="item-media rounded ">
+                          <a class="item-media-content" href="artist.detail.html" style="background-image: url('assets/images/a6.jpg');"></a>
+                        </div>
+                        <div class="item-info ">
+                          <div class="item-title text-ellipsis">
+                            <a href="artist.detail.html">OlsJesse Russell</a>
+                            <div class="text-sm text-muted">23 songs</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="item">
+                        <div class="item-media rounded ">
+                          <a class="item-media-content" href="artist.detail.html" style="background-image: url('assets/images/a8.jpg');"></a>
+                        </div>
+                        <div class="item-info ">
+                          <div class="item-title text-ellipsis">
+                            <a href="artist.detail.html">Sara King</a>
+                            <div class="text-sm text-muted">14 songs</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="item">
+                        <div class="item-media rounded ">
+                          <a class="item-media-content" href="artist.detail.html" style="background-image: url('assets/images/a9.jpg');"></a>
+                        </div>
+                        <div class="item-info ">
+                          <div class="item-title text-ellipsis">
+                            <a href="artist.detail.html">Douglas Torres</a>
+                            <div class="text-sm text-muted">20 songs</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="item">
+                        <div class="item-media rounded ">
+                          <a class="item-media-content" href="artist.detail.html" style="background-image: url('assets/images/a7.jpg');"></a>
+                        </div>
+                        <div class="item-info ">
+                          <div class="item-title text-ellipsis">
+                            <a href="artist.detail.html">Richard Carr</a>
+                            <div class="text-sm text-muted">6 songs</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-groups" id="top-search">
+              <strong class="text-muted">Top searches: </strong>
+              <a class="btn btn-xs white" href="#">Happy</a>
+              <a class="btn btn-xs white" href="#">Music</a>
+              <a class="btn btn-xs white" href="#">Weekend</a>
+              <a class="btn btn-xs white" href="#">Summer</a>
+              <a class="btn btn-xs white" href="#">Holiday</a>
+              <a class="btn btn-xs white" href="#">Blue</a>
+              <a class="btn btn-xs white" href="#">Soul</a>
+              <a class="btn btn-xs white" href="#">Calm</a>
+              <a class="btn btn-xs white" href="#">Nice</a>
+              <a class="btn btn-xs white" href="#">Home</a>
+              <a class="btn btn-xs white" href="#">SLeep</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ############ SEARCH END -->
+  <!-- ############ SHARE START -->
+  <div class="modal fade animate" id="share-modal">
+    <div class="modal-dialog">
+      <div class="modal-content fade-down">
+        <div class="modal-header">
+
+          <h5 class="modal-title">Share</h5>
+        </div>
+        <div class="modal-body p-lg">
+          <div class="m-b" id="share-list">
+            <a class="btn btn-icon btn-social rounded btn-social-colored indigo" href="" title="Facebook">
+              <i class="fa fa-facebook"></i>
+              <i class="fa fa-facebook"></i>
+            </a>
+
+            <a class="btn btn-icon btn-social rounded btn-social-colored light-blue" href="" title="Twitter">
+              <i class="fa fa-twitter"></i>
+              <i class="fa fa-twitter"></i>
+            </a>
+
+            <a class="btn btn-icon btn-social rounded btn-social-colored red-600" href="" title="Google+">
+              <i class="fa fa-google-plus"></i>
+              <i class="fa fa-google-plus"></i>
+            </a>
+
+            <a class="btn btn-icon btn-social rounded btn-social-colored blue-grey-600" href="" title="Trumblr">
+              <i class="fa fa-tumblr"></i>
+              <i class="fa fa-tumblr"></i>
+            </a>
+
+            <a class="btn btn-icon btn-social rounded btn-social-colored red-700" href="" title="Pinterst">
+              <i class="fa fa-pinterest"></i>
+              <i class="fa fa-pinterest"></i>
+            </a>
+          </div>
+          <div>
+            <input class="form-control" value="http://plamusic.com/slug"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ############ SHARE END -->
+
+  <!-- ############ LAYOUT END-->
+</div>

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Album} from "../../album";
+import {Album} from "../../model/album";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -19,7 +19,9 @@ export class AlbumService {
       'Authorization': 'Bearer ' + this.token
     })
   }
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  }
 
   getAllAlbum(): Observable<Album[]> {
     return this.http.get<Album[]>(this.apiGetAllAlbum, this.httpJson);

@@ -75,6 +75,7 @@ export class FirebaseComponent implements OnInit {
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe(url => {
             if (url) {
+              this.toastr.success('Uploaded successfully', 'Tải lên thành công');
               this.fb = url;
             }
             console.log(this.fb);

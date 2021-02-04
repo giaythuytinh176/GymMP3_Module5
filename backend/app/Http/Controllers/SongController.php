@@ -8,25 +8,64 @@ use App\Models\Category;
 use App\Models\Album;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 class SongController extends Controller
 {
+    public function createSong(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nameSong' => 'required|string',
+            'avatarUrl' => 'required|string',
+            'mp3Url' => 'required|string|unique:songs',
+            'describes' => 'required|string',
+            'author' => 'required|string',
+            'views' => 'required|integer',
+            'user_id' => 'required|integer',
+            'singer_id' => 'required|string',
+            'category_id' => 'required|integer',
+            'album_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $data = new Song();
+        $data->fill($request->all());
+        $data->save();
+        foreach (json_decode($request->singer_id, true) as $s_id) {
+            $data->singers()->attach($s_id);
+        }
+        return response()->json(compact('data'));
+    }
+
+    public function findSinger(Request $request)
+    {
+        $word = $request->word;
+        $data = Vietnamese::whereHas("englishs", function (\Illuminate\Database\Eloquent\Builder $builder) use ($word) {
+            $builder->where('englishes.name', '=', $word);
+        })->get();
+        return response()->json($data, 200);
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        $songs= DB::table('songs')->join('categories','songs.category_id','=','categories.id')->select('songs.*','songs.category_id')->get();
+        $songs = DB::table('songs')->join('categories', 'songs.category_id', '=', 'categories.id')->select('songs.*', 'songs.category_id')->get();
         return response()->json($songs);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -36,8 +75,8 @@ class SongController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -50,25 +89,39 @@ class SongController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Song  $song
-     * @return \Illuminate\Http\Response
+     * @param Song $song
+     * @return Response
      */
     public function show($id)
     {
 
         $songs = DB::table('songs')
-        ->select('songs.*','users.username','categories.category_name','singers.singer_name','albums.album_name')
-        ->join('users','users.id','=','songs.user_id')
-        ->join('categories','categories.id','=','songs.category_id')
-        ->join('singers','singers.id','=','songs.singer_id')
-        ->join('albums','albums.id','=','songs.album_id')
-        ->where('users.id','=',$id)
-        ->get();
+            ->select('songs.*', 'users.username', 'categories.category_name', 'singers.singer_name', 'albums.album_name')
+            ->join('users', 'users.id', '=', 'songs.user_id')
+            ->join('categories', 'categories.id', '=', 'songs.category_id')
+            ->join('singers', 'singers.id', '=', 'songs.singer_id')
+            ->join('albums', 'albums.id', '=', 'songs.album_id')
+            ->where('users.id', '=', $id)
+            ->get();
         return response()->json($songs, 200);
 
     }
 
-    public function showidsong($id){
+    public function allSongs()
+    {
+//        $data = DB::table('songs')
+//            ->select('songs.*', 'users.username', 'categories.category_name', 'singers.singer_name', 'albums.album_name')
+//            ->join('users', 'users.id', '=', 'songs.user_id')
+//            ->join('categories', 'categories.id', '=', 'songs.category_id')
+//            ->join('singers', 'singers.id', '=', 'songs.singer_id')
+//            ->join('albums', 'albums.id', '=', 'songs.album_id')
+//            ->get();
+        $data = Song::with('singers')->get();
+        return response()->json(compact('data'), 200);
+    }
+
+    public function showidsong($id)
+    {
         $song = Song::find($id);
         return response()->json($song);
     }
@@ -76,8 +129,8 @@ class SongController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Song  $song
-     * @return \Illuminate\Http\Response
+     * @param Song $song
+     * @return Response
      */
     public function edit(Song $song)
     {
@@ -87,9 +140,9 @@ class SongController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Song  $song
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Song $song
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -102,8 +155,8 @@ class SongController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Song  $song
-     * @return \Illuminate\Http\Response
+     * @param Song $song
+     * @return Response
      */
     public function destroy($id)
     {
