@@ -10,6 +10,8 @@ import {AllListSongComponent} from "./component/songManager/all-list-song/all-li
 import {CreateSongComponent} from "./component/songManager/create-song/create-song/create-song.component";
 import {UpdateSongComponent} from "./component/songManager/update-song/update-song.component";
 import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
+import firebase from "firebase";
+import Auth = firebase.auth.Auth;
 
 const routes: Routes = [
   {
@@ -51,6 +53,11 @@ const routes: Routes = [
   {
     path: 'songs/:id',
     component: UpdateSongComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'deletesong/:id',
+    component: ShowSongsUserComponent,
     canActivate: [AuthGuard],
   },
 

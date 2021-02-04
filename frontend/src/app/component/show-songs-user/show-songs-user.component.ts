@@ -64,4 +64,13 @@ export class ShowSongsUserComponent implements OnInit {
       });
   }
 
+  deleteSong(id:number){
+    this.songService.deleteSong(id).subscribe(
+      data=>{
+        console.log(data);
+        this.getListSongs();
+      }, error => console.log(error)
+    )
+  }
+
 }
