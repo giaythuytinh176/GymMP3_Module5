@@ -17,7 +17,7 @@ import {Song} from '../../model/song/song';
 })
 export class ShowSongsUserComponent implements OnInit {
 
-  songs: Song;
+  songs: Song[];
   success: string;
   fail: string;
   username: string;
@@ -45,23 +45,23 @@ export class ShowSongsUserComponent implements OnInit {
         this.token.signOut();
         this.toastr.warning('You must login to see list songs.');
       }
-      this.userInfor = data.user;
+      else {
+        this.userInfor = data.user;
+        this.songService.getSongDetail(this.userInfor.id)
+          .subscribe((data: any) => {
+            console.log(data);
+            this.songs = data;
+            if (data.status) {
+              this.token.signOut();
+            }
+          }, error => {
+            console.log(error);
+            this.isUpdate = false;
+            this.isUpdateFailed = true;
+          });
+      }
     }, error => console.log(error));
-  }
 
-  getListSongs() {
-    this.songService.getSongDetail(this.userInfor.id)
-      .subscribe((data: any) => {
-        console.log(data);
-        this.songs = data;
-        if (data.status) {
-          this.token.signOut();
-        }
-      }, error => {
-        console.log(error);
-        this.isUpdate = false;
-        this.isUpdateFailed = true;
-      });
   }
 
 }

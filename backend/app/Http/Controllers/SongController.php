@@ -7,6 +7,7 @@ use App\Models\Singer;
 use App\Models\Category;
 use App\Models\Album;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -94,17 +95,38 @@ class SongController extends Controller
      */
     public function show($id)
     {
-
         $songs = DB::table('songs')
-            ->select('songs.*', 'users.username', 'categories.category_name', 'singers.singer_name', 'albums.album_name')
+            ->select('songs.*', 'users.username', 'categories.category_name', 'albums.album_name')
             ->join('users', 'users.id', '=', 'songs.user_id')
-            ->join('categories', 'categories.id', '=', 'songs.category_id')
-            ->join('singers', 'singers.id', '=', 'songs.singer_id')
             ->join('albums', 'albums.id', '=', 'songs.album_id')
+            ->join('categories', 'categories.id', '=', 'songs.category_id')
+//            ->join('song_singer', 'singer_id', '=')
             ->where('users.id', '=', $id)
-            ->get();
-        return response()->json($songs, 200);
+            ->get()
+            ->toArray();
+        $data = [];
+        $songs = json_decode(json_encode($songs), true);
+        foreach ($songs as $song) {
+            $data[]['singer_list_name'] = $this->findSingerBySongID($song['id']);
+        }
+        $last = array_replace_recursive($songs, $data);
+        return response()->json($last, 200);
+    }
 
+    public function findSingerBySongID($id)
+    {
+        $list_singer_id = [];
+        $data = DB::table('song_singer')->where('song_singer.song_id', '=', $id)->get();
+        foreach ($data as $dt) {
+            $list_singer_id[] = $this->findSingerNameBySingerID($dt->singer_id);
+        }
+        return $list_singer_id;
+    }
+
+    public function findSingerNameBySingerID($id)
+    {
+        $data = DB::table('singers')->where('singers.id', '=', $id)->first();
+        return $data->singer_name;
     }
 
     public function allSongs()

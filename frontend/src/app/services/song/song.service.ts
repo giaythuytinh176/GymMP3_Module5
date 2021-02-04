@@ -20,10 +20,10 @@ export class SongService {
     })
   }
   private API_URL_CREATE = environment.apiUrl + '/song/create';
-  private apiListSongUser = "http://127.0.0.1:8000/api/listsongs"
-  private updateSongUrl = 'http://localhost:8000/api/songs';
-  private getUserUrl = 'http://localhost:8000/api/user';
-  private apiGetAllSongs = 'http://localhost:8000/api/songs/list';
+  private apiListSongUser = environment.apiUrl + '/listsongs';
+  private updateSongUrl = environment.apiUrl + '/songs';
+  private getUserUrl = environment.apiUrl + '/user';
+  private apiGetAllSongs = environment.apiUrl + '/songs/list';
 
   constructor(
     private http: HttpClient,
