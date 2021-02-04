@@ -20,13 +20,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('signup', '\App\Http\Controllers\UserController@register');
 Route::post('login', '\App\Http\Controllers\UserController@authenticate');
+<<<<<<< HEAD
 Route::get('/songs/list', [\App\Http\Controllers\SongController::class, 'allSongs']);
+=======
+Route::get('/songs',[\App\Http\Controllers\SongController::class,'index']);
+Route::post('/songs', [\App\Http\Controllers\SongController::class, 'store']);
+
+>>>>>>> e69b538d68601004c425fe92b2324963dd22f113
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', '\App\Http\Controllers\UserController@getAuthenticatedUser');
     Route::put('/users/{id}', '\App\Http\Controllers\UserController@update')->name('users.update');
     Route::get('listsongs/{id}','\App\Http\Controllers\SongController@show');
     Route::post('changePassword', '\App\Http\Controllers\UserController@changePassword');
+<<<<<<< HEAD
     Route::post('/song/create', '\App\Http\Controllers\SongController@createSong');
     Route::get('/albums/list', '\App\Http\Controllers\AlbumController@index');
     Route::get('/categories/list', '\App\Http\Controllers\CategoryController@index');
@@ -36,6 +43,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('/songs/{id}', [\App\Http\Controllers\SongController::class, 'destroy']);
     Route::get('/songs',[\App\Http\Controllers\SongController::class,'index']);
     Route::post('/songs', [\App\Http\Controllers\SongController::class, 'store']);
+=======
+    Route::put('/songs/{id}', [\App\Http\Controllers\SongController::class, 'update']);
+    Route::get('/songs/{id}', [\App\Http\Controllers\SongController::class, 'showidsong']);
+    Route::delete('/songs/{id}', [\App\Http\Controllers\SongController::class, 'destroy']);
+>>>>>>> e69b538d68601004c425fe92b2324963dd22f113
 
 });
 

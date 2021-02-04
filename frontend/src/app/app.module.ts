@@ -61,6 +61,7 @@ import {ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
 import {AngularFireStorageModule,} from "@angular/fire/storage";
 import {FirebaseComponent} from "./component/firebase/firebase.component";
+<<<<<<< HEAD
 import {LoginComponent} from './component/login/login.component';
 import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song/all-list-song.component';
 import {CreateSongComponent} from './component/songManager/create-song/create-song/create-song.component';
@@ -68,6 +69,12 @@ import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.componen
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
 import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
+=======
+import { LoginComponent } from './component/login/login.component';
+import { UpdateSongComponent } from './component/songManager/update-song/update-song.component';
+import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-user.component';
+
+>>>>>>> e69b538d68601004c425fe92b2324963dd22f113
 
 @NgModule({
   declarations: [
@@ -78,12 +85,17 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     ProfileComponent,
     NotGuardComponent,
     FirebaseComponent,
+<<<<<<< HEAD
     FirebaseMP3Component,
     AllListSongComponent,
     CreateSongComponent,
     UpdateSongComponent,
     ShowSongsUserComponent,
     SidebarComponent,
+=======
+    UpdateSongComponent,
+    ShowSongsUserComponent,
+>>>>>>> e69b538d68601004c425fe92b2324963dd22f113
   ],
   imports: [
     BrowserModule,
