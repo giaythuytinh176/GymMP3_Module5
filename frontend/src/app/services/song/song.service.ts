@@ -24,7 +24,8 @@ export class SongService {
   private updateSongUrl = 'http://localhost:8000/api/songs';
   private getUserUrl = 'http://localhost:8000/api/user';
   private apiGetAllSongs = 'http://localhost:8000/api/songs/list';
-
+  private search = 'http://localhost:8000/api/search';
+  
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -53,5 +54,9 @@ export class SongService {
 
   getInfoUserToken(): Observable<UpdateInfo> {
     return this.http.get<UpdateInfo>(this.getUserUrl, this.httpJson);
+  }
+
+  searchSong(key: any): Observable<any> {
+    return this.http.post(`${this.search}`, {search: key});
   }
 }

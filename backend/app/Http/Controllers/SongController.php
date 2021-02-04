@@ -165,4 +165,22 @@ class SongController extends Controller
         return response()->json($song);
     }
 
+    public function search(Request $request)
+    {  
+        $songs = DB::table('songs')
+                ->select('songs.*', 'users.username', 'categories.category_name','albums.album_name')
+                ->join('users', 'users.id', '=', 'songs.user_id')
+                ->join('categories', 'categories.id', '=', 'songs.category_id')
+                ->join('albums', 'albums.id', '=', 'songs.album_id')
+                // ->join('song_singer', 'songs.id', '=', 'song_singer.song_id')
+                // ->join('singers', 'song_singer.singer_id', '=', 'singers.id')
+                // ->groupBy('song_singer.singer_id')
+                ->where('songs.nameSong', 'like', '%' . $request->search . '%')
+                ->orWhere('categories.category_name', 'like', '%' . $request->search . '%')
+                ->orWhere('albums.album_name', 'like', '%' . $request->search . '%')
+                // ->orWhere('singers.singer_name', 'like', '%' . $request->search . '%')
+                ->get();
+        return response()->json($songs, 200);
+    }
+
 }

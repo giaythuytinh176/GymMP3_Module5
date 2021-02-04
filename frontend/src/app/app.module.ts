@@ -68,6 +68,7 @@ import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.componen
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
 import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { SearchSongComponent } from './component/songManager/search-song/search-song.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     UpdateSongComponent,
     ShowSongsUserComponent,
     SidebarComponent,
+    SearchSongComponent,
   ],
   imports: [
     BrowserModule,

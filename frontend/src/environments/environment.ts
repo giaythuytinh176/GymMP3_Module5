@@ -8,14 +8,24 @@ export const environment = {
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig: {
-    apiKey: 'AIzaSyBBjVystZ5NskbWkWsuBdtLh6ntZdiAQqg',
-    authDomain: 'dataimagemusic.firebaseapp.com',
-    databaseURL: 'https://dataimagemusic-default-rtdb.firebaseio.com',
-    projectId: 'dataimagemusic',
-    storageBucket: 'dataimagemusic.appspot.com',
-    messagingSenderId: '1066682814538',
-    appId: '1:1066682814538:web:17e10bc6565189b29d56b3',
-    measurementId: 'G-VX010H87ZW'
+    // apiKey: 'AIzaSyBBjVystZ5NskbWkWsuBdtLh6ntZdiAQqg',
+    // authDomain: 'dataimagemusic.firebaseapp.com',
+    // databaseURL: 'https://dataimagemusic-default-rtdb.firebaseio.com',
+    // projectId: 'dataimagemusic',
+    // storageBucket: 'dataimagemusic.appspot.com',
+    // messagingSenderId: '1066682814538',
+    // appId: '1:1066682814538:web:17e10bc6565189b29d56b3',
+    // measurementId: 'G-VX010H87ZW'
+
+    apiKey: "AIzaSyAEffQT02Vz7A1amIO87zCJa1ovmJ1fGxE",
+    authDomain: "zingmp3-8b741.firebaseapp.com",
+    databaseURL: "https://zingmp3-8b741-default-rtdb.firebaseio.com",
+    projectId: "zingmp3-8b741",
+    storageBucket: "zingmp3-8b741.appspot.com",
+    messagingSenderId: "485213588056",
+    appId: "1:485213588056:web:25c939bb03ac33b051182d",
+    measurementId: "G-M2QH4BPQ45"
+
   },
 };
 
