@@ -44,8 +44,7 @@ export class ShowSongsUserComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to see list songs.');
-      }
-      else {
+      } else {
         this.userInfor = data.user;
         this.songService.getSongDetail(this.userInfor.id)
           .subscribe((data: any) => {
@@ -62,6 +61,17 @@ export class ShowSongsUserComponent implements OnInit {
       }
     }, error => console.log(error));
 
+  }
+
+  deleteSong(id: number) {
+    if (confirm('Bạn chắc chắn muốn xóa chứ?')) {
+      this.songService.deleteSong(id).subscribe(
+        data => {
+          console.log(data);
+          this.routes.navigate(['/listsongs']);
+        }, error => console.log(error)
+      )
+    }
   }
 
 }

@@ -24,6 +24,8 @@ export class SongService {
   private updateSongUrl = environment.apiUrl + '/songs';
   private getUserUrl = environment.apiUrl + '/user';
   private apiGetAllSongs = environment.apiUrl + '/songs/list';
+  private search = environment.apiUrl + '/search';
+  private deleteSongsUrl = environment.apiUrl + '/songs'
 
   constructor(
     private http: HttpClient,
@@ -53,5 +55,14 @@ export class SongService {
 
   getInfoUserToken(): Observable<UpdateInfo> {
     return this.http.get<UpdateInfo>(this.getUserUrl, this.httpJson);
+  }
+
+  searchSong(key: any): Observable<any> {
+    return this.http.post(`${this.search}`, {search: key});
+  }
+
+  deleteSong(id: number) {
+    return this.http.delete(`${this.deleteSongsUrl}/${id}`, this.httpJson);
+
   }
 }

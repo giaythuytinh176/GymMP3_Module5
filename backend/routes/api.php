@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('signup', '\App\Http\Controllers\UserController@register');
 Route::post('login', '\App\Http\Controllers\UserController@authenticate');
 Route::get('/songs/list', [\App\Http\Controllers\SongController::class, 'allSongs']);
+Route::post('/search','\App\Http\Controllers\SongController@search');
 
 
 Route::group(['middleware' => ['jwt.verify']], function() {
