@@ -17,7 +17,7 @@ import {Song} from '../../model/song/song';
 })
 export class ShowSongsUserComponent implements OnInit {
 
-  songs: Song;
+  songs: Song[];
   success: string;
   fail: string;
   username: string;
@@ -44,33 +44,34 @@ export class ShowSongsUserComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to see list songs.');
+      } else {
+        this.userInfor = data.user;
+        this.songService.getSongDetail(this.userInfor.id)
+          .subscribe((data: any) => {
+            console.log(data);
+            this.songs = data;
+            if (data.status) {
+              this.token.signOut();
+            }
+          }, error => {
+            console.log(error);
+            this.isUpdate = false;
+            this.isUpdateFailed = true;
+          });
       }
-      this.userInfor = data.user;
     }, error => console.log(error));
+
   }
 
-  getListSongs() {
-    this.songService.getSongDetail(this.userInfor.id)
-      .subscribe((data: any) => {
-        console.log(data);
-        this.songs = data;
-        if (data.status) {
-          this.token.signOut();
-        }
-      }, error => {
-        console.log(error);
-        this.isUpdate = false;
-        this.isUpdateFailed = true;
-      });
-  }
-
-  deleteSong(id:number){
-    this.songService.deleteSong(id).subscribe(
-      data=>{
-        console.log(data);
-        this.getListSongs();
-      }, error => console.log(error)
-    )
+  deleteSong(id: number) {
+    if (confirm('Bạn chắc chắn muốn xóa chứ?')) {
+      this.songService.deleteSong(id).subscribe(
+        data => {
+          console.log(data);
+          this.routes.navigate(['/listsongs']);
+        }, error => console.log(error)
+      )
+    }
   }
 
 }

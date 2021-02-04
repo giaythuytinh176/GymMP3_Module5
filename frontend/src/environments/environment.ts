@@ -9,6 +9,16 @@ export const environment = {
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig: {
     //Tam
+    apiKey: "AIzaSyB105jQsfLF2uVEccrUtVg2CkgCLycBqys",
+    authDomain: "test-30590.firebaseapp.com",
+    databaseURL: "https://test-30590-default-rtdb.firebaseio.com",
+    projectId: "test-30590",
+    storageBucket: "test-30590.appspot.com",
+    messagingSenderId: "310058872365",
+    appId: "1:310058872365:web:7f9d0d02900fb59c4dd2a4",
+    measurementId: "G-PQWQY0YKYF"
+
+    //Tam
     // apiKey: 'AIzaSyBBjVystZ5NskbWkWsuBdtLh6ntZdiAQqg',
     // authDomain: 'dataimagemusic.firebaseapp.com',
     // databaseURL: 'https://dataimagemusic-default-rtdb.firebaseio.com',
@@ -19,14 +29,14 @@ export const environment = {
     // measurementId: 'G-VX010H87ZW'
 
     //Quynh
-    apiKey: "AIzaSyAEffQT02Vz7A1amIO87zCJa1ovmJ1fGxE",
-    authDomain: "zingmp3-8b741.firebaseapp.com",
-    databaseURL: "https://zingmp3-8b741-default-rtdb.firebaseio.com",
-    projectId: "zingmp3-8b741",
-    storageBucket: "zingmp3-8b741.appspot.com",
-    messagingSenderId: "485213588056",
-    appId: "1:485213588056:web:25c939bb03ac33b051182d",
-    measurementId: "G-M2QH4BPQ45"
+    // apiKey: "AIzaSyAEffQT02Vz7A1amIO87zCJa1ovmJ1fGxE",
+    // authDomain: "zingmp3-8b741.firebaseapp.com",
+    // databaseURL: "https://zingmp3-8b741-default-rtdb.firebaseio.com",
+    // projectId: "zingmp3-8b741",
+    // storageBucket: "zingmp3-8b741.appspot.com",
+    // messagingSenderId: "485213588056",
+    // appId: "1:485213588056:web:25c939bb03ac33b051182d",
+    // measurementId: "G-M2QH4BPQ45"
 
     //Thanh
     // apiKey: "AIzaSyADjGHtFp8CImok32l2bKnGlRYFCQsubZc",
@@ -37,7 +47,6 @@ export const environment = {
     // messagingSenderId: "489727620289",
     // appId: "1:489727620289:web:faf203074f775f8f439040",
     // measurementId: "G-XXB7QEJBE4"
-
   },
 };
 

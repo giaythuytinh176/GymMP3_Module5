@@ -20,12 +20,12 @@ export class SongService {
     })
   }
   private API_URL_CREATE = environment.apiUrl + '/song/create';
-  private apiListSongUser = "http://127.0.0.1:8000/api/listsongs"
-  private updateSongUrl = 'http://localhost:8000/api/songs';
-  private getUserUrl = 'http://localhost:8000/api/user';
-  private apiGetAllSongs = 'http://localhost:8000/api/songs/list';
-  private search = 'http://localhost:8000/api/search';
-  private deleteSongsUrl = 'http://localhost:8000/api/songs'
+  private apiListSongUser = environment.apiUrl + '/listsongs';
+  private updateSongUrl = environment.apiUrl + '/songs';
+  private getUserUrl = environment.apiUrl + '/user';
+  private apiGetAllSongs = environment.apiUrl + '/songs/list';
+  private search = environment.apiUrl + '/search';
+  private deleteSongsUrl = environment.apiUrl + '/songs'
 
   constructor(
     private http: HttpClient,
@@ -61,7 +61,7 @@ export class SongService {
     return this.http.post(`${this.search}`, {search: key});
   }
 
-  deleteSong(id:number){
+  deleteSong(id: number) {
     return this.http.delete(`${this.deleteSongsUrl}/${id}`, this.httpJson);
 
   }

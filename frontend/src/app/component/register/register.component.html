@@ -1,7 +1,11 @@
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Register</h1>
+</div>
+
 <div class="container">
   <form [formGroup]="registerForm" class="example-form">
     <mat-form-field appearance="fill" class="example-full-width">
-      <mat-label>Username</mat-label>
+      <mat-label><p style="color: darkgray;">Username</p></mat-label>
       <input formControlName="username" matInput placeholder="Username" type="text">
       <mat-error
         *ngIf="registerForm.get('username')!.invalid && registerForm.get('username')!.touched  || (registerForm.get('username').untouched) && registerFormAttempt">
@@ -13,7 +17,7 @@
     <br>
 
     <mat-form-field appearance="fill" class="example-full-width">
-      <mat-label>Phone</mat-label>
+      <mat-label><p style="color: darkgray;">Phone</p></mat-label>
       <input formControlName="phone" matInput placeholder="0123456789" type="text">
       <mat-error
         *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched  || (registerForm.get('phone').untouched) && registerFormAttempt">
@@ -26,7 +30,8 @@
     <br>
 
     <mat-form-field appearance="fill" class="example-full-width">
-      <input formControlName="password" matInput placeholder="New password" required>
+      <mat-label><p style="color: darkgray;">New password</p></mat-label>
+      <input type="password" formControlName="password" matInput placeholder="New password" required>
       <mat-error *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched">
         <span
           *ngIf="registerForm.get('password').hasError('required')">Please enter <strong>your password</strong>.</span><br>
@@ -40,7 +45,8 @@
     <br>
 
     <mat-form-field appearance="fill" class="example-full-width">
-      <input [errorStateMatcher]="matcher" formControlName="password_confirmation" matInput
+      <mat-label><p style="color: darkgray;">Confirm password</p></mat-label>
+      <input type="password" [errorStateMatcher]="matcher" formControlName="password_confirmation" matInput
              placeholder="Confirm password">
       <mat-error
         *ngIf="registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched">
@@ -54,7 +60,7 @@
 
     <br>
     <br>
-    <mat-card-actions>
+    <mat-card-actions style="padding-top: 50px">
       <button (click)="onSubmit()" [disabled]="!registerForm.valid" color="primary" mat-raised-button type="submit">
         Add
       </button> &nbsp;

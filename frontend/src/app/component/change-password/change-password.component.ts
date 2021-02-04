@@ -34,9 +34,11 @@ export class ChangePasswordComponent implements OnInit {
       console.log(data);
       if (data.status) {
         this.token.signOut();
-        this.toastr.warning('You must login to update profile.');
+        this.toastr.warning('You must login to change password.');
       }
-      this.userinfo = data.user;
+      else {
+        this.userinfo = data.user;
+      }
     }, error => console.log(error));
   }
 
