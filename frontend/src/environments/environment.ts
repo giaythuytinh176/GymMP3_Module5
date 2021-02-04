@@ -8,14 +8,14 @@ export const environment = {
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig: {
-    apiKey: 'AIzaSyBBjVystZ5NskbWkWsuBdtLh6ntZdiAQqg',
-    authDomain: 'dataimagemusic.firebaseapp.com',
-    databaseURL: 'https://dataimagemusic-default-rtdb.firebaseio.com',
-    projectId: 'dataimagemusic',
-    storageBucket: 'dataimagemusic.appspot.com',
-    messagingSenderId: '1066682814538',
-    appId: '1:1066682814538:web:17e10bc6565189b29d56b3',
-    measurementId: 'G-VX010H87ZW'
+    apiKey: "AIzaSyADjGHtFp8CImok32l2bKnGlRYFCQsubZc",
+    authDomain: "upload-image-256f2.firebaseapp.com",
+    databaseURL: "https://upload-image-256f2-default-rtdb.firebaseio.com",
+    projectId: "upload-image-256f2",
+    storageBucket: "upload-image-256f2.appspot.com",
+    messagingSenderId: "489727620289",
+    appId: "1:489727620289:web:faf203074f775f8f439040",
+    measurementId: "G-XXB7QEJBE4"
   },
 };
 

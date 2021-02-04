@@ -24,6 +24,7 @@ export class SongService {
   private updateSongUrl = 'http://localhost:8000/api/songs';
   private getUserUrl = 'http://localhost:8000/api/user';
   private apiGetAllSongs = 'http://localhost:8000/api/songs/list';
+  private deleteSongsUrl = 'http://localhost:8000/api/songs'
 
   constructor(
     private http: HttpClient,
@@ -53,5 +54,9 @@ export class SongService {
 
   getInfoUserToken(): Observable<UpdateInfo> {
     return this.http.get<UpdateInfo>(this.getUserUrl, this.httpJson);
+  }
+
+  deleteSong(id:number){
+    return this.http.delete(`${this.deleteSongsUrl}/${id}`, this.httpJson);
   }
 }
