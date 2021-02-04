@@ -21,12 +21,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('signup', '\App\Http\Controllers\UserController@register');
 Route::post('login', '\App\Http\Controllers\UserController@authenticate');
 <<<<<<< HEAD
+<<<<<<< HEAD
 Route::get('/songs/list', [\App\Http\Controllers\SongController::class, 'allSongs']);
 =======
 Route::get('/songs',[\App\Http\Controllers\SongController::class,'index']);
 Route::post('/songs', [\App\Http\Controllers\SongController::class, 'store']);
 
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+Route::get('/songs/list', [\App\Http\Controllers\SongController::class, 'allSongs']);
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', '\App\Http\Controllers\UserController@getAuthenticatedUser');
@@ -34,6 +38,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('listsongs/{id}','\App\Http\Controllers\SongController@show');
     Route::post('changePassword', '\App\Http\Controllers\UserController@changePassword');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
     Route::post('/song/create', '\App\Http\Controllers\SongController@createSong');
     Route::get('/albums/list', '\App\Http\Controllers\AlbumController@index');
     Route::get('/categories/list', '\App\Http\Controllers\CategoryController@index');
@@ -43,11 +50,14 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('/songs/{id}', [\App\Http\Controllers\SongController::class, 'destroy']);
     Route::get('/songs',[\App\Http\Controllers\SongController::class,'index']);
     Route::post('/songs', [\App\Http\Controllers\SongController::class, 'store']);
+<<<<<<< HEAD
 =======
     Route::put('/songs/{id}', [\App\Http\Controllers\SongController::class, 'update']);
     Route::get('/songs/{id}', [\App\Http\Controllers\SongController::class, 'showidsong']);
     Route::delete('/songs/{id}', [\App\Http\Controllers\SongController::class, 'destroy']);
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 
 });
 

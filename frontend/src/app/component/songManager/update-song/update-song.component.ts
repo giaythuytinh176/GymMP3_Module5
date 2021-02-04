@@ -1,16 +1,23 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {Component, OnInit} from '@angular/core';
 =======
 import { Component, OnInit } from '@angular/core';
 import {SongService} from "../../../services/song.service";
 import {Song} from "../../../song/song";
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+import {Component, OnInit} from '@angular/core';
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../../services/category/caterory.service";
 import {SingerService} from "../../../services/singer/singer.service";
 import {AlbumService} from "../../../services/album/album.service";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 import {environment} from 'src/environments/environment';
 import {FirebaseComponent} from "../../firebase/firebase.component";
 import {Album} from "../../../model/album";
@@ -19,6 +26,7 @@ import {Singer} from "../../../model/singer";
 import {FirebaseMP3Component} from "../../firebaseMP3/firebaseMP3.component";
 import {SongService} from "../../../services/song/song.service";
 import {Song} from "../../../model/song/song";
+<<<<<<< HEAD
 =======
 import { environment } from 'src/environments/environment';
 import {Album} from "../../../album";
@@ -26,6 +34,8 @@ import {Category} from "../../../category";
 import {Singer} from "../../singer";
 import {FirebaseComponent} from "../../firebase/firebase.component";
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 
 @Component({
   selector: 'app-update-song',
@@ -34,9 +44,12 @@ import {FirebaseComponent} from "../../firebase/firebase.component";
 })
 export class UpdateSongComponent implements OnInit {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   private readonly API_URL_CREATE = environment.apiUrl + '/song/update';
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
   updateMusicForm: FormGroup
   albums: Album[];
   categories: Category[];
@@ -48,6 +61,9 @@ export class UpdateSongComponent implements OnInit {
   album_id: any;
   songForm: FormGroup
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
   private readonly API_URL_CREATE = environment.apiUrl + '/song/update';
 
   constructor(private songService: SongService,
@@ -60,6 +76,7 @@ export class UpdateSongComponent implements OnInit {
               public firebaseMP3: FirebaseMP3Component,
   ) {
     this.songForm = new FormGroup({
+<<<<<<< HEAD
 =======
   constructor(private songService:SongService,
               private route:Router,
@@ -71,6 +88,8 @@ export class UpdateSongComponent implements OnInit {
   ) {
     this.songForm = new FormGroup ({
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
       nameSong: new FormControl('', [Validators.required])
     });
   }

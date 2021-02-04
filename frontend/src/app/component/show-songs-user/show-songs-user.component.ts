@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 import {Component, OnInit} from '@angular/core';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -10,6 +13,7 @@ import {UserService} from 'src/app/services/user.service';
 import {FirebaseComponent} from '../firebase/firebase.component';
 import {SongService} from '../../services/song/song.service';
 import {Song} from '../../model/song/song';
+<<<<<<< HEAD
 =======
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -23,6 +27,8 @@ import { SongsService } from 'src/app/services/songs/songs.service';
 import { UserService } from 'src/app/services/user.service';
 import { FirebaseComponent } from '../firebase/firebase.component';
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 
 @Component({
   selector: 'app-show-songs-user',
@@ -32,16 +38,23 @@ import { FirebaseComponent } from '../firebase/firebase.component';
 export class ShowSongsUserComponent implements OnInit {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   songs: Song;
 =======
   songs: Songs;
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+  songs: Song;
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
   success: string;
   fail: string;
   username: string;
   isUpdate = false;
   isUpdateFailed = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
   songsinfo!: Song;
   userInfor!: UpdateInfo;
 
@@ -54,6 +67,7 @@ export class ShowSongsUserComponent implements OnInit {
               private token: TokenStorageService,
               private toastr: ToastrService,
               public firebase: FirebaseComponent,
+<<<<<<< HEAD
 =======
   songsinfo!: Songs;
   userInfor!: UpdateInfo;
@@ -68,6 +82,8 @@ export class ShowSongsUserComponent implements OnInit {
     private toastr: ToastrService,
     public firebase: FirebaseComponent,
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
   ) {
   }
 
@@ -81,12 +97,17 @@ export class ShowSongsUserComponent implements OnInit {
       this.userInfor = data.user;
     }, error => console.log(error));
 <<<<<<< HEAD
+<<<<<<< HEAD
   }
 
 =======
 
   }
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+  }
+
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
   getListSongs() {
     this.songService.getSongDetail(this.userInfor.id)
       .subscribe((data: any) => {

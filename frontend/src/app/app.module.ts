@@ -62,6 +62,9 @@ import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guar
 import {AngularFireStorageModule,} from "@angular/fire/storage";
 import {FirebaseComponent} from "./component/firebase/firebase.component";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 import {LoginComponent} from './component/login/login.component';
 import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song/all-list-song.component';
 import {CreateSongComponent} from './component/songManager/create-song/create-song/create-song.component';
@@ -69,12 +72,15 @@ import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.componen
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
 import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
+<<<<<<< HEAD
 =======
 import { LoginComponent } from './component/login/login.component';
 import { UpdateSongComponent } from './component/songManager/update-song/update-song.component';
 import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-user.component';
 
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
 
 @NgModule({
   declarations: [
@@ -86,16 +92,22 @@ import { ShowSongsUserComponent } from './component/show-songs-user/show-songs-u
     NotGuardComponent,
     FirebaseComponent,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
     FirebaseMP3Component,
     AllListSongComponent,
     CreateSongComponent,
     UpdateSongComponent,
     ShowSongsUserComponent,
     SidebarComponent,
+<<<<<<< HEAD
 =======
     UpdateSongComponent,
     ShowSongsUserComponent,
 >>>>>>> e69b538d68601004c425fe92b2324963dd22f113
+=======
+>>>>>>> b26a701020202ac5aa1f1ec9552bfc805380cd98
   ],
   imports: [
     BrowserModule,
