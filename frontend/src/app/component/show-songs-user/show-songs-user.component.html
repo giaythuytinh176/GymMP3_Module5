@@ -1,4 +1,11 @@
-<table class="table">
+<div class="main-content">
+  <div id="page-wrapper">
+    <div class="main-page">
+      <div class="tables">
+        <h3 class="title1" style="text-align: center; color: #0F9E5E  ">My List Song</h3>
+        <div class="panel-body widget-shadow">
+
+          <table class=" table-bordered" style="width:100%">
   <thead>
   <th>STT</th>
   <th>Name Song</th>
@@ -10,6 +17,7 @@
   <th>Album</th>
   <th>Image</th>
   <th>Mp3</th>
+  <th>Action</th>
   </thead>
   <tbody>
   <tr *ngFor="let i=index, let song of songs">
@@ -27,7 +35,16 @@
         <source src="{{song?.mp3Url}}" type="audio/mpeg">
       </audio>
     </td>
+    <td>
+    <a (click)="deleteSong(song.id)" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')" >Delete</a>
+    </td>
   </tr>
   </tbody>
 </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <button (click)="getListSongs()">submit</button>
+

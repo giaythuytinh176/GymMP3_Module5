@@ -25,7 +25,8 @@ export class SongService {
   private getUserUrl = 'http://localhost:8000/api/user';
   private apiGetAllSongs = 'http://localhost:8000/api/songs/list';
   private search = 'http://localhost:8000/api/search';
-  
+  private deleteSongsUrl = 'http://localhost:8000/api/songs'
+
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -58,5 +59,10 @@ export class SongService {
 
   searchSong(key: any): Observable<any> {
     return this.http.post(`${this.search}`, {search: key});
+  }
+
+  deleteSong(id:number){
+    return this.http.delete(`${this.deleteSongsUrl}/${id}`, this.httpJson);
+
   }
 }
