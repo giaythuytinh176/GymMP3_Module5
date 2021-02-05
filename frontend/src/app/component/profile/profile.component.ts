@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
   address: string;
   email: string;
   phone: string;
+  avatar: string;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -57,6 +58,7 @@ export class ProfileComponent implements OnInit {
         this.address = this.userinfo.address;
         this.email = this.userinfo.email;
         this.phone = this.userinfo.phone;
+        this.avatar = this.userinfo.avatar;
       }
     }, error => console.log(error));
 

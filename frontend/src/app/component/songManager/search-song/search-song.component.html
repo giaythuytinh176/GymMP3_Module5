@@ -1,47 +1,50 @@
 <!-- <input class="form-control me-2" type="text" (input)="onInput($event)" placeholder="Search" aria-label="Search"> -->
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Search</h1>
+</div>
 
 <div class="page-content">
-    <div class="row-col">
-        <div class="col-lg-9 b-r no-border-md">
-            <div class="page-title m-b">
-                <div class="padding">
-                    <div class="container">
-                      <input class="form-control me-2" type="text" (input)="onInput($event)" placeholder="Search"
-                             aria-label="Search">
-                    </div>
-                    <br>
-                    <div class="row">
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="page-title m-b">
+        <div class="padding">
+          <div class="container">
+            <input class="form-control me-2" type="text" (input)="onInput($event)" placeholder="Search"
+                   aria-label="Search">
+          </div>
+          <br>
+          <div class="row">
 
-                        <div *ngFor="let val of song" class="col-xs-4 col-sm-4 col-md-3">
-                            <div [attr.data-id]="val.id" [attr.data-src]="val.mp3Url" class="item r">
-                                <div class="item-media">
-                                    <a [ngStyle]="{'background-image': 'url(' + val.avatarUrl + ')'}"
-                                        class="item-media-content" href="track.detail.html"></a>
-                                    <div class="item-overlay center">
-                                        <button class="btn-playpause">Play</button>
-                                    </div>
-                                </div>
-                                <div class="item-info">
-                                    <div class="item-overlay bottom text-right">
-                                        <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                                        <a class="btn-more" data-toggle="dropdown" href="#"><i
-                                                class="fa fa-ellipsis-h"></i></a>
-                                        <div class="dropdown-menu pull-right black lt"></div>
-                                    </div>
-                                    <div class="item-title text-ellipsis">
-                                        <a href="track.detail.html">{{ val.nameSong }}</a>
-                                    </div>
-                                    <!-- <div class="item-author text-sm text-ellipsis ">
-            <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
-              {{ singer.singer_name }},
-            </a>
-          </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div *ngFor="let val of song" class="col-xs-4 col-sm-4 col-md-3">
+              <div [attr.data-id]="val.id" [attr.data-src]="val.mp3Url" class="item r">
+                <div class="item-media">
+                  <a [ngStyle]="{'background-image': 'url(' + val.avatarUrl + ')'}"
+                     class="item-media-content" href="track.detail.html"></a>
+                  <div class="item-overlay center">
+                    <button class="btn-playpause">Play</button>
+                  </div>
                 </div>
+                <div class="item-info">
+                  <div class="item-overlay bottom text-right">
+                    <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+                    <a class="btn-more" data-toggle="dropdown" href="#"><i
+                      class="fa fa-ellipsis-h"></i></a>
+                    <div class="dropdown-menu pull-right black lt"></div>
+                  </div>
+                  <div class="item-title text-ellipsis">
+                    <a href="track.detail.html">{{ val.nameSong }}</a>
+                  </div>
+                  <!--                  <div class="item-author text-sm text-ellipsis ">-->
+                  <!--                    <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">-->
+                  <!--                      {{ singer.singer_name }},-->
+                  <!--                    </a>-->
+                  <!--                  </div>-->
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -15,10 +15,7 @@
                   <div class="container">
                     <div class="row">
                       <div *ngIf="isLoggedIn; else loggedOut">
-                        Logged in as
-                        <li>
-                          <button (click)="signOut()">Logout</button>
-                        </li>
+                        Login successfully ... redirect to Browse
                       </div>
                       <ng-template #loggedOut>
                         <div class="row col-sm-12" style="max-width:600px;">

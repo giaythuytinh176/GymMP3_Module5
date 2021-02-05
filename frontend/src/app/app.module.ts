@@ -66,7 +66,10 @@ import {AllListSongComponent} from './component/songManager/all-list-song/all-li
 import {CreateSongComponent} from './component/songManager/create-song/create-song/create-song.component';
 import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.component";
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
-import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
+import {
+  DialogContentExampleDialog,
+  ShowSongsUserComponent
+} from './component/show-songs-user/show-songs-user.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { SearchSongComponent } from './component/songManager/search-song/search-song.component';
 
@@ -86,6 +89,7 @@ import { SearchSongComponent } from './component/songManager/search-song/search-
     ShowSongsUserComponent,
     SidebarComponent,
     SearchSongComponent,
+    DialogContentExampleDialog,
   ],
   imports: [
     BrowserModule,
