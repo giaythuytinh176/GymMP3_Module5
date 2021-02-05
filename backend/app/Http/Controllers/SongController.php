@@ -96,13 +96,16 @@ class SongController extends Controller
     {
 
         $songs = DB::table('songs')
-            ->select('songs.*', 'users.username', 'categories.category_name', 'singers.singer_name', 'albums.album_name')
+            ->select('songs.*', 'users.username', 'categories.category_name', 'albums.album_name')
             ->join('users', 'users.id', '=', 'songs.user_id')
-            ->join('categories', 'categories.id', '=', 'songs.category_id')
-            ->join('singers', 'singers.id', '=', 'songs.singer_id')
             ->join('albums', 'albums.id', '=', 'songs.album_id')
+            ->join('categories', 'categories.id', '=', 'songs.category_id')
+//            ->join('song_singer', 'singer_id', '=')
             ->where('users.id', '=', $id)
             ->get();
+//        $songs = Song::with('singers', function (Builder $q) {
+//            $q->where();
+//        })->get();
         return response()->json($songs, 200);
 
     }
@@ -158,11 +161,15 @@ class SongController extends Controller
      * @param Song $song
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Song $song , Request $request)
     {
-        $song = Song::find($id);
+//        $song = Song::find($id);
+//        $song->delete();
+//        return response()->json($song);
+//    }
+        $song = Song::findOrFail($request->id);
+        $song->singers()->detach();
         $song->delete();
         return response()->json($song);
     }
-
 }
