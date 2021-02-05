@@ -6,8 +6,8 @@
             <div class="page-title m-b">
                 <div class="padding">
                     <div class="container">
-                      <input class="form-control me-2" type="text" (input)="onInput($event)" placeholder="Search"
-                             aria-label="Search">
+                        <input class="form-control me-2" type="text" (input)="onInput($event)" placeholder="Search"
+                            aria-label="Search">
                     </div>
                     <br>
                     <div class="row">
@@ -31,11 +31,11 @@
                                     <div class="item-title text-ellipsis">
                                         <a href="track.detail.html">{{ val.nameSong }}</a>
                                     </div>
-                                    <!-- <div class="item-author text-sm text-ellipsis ">
-            <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
-              {{ singer.singer_name }},
-            </a>
-          </div> -->
+                                    <div class="item-author text-sm text-ellipsis ">
+                                        <a class="text-muted" href="artist.detail.html">
+                                            {{ val.singer_list_name }},
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
