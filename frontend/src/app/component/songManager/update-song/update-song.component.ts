@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../../services/category/caterory.service";
 import {SingerService} from "../../../services/singer/singer.service";
@@ -12,6 +12,10 @@ import {Singer} from "../../../model/singer";
 import {FirebaseMP3Component} from "../../firebaseMP3/firebaseMP3.component";
 import {SongService} from "../../../services/song/song.service";
 import {Song} from "../../../model/song/song";
+import {UpdateInfo} from "../../../model/userManager/updateinfo";
+import {UserService} from "../../../services/user.service";
+import {ToastrService} from "ngx-toastr";
+import {TokenStorageService} from "../../../auth/token-storage.service";
 
 @Component({
   selector: 'app-update-song',
@@ -28,8 +32,12 @@ export class UpdateSongComponent implements OnInit {
   singer_id: any;
   category_id: any;
   album_id: any;
-  songForm: FormGroup
-  private readonly API_URL_CREATE = environment.apiUrl + '/song/update';
+  userinfo!: UpdateInfo;
+  nameSong: any;
+  describes: any;
+  author: any;
+  views: any;
+  id: number;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -39,10 +47,11 @@ export class UpdateSongComponent implements OnInit {
               private albumService: AlbumService,
               public firebase: FirebaseComponent,
               public firebaseMP3: FirebaseMP3Component,
+              private userService: UserService,
+              private toastr: ToastrService,
+              private fb: FormBuilder,
+              private token: TokenStorageService,
   ) {
-    this.songForm = new FormGroup({
-      nameSong: new FormControl('', [Validators.required])
-    });
   }
 
   ngOnInit() {
@@ -58,30 +67,68 @@ export class UpdateSongComponent implements OnInit {
       this.singers = singers.data;
       console.log(this.singers);
     }, (error) => console.log(error));
-    console.log(111);
+
+    this.userService.getInfoUserToken().subscribe((data: any) => {
+      console.log(data);
+      if (data.status) {
+        this.token.signOut();
+        this.toastr.warning('You must login to create Song.');
+      } else {
+        this.userinfo = data.user;
+      }
+    }, error => console.log(error));
+
+    this.updateMusicForm = this.fb.group({
+      nameSong: ['', [Validators.required]],
+      avatarUrl: ['', [Validators.required]],
+      mp3Url: ['', [Validators.required]],
+      describes: ['', [Validators.required]],
+      author: ['', [Validators.required]],
+      views: ['', [Validators.required]],
+      singer_id: ['', [Validators.required]],
+      category_id: ['', [Validators.required]],
+      album_id: ['', [Validators.required]],
+    });
+
     this.routes.paramMap.subscribe(paramMap => {
-      const id = +paramMap.get('id');
-      this.songService.getSongById(id).subscribe(
-        data => {
-          this.song = data;
-          console.log(this.song);
+      this.id = +paramMap.get('id');
+      this.songService.getSongById(this.id).subscribe(
+        (data: any) => {
+          if (data.status) {
+            this.toastr.warning('You must login to update song.');
+            this.token.signOut();
+          } else {
+            this.nameSong = data.nameSong;
+            this.describes = data.describes;
+            this.author = data.author;
+            this.views = data.views;
+          }
         },
         error => {
-          this.song = null;
+          console.log(error);
         }
       );
     });
   }
 
   updateSong() {
+    console.log(this.userinfo);
+    this.updateMusicForm.value.avatarUrl = this.firebase.fb;
+    this.updateMusicForm.value.mp3Url = this.firebaseMP3.fb;
+    this.song = this.updateMusicForm.value;
+    this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
+    this.song.user_id = this.userinfo.id;
     console.log(this.song);
-    this.songService.updateSong(this.song).subscribe(next => {
-      alert('Bạn đã Sửa thành công bài hát');
-      this.route.navigate(['/list-song']);
-      console.log(next);
+    this.songService.updateSong(this.song, this.id).subscribe((data: any) => {
+      if (data.status) {
+        this.toastr.warning('You must login to update song.');
+        this.token.signOut();
+      } else {
+        this.toastr.success('Updated Song Sucessfully.');
+        this.route.navigate(['/listsongs']);
+      }
     }, error => {
-      console.log(error),
-        alert('Bạn chưa Sửa thành công');
+      console.log(error);
     });
   }
 

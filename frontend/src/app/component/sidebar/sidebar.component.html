@@ -115,6 +115,16 @@
       </a>
     </li>
     <li *ngIf="isLoggedIn">
+      <a [routerLink]="['/changepass']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+
+                    </i>
+                  </span>
+        <span class="nav-text">Change Password</span>
+      </a>
+    </li>
+    <li *ngIf="isLoggedIn">
       <a (click)="loginComponent.signOut()">
                   <span class="nav-icon">
                     <i class="material-icons">

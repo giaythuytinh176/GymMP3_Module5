@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Song } from 'src/app/model/song/song';
 import { SongService } from 'src/app/services/song/song.service';
+import {Song} from "../../../model/song/song";
 
 @Component({
   selector: 'app-search-song',
@@ -9,7 +9,7 @@ import { SongService } from 'src/app/services/song/song.service';
   styleUrls: ['./search-song.component.css']
 })
 export class SearchSongComponent implements OnInit {
-  song!: any;
+  song!: Song[];
   search!: any;
 
   constructor(
@@ -27,16 +27,10 @@ export class SearchSongComponent implements OnInit {
         console.log(error);
       }
     );
-    
   }
 
   onInput(event): any{
     this.search = event.target.value;
-    this.loadData();
-  }
-
-  loadData()
-  {
     this.songService.searchSong(this.search).subscribe(
       data => {
         this.song = data;
@@ -47,5 +41,4 @@ export class SearchSongComponent implements OnInit {
       }
     );
   }
-
 }

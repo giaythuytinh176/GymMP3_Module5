@@ -3,11 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Song;
-use App\Models\Singer;
-use App\Models\Category;
-use App\Models\Album;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -41,15 +36,6 @@ class SongController extends Controller
             $data->singers()->attach($s_id);
         }
         return response()->json(compact('data'));
-    }
-
-    public function findSinger(Request $request)
-    {
-        $word = $request->word;
-        $data = Vietnamese::whereHas("englishs", function (\Illuminate\Database\Eloquent\Builder $builder) use ($word) {
-            $builder->where('englishes.name', '=', $word);
-        })->get();
-        return response()->json($data, 200);
     }
 
     /**
@@ -168,10 +154,31 @@ class SongController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $song = Song::find($id);
-        $song->fill($request->all());
-        $song->save();
-        return response()->json($song);
+        $validator = Validator::make($request->all(), [
+            'nameSong' => 'required|string',
+            'avatarUrl' => 'required|string',
+            'mp3Url' => 'required|string',
+            'describes' => 'required|string',
+            'author' => 'required|string',
+            'views' => 'required|integer',
+            'user_id' => 'required|integer',
+            'singer_id' => 'required|string',
+            'category_id' => 'required|integer',
+            'album_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $data = Song::findOrFail($id);
+        $data->fill($request->all());
+        $data->save();
+        $data->singers()->detach();
+        foreach (json_decode($request->singer_id, true) as $s_id) {
+            $data->singers()->attach($s_id);
+        }
+        return response()->json(compact('data'));
     }
 
     /**
@@ -188,7 +195,7 @@ class SongController extends Controller
     }
 
     public function search(Request $request)
-    {  
+    {
         $songs = DB::table('songs')
                 ->select('songs.*', 'users.username', 'categories.category_name','albums.album_name')
                 ->join('users', 'users.id', '=', 'songs.user_id')

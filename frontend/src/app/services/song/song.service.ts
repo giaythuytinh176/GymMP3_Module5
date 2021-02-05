@@ -46,11 +46,11 @@ export class SongService {
   }
 
   getSongById(id: number): Observable<Song> {
-    return this.http.get<Song>(`${this.updateSongUrl}/${id}`);
+    return this.http.get<Song>(`${this.updateSongUrl}/${id}`, this.httpJson)
   }
 
-  updateSong(song: Song): Observable<Song> {
-    return this.http.put<Song>(`${this.updateSongUrl}/${song.id}`, song);
+  updateSong(song: Song, id: number): Observable<Song> {
+    return this.http.put<Song>(`${this.updateSongUrl}/${id}`, song, this.httpJson)
   }
 
   getInfoUserToken(): Observable<UpdateInfo> {

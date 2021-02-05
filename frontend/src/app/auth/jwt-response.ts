@@ -1,3 +1,4 @@
 export class JwtResponse {
-  token: string;
+  token?: string;
+  error?: string;
 }
