@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
 import {Song} from "../../model/song/song";
 import {UserService} from "../../services/user.service";
@@ -33,6 +33,7 @@ export class EditProfileComponent implements OnInit {
   username = '';
   songs: Song[];
   shake: any;
+  old_avatar = '';
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -53,8 +54,7 @@ export class EditProfileComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update profile.');
-      }
-      else {
+      } else {
         this.userinfo = data.user;
         this.profileForm.value.name = this.userinfo.name;
         this.profileForm.value.address = this.userinfo.address;
@@ -65,6 +65,7 @@ export class EditProfileComponent implements OnInit {
         this.email = this.userinfo.email;
         this.phone = this.userinfo.phone;
         this.avatar = this.userinfo.avatar;
+        this.old_avatar = this.userinfo.avatar;
         this.username = this.userinfo.username;
         this.songService.getSongDetail(this.userinfo.id)
           .subscribe((data: any) => {
@@ -87,7 +88,8 @@ export class EditProfileComponent implements OnInit {
       address: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern(/^0\d{9,10}$/)]],
-      avatar: ['', [Validators.required]],
+      avatar: [''],
+      old_avatar: [this.old_avatar],
     });
   }
 
@@ -96,24 +98,33 @@ export class EditProfileComponent implements OnInit {
     this.profileForm.value.avatar = this.firebase.fb;
     this.profileForm.value.username = this.userinfo.username;
     this.profileForm.value.id = this.userinfo.id;
-    if (this.profileForm.valid) {
-      const data = this.profileForm.value;
-      this.userService.updateUser(data, data.id)
-        .subscribe((data: any) => {
-          console.log(data);
-          if (data.status) {
-            this.token.signOut();
-            this.toastr.warning('You must login to update profile.');
-          }
-          else {
-            // this.routes.navigate(['list']);
-            this.toastr.success('Cập nhật thành công');
-            this.routes.navigate(['']);
-          }
-        }, error => {
-          console.log(error);
-          this.toastr.warning('Update failed. Please try again!')
-        });
+    if ((this.profileForm.value.avatar == '') && (this.profileForm.value.old_avatar == '')) {
+      this.toastr.warning('Avatar is required!');
+    } else {
+      if (this.profileForm.value.avatar && this.profileForm.value.avatar.includes('http')) {
+
+      } else {
+        this.profileForm.value.avatar = this.old_avatar;
+      }
+
+      if (this.profileForm.valid) {
+        const data = this.profileForm.value;
+        this.userService.updateUser(data, data.id)
+          .subscribe((data: any) => {
+            console.log(data);
+            if (data.status) {
+              this.token.signOut();
+              this.toastr.warning('You must login to update profile.');
+            } else {
+              // this.routes.navigate(['list']);
+              this.toastr.success('Updated profile successfully!');
+              this.routes.navigate(['/profile']);
+            }
+          }, error => {
+            console.log(JSON.parse(error.error));
+            this.toastr.warning(JSON.parse(error.error).avatar);
+          });
+      }
     }
   }
 }

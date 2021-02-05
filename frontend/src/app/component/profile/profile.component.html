@@ -131,7 +131,9 @@
 
                           <div class="item-action visible-list m-t-sm">
                             <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                            <button class="btn btn-xs white" (click)="openDialog(song.id, song.nameSong)">Delete</button>
+<!--                            data-toggle="modal" data-target="#delete-modal"-->
+<!--                            <button mat-raised-button color="warn" (click)="openDialog(song.id, song.nameSong)">Xoá</button>-->
                           </div>
                         </div>
                       </div>
