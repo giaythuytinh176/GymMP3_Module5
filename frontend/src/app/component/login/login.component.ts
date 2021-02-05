@@ -17,9 +17,9 @@ import {shake} from "ng-animate";
   ],
 })
 export class LoginComponent implements OnInit {
-  private loginInfo: LoginInfo;
   loginForm: FormGroup;
   shake: any;
+  private loginInfo: LoginInfo;
 
   constructor(private authService: AuthService,
               private route: Router,
@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.route.navigate(['/browse']);
-    }
+    // if (this.tokenStorage.getToken()) {
+    //   this.route.navigate(['/browse']);
+    // }
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
@@ -43,8 +43,7 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm);
     if (this.loginForm.value.password.length < 6) {
       this.toasrt.warning('Password is too short.')
-    }
-    else if (this.loginForm.value.password.length > 8) {
+    } else if (this.loginForm.value.password.length > 8) {
       this.toasrt.warning('Password is too long.')
     } else {
       this.loginInfo = new LoginInfo(
@@ -62,6 +61,7 @@ export class LoginComponent implements OnInit {
             setTimeout(() => {
               window.location.reload();
             }, 1000);
+            this.route.navigate(['/browse']);
           }
         },
         err => {

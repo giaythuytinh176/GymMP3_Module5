@@ -49,6 +49,7 @@ export class ProfileComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to see profile.');
+        window.location.reload();
       } else {
         this.userinfo = data.user;
         this.name = this.userinfo.name;
@@ -103,7 +104,6 @@ export class ProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogDeleteMyList, {
       width: '300px',
       data: {id, nameSong},
-      panelClass: 'custom-modalbox'
     });
 
     dialogRef.afterClosed().subscribe(result => {

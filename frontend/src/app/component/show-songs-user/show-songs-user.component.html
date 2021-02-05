@@ -32,7 +32,7 @@
                     <a href="track.detail.html">{{ song.nameSong }}</a> &nbsp;
                     <a [routerLink]="['/editsong', song.id]" color="primary" mat-raised-button>Edit</a> &nbsp;
                     <!--                    <a (click)="deleteSong(song.id)" color="warn" mat-raised-button>Delete</a>-->
-                    <button mat-raised-button color="warn" (click)="openDialog(song.id, song.nameSong)">Xoá</button>
+                    <button (click)="openDialog(song.id, song.nameSong)" color="warn" mat-raised-button>Delete</button>
                   </div>
                   <div class="item-author text-sm text-ellipsis ">
                     <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">

@@ -12,7 +12,7 @@
       <div class="col-md-2">
         <mat-form-field appearance="fill" class="example-full-width">
           <mat-label><strong style="color: darkgray;">Name Song: </strong></mat-label>
-          <input type="text" [(ngModel)]="nameSong" matInput formControlName="nameSong" placeholder="Hello">
+          <input [(ngModel)]="nameSong" formControlName="nameSong" matInput placeholder="Hello" type="text">
           <mat-error
             *ngIf="updateMusicForm.get('nameSong').invalid && updateMusicForm.get('nameSong').touched">
             Name Song is <strong>required</strong>
@@ -110,7 +110,7 @@
       <div class="col-md-2">
         <mat-form-field appearance="fill" class="example-full-width">
           <mat-label><strong style="color: darkgray;">Author: </strong></mat-label>
-          <input type="text" [(ngModel)]="author" matInput formControlName="author">
+          <input [(ngModel)]="author" formControlName="author" matInput type="text">
           <mat-error
             *ngIf="updateMusicForm.get('author').invalid && updateMusicForm.get('author').touched">
             Author is <strong>required</strong>
@@ -132,7 +132,7 @@
       <div class="col-md-2">
         <mat-form-field appearance="fill" class="example-full-width">
           <mat-label><strong style="color: darkgray;">Views: </strong></mat-label>
-          <input type="number" [(ngModel)]="views" matInput formControlName="views">
+          <input [(ngModel)]="views" formControlName="views" matInput type="number">
           <mat-error
             *ngIf="updateMusicForm.get('views').invalid && updateMusicForm.get('views').touched">
             Views is <strong>required</strong>
@@ -198,7 +198,7 @@
       <div align="center" class="col-md-4" style="text-align: center">
         <mat-form-field appearance="fill" class="example-full-width">
           <mat-label><strong style="color: darkgray;">Describes: </strong></mat-label>
-          <textarea matInput [(ngModel)]="describes" formControlName="describes"></textarea>
+          <textarea [(ngModel)]="describes" formControlName="describes" matInput></textarea>
           <mat-error
             *ngIf="updateMusicForm.get('describes').invalid && updateMusicForm.get('describes').touched">
             Describes is <strong>required</strong>
@@ -216,9 +216,10 @@
       <div class="col-md-4">
         <p></p>
       </div>
-      <div style="text-align: center" class="col-md-4">
+      <div class="col-md-4" style="text-align: center">
         <button [disabled]="!updateMusicForm.valid" class="btn btn-primary" type="submit">Sửa Bài Hát</button>
-      </div>q
+      </div>
+      q
       <div class="col-md-4">
         <p></p>
       </div>

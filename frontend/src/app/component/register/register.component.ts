@@ -15,6 +15,7 @@ import {SignupInfo} from 'src/app/auth/signup-info';
 import {ErrorStateMatcher} from "@angular/material/core";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-register',
@@ -31,11 +32,15 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
   shake: any;
+  checkExistUser: any;
+  username: any;
+  existUserMess = false;
 
   constructor(private authService: AuthService,
               private route: Router,
               private toastr: ToastrService,
-              private fb: FormBuilder
+              private fb: FormBuilder,
+              private userService: UserService,
   ) {
   }
 
@@ -48,10 +53,26 @@ export class RegisterComponent implements OnInit {
     }, {validators: this.checkPasswords});
   }
 
+  onInput(event): any {
+    this.username = event.target.value;
+    this.userService.checkExistUser(this.username).subscribe(
+      (data: any) => {
+        this.existUserMess = false;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+        if (JSON.parse(error.error).username[0] == 'The username has already been taken.') {
+          this.existUserMess = true;
+        }
+      }
+    );
+  }
+
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     const password = group.get('password').value;
     const password_confirmation = group.get('password_confirmation').value;
-    return password === password_confirmation ? null : { passwordnotmatch: true }
+    return password === password_confirmation ? null : {passwordnotmatch: true}
   }
 
   comparePassword(c: AbstractControl) {
@@ -73,11 +94,27 @@ export class RegisterComponent implements OnInit {
     this.authService.signUp(this.signupInfo).subscribe(
       (data: any) => {
         console.log(data);
-        this.toastr.success('Your account has been created successfully!');
-        this.route.navigate(['/browse']);
+        console.log(111);
+        if (data.error || data.status) {
+          this.toastr.warning('Something wrong.')
+          window.location.reload();
+          this.route.navigate(['/signup']);
+        } else {
+          this.toastr.success('Your account has been created successfully!');
+          this.route.navigate(['/browse']);
+        }
       },
-      error => {
-        console.log(error);
+      err => {
+        console.log(err);
+        console.log(JSON.parse(err.error));
+        console.log(222);
+        if ((JSON.parse(err.error)).username == 'The username has already been taken.') {
+          this.toastr.warning('The username already exists!');
+        } else if ((JSON.parse(err.error)).phone == 'The phone has already been taken.') {
+          this.toastr.warning('The phone already exists!');
+        } else {
+          this.toastr.warning('Something wrong.')
+        }
       }
     );
   }

@@ -14,7 +14,7 @@ export class Song {
   category_name?: any;
   album_name?: any;
   singer_list_name?: any;
-  singers?: [{singer_name: string}];
+  singers?: [{ singer_name: string }];
 
   constructor(
     id: number,
@@ -28,7 +28,7 @@ export class Song {
     singer_id: any,
     category_id: number,
     album_id: number,
-    singers: [{singer_name: string}],
+    singers: [{ singer_name: string }],
   ) {
     this.id = id;
     this.nameSong = nameSong;
