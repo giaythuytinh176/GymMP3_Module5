@@ -160,15 +160,15 @@ class SongController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nameSong' => 'required|string',
-            'avatarUrl' => 'required|string',
-            'mp3Url' => 'required|string',
             'describes' => 'required|string',
             'author' => 'required|string',
             'views' => 'required|integer',
             'user_id' => 'required|integer',
-            'singer_id' => 'required|string',
-            'category_id' => 'required|integer',
-            'album_id' => 'required|integer',
+//            'avatarUrl' => 'required|string',
+//            'mp3Url' => 'required|string',
+//            'singer_id' => 'required|string',
+//            'category_id' => 'required|integer',
+//            'album_id' => 'required|integer',
         ]);
 
         if ($validator->fails()) {
