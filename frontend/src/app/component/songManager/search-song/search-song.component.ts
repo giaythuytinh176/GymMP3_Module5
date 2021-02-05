@@ -11,6 +11,7 @@ import {Song} from "../../../model/song/song";
 export class SearchSongComponent implements OnInit {
   song!: Song[];
   search!: any;
+  count!: any;
 
   constructor(
     private songService: SongService,
@@ -34,7 +35,8 @@ export class SearchSongComponent implements OnInit {
     this.songService.searchSong(this.search).subscribe(
       data => {
         this.song = data;
-        console.log(this.song)
+       this.count = data.song.length;
+        console.log()
       },
       error => {
         console.log(error);

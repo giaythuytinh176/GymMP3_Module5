@@ -94,11 +94,11 @@ export class CreateSongComponent implements OnInit {
     console.log(this.song);
     this.songService.createSong(this.song).subscribe((data: any) => {
         console.log(data);
-        this.toastr.success('Bạn đã thêm thành công Bài Hát');
+        this.toastr.success('Add song success');
         this.routes.navigate(['/browse']);
       }, error => {
         console.log(error);
-        this.toastr.success('Gặp lỗi xảy ra khi thêm bài hát này!');
+        this.toastr.success(" Error when adding songs");
       }
     );
   }

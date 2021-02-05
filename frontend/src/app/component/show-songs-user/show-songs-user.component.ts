@@ -107,8 +107,8 @@ export class ShowSongsUserComponent implements OnInit {
       <p>Do you want to delete <strong>{{ data.nameSong }}</strong>?</p>
     </div>
     <div mat-dialog-actions>
-      <button mat-raised-button color="warn" [mat-dialog-close]="data.id" cdkFocusInitial>Xoá</button>
-      <button mat-stroked-button color="basic" (click)="onNoClick()">Thoát</button>
+      <button mat-raised-button color="warn" [mat-dialog-close]="data.id" cdkFocusInitial>Delete</button>
+      <button mat-stroked-button color="basic" (click)="onNoClick()">Cancel</button>
     </div>
   `,
 })
