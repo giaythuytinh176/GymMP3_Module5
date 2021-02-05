@@ -7,6 +7,8 @@ import {JwtResponse} from './jwt-response';
 import {SignupInfo} from './signup-info';
 import {ToastrService} from "ngx-toastr";
 import {LoginInfo} from "./login-info";
+import {environment} from "../../environments/environment";
+import {TokenStorageService} from "./token-storage.service";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -27,10 +29,10 @@ export class AuthService {
     })
   }
   auth = false;
-  private signupUrl = 'http://127.0.0.1:8000/api/signup';
-  private changePassUrl = 'http://localhost:8000/api/changePassword';
-  private loginUrl = 'http://127.0.0.1:8000/api/login';
-  private authUrl = 'http://127.0.0.1:8000/api/user';
+  private signupUrl = environment.apiUrl + '/signup';
+  private changePassUrl = environment.apiUrl + '/changePassword';
+  private loginUrl = environment.apiUrl + '/login';
+  private authUrl = environment.apiUrl + '/user';
 
   constructor(private http: HttpClient,
               private toasrt: ToastrService,

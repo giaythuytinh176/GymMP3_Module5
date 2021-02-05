@@ -33,31 +33,34 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
-
+    // console.log(this.form);
     this.loginInfo = new LoginInfo(
       this.form.username,
       this.form.password
     );
-
     this.authService.attemptAuth(this.loginInfo).subscribe(
-      data => {
-        console.log(data);
-        this.tokenStorage.saveToken(data.token);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        setTimeout( () => {
-          this.reloadPage();
-        }, 1000);
-        this.toasrt.success('Login sucessfully.');
+      (data: any) => {
+        console.log(111);
+        if (data.error || data.status) {
+          this.isLoginFailed = true;
+          this.toasrt.warning('Login Failed!!! Please login again!')
+        }
+        else {
+          console.log(data);
+          this.tokenStorage.saveToken(data.token);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.toasrt.success('Login successfully.');
+          setTimeout( () => {
+            this.reloadPage();
+          }, 1000);
+
+        }
       },
       error => {
         console.log(error);
-        this.errorMessage = error.error.message;
         this.isLoginFailed = true;
-        this.signOut();
         this.toasrt.warning('Login Failed!!! Please login again!')
-        this.reloadPage();
       }
     );
   }

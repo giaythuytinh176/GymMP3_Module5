@@ -31,6 +31,11 @@ class Song extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function singers()
     {
         return $this->belongsToMany(Singer::class, 'song_singer', 'song_id', 'singer_id');

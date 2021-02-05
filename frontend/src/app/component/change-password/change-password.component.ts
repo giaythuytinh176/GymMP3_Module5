@@ -46,9 +46,10 @@ export class ChangePasswordComponent implements OnInit {
       console.log(data);
       if (data.status) {
         this.token.signOut();
-        this.toastr.warning('You must login to update profile.');
+        this.toastr.warning('You must login to change password.');
+      } else {
+        this.userinfo = data.user;
       }
-      this.userinfo = data.user;
     }, error => console.log(error));
 
 
@@ -73,12 +74,16 @@ export class ChangePasswordComponent implements OnInit {
     this.authService
       .changePasswordAuth(this.changePassword)
       .subscribe(
-        data => {
+        (data: any) => {
           console.log(data);
-          this.isChangePassed = true;
-          this.toastr.success('You have successfully changed your Password');
-          //alert('You have successfully changed your Password');
-          this.router.navigate(['/']);
+          if (data.error || data.status) {
+            this.toastr.warning('You have not changed successfully');
+          } else {
+            this.isChangePassed = true;
+            this.toastr.success('You have successfully changed your Password');
+            //alert('You have successfully changed your Password');
+            this.router.navigate(['/']);
+          }
         },
         error => {
           console.log(error);

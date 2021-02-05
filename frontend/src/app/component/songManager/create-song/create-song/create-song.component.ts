@@ -67,7 +67,9 @@ export class CreateSongComponent implements OnInit {
         this.token.signOut();
         this.toastr.warning('You must login to create Song.');
       }
-      this.userinfo = data.user;
+      else {
+        this.userinfo = data.user;
+      }
     }, error => console.log(error));
 
     this.createMusicForm = this.fb.group({

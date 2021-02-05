@@ -7,6 +7,7 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {ToastrService} from "ngx-toastr";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
 import {FirebaseComponent} from "../firebase/firebase.component";
+import {Song} from "../../model/song/song";
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +24,11 @@ export class ProfileComponent implements OnInit {
   isUpdate = false;
   isUpdateFailed = false;
   userinfo!: UpdateInfo;
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+  avatar: string;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -42,8 +48,18 @@ export class ProfileComponent implements OnInit {
         this.token.signOut();
         this.toastr.warning('You must login to update profile.');
       }
-      this.userinfo = data.user;
-      this.profileForm.value.name = this.userinfo.name;
+      else {
+        this.userinfo = data.user;
+        this.profileForm.value.name = this.userinfo.name;
+        this.profileForm.value.address = this.userinfo.address;
+        this.profileForm.value.email = this.userinfo.email;
+        this.profileForm.value.phone = this.userinfo.phone;
+        this.name = this.userinfo.name;
+        this.address = this.userinfo.address;
+        this.email = this.userinfo.email;
+        this.phone = this.userinfo.phone;
+        this.avatar = this.userinfo.avatar;
+      }
     }, error => console.log(error));
 
     this.profileForm = this.fb.group({
@@ -68,10 +84,12 @@ export class ProfileComponent implements OnInit {
             this.token.signOut();
             this.toastr.warning('You must login to update profile.');
           }
-          // this.routes.navigate(['list']);
-          this.updateSuccess();
-          this.isUpdate = true;
-          this.isUpdateFailed = false;
+          else {
+            // this.routes.navigate(['list']);
+            this.updateSuccess();
+            this.isUpdate = true;
+            this.isUpdateFailed = false;
+          }
         }, error => {
           console.log(error);
           this.isUpdate = false;

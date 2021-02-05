@@ -74,11 +74,17 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
 
-    public function changePassword(Request $request): \Illuminate\Http\JsonResponse
+    public function changePassword(Request $request)
     {
+        if ($request->new_password !== $request->confirm_new_password) {
+            $error = ['Passwords do not match'];
+            return response()->json(compact('error'));
+        }
+
         $validator = Validator::make($request->all(), [
             'password' => 'required',
             'new_password' => 'required|string|min:6|max:8',
+            'confirm_new_password' => 'required|string|min:6|max:8',
         ]);
 
         if ($validator->fails()) {

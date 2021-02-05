@@ -1,50 +1,118 @@
-<div class="main-content">
-  <div id="page-wrapper">
-    <div class="main-page">
-      <div class="tables">
-        <h3 class="title1" style="text-align: center; color: #0F9E5E  ">My List Song</h3>
-        <div class="panel-body widget-shadow">
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">My List Song</h1>
+</div>
 
-          <table class=" table-bordered" style="width:100%">
-  <thead>
-  <th>STT</th>
-  <th>Name Song</th>
-  <th>Describes</th>
-  <th>Author</th>
-  <th>Views</th>
-  <th>Singer</th>
-  <th>Category</th>
-  <th>Album</th>
-  <th>Image</th>
-  <th>Mp3</th>
-  <th>Action</th>
-  </thead>
-  <tbody>
-  <tr *ngFor="let i=index, let song of songs">
-    <td>{{i + 1}}</td>
-    <td>{{song.nameSong}}</td>
-    <td>{{song.describes}}</td>
-    <td>{{song.author}}</td>
-    <td>{{song.views}}</td>
-    <td>{{song.singer_name}}</td>
-    <td>{{song.category_name}}</td>
-    <td>{{song?.album_name}}</td>
-    <td><img height="100px" src="{{song?.avatarUrl}}" width="100px"></td>
-    <td>
-      <audio controls>
-        <source src="{{song?.mp3Url}}" type="audio/mpeg">
-      </audio>
-    </td>
-    <td>
-    <a (click)="deleteSong(song.id)" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa chứ?')" >Delete</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+
+<div class="page-content">
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="padding">
+        <div class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
+            autoTrigger: true,
+            loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
+            padding: 50,
+            nextSelector: 'a.jscroll-next:last'
+          }">
+          <div class="row">
+            <div *ngFor="let i=index, let song of songs" class="col-xs-4 col-sm-4 col-md-3">
+              <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+                <div class="item-media">
+                  <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
+                  <div class="item-overlay center">
+                    <button class="btn-playpause">Play</button>
+                  </div>
+                </div>
+                <div class="item-info">
+                  <div class="item-overlay bottom text-right">
+                    <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+                    <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
+                    <div class="dropdown-menu pull-right black lt"></div>
+                  </div>
+                  <div class="item-title text-ellipsis">
+                    <a href="track.detail.html">{{ song.nameSong }}</a> &nbsp;
+                    <a [routerLink]="['/editsong', song.id]" color="primary" mat-raised-button>Edit</a> &nbsp;
+<!--                    <a (click)="deleteSong(song.id)" color="warn" mat-raised-button>Delete</a>-->
+                    <button mat-raised-button color="warn" (click)="openDialog(song.id, song.nameSong)">Xoá</button>
+                  </div>
+                  <div class="item-author text-sm text-ellipsis ">
+                    <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                      {{ singer.singer_name }},
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <a class="btn btn-sm white rounded jscroll-next" href="scroll.item.html">Show More</a>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
 </div>
-<button (click)="getListSongs()">submit</button>
 
+<!--<style>-->
+<!--  th {-->
+<!--    font-size: 16px;-->
+<!--  }-->
+<!--</style>-->
+
+<!--<div class="page-content">-->
+<!--  <div class="row-col">-->
+<!--    <div class="col-lg-9 b-r no-border-md">-->
+<!--      <div class="page-title m-b">-->
+<!--        <div class="padding">-->
+<!--          <div class="main-content">-->
+<!--            <div id="page-wrapper">-->
+<!--              <div class="main-page">-->
+<!--                <div class="tables">-->
+<!--                  <div class="panel-body widget-shadow">-->
+<!--                    <table class="table-bordered" style="width:100%">-->
+<!--                      <thead>-->
+<!--                      <th>#</th>-->
+<!--                      <th>Name Song</th>-->
+<!--                      <th>Describes</th>-->
+<!--                      <th>Author</th>-->
+<!--                      <th>Views</th>-->
+<!--                      <th>Singer</th>-->
+<!--                      <th>Category</th>-->
+<!--                      <th>Album</th>-->
+<!--                      <th>Image</th>-->
+<!--                      <th>Mp3</th>-->
+<!--                      <th>Action</th>-->
+<!--                      </thead>-->
+<!--                      <tbody>-->
+<!--                      <tr *ngFor="let i=index, let song of songs">-->
+<!--                        <td>{{i + 1}}</td>-->
+<!--                        <td><strong>{{song.nameSong}}</strong></td>-->
+<!--                        <td>{{song.describes.substring(0, 50)}}...</td>-->
+<!--                        <td>{{song.author}}</td>-->
+<!--                        <td>{{song.views}}</td>-->
+<!--                        <td>{{song.singer_list_name}}</td>-->
+<!--                        <td>{{song.category_name}}</td>-->
+<!--                        <td>{{song.album_name}}</td>-->
+<!--                        <td><img height="100px" src="{{song?.avatarUrl}}" width="100px"></td>-->
+<!--                        <td>-->
+<!--                          <audio controls>-->
+<!--                            <source src="{{song?.mp3Url}}" type="audio/mpeg">-->
+<!--                          </audio>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                          <a [routerLink]="['/editsong', song.id]" color="primary" mat-raised-button>Edit</a> &nbsp;-->
+<!--                          <a (click)="deleteSong(song.id)" color="warn" mat-raised-button>Delete</a>-->
+<!--                        </td>-->
+<!--                      </tr>-->
+<!--                      </tbody>-->
+<!--                    </table>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UpdateInfo} from "../model/userManager/updateinfo";
+import {environment} from "../../environments/environment";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -16,8 +17,8 @@ export class UserService {
       'Authorization': 'Bearer ' + this.token
     })
   }
-  private getUserUrl = 'http://localhost:8000/api/user';
-  private updateUserUrl = 'http://localhost:8000/api/users';
+  private getUserUrl = environment.apiUrl + '/user';
+  private updateUserUrl = environment.apiUrl + '/users';
 
   constructor(private http: HttpClient) {
   }

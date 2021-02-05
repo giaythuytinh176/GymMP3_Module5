@@ -55,6 +55,16 @@
     <!--              </a>-->
     <!--            </li>-->
     <li>
+      <a [routerLink]="['/search']" href="/profile">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      search
+                    </i>
+                  </span>
+        <span class="nav-text">Search</span>
+      </a>
+    </li>
+    <li>
       <a [routerLink]="['/profile']" href="/profile">
                   <span class="nav-icon">
                     <i class="material-icons">
@@ -84,7 +94,7 @@
         <span class="nav-text">Add Song</span>
       </a>
     </li>
-    <li>
+    <li *ngIf="!isLoggedIn">
       <a [routerLink]="['/login']">
                   <span class="nav-icon">
                     <i class="material-icons">
@@ -94,7 +104,7 @@
         <span class="nav-text">Login</span>
       </a>
     </li>
-    <li>
+    <li *ngIf="!isLoggedIn">
       <a [routerLink]="['/signup']">
                   <span class="nav-icon">
                     <i class="material-icons">
@@ -104,7 +114,17 @@
         <span class="nav-text">Signup</span>
       </a>
     </li>
-    <li>
+    <li *ngIf="isLoggedIn">
+      <a [routerLink]="['/changepass']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+
+                    </i>
+                  </span>
+        <span class="nav-text">Change Password</span>
+      </a>
+    </li>
+    <li *ngIf="isLoggedIn">
       <a (click)="loginComponent.signOut()">
                   <span class="nav-icon">
                     <i class="material-icons">

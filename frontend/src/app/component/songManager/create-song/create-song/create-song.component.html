@@ -1,20 +1,27 @@
-<div class="container">
-  <div class="container-fluid row">
-    <div class="col-3">
-<!--      &lt;!&ndash;      <app-menu-left></app-menu-left>&ndash;&gt;111-->
-    </div>
-    <div class="col-5" style="margin-bottom: 10px">
-      <form (ngSubmit)="createSong()" [formGroup]="createMusicForm">
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Add New Song</h1>
+</div>
+
+<div class="container-fluid">
+  <form (ngSubmit)="createSong()" [formGroup]="createMusicForm">
+    <div class="row">
+
+      <div class="col-md-4">
+        <p></p>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label><strong style="color: darkgray;">Name Song: </strong></mat-label>
+          <input type="text" matInput formControlName="nameSong" placeholder="Hello">
+          <mat-error
+            *ngIf="createMusicForm.get('nameSong').invalid && createMusicForm.get('nameSong').touched">
+            Name Song is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
         <div class="form-group">
-          <label>Tên bài hát: </label>
-          <input class="form-control" formControlName="nameSong" type="text">
-          <div *ngIf="createMusicForm.get('nameSong').invalid && createMusicForm.get('nameSong').touched"
-               style="color: #ff0000">
-            Name Song is <strong>required</strong>.
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Ảnh bài hát: </label>
+          <label><strong>Image song: </strong></label> &nbsp;
           <label class="label-input" for="avatar">
             <div *ngIf="firebase.fileToUpload; else NoSelect">
               Filename: {{ firebase.fileToUpload.name }}
@@ -48,9 +55,22 @@
             Avatar is <strong>required</strong>.
           </div>
         </div>
+      </div>
+      <div class="col-md-4">
+        <p></p>
+      </div>
 
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <p></p>
+      </div>
+      <div class="col-md-2">
         <div class="form-group">
-          <label>Mp3: </label>
+          <label><strong>Mp3 file: </strong> </label> &nbsp;
           <label class="label-input" for="mp3Url">
             <div *ngIf="firebaseMP3.fileToUpload; else NoSelect">
               Filename: {{ firebaseMP3.fileToUpload.name }}
@@ -86,77 +106,124 @@
             Mp3 Url is <strong>required</strong>.
           </div>
         </div>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label><strong style="color: darkgray;">Author: </strong></mat-label>
+          <input type="text" matInput formControlName="author">
+          <mat-error
+            *ngIf="createMusicForm.get('author').invalid && createMusicForm.get('author').touched">
+            Author is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <p></p>
+      </div>
 
-        <div class="form-group">
-          <label>Author: </label>
-          <input class="form-control" formControlName="author" type="text">
-          <div *ngIf="createMusicForm.get('author').invalid && createMusicForm.get('author').touched"
-               style="color: #ff0000">
-            Author is <strong>required</strong>.
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label>Views: </label>
-          <input class="form-control" formControlName="views" type="number">
-          <div *ngIf="createMusicForm.get('views').invalid && createMusicForm.get('views').touched"
-               style="color: #ff0000">
-            Views is <strong>required</strong>.
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Singer: </label>
-          <select class="form-control" formControlName="singer_id" multiple>
-            <!--            <option disabled selected value> &#45;&#45; select a Singer &#45;&#45;</option>-->
-            <option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</option>
-          </select>
-          <div *ngIf="createMusicForm.get('singer_id').invalid && createMusicForm.get('singer_id').touched"
-               style="color: #ff0000">
-            Singer is <strong>required</strong>.
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Thể Loại: </label>
-          <select class="form-control" formControlName="category_id">
-            <option disabled selected value> -- select a Category --</option>
-            <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
-          </select>
-          <div *ngIf="createMusicForm.get('category_id').invalid && createMusicForm.get('category_id').touched"
-               style="color: #ff0000">
-            Category is <strong>required</strong>.
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Album: </label>
-          <select class="form-control" formControlName="album_id">
-            <option disabled selected value> -- select an Album --</option>
-            <option *ngFor="let album of albums" [value]="album.id">{{ album.album_name }}</option>
-          </select>
-          <div *ngIf="createMusicForm.get('album_id').invalid && createMusicForm.get('album_id').touched"
-               style="color: #ff0000">
-            Album is <strong>required</strong>.
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Describes: </label>
-          <textarea class="form-control" formControlName="describes"></textarea>
-          <div *ngIf="createMusicForm.get('describes').invalid && createMusicForm.get('describes').touched"
-               style="color: #ff0000">
-            Describes is <strong>required</strong>.
-          </div>
-        </div>
-        <div style="margin-bottom: 10px">
-          <button [disabled]="!createMusicForm.valid" class="btn btn-primary" type="submit">Thêm Bài Hát</button>
-        </div>
-      </form>
     </div>
-    <div class="col-4" style="margin-bottom: 10px">
-      <!--      <app-upload-file (giveURLtoCreate)="onChange($event)"></app-upload-file>-->
-      <!--      <app-upload-avatar (giveURLtoCreate)="onAvatar($event)"></app-upload-avatar>-->
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <p></p>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label><strong style="color: darkgray;">Views: </strong></mat-label>
+          <input type="number" matInput formControlName="views">
+          <mat-error
+            *ngIf="createMusicForm.get('views').invalid && createMusicForm.get('views').touched">
+            Views is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label><strong style="color: darkgray;">Singer: </strong></mat-label>
+          <mat-select formControlName="singer_id" multiple>
+            <mat-option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="createMusicForm.get('singer_id').invalid && createMusicForm.get('singer_id').touched" style="color: #ff0000">
+            Singer is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <p></p>
+      </div>
+
+
     </div>
-  </div>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <p></p>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label><strong style="color: darkgray;">Category: </strong></mat-label>
+          <mat-select formControlName="category_id">
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="createMusicForm.get('category_id').invalid && createMusicForm.get('category_id').touched" style="color: #ff0000">
+            Category is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label><strong style="color: darkgray;">Album: </strong></mat-label>
+          <mat-select formControlName="album_id">
+            <mat-option *ngFor="let album of albums" [value]="album.id">{{ album.album_name }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="createMusicForm.get('album_id').invalid && createMusicForm.get('album_id').touched" style="color: #ff0000">
+            Album is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <p></p>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <p></p>
+      </div>
+      <div align="center" class="col-md-4" style="text-align: center">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label><strong style="color: darkgray;">Describes: </strong></mat-label>
+          <textarea matInput formControlName="describes"></textarea>
+          <mat-error
+            *ngIf="createMusicForm.get('describes').invalid && createMusicForm.get('describes').touched">
+            Describes is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <p></p>
+      </div>
+      <div style="text-align: center" class="col-md-4">
+        <button [disabled]="!createMusicForm.valid" class="btn btn-primary" type="submit">Thêm Bài Hát</button>
+      </div>
+      <div class="col-md-4">
+        <p></p>
+      </div>
+
+
+    </div>
+  </form>
 </div>
