@@ -208,8 +208,16 @@ class SongController extends Controller
                 ->orWhere('categories.category_name', 'like', '%' . $request->search . '%')
                 ->orWhere('albums.album_name', 'like', '%' . $request->search . '%')
                 // ->orWhere('singers.singer_name', 'like', '%' . $request->search . '%')
-                ->get();
-        return response()->json($songs, 200);
+                ->get()
+                ->toArray();
+                $data = [];
+                $songs = json_decode(json_encode($songs), true);
+                foreach ($songs as $song) {
+                    $data[]['singer_list_name'] = $this->findSingerBySongID($song['id']);
+                }
+                $last = array_replace_recursive($songs, $data);
+                return response()->json($last, 200);
+        // return response()->json($songs, 200);
     }
 
 }
