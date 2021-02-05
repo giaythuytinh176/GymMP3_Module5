@@ -74,16 +74,16 @@
         <span class="nav-text">Profile</span>
       </a>
     </li>
-    <li *ngIf="isLoggedIn">
-      <a [routerLink]="['/listsongs']">
-                  <span class="nav-icon">
-                    <i class="material-icons">
+<!--    <li *ngIf="isLoggedIn">-->
+<!--      <a [routerLink]="['/listsongs']">-->
+<!--                  <span class="nav-icon">-->
+<!--                    <i class="material-icons">-->
 
-                    </i>
-                  </span>
-        <span class="nav-text">My List</span>
-      </a>
-    </li>
+<!--                    </i>-->
+<!--                  </span>-->
+<!--        <span class="nav-text">My List</span>-->
+<!--      </a>-->
+<!--    </li>-->
     <li *ngIf="isLoggedIn">
       <a [routerLink]="['/create-song']">
                   <span class="nav-icon">
@@ -98,7 +98,7 @@
       <a [routerLink]="['/login']">
                   <span class="nav-icon">
                     <i class="material-icons">
-
+                        login
                     </i>
                   </span>
         <span class="nav-text">Login</span>
@@ -108,27 +108,27 @@
       <a [routerLink]="['/signup']">
                   <span class="nav-icon">
                     <i class="material-icons">
-
+                       signup
                     </i>
                   </span>
         <span class="nav-text">Signup</span>
       </a>
     </li>
-    <li *ngIf="isLoggedIn">
-      <a [routerLink]="['/changepass']">
-                  <span class="nav-icon">
-                    <i class="material-icons">
+<!--    <li *ngIf="isLoggedIn">-->
+<!--      <a [routerLink]="['/changepass']">-->
+<!--                  <span class="nav-icon">-->
+<!--                    <i class="material-icons">-->
 
-                    </i>
-                  </span>
-        <span class="nav-text">Change Password</span>
-      </a>
-    </li>
+<!--                    </i>-->
+<!--                  </span>-->
+<!--        <span class="nav-text">Change Password</span>-->
+<!--      </a>-->
+<!--    </li>-->
     <li *ngIf="isLoggedIn">
       <a (click)="loginComponent.signOut()">
                   <span class="nav-icon">
                     <i class="material-icons">
-
+                      logout
                     </i>
                   </span>
         <span class="nav-text">Logout</span>

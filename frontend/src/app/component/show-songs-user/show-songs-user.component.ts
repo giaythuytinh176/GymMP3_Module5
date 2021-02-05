@@ -51,7 +51,6 @@ export class ShowSongsUserComponent implements OnInit {
         this.getSongDetail();
       }
     }, error => console.log(error));
-
   }
 
   getSongDetail() {

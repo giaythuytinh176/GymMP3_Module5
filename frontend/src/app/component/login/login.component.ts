@@ -5,15 +5,21 @@ import {Router} from "@angular/router";
 import {TokenStorageService} from "../../token-storage.service";
 import {ToastrService} from "ngx-toastr";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {transition, trigger, useAnimation} from "@angular/animations";
+import {shake} from "ng-animate";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [
+    trigger('shake', [transition('* => *', useAnimation(shake))])
+  ],
 })
 export class LoginComponent implements OnInit {
   private loginInfo: LoginInfo;
   loginForm: FormGroup;
+  shake: any;
 
   constructor(private authService: AuthService,
               private route: Router,
@@ -29,7 +35,7 @@ export class LoginComponent implements OnInit {
     }
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
     });
   }
 

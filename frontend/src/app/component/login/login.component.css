@@ -6,31 +6,3 @@
   margin-left: -50px;
   text-align: center;
 }
-
-.input-error {
-  border: red 1px solid;
-}
-
-.input-invalid {
-  border: 1px solid red;
-}
-
-.input-valid {
-  border: 1px solid green;
-}
-
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #FFFFFFDE !important;
-  opacity: 1; /* Firefox */
-  font-size: 14px;
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #FFFFFFDE !important;
-  font-size: 14px;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-  color: #FFFFFFDE !important;
-  font-size: 14px;
-}

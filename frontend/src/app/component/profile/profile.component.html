@@ -1,3 +1,7 @@
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Profile</h1>
+</div>
+
 <div class="app dk" id="app">
 
   <!-- ############ LAYOUT START-->
@@ -40,26 +44,29 @@
     <div class="app-body" id="view">
 
       <!-- ############ PAGE START-->
-      <div class="page-bg" data-stellar-ratio="2" style="background-image: url('images/a3.jpg');"></div>
+      <div class="page-bg" data-stellar-ratio="2" [ngStyle]="{'background-image': 'url(' + avatar + ')'}"></div>
       <div class="page-content">
         <div class="padding b-b">
           <div class="row-col">
             <div class="col-sm w w-auto-xs m-b">
               <div class="item w rounded">
                 <div class="item-media">
-                  <div class="item-media-content" style="background-image: url('images/a3.jpg');"></div>
+                  <div class="item-media-content" [ngStyle]="{'background-image': 'url(' + avatar + ')'}"></div>
                 </div>
               </div>
             </div>
             <div class="col-sm">
               <div class="p-l-md no-padding-xs">
                 <h1 class="page-title">
-                  <span class="h1 _800">Rachel Platten</span>
+                  <span class="h1 _800">{{ username }}</span>
                 </h1>
-                <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quamquam tu hanc copiosiorem etiam soles dicere. Nihil illinc huc pervenit. Verum hoc idem saepe faciamus. Quid ad utilitatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.</p>
+                <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">
+                  ...
+                </p>
                 <div class="item-action m-b">
-                  <a href="#" class="btn btn-sm rounded primary">Upload</a>
-                  <a href="#" class="btn btn-sm rounded white">Edit Profile</a>
+<!--                  <a href="#" class="btn btn-sm rounded primary">Upload</a>-->
+                  <a href="#" class="btn btn-sm rounded primary" [routerLink]="['/edit-profile']">Edit Profile</a>
+                  <a href="#" class="btn btn-sm rounded white" [routerLink]="['/change-password']">Change Password</a>
                 </div>
                 <div class="block clearfix m-b">
                   <span>9</span> <span class="text-muted">Albums</span>, <span>23</span> <span class="text-muted">Tracks</span>
@@ -91,10 +98,10 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="track">
                   <div class="row item-list item-list-by m-b">
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-10" data-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                    <div *ngFor="let song of songs; let i=index;" class="col-xs-12">
+                      <div class="item r" [attr.data-id]="song.id" [attr.data-src]="song.mp3Url">
                         <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b9.jpg');"></a>
+                          <a href="track.detail.html" class="item-media-content" [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}"></a>
                           <div class="item-overlay center">
                             <button  class="btn-playpause">Play</button>
                           </div>
@@ -106,10 +113,12 @@
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">The Open Road</a>
+                            <a href="track.detail.html">{{ song.nameSong }}</a>
                           </div>
                           <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Postiljonen</a>
+                            <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                              {{ singer.singer_name }},
+                            </a>
                           </div>
                           <div class="item-meta text-sm text-muted">
                             <span class="item-meta-category"><a href="browse.html" class="label">Soul</a></span>
@@ -117,403 +126,7 @@
                           </div>
 
                           <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Litatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-9" data-src="http://api.soundcloud.com/tracks/264094434/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b8.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">All I Need</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Pablo Nouvelle</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Jazz</a></span>
-                            <span class="item-meta-date text-xs">02.04.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-4" data-src="http://api.soundcloud.com/tracks/230791292/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b3.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">What A Time To Be Alive</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Judith Garcia</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Electro</a></span>
-                            <span class="item-meta-date text-xs">04.05.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Verum hoc idem saepe faciamus inguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-2" data-src="http://api.soundcloud.com/tracks/259445397/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b1.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">Fireworks</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Kygo</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Jazz</a></span>
-                            <span class="item-meta-date text-xs">02.05.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Hidem saepe faciamus. Quid ad utilitatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-12" data-src="http://api.soundcloud.com/tracks/174495152/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b11.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">Happy ending</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Postiljonen</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Latin</a></span>
-                            <span class="item-meta-date text-xs">09.06.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Utilitatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-6" data-src="http://api.soundcloud.com/tracks/236107824/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b5.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">Body on me</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Rita Ora</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Nature</a></span>
-                            <span class="item-meta-date text-xs">09.04.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-11" data-src="http://api.soundcloud.com/tracks/218060449/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b10.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">Spring</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Pablo Nouvelle</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Indie</a></span>
-                            <span class="item-meta-date text-xs">09.03.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Saepe faciamus. Quid ad utilitatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b2.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">I Wanna Be In the Cavalry</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Jeremy Scott</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">DJ</a></span>
-                            <span class="item-meta-date text-xs">09.04.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-5" data-src="http://streaming.radionomy.com/JamendoLounge">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b4.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">Live Radio</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Radionomy</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Electro</a></span>
-                            <span class="item-meta-date text-xs">09.05.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Verum hoc idem saepe faciamus. Quid ad utilitatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-8" data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b7.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">Simple Place To Be</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">RYD</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Radio</a></span>
-                            <span class="item-meta-date text-xs">09.04.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Ad utilitatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-7" data-src="http://api.soundcloud.com/tracks/245566366/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b6.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">Reflection (Deluxe)</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Fifth Harmony</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Pop</a></span>
-                            <span class="item-meta-date text-xs">05.05.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Quid ad utilitatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a href="#" class="btn btn-xs white">Edit</a>
-                            <a href="#" class="btn btn-xs white" data-toggle="modal" data-target="#delete-modal">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12">
-                      <div class="item r" data-id="item-1" data-src="http://api.soundcloud.com/tracks/269944843/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                        <div class="item-media ">
-                          <a href="track.detail.html" class="item-media-content" style="background-image: url('images/b0.jpg');"></a>
-                          <div class="item-overlay center">
-                            <button  class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                            <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">Pull Up</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a href="artist.detail.html" class="text-muted">Summerella</a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a href="browse.html" class="label">Blue</a></span>
-                            <span class="item-meta-date text-xs">30.05.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quamquam tu hanc copiosiorem etiam soles dicere. Nihil illinc huc pervenit.
+                            {{ song.describes.substring(0, 50) }}...
                           </div>
 
                           <div class="item-action visible-list m-t-sm">
@@ -693,23 +306,17 @@
                   <form>
                     <div class="form-group row">
                       <div class="col-sm-3 form-control-label text-muted">Location</div>
-                      <div class="col-sm-9"><input value="Earth" class="form-control"></div>
+                      <div class="col-sm-9">
+                        <input value="Earth" class="form-control">
+                      </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-3 form-control-label text-muted">Website</div>
-                      <div class="col-sm-9"><input placeholder="http://" class="form-control"></div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-sm-3 form-control-label text-muted">Music Type</div>
                       <div class="col-sm-9">
-                        <select class="form-control c-select">
-                          <option>Blue</option>
-                          <option>Electro</option>
-                          <option>Pop</option>
-                          <option>Soul</option>
-                        </select>
+                        <input placeholder="http://" class="form-control">
                       </div>
                     </div>
+
                   </form>
                 </div>
               </div>
@@ -1169,3 +776,4 @@
 
   <!-- ############ LAYOUT END-->
 </div>
+

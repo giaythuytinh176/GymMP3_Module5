@@ -13,11 +13,16 @@ import {ToastrService} from 'ngx-toastr';
 import {AuthService} from 'src/app/auth/auth.service';
 import {SignupInfo} from 'src/app/auth/signup-info';
 import {ErrorStateMatcher} from "@angular/material/core";
+import {transition, trigger, useAnimation} from "@angular/animations";
+import {shake} from "ng-animate";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  animations: [
+    trigger('shake', [transition('* => *', useAnimation(shake))])
+  ],
 })
 export class RegisterComponent implements OnInit {
 
@@ -25,6 +30,7 @@ export class RegisterComponent implements OnInit {
   signupInfo: SignupInfo;
   registerForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
+  shake: any;
 
   constructor(private authService: AuthService,
               private route: Router,

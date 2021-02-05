@@ -13,6 +13,7 @@ import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-use
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component'
 import firebase from "firebase";
 import Auth = firebase.auth.Auth;
+import {EditProfileComponent} from "./component/edit-profile/edit-profile.component";
 
 const routes: Routes = [
   {
@@ -20,13 +21,18 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'changepass',
+    path: 'change-password',
     component: ChangePasswordComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-profile',
+    component: EditProfileComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -46,11 +52,11 @@ const routes: Routes = [
     component: CreateSongComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'listsongs',
-    component: ShowSongsUserComponent,
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: 'listsongs',
+  //   component: ShowSongsUserComponent,
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: 'editsong/:id',
     component: UpdateSongComponent,

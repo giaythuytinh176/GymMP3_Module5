@@ -72,6 +72,7 @@ import {
 } from './component/show-songs-user/show-songs-user.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { SearchSongComponent } from './component/songManager/search-song/search-song.component';
+import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { SearchSongComponent } from './component/songManager/search-song/search-
     SidebarComponent,
     SearchSongComponent,
     DialogContentExampleDialog,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

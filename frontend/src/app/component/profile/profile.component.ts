@@ -8,6 +8,8 @@ import {ToastrService} from "ngx-toastr";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
 import {FirebaseComponent} from "../firebase/firebase.component";
 import {Song} from "../../model/song/song";
+import {ShowSongsUserComponent} from "../show-songs-user/show-songs-user.component";
+import {SongService} from "../../services/song/song.service";
 
 @Component({
   selector: 'app-profile',
@@ -17,18 +19,14 @@ import {Song} from "../../model/song/song";
 export class ProfileComponent implements OnInit {
 
   user: UpdateInfo;
-  success: string;
-  fail: string;
-  profileForm: FormGroup;
-  username: string;
-  isUpdate = false;
-  isUpdateFailed = false;
   userinfo!: UpdateInfo;
   name: string;
   address: string;
   email: string;
   phone: string;
   avatar: string;
+  username: string;
+  songs: Song[];
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -38,6 +36,8 @@ export class ProfileComponent implements OnInit {
               private token: TokenStorageService,
               private toastr: ToastrService,
               public firebase: FirebaseComponent,
+              public showSongsUser: ShowSongsUserComponent,
+              private songService: SongService,
   ) {
   }
 
@@ -46,61 +46,31 @@ export class ProfileComponent implements OnInit {
       console.log(data);
       if (data.status) {
         this.token.signOut();
-        this.toastr.warning('You must login to update profile.');
-      }
-      else {
+        this.toastr.warning('You must login to see profile.');
+      } else {
         this.userinfo = data.user;
-        this.profileForm.value.name = this.userinfo.name;
-        this.profileForm.value.address = this.userinfo.address;
-        this.profileForm.value.email = this.userinfo.email;
-        this.profileForm.value.phone = this.userinfo.phone;
         this.name = this.userinfo.name;
         this.address = this.userinfo.address;
         this.email = this.userinfo.email;
         this.phone = this.userinfo.phone;
         this.avatar = this.userinfo.avatar;
+        this.username = this.userinfo.username;
+        this.songService.getSongDetail(this.userinfo.id)
+          .subscribe((data: any) => {
+            if (data.status) {
+              this.token.signOut();
+            } else {
+              console.log(data);
+              this.songs = data;
+            }
+          }, error => {
+            console.log(error);
+          });
+        console.log(this.showSongsUser.songs);
       }
     }, error => console.log(error));
 
-    this.profileForm = this.fb.group({
-      name: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
-      avatar: ['', [Validators.required]],
-    });
   }
 
-  updateUser() {
-    this.profileForm.value.avatar = this.firebase.fb;
-    this.profileForm.value.username = this.userinfo.username;
-    this.profileForm.value.id = this.userinfo.id;
-    if (this.profileForm.valid) {
-      const data = this.profileForm.value;
-      this.userService.updateUser(data, data.id)
-        .subscribe((data: any) => {
-          console.log(data);
-          if (data.status) {
-            this.token.signOut();
-            this.toastr.warning('You must login to update profile.');
-          }
-          else {
-            // this.routes.navigate(['list']);
-            this.updateSuccess();
-            this.isUpdate = true;
-            this.isUpdateFailed = false;
-          }
-        }, error => {
-          console.log(error);
-          this.isUpdate = false;
-          this.isUpdateFailed = true;
-          this.toastr.warning('Update failed. Please try again!')
-        });
-    }
-  }
 
-  updateSuccess() {
-    this.toastr.success('Cập nhật thành công');
-    this.routes.navigate(['']);
-  }
 }
