@@ -2,69 +2,153 @@
   <h1 class="inline m-a-0" style="padding-left: 50px">Register</h1>
 </div>
 
-<div class="container">
-  <form [formGroup]="registerForm" class="example-form">
-    <mat-form-field appearance="fill" class="example-full-width">
-      <mat-label><p style="color: darkgray;">Username</p></mat-label>
-      <input formControlName="username" matInput placeholder="Username" type="text">
-      <mat-error
-        *ngIf="registerForm.get('username')!.invalid && registerForm.get('username')!.touched  || (registerForm.get('username').untouched) && registerFormAttempt">
-        Username is <strong>required</strong>.
-      </mat-error>
-    </mat-form-field>
-
-    <br>
-    <br>
-
-    <mat-form-field appearance="fill" class="example-full-width">
-      <mat-label><p style="color: darkgray;">Phone</p></mat-label>
-      <input formControlName="phone" matInput placeholder="0123456789" type="text">
-      <mat-error
-        *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched  || (registerForm.get('phone').untouched) && registerFormAttempt">
-        <span *ngIf="registerForm.get('phone').hasError('required')">Phone is <strong>required</strong>.</span>
-        <span *ngIf="registerForm.get('phone').hasError('pattern')">Phone must start with 0 followed by 9 or 10 digits.</span>
-      </mat-error>
-    </mat-form-field>
-
-    <br>
-    <br>
-
-    <mat-form-field appearance="fill" class="example-full-width">
-      <mat-label><p style="color: darkgray;">New password</p></mat-label>
-      <input type="password" formControlName="password" matInput placeholder="New password" required>
-      <mat-error *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched">
-        <span
-          *ngIf="registerForm.get('password').hasError('required')">Please enter <strong>your password</strong>.</span><br>
-        <span
-          *ngIf="registerForm.get('password').hasError('minlength')">Password should contain 6 characters.</span><br>
-        <span *ngIf="registerForm.get('password').hasError('maxlength')">Password should contain less than or equal to 8 characters.</span><br>
-      </mat-error>
-    </mat-form-field>
-
-    <br>
-    <br>
-
-    <mat-form-field appearance="fill" class="example-full-width">
-      <mat-label><p style="color: darkgray;">Confirm password</p></mat-label>
-      <input type="password" [errorStateMatcher]="matcher" formControlName="password_confirmation" matInput
-             placeholder="Confirm password">
-      <mat-error
-        *ngIf="registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched">
-        <span *ngIf="registerForm.get('password_confirmation').hasError('required')">Password Confirm is <strong>required</strong>.</span><br>
-        <span *ngIf="registerForm.hasError('passwordnotmatch')">Passwords do not match</span><br>
-
-        <span *ngIf="registerForm.get('password_confirmation').hasError('minlength')">Password Confirm should contain 6 characters.</span><br>
-        <span *ngIf="registerForm.get('password_confirmation').hasError('maxlength')">Password Confirm should contain less than or equal to 8 characters.</span><br>
-      </mat-error>
-    </mat-form-field>
-
-    <br>
-    <br>
-    <mat-card-actions style="padding-top: 50px">
-      <button (click)="onSubmit()" [disabled]="!registerForm.valid" color="primary" mat-raised-button type="submit">
-        Register
-      </button> &nbsp;
-      <button (click)="reset()" color="warn" mat-raised-button>Reset</button>
-    </mat-card-actions>
-  </form>
+<div class="b-t" style="margin-top: 50px">
+  <div class="center-block w-xxl w-auto-xs p-y-md text-center">
+    <div class="p-a-md">
+      <div>
+        <a href="#" class="btn btn-block indigo text-white m-b-sm">
+          <i class="fa fa-facebook pull-left"></i>
+          Sign up with Facebook
+        </a>
+        <a href="#" class="btn btn-block red text-white">
+          <i class="fa fa-google-plus pull-left"></i>
+          Sign up with Google+
+        </a>
+      </div>
+      <div class="m-y text-sm">
+        OR
+      </div>
+      <form [formGroup]="registerForm">
+        <div class="form-group">
+          <input [class.input-invalid]="registerForm.get('username')!.invalid && registerForm.get('username')!.touched" [class.input-valid]="registerForm.get('username')!.valid && registerForm.get('username')!.touched" formControlName="username" type="text" class="form-control" placeholder="Username">
+          <div *ngIf="registerForm.get('username')!.invalid && registerForm.get('username')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="registerForm.get('username').hasError('required')">
+              Username is <strong>required.</strong>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input [class.input-invalid]="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched" [class.input-valid]="registerForm.get('phone')!.valid && registerForm.get('phone')!.touched" formControlName="phone" type="text" class="form-control" placeholder="Phone">
+          <div *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="registerForm.get('phone').hasError('required')">
+              Phone is <strong>required.</strong>
+            </div>
+            <div *ngIf="registerForm.get('phone').hasError('pattern')">
+              Phone must start with <strong>0 followed by 9 or 10 digits</strong>.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input [errorStateMatcher]="matcher" matInput [class.input-invalid]="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" [class.input-valid]="registerForm.get('password')!.valid && registerForm.get('password')!.touched" formControlName="password" type="password" class="form-control" placeholder="Password">
+          <div *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="registerForm.get('password').hasError('required')">
+              Password is <strong>required.</strong>
+            </div>
+            <div *ngIf="registerForm.get('password').hasError('minlength')">
+              Password must be at least <strong>6 characters long.</strong>
+            </div>
+            <div *ngIf="registerForm.get('password').hasError('maxlength')">
+              Password can be max <strong>10 characters long.</strong>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input [errorStateMatcher]="matcher" matInput [class.input-invalid]="(registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched) || registerForm.hasError('passwordnotmatch')" [class.input-valid]="registerForm.get('password_confirmation')!.valid && registerForm.get('password_confirmation')!.touched && !registerForm.hasError('passwordnotmatch')" formControlName="password_confirmation" type="password" class="form-control" placeholder="Password Confirmation">
+          <div style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="registerForm.hasError('passwordnotmatch')">
+              Passwords do <strong>not match.</strong>
+            </div>
+            <div *ngIf="registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched">
+              <div *ngIf="registerForm.get('password_confirmation').hasError('required')">
+                Password confirmation is <strong>required.</strong>
+              </div>
+            </div>
+            <div *ngIf="registerForm.get('password_confirmation').hasError('minlength')">
+              Password confirmation must be at least <strong>6 characters long.</strong>
+            </div>
+            <div *ngIf="registerForm.get('password_confirmation').hasError('maxlength')">
+              Password confirmation can be max <strong>10 characters long.</strong>
+            </div>
+          </div>
+        </div>
+        <div class="m-b-md text-sm">
+          <span class="text-muted">By clicking Sign Up, I agree to the</span>
+          <a href="#"> Terms of service</a>
+          <span class="text-muted"> and</span>
+          <a href="#"> Policy Privacy.</a>
+        </div>
+        <button type="submit" (click)="onSubmit()" [disabled]="!registerForm.valid" class="btn btn-lg black p-x-lg">Sign Up
+        </button>
+      </form>
+      <div class="p-y-sm text-center">
+        <div>Already have an account? <a href="signin.html" [routerLink]="['/login']" class="text-primary _600">Sign in</a></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!--  <div class="container">-->
+<!--    <form [formGroup]="registerForm" class="example-form">-->
+<!--      <mat-form-field appearance="fill" class="example-full-width">-->
+<!--        <mat-label><p style="color: darkgray;">Username</p></mat-label>-->
+<!--        <input formControlName="username" matInput placeholder="Username" type="text">-->
+<!--        <mat-error-->
+<!--          *ngIf="registerForm.get('username')!.invalid && registerForm.get('username')!.touched">-->
+<!--          Username is <strong>required</strong>.-->
+<!--        </mat-error>-->
+<!--      </mat-form-field>-->
+
+<!--      <br>-->
+<!--      <br>-->
+
+<!--      <mat-form-field appearance="fill" class="example-full-width">-->
+<!--        <mat-label><p style="color: darkgray;">Phone</p></mat-label>-->
+<!--        <input formControlName="phone" matInput placeholder="0123456789" type="text">-->
+<!--        <mat-error-->
+<!--          *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched">-->
+<!--          <span *ngIf="registerForm.get('phone').hasError('required')">Phone is <strong>required</strong>.</span>-->
+<!--          <span *ngIf="registerForm.get('phone').hasError('pattern')">Phone must start with 0 followed by 9 or 10 digits.</span>-->
+<!--        </mat-error>-->
+<!--      </mat-form-field>-->
+
+<!--      <br>-->
+<!--      <br>-->
+
+<!--      <mat-form-field appearance="fill" class="example-full-width">-->
+<!--        <mat-label><p style="color: darkgray;">password</p></mat-label>-->
+<!--        <input type="password" formControlName="password" matInput placeholder="Password" required>-->
+<!--        <mat-error *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched">-->
+<!--          <span-->
+<!--            *ngIf="registerForm.get('password').hasError('required')">Please enter <strong>your password</strong>.</span><br>-->
+<!--          <span-->
+<!--            *ngIf="registerForm.get('password').hasError('minlength')">Password should contain 6 characters.</span><br>-->
+<!--          <span *ngIf="registerForm.get('password').hasError('maxlength')">Password should contain less than or equal to 8 characters.</span><br>-->
+<!--        </mat-error>-->
+<!--      </mat-form-field>-->
+
+<!--      <br>-->
+<!--      <br>-->
+
+<!--      <mat-form-field appearance="fill" class="example-full-width">-->
+<!--        <mat-label><p style="color: darkgray;">Confirm password</p></mat-label>-->
+<!--        <input type="password" [errorStateMatcher]="matcher" formControlName="password_confirmation" matInput-->
+<!--               placeholder="Confirm password">-->
+<!--        <mat-error-->
+<!--          *ngIf="registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched">-->
+<!--          <span *ngIf="registerForm.get('password_confirmation').hasError('required')">Password Confirm is <strong>required</strong>.</span><br>-->
+<!--          <span *ngIf="registerForm.hasError('passwordnotmatch')">Passwords do not match</span><br>-->
+
+<!--          <span *ngIf="registerForm.get('password_confirmation').hasError('minlength')">Password Confirm should contain 6 characters.</span><br>-->
+<!--          <span *ngIf="registerForm.get('password_confirmation').hasError('maxlength')">Password Confirm should contain less than or equal to 8 characters.</span><br>-->
+<!--        </mat-error>-->
+<!--      </mat-form-field>-->
+
+<!--      <br>-->
+<!--      <br>-->
+<!--      <mat-card-actions style="padding-top: 50px">-->
+<!--        <button (click)="onSubmit()" [disabled]="!registerForm.valid" color="primary" mat-raised-button type="submit">-->
+<!--          Register-->
+<!--        </button> &nbsp;-->
+<!--      </mat-card-actions>-->
+<!--    </form>-->
+<!--  </div>-->

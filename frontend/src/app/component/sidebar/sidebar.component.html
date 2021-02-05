@@ -1,8 +1,8 @@
 <nav class="scroll nav-stacked nav-active-primary">
 
   <ul class="nav" data-ui-nav>
-    <li class="nav-header hidden-folded">
-      <span class="text-xs text-muted">Main</span>
+    <li *ngIf="isLoggedIn" class="nav-header hidden-folded">
+      <span class="text-xs text-muted">Welcome, {{ user.username }}</span>
     </li>
     <!--            <li>-->
     <!--              <a href="player.html">-->
@@ -55,7 +55,7 @@
     <!--              </a>-->
     <!--            </li>-->
     <li>
-      <a [routerLink]="['/search']" href="/profile">
+      <a [routerLink]="['/search']">
                   <span class="nav-icon">
                     <i class="material-icons">
                       search
@@ -64,8 +64,8 @@
         <span class="nav-text">Search</span>
       </a>
     </li>
-    <li>
-      <a [routerLink]="['/profile']" href="/profile">
+    <li *ngIf="isLoggedIn">
+      <a [routerLink]="['/profile']">
                   <span class="nav-icon">
                     <i class="material-icons">
 
@@ -74,8 +74,8 @@
         <span class="nav-text">Profile</span>
       </a>
     </li>
-    <li>
-      <a [routerLink]="['/listsongs']" href="/listsongs">
+    <li *ngIf="isLoggedIn">
+      <a [routerLink]="['/listsongs']">
                   <span class="nav-icon">
                     <i class="material-icons">
 
@@ -84,7 +84,7 @@
         <span class="nav-text">My List</span>
       </a>
     </li>
-    <li>
+    <li *ngIf="isLoggedIn">
       <a [routerLink]="['/create-song']">
                   <span class="nav-icon">
                     <i class="material-icons">
