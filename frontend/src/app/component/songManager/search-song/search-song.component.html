@@ -1,50 +1,51 @@
-<!-- <input class="form-control me-2" type="text" (input)="onInput($event)" placeholder="Search" aria-label="Search"> -->
 <div class="page-title m-b">
   <h1 class="inline m-a-0" style="padding-left: 50px">Search</h1>
 </div>
 
-<div class="page-content">
-  <div class="row-col">
-    <div class="col-lg-9 b-r no-border-md">
-      <div class="page-title m-b">
         <div class="padding">
-          <div class="container">
-            <input class="form-control me-2" type="text" (input)="onInput($event)" placeholder="Search"
-                   aria-label="Search">
-          </div>
-          <br>
-          <div class="row">
-
-            <div *ngFor="let val of song" class="col-xs-4 col-sm-4 col-md-3">
-              <div [attr.data-id]="val.id" [attr.data-src]="val.mp3Url" class="item r">
-                <div class="item-media">
-                  <a [ngStyle]="{'background-image': 'url(' + val.avatarUrl + ')'}"
-                     class="item-media-content" href="track.detail.html"></a>
-                  <div class="item-overlay center">
-                    <button class="btn-playpause">Play</button>
-                  </div>
+          <form action="#" class="m-b-md">
+						<div class="input-group input-group-lg">
+							<input type="text" class="form-control" (input)="onInput($event)" placeholder="Search">
+						</div>
+            
+					</form>
+          
+          <div class="m-y">
+						<div class="row item-list item-list-lg item-list-by m-b" *ngIf="song.length>0">
+              <p class="m-b-md"><strong></strong> Results found for: {{song.length}} <strong>Keyword</strong></p>
+          <div class="col-xs-12" *ngFor="let val of song">
+            <div [attr.data-id]="val.id" [attr.data-src]="val.mp3Url" class="item r">
+              <div class="item-media ">
+                <a href="track.detail.html" class="item-media-content"
+                [ngStyle]="{'background-image': 'url(' + val.avatarUrl + ')'}"></a>
+                <div class="item-overlay center">
+                  <button class="btn-playpause">Play</button>
                 </div>
-                <div class="item-info">
-                  <div class="item-overlay bottom text-right">
-                    <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                    <a class="btn-more" data-toggle="dropdown" href="#"><i
+              </div>
+              <div class="item-info">
+                <div class="item-overlay bottom text-right">
+                  <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                  <a href="#" class="btn-more" data-toggle="dropdown"><i
                       class="fa fa-ellipsis-h"></i></a>
-                    <div class="dropdown-menu pull-right black lt"></div>
-                  </div>
-                  <div class="item-title text-ellipsis">
-                    <a href="track.detail.html">{{ val.nameSong }}</a>
-                  </div>
-                  <div class="item-author text-sm text-ellipsis ">
-                    <a class="text-muted" href="artist.detail.html">
-                      {{ val.singer_list_name }},
-                    </a>
-                  </div>
+                  <div class="dropdown-menu pull-right black lt"></div>
+                </div>
+                <div class="item-title text-ellipsis">
+                  <a href="track.detail.html">{{ val.nameSong}}</a>
+                </div>
+                <div class="item-author text-sm text-ellipsis ">
+                  <a href="artist.detail.html" class="text-muted">{{ val.singer_list_name }},</a>
+                </div>
+                <div class="item-meta text-sm text-muted">
+                  <span class="item-meta-tag visible-list"><a href="browse.html"></a></span>
+                </div>
+                <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
+                  {{val.describes.substring(0,100)}}...
                 </div>
               </div>
             </div>
           </div>
+         
         </div>
       </div>
     </div>
-  </div>
-</div>
+
