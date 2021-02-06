@@ -141,9 +141,9 @@
           <!--            Filename: {{ firebase.fileToUpload.name }}-->
           <!--          </div>-->
           <div *ngIf="createMusicForm.get('avatarUrl').invalid && createMusicForm.get('avatarUrl').touched"
-               style="margin-top: 10px;color: red; text-align: left !important;">
+               style="color: red; text-align: left !important;">
             <div [@shake]="shake">
-              Avatar is <strong>required.</strong>
+              Avatar File is <strong>required.</strong>
             </div>
           </div>
         </div>
@@ -186,8 +186,8 @@
           </div>
 
           <div *ngIf="createMusicForm.get('mp3Url').invalid && createMusicForm.get('mp3Url').touched"
-               style="color: #ff0000">
-            Mp3 Url is <strong>required</strong>.
+               style="color: #ff0000; text-align: left !important;">
+            Mp3 File is <strong>required</strong>.
           </div>
         </div>
       </div>

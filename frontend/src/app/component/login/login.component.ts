@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
             this.toasrt.success('Login successfully.');
             setTimeout(() => {
               window.location.reload();
-            }, 1000);
+            }, 1);
             this.route.navigate(['/browse']);
           }
         },
