@@ -6,6 +6,7 @@
   margin-left: -50px;
   text-align: center;
 }
+
 .example-form {
   min-width: 250px;
   max-width: 500px;
@@ -32,15 +33,17 @@
   color: rgba(37, 31, 31, 0.87) !important;
   /*font-weight: bold;*/
 }
+
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
   color: rgba(37, 31, 31, 0.87) !important;
   /*font-weight: bold;*/
-  opacity:  1;
+  opacity: 1;
 }
+
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
   color: rgba(37, 31, 31, 0.87) !important;
   /*font-weight: bold;*/
-  opacity:  1;
+  opacity: 1;
 }
 
 ::placeholder { /* Most modern browsers support this now. */

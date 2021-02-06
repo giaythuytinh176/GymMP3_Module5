@@ -1,5 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TokenStorageService} from "../../auth/token-storage.service";
@@ -11,6 +10,7 @@ import {Song} from "../../model/song/song";
 import {ShowSongsUserComponent} from "../show-songs-user/show-songs-user.component";
 import {SongService} from "../../services/song/song.service";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
+import {UserService} from "../../services/userManager/user.service";
 
 @Component({
   selector: 'app-profile',
@@ -47,9 +47,8 @@ export class ProfileComponent implements OnInit {
     this.userService.getInfoUserToken().subscribe((data: any) => {
       console.log(data);
       if (data.status) {
-        this.token.signOut();
         this.toastr.warning('You must login to see profile.');
-        window.location.reload();
+        this.token.signOut();
         this.routes.navigate(['/login'])
       } else {
         this.userinfo = data.user;

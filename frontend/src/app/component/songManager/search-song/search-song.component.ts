@@ -29,7 +29,7 @@ export class SearchSongComponent implements OnInit {
       throttleTime(300),
       distinctUntilChanged(),
       //concatMap(value => {
-        switchMap(value => {
+      switchMap(value => {
         return this.songService.searchSong(value);
       })
     ).subscribe(

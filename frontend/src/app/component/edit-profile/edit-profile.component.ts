@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
 import {Song} from "../../model/song/song";
-import {UserService} from "../../services/user.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TokenStorageService} from "../../auth/token-storage.service";
@@ -12,6 +11,7 @@ import {ShowSongsUserComponent} from "../show-songs-user/show-songs-user.compone
 import {SongService} from "../../services/song/song.service";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
+import {UserService} from "../../services/userManager/user.service";
 
 @Component({
   selector: 'app-edit-profile',

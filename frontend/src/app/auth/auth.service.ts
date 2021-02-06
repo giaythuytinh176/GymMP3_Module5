@@ -40,6 +40,11 @@ export class AuthService {
   ) {
   }
 
+  tokenExpired() {
+    const expiry = (JSON.parse(atob(this.token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
+
   signUp(info: SignupInfo): Observable<string> {
     console.log(info);
     return this.http.post<string>(this.signupUrl, info, httpOptions);
@@ -53,14 +58,13 @@ export class AuthService {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-   authToken(): Promise<any> {
+  authToken(): Promise<any> {
     // console.log(token);
     return this.http.get<any>(this.authUrl, this.httpJson).toPromise().then(r => {
-      if (r.user.username) {
+      if (r.user?.username) {
         this.tokenStorage.saveLogin('true');
         return true;
-      }
-      else {
+      } else {
         this.tokenStorage.saveLogin('false');
         this.tokenStorage.signOut();
         return false;
@@ -71,11 +75,27 @@ export class AuthService {
   }
 
   loggined(): boolean {
+    this.http.get<any>(this.authUrl, this.httpJson).subscribe((res: any) => {
+      if (res.user?.username) {
+        // console.log(5555555);
+      } else {
+        this.tokenStorage.signOut();
+      }
+    }, (error: any) => {
+      console.log(error);
+    });
     if (this.token) {
-      this.authToken();
-      return true;
+      if (this.tokenStorage.getToken()) {
+        if (this.tokenExpired()) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
     } else {
-      this.toasrt.warning('Session expired, please login again!');
+      this.toasrt.warning('Session expired or Not login yet, please login again!');
       return false;
     }
   }

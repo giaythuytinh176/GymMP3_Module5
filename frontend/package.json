@@ -22,14 +22,18 @@
     "@angular/platform-browser": "~11.1.0",
     "@angular/platform-browser-dynamic": "~11.1.0",
     "@angular/router": "~11.1.0",
+    "@auth0/angular-jwt": "^5.0.2",
+    "angular-jwt": "^0.1.11",
     "bootstrap": "^4.6.0",
     "firebase": "^8.2.5",
     "jquery": "^3.5.1",
     "ng-animate": "^1.0.0",
+    "ngx-mat-select-search": "^3.2.0",
     "ngx-toastr": "^13.2.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "url-polyfill": "^1.1.12",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {

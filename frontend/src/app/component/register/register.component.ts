@@ -15,7 +15,7 @@ import {SignupInfo} from 'src/app/auth/signup-info';
 import {ErrorStateMatcher} from "@angular/material/core";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../services/userManager/user.service";
 
 @Component({
   selector: 'app-register',
@@ -97,7 +97,9 @@ export class RegisterComponent implements OnInit {
         console.log(111);
         if (data.error || data.status) {
           this.toastr.warning('Something wrong.')
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
           this.route.navigate(['/signup']);
         } else {
           this.toastr.success('Your account has been created successfully!');

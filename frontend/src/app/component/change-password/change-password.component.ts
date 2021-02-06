@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from 'src/app/auth/auth.service';
 import {ChangePassword} from 'src/app/auth/change-password';
-import {UserService} from "../../services/user.service";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {ToastrService} from "ngx-toastr";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
@@ -10,6 +9,7 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {ErrorStateMatcher} from "@angular/material/core";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
+import {UserService} from "../../services/userManager/user.service";
 
 @Component({
   selector: 'app-change-password',
@@ -91,7 +91,9 @@ export class ChangePasswordComponent implements OnInit {
 
           } else {
             this.toastr.warning('Something wrong.');
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
             this.router.navigate(['/login']);
           }
         },
@@ -103,7 +105,9 @@ export class ChangePasswordComponent implements OnInit {
             }, 500);
           } else {
             this.toastr.warning('Something wrong.');
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
             this.router.navigate(['/login']);
           }
         });

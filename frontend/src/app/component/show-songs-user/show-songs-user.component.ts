@@ -5,11 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {TokenStorageService} from 'src/app/auth/token-storage.service';
 import {UpdateInfo} from 'src/app/model/userManager/updateinfo';
-import {UserService} from 'src/app/services/user.service';
 import {FirebaseComponent} from '../firebase/firebase.component';
 import {SongService} from '../../services/song/song.service';
 import {Song} from '../../model/song/song';
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
+import {UserService} from "../../services/userManager/user.service";
 
 @Component({
   selector: 'app-show-songs-user',

@@ -73,6 +73,8 @@ import {
 import {SidebarComponent} from './component/sidebar/sidebar.component';
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component';
 import {EditProfileComponent} from './component/edit-profile/edit-profile.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 
 @NgModule({
   declarations: [
@@ -152,6 +154,10 @@ import {EditProfileComponent} from './component/edit-profile/edit-profile.compon
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    MatSelectModule,
+    MatFormFieldModule,
+    NgxMatSelectSearchModule,
+
   ],
   providers: [
     FirebaseComponent,

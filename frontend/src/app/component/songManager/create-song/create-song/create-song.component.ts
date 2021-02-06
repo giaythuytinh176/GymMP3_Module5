@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../../../services/user.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -10,14 +9,15 @@ import {UpdateInfo} from "../../../../model/userManager/updateinfo";
 import {Song} from "../../../../model/song/song";
 import {SongService} from "../../../../services/song/song.service";
 import {FirebaseMP3Component} from "../../../firebaseMP3/firebaseMP3.component";
-import {Album} from "../../../../model/album";
 import {AlbumService} from '../../../../services/album/album.service';
-import {Category} from "../../../../model/category";
-import {Singer} from "../../../../model/singer";
 import {CategoryService} from "../../../../services/category/caterory.service";
 import {SingerService} from "../../../../services/singer/singer.service";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
+import {Album} from 'src/app/model/album/album';
+import {Category} from 'src/app/model/category/category';
+import {Singer} from "../../../../model/singer/singer";
+import {UserService} from "../../../../services/userManager/user.service";
 
 @Component({
   selector: 'app-create-song',
