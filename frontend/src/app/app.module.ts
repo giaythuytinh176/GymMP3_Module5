@@ -57,7 +57,7 @@ import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {environment} from "../environments/environment";
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
-import {ProfileComponent} from './component/profile/profile.component';
+import {DialogDeleteMyList, ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
 import {AngularFireStorageModule,} from "@angular/fire/storage";
 import {FirebaseComponent} from "./component/firebase/firebase.component";
@@ -70,8 +70,9 @@ import {
   DialogContentExampleDialog,
   ShowSongsUserComponent
 } from './component/show-songs-user/show-songs-user.component';
-import { SidebarComponent } from './component/sidebar/sidebar.component';
-import { SearchSongComponent } from './component/songManager/search-song/search-song.component';
+import {SidebarComponent} from './component/sidebar/sidebar.component';
+import {SearchSongComponent} from './component/songManager/search-song/search-song.component';
+import {EditProfileComponent} from './component/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,8 @@ import { SearchSongComponent } from './component/songManager/search-song/search-
     SidebarComponent,
     SearchSongComponent,
     DialogContentExampleDialog,
+    DialogDeleteMyList,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

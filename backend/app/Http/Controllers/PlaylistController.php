@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Playlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlaylistController extends Controller
 {
@@ -99,5 +100,5 @@ class PlaylistController extends Controller
         return $data->singer_name;
     }
 
-    
+
 }

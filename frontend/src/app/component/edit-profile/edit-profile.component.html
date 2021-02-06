@@ -1,0 +1,234 @@
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Edit Profile</h1>
+</div>
+
+
+<div class="container">
+  <div class="b-t" style="margin-top: 50px; margin-left: 50px">
+
+    <form [formGroup]="profileForm" name="form">
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Name:</div>
+        <div class="col-sm-7">
+          <input [(ngModel)]="name" [class.input-invalid]="profileForm.get('name')!.invalid && profileForm.get('name')!.touched" [class.input-valid]="profileForm.get('name')!.valid && profileForm.get('name')!.touched" class="form-control" formControlName="name" placeholder="Name" type="text">
+          <div *ngIf="profileForm.get('name')!.invalid && profileForm.get('name')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="profileForm.get('name').hasError('required')">
+              <div [@shake]="shake">
+                Name is <strong>required.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Address:</div>
+        <div class="col-sm-7">
+          <input [(ngModel)]="address" [class.input-invalid]="profileForm.get('address')!.invalid && profileForm.get('address')!.touched" [class.input-valid]="profileForm.get('address')!.valid && profileForm.get('address')!.touched" class="form-control" formControlName="address" placeholder="Address" type="text">
+          <div *ngIf="profileForm.get('address')!.invalid && profileForm.get('address')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="profileForm.get('address').hasError('required')">
+              <div [@shake]="shake">Address is <strong>required.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Email:</div>
+        <div class="col-sm-7">
+          <input [(ngModel)]="email" [class.input-invalid]="profileForm.get('email')!.invalid && profileForm.get('email')!.touched" [class.input-valid]="profileForm.get('email')!.valid && profileForm.get('email')!.touched" class="form-control" formControlName="email" placeholder="Email" type="email">
+          <div *ngIf="profileForm.get('email')!.invalid && profileForm.get('email')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="profileForm.get('email').hasError('required')">
+              <div [@shake]="shake">Email is <strong>required.</strong>
+              </div>
+            </div>
+            <div *ngIf="profileForm.get('email').hasError('email')">
+              <div [@shake]="shake">Please enter a valid email.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Phone:</div>
+        <div class="col-sm-7">
+          <input [(ngModel)]="phone" [class.input-invalid]="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched" [class.input-valid]="profileForm.get('phone')!.valid && profileForm.get('phone')!.touched" class="form-control" formControlName="phone" placeholder="Phone" type="text">
+          <div *ngIf="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="profileForm.get('phone').hasError('required')">
+              <div [@shake]="shake">Phone is <strong>required.</strong>
+              </div>
+            </div>
+            <div *ngIf="profileForm.get('phone').hasError('pattern')">
+              <div [@shake]="shake">Phone must start with <strong>0 followed by 9 or 10 digits</strong>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Avatar:</div>
+        <div class="col-sm-7">
+          <div *ngIf="firebase.fileToUpload">
+            Filename: {{ firebase.fileToUpload.name }}
+          </div>
+          <input (change)="firebase.handleFileInput($event)" [class.input-invalid]="profileForm.get('avatar')!.invalid &&
+            profileForm.get('avatar')!.touched"
+                 [class.input-valid]="profileForm.get('avatar')!.valid &&
+            profileForm.get('avatar')!.touched" accept="image/*"
+                 class="form-control"
+                 formControlName="avatar"
+                 id="avatar"
+                 placeholder="Avatar"
+                 type="file">
+          <br>
+          <input [(ngModel)]="old_avatar" formControlName="old_avatar" type="hidden">
+          <div *ngIf="firebase.percentage | async as pct">
+            <div class="col-12">
+              <div class="progress">
+                <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100"
+                     aria-valuemin="0" aria-valuenow="{{ pct | number }}" class="progress-bar progress-bar-info progress-bar-striped"
+                     role="progressbar"> {{ pct | number }}%
+                </div>
+              </div>
+            </div>
+            <img [src]="firebase.fb" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
+          </div>
+
+          <div *ngIf="!firebase.fb && old_avatar">
+            <img [src]="old_avatar" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
+          </div>
+
+          <!--            <div *ngIf="profileForm.get('avatar')!.invalid && profileForm.get('avatar')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">-->
+          <!--              <div *ngIf="profileForm.get('avatar').hasError('required')">-->
+          <!--                <div [@shake]="shake">Avatar is <strong>required.</strong>-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--            </div>-->
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-10 text-center">
+          <a [routerLink]="['/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
+          <button (click)="updateUser()" [disabled]="!profileForm.valid" class="btn btn-md black p-x-md" type="submit">
+            Update profile
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+
+<!--<div class="container">-->
+<!--        <div class="card-body">-->
+<!--          <form (ngSubmit)="updateUser()" [formGroup]="profileForm" class="ng-untouched ng-pristine ng-valid">-->
+
+<!--            <div class="form-row form-group">-->
+<!--              <label class="col-lg-2 text-md-right col-form-label" for="username">Username</label>-->
+<!--              <div class="col-lg-9">-->
+<!--                <input class="form-control" disabled id="username" type="text" value="{{ userinfo?.username }}">-->
+<!--              </div>`-->
+<!--            </div>-->
+
+<!--            <div class="form-row form-group">-->
+<!--              <label class="col-lg-2 text-md-right col-form-label" for="name">Name</label>-->
+<!--              <div class="col-lg-9">-->
+<!--                <input class="form-control" [(ngModel)]="name" formControlName="name" id="name" type="text">-->
+<!--                <div *ngIf="profileForm.get('name').invalid && profileForm.get('name').touched" style="color: #ff0000">-->
+<!--                  Name is <strong>required</strong>.-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="form-row form-group">-->
+<!--              <label class="col-lg-2 text-md-right col-form-label" for="address">Address</label>-->
+<!--              <div class="col-lg-9">-->
+<!--                <input class="form-control" [(ngModel)]="address"  formControlName="address" id="address" type="text">-->
+<!--                <div *ngIf="profileForm.get('address').invalid && profileForm.get('address').touched"-->
+<!--                     style="color: #ff0000">-->
+<!--                  Address is <strong>required</strong>.-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="form-row form-group">-->
+<!--              <label class="col-lg-2 text-md-right col-form-label" for="email">Email</label>-->
+<!--              <div class="col-lg-9">-->
+<!--                <input class="form-control" [(ngModel)]="email" formControlName="email" id="email" type="text">-->
+<!--                <div *ngIf="profileForm.get('email').invalid && profileForm.get('email').touched" style="color: red">-->
+<!--                  <div *ngIf="profileForm.get('email').hasError('required')">-->
+<!--                    Email is <strong>required</strong>.-->
+<!--                  </div>-->
+<!--                  <div *ngIf="profileForm.get('email').hasError('email')" style="color: red">-->
+<!--                    Please enter a <strong>valid email.</strong>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="form-row form-group">-->
+<!--              <label class="col-lg-2 text-md-right col-form-label" for="phone">Phone Number</label>-->
+<!--              <div class="col-lg-9">-->
+<!--                <input class="form-control" [(ngModel)]="phone" formControlName="phone" id="phone" type="text">-->
+<!--                <div *ngIf="profileForm.get('phone').invalid && profileForm.get('phone').touched"-->
+<!--                     style="color: red">-->
+<!--                  Phone is <strong>required</strong>.-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="form-row form-group">-->
+<!--              <label class="col-lg-2 text-md-right col-form-label" for="phone">Avatar</label>-->
+<!--              <div class="col-lg-9">-->
+<!--                <label class="label-input" for="avatar">-->
+<!--                  <div *ngIf="firebase.fileToUpload; else NoSelect">-->
+<!--                    Filename: {{ firebase.fileToUpload.name }}-->
+<!--                  </div>-->
+<!--                  <ng-template #NoSelect>-->
+<!--                    Choose File-->
+<!--                  </ng-template>-->
+<!--                  <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"-->
+<!--                         formControlName="avatar"-->
+<!--                         id="avatar"-->
+<!--                         type="file"-->
+<!--                  />-->
+<!--                </label>-->
+
+<!--                <div *ngIf="firebase.percentage | async as pct">-->
+<!--                  &lt;!&ndash;  <mat-progress-bar mode="determinate" [value]="pct"></mat-progress-bar>&ndash;&gt;-->
+<!--                  <div class="col-12">-->
+<!--                    <div class="progress">-->
+<!--                      <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100"-->
+<!--                           aria-valuemin="0" aria-valuenow="{{ pct | number }}" class="progress-bar progress-bar-info progress-bar-striped"-->
+<!--                           role="progressbar"> {{ pct | number }}%-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                    <img [src]="firebase.fb" class="thumbnail img-responsive img-thumbnail img-fluid"  style="width: 160px; height: 120px;"><br>-->
+<!--                </div>-->
+
+<!--                <div *ngIf="profileForm.get('avatar').invalid && profileForm.get('avatar').touched"-->
+<!--                     style="color: red">-->
+<!--                  Avatar is <strong>required</strong>.-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="form-row form-group">-->
+<!--              <label class="col-lg-2 text-md-right col-form-label"></label>-->
+<!--              <div class="col-lg-9">-->
+<!--                <button class="btn btn-outline-secondary" routerLink="/browse" type="button">Cancel</button> &nbsp;-->
+<!--                <button [disabled]="!profileForm.valid" class="btn btn-outline-success" type="submit">Update user</button>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--          </form>-->
+<!--        </div>-->
+<!--</div>-->

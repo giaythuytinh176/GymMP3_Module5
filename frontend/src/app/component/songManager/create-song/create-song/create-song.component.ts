@@ -16,11 +16,16 @@ import {Category} from "../../../../model/category";
 import {Singer} from "../../../../model/singer";
 import {CategoryService} from "../../../../services/category/caterory.service";
 import {SingerService} from "../../../../services/singer/singer.service";
+import {transition, trigger, useAnimation} from "@angular/animations";
+import {shake} from "ng-animate";
 
 @Component({
   selector: 'app-create-song',
   templateUrl: './create-song.component.html',
-  styleUrls: ['./create-song.component.css']
+  styleUrls: ['./create-song.component.css'],
+  animations: [
+    trigger('shake', [transition('* => *', useAnimation(shake))])
+  ],
 })
 export class CreateSongComponent implements OnInit {
 
@@ -30,6 +35,7 @@ export class CreateSongComponent implements OnInit {
   albums: Album[];
   categories: Category[];
   singers: Singer[];
+  shake: any;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -66,8 +72,7 @@ export class CreateSongComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to create Song.');
-      }
-      else {
+      } else {
         this.userinfo = data.user;
       }
     }, error => console.log(error));
@@ -78,7 +83,7 @@ export class CreateSongComponent implements OnInit {
       mp3Url: ['', [Validators.required]],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      views: ['', [Validators.required]],
+      views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       singer_id: ['', [Validators.required]],
       category_id: ['', [Validators.required]],
       album_id: ['', [Validators.required]],
@@ -94,14 +99,17 @@ export class CreateSongComponent implements OnInit {
     console.log(this.song);
     this.songService.createSong(this.song).subscribe((data: any) => {
         console.log(data);
-        this.toastr.success('Add song success');
-        this.routes.navigate(['/browse']);
+        if (data.error || data.status) {
+          this.token.signOut();
+          this.toastr.warning('You must login to create song.');
+        } else {
+          this.toastr.success('Add song success');
+          this.routes.navigate(['/profile']);
+        }
       }, error => {
         console.log(error);
-        this.toastr.success(" Error when adding songs");
+        this.toastr.warning("Something wrong.");
       }
     );
   }
-
-
 }

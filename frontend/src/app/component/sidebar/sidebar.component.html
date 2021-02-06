@@ -1,8 +1,8 @@
 <nav class="scroll nav-stacked nav-active-primary">
 
   <ul class="nav" data-ui-nav>
-    <li class="nav-header hidden-folded">
-      <span class="text-xs text-muted">Main</span>
+    <li *ngIf="isLoggedIn" class="nav-header hidden-folded">
+      <span class="text-xs text-muted">Welcome, {{ user.username }}</span>
     </li>
     <!--            <li>-->
     <!--              <a href="player.html">-->
@@ -55,7 +55,7 @@
     <!--              </a>-->
     <!--            </li>-->
     <li>
-      <a [routerLink]="['/search']" href="/profile">
+      <a [routerLink]="['/search']">
                   <span class="nav-icon">
                     <i class="material-icons">
                       search
@@ -64,31 +64,31 @@
         <span class="nav-text">Search</span>
       </a>
     </li>
-    <li>
-      <a [routerLink]="['/profile']" href="/profile">
+    <li *ngIf="isLoggedIn">
+      <a [routerLink]="['/profile']">
                   <span class="nav-icon">
                     <i class="material-icons">
-
+                        person
                     </i>
                   </span>
         <span class="nav-text">Profile</span>
       </a>
     </li>
-    <li>
-      <a [routerLink]="['/listsongs']" href="/listsongs">
-                  <span class="nav-icon">
-                    <i class="material-icons">
+    <!--    <li *ngIf="isLoggedIn">-->
+    <!--      <a [routerLink]="['/listsongs']">-->
+    <!--                  <span class="nav-icon">-->
+    <!--                    <i class="material-icons">-->
 
-                    </i>
-                  </span>
-        <span class="nav-text">My List</span>
-      </a>
-    </li>
-    <li>
+    <!--                    </i>-->
+    <!--                  </span>-->
+    <!--        <span class="nav-text">My List</span>-->
+    <!--      </a>-->
+    <!--    </li>-->
+    <li *ngIf="isLoggedIn">
       <a [routerLink]="['/create-song']">
                   <span class="nav-icon">
                     <i class="material-icons">
-
+                        add
                     </i>
                   </span>
         <span class="nav-text">Add Song</span>
@@ -98,7 +98,7 @@
       <a [routerLink]="['/login']">
                   <span class="nav-icon">
                     <i class="material-icons">
-
+                        login
                     </i>
                   </span>
         <span class="nav-text">Login</span>
@@ -108,27 +108,27 @@
       <a [routerLink]="['/signup']">
                   <span class="nav-icon">
                     <i class="material-icons">
-
+                        app_registration
                     </i>
                   </span>
         <span class="nav-text">Signup</span>
       </a>
     </li>
-    <li *ngIf="isLoggedIn">
-      <a [routerLink]="['/changepass']">
-                  <span class="nav-icon">
-                    <i class="material-icons">
+    <!--    <li *ngIf="isLoggedIn">-->
+    <!--      <a [routerLink]="['/changepass']">-->
+    <!--                  <span class="nav-icon">-->
+    <!--                    <i class="material-icons">-->
 
-                    </i>
-                  </span>
-        <span class="nav-text">Change Password</span>
-      </a>
-    </li>
+    <!--                    </i>-->
+    <!--                  </span>-->
+    <!--        <span class="nav-text">Change Password</span>-->
+    <!--      </a>-->
+    <!--    </li>-->
     <li *ngIf="isLoggedIn">
       <a (click)="loginComponent.signOut()">
                   <span class="nav-icon">
                     <i class="material-icons">
-
+                      logout
                     </i>
                   </span>
         <span class="nav-text">Logout</span>

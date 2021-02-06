@@ -3,6 +3,8 @@ import {LoginComponent} from "../login/login.component";
 import {UserService} from "../../services/user.service";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
+import {Users} from "../../model/users/users";
 
 @Component({
   selector: 'app-sidebar',
@@ -11,24 +13,29 @@ import {ToastrService} from "ngx-toastr";
 })
 export class SidebarComponent implements OnInit {
   isLoggedIn = false;
+  user: Users;
 
   constructor(
     public loginComponent: LoginComponent,
     private userService: UserService,
     private token: TokenStorageService,
     private toastr: ToastrService,
+    private router: Router,
   ) {
   }
 
   ngOnInit(): void {
-    this.userService.getInfoUserToken().subscribe((data: any) => {
-      console.log(data);
-      if (data.status) {
-        this.isLoggedIn = false;
-      } else {
-        this.isLoggedIn = true;
-      }
-    }, error => console.log(error));
+    if (this.token.getToken()) {
+      this.userService.getInfoUserToken().subscribe((data: any) => {
+        console.log(data);
+        if (data.status) {
+          this.isLoggedIn = false;
+        } else {
+          this.user = data.user;
+          this.isLoggedIn = true;
+        }
+      }, error => console.log(error));
+    }
   }
 
 }

@@ -13,27 +13,34 @@ import {ToastrService} from 'ngx-toastr';
 import {AuthService} from 'src/app/auth/auth.service';
 import {SignupInfo} from 'src/app/auth/signup-info';
 import {ErrorStateMatcher} from "@angular/material/core";
+import {transition, trigger, useAnimation} from "@angular/animations";
+import {shake} from "ng-animate";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  animations: [
+    trigger('shake', [transition('* => *', useAnimation(shake))])
+  ],
 })
 export class RegisterComponent implements OnInit {
 
-  register: any;
+  register: { username: string, phone: string, password: string, password_confirmation: string };
   signupInfo: SignupInfo;
-  isSignedUp = false;
-  isSignUpFailed = false;
-  errorMessage = '';
   registerForm!: FormGroup;
-  public registerFormAttempt: boolean;
   matcher = new MyErrorStateMatcher();
+  shake: any;
+  checkExistUser: any;
+  username: any;
+  existUserMess = false;
 
   constructor(private authService: AuthService,
               private route: Router,
               private toastr: ToastrService,
-              private fb: FormBuilder
+              private fb: FormBuilder,
+              private userService: UserService,
   ) {
   }
 
@@ -43,7 +50,23 @@ export class RegisterComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern(/^0\d{9,10}$/)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
       password_confirmation: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
-    }, {validator: this.checkPasswords});
+    }, {validators: this.checkPasswords});
+  }
+
+  onInput(event): any {
+    this.username = event.target.value;
+    this.userService.checkExistUser(this.username).subscribe(
+      (data: any) => {
+        this.existUserMess = false;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+        if (JSON.parse(error.error).username[0] == 'The username has already been taken.') {
+          this.existUserMess = true;
+        }
+      }
+    );
   }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
@@ -54,19 +77,13 @@ export class RegisterComponent implements OnInit {
 
   comparePassword(c: AbstractControl) {
     const v = c.value;
-    return (v.password === v.confirmPassword) ? null : {
+    return (v.password === v.password_confirmation) ? null : {
       passwordnotmatch: true
     };
   }
 
-  reset() {
-    this.registerForm.reset();
-    this.registerFormAttempt = false;
-  }
-
   onSubmit() {
     console.log(this.register);
-
     this.register = this.registerForm.value;
     this.signupInfo = new SignupInfo(
       this.register.username,
@@ -75,29 +92,38 @@ export class RegisterComponent implements OnInit {
       this.register.password_confirmation
     );
     this.authService.signUp(this.signupInfo).subscribe(
-      data => {
+      (data: any) => {
         console.log(data);
-        this.isSignedUp = true;
-        this.isSignUpFailed = false;
-        this.toastr.success('Creat Account Success!!');
-        // alert('Creat Account Success!!');
-        this.route.navigate(['/']);
+        console.log(111);
+        if (data.error || data.status) {
+          this.toastr.warning('Something wrong.')
+          window.location.reload();
+          this.route.navigate(['/signup']);
+        } else {
+          this.toastr.success('Your account has been created successfully!');
+          this.route.navigate(['/browse']);
+        }
       },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
-        this.isSignUpFailed = true;
-        alert('Create Account Failed! Please Create Account Again!');
+      err => {
+        console.log(err);
+        console.log(JSON.parse(err.error));
+        console.log(222);
+        if ((JSON.parse(err.error)).username == 'The username has already been taken.') {
+          this.toastr.warning('The username already exists!');
+        } else if ((JSON.parse(err.error)).phone == 'The phone has already been taken.') {
+          this.toastr.warning('The phone already exists!');
+        } else {
+          this.toastr.warning('Something wrong.')
+        }
       }
     );
   }
-
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const invalidCtrl = !!(control!.invalid && control!.parent!.dirty);
-    const invalidParent = !!(control!.parent!.invalid && control!.parent!.dirty);
+    const invalidCtrl = !!(control?.invalid && control?.parent?.dirty);
+    const invalidParent = !!(control?.parent?.invalid && control?.parent?.dirty);
 
     return invalidCtrl || invalidParent;
   }

@@ -1,76 +1,144 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12" style="margin-top: 20px;">
-      <mat-card style="background-color: #f8f8f8; margin: 50px 350px;">
-        <mat-card-header>
-          <mat-card-title class="formlogin"> Login</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="row justify-contents-around mat-basic-player">
-          <div class="col py-3 pl-5">
-            <div class="container">
-              <div class="row">
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Login</h1>
+</div>
 
-                <div class="col-8" style="margin-top: 20px;">
-
-                  <div class="container">
-                    <div class="row">
-                      <div *ngIf="isLoggedIn; else loggedOut">
-                        Login successfully ... redirect to Browse
-                      </div>
-                      <ng-template #loggedOut>
-                        <div class="row col-sm-12" style="max-width:600px;">
-                          <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"
-                                name="form" novalidate>
-                            <div class="form-group">
-                              <label>Username</label>
-                              <br>
-                              <input #username="ngModel" [(ngModel)]="form.username" class="form-control" name="username"
-                                     required style="width: 300px "
-                                     type="text"/>
-                              <div *ngIf="f.submitted && username.invalid">
-                                <div *ngIf="username.errors.required">Username is
-                                  required
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label>Password</label>
-                              <br>
-                              <input #password="ngModel" [(ngModel)]="form.password" class="form-control"
-                                     minlength="6" name="password"
-                                     required type="password"/>
-                              <div *ngIf="f.submitted && password.invalid">
-                                <div *ngIf="password.errors.required">Password is
-                                  required
-                                </div>
-                                <div *ngIf="password.errors.minlength">Password must be
-                                  at least 6 characters
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <button class="btn btn-primary">Login</button>
-                              <div *ngIf="f.submitted && isLoginFailed"
-                                   class="alert alert-danger">
-                                Login failed: {{errorMessage}}
-                              </div>
-                            </div>
-                          </form>
-                          <hr/>
-                          <p>Don't have an account?</p>
-                          <a class="btn btn-success" href="signup">Sign Up</a>
-                        </div>
-                      </ng-template>
-                    </div>
-                  </div>
-                </div>
+<div class="b-t" style="margin-top: 50px">
+  <div class="center-block w-xxl w-auto-xs p-y-md text-center">
+    <div class="p-a-md">
+      <div>
+        <a class="btn btn-block indigo text-white m-b-sm" href="#">
+          <i class="fa fa-facebook pull-left"></i>
+          Sign in with Facebook
+        </a>
+        <a class="btn btn-block red text-white" href="#">
+          <i class="fa fa-google-plus pull-left"></i>
+          Sign in with Google+
+        </a>
+      </div>
+      <div class="m-y text-sm">
+        OR
+      </div>
+      <form [formGroup]="loginForm" name="form">
+        <div class="form-group">
+          <input [class.input-invalid]="loginForm.get('username')!.invalid && loginForm.get('username')!.touched" [class.input-valid]="loginForm.get('username')!.valid && loginForm.get('username')!.touched" class="form-control" formControlName="username" placeholder="Username" type="text">
+          <div *ngIf="loginForm.get('username')!.invalid && loginForm.get('username')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="loginForm.get('username').hasError('required')">
+              <div [@shake]="shake">Username is <strong>required.</strong>
               </div>
             </div>
           </div>
-        </mat-card-content>
-        <div>
         </div>
-      </mat-card>
+        <div class="form-group">
+          <input [class.input-valid]="loginForm.get('password')!.valid && loginForm.get('password')!.touched" [ngClass]="{'input-invalid': loginForm.get('password')!.invalid && loginForm.get('password')!.touched}" class="form-control" formControlName="password" placeholder="Password" type="password">
+          <div *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="loginForm.get('password').hasError('required')">
+              <div [@shake]="shake">Password is <strong>required.</strong>
+              </div>
+            </div>
+            <div *ngIf="loginForm.get('password').hasError('minlength')">
+              <div [@shake]="shake">Password must be at least <strong>6 characters long.</strong>
+              </div>
+            </div>
+            <div *ngIf="loginForm.get('password').hasError('maxlength')">
+              <div [@shake]="shake">Password can be max <strong>10 characters long.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--        <div class="m-b-md">-->
+        <!--          <label class="md-check">-->
+        <!--            <input type="checkbox"><i class="primary"></i> Keep me signed in-->
+        <!--          </label>-->
+        <!--        </div>-->
+        <button (click)="onSubmit()" [disabled]="!loginForm.valid" class="btn btn-lg black p-x-lg" type="submit">Sign
+          in
+        </button>
+      </form>
+      <!--      <div class="m-y">-->
+      <!--        <a href="forgot-password.html" class="_600">Forgot password?</a>-->
+      <!--      </div>-->
+      <div>
+        Do not have an account?
+        <a [routerLink]="['/signup']" class="text-primary _600" href="signup.html">Sign up</a>
+      </div>
     </div>
   </div>
 </div>
+
+
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col-12" style="margin-top: 20px;">-->
+<!--      <mat-card style="background-color: #f8f8f8; margin: 50px 350px;">-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title class="formlogin"> Login</mat-card-title>-->
+<!--        </mat-card-header>-->
+<!--        <mat-card-content class="row justify-contents-around mat-basic-player">-->
+<!--          <div class="col py-3 pl-5">-->
+<!--            <div class="container">-->
+<!--              <div class="row">-->
+
+<!--                <div class="col-8" style="margin-top: 20px;">-->
+
+<!--                  <div class="container">-->
+<!--                    <div class="row">-->
+<!--                      <div *ngIf="isLoggedIn; else loggedOut">-->
+<!--                        Login successfully ... redirect to Browse-->
+<!--                      </div>-->
+<!--                      <ng-template #loggedOut>-->
+<!--                        <div class="row col-sm-12" style="max-width:600px;">-->
+<!--                          <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"-->
+<!--                                name="form" novalidate>-->
+<!--                            <div class="form-group">-->
+<!--                              <label>Username</label>-->
+<!--                              <br>-->
+<!--                              <input #username="ngModel" [(ngModel)]="form.username" class="form-control" name="username"-->
+<!--                                     required style="width: 300px "-->
+<!--                                     type="text"/>-->
+<!--                              <div *ngIf="f.submitted && username.invalid">-->
+<!--                                <div *ngIf="username.errors.required">Username is-->
+<!--                                  required-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                              <label>Password</label>-->
+<!--                              <br>-->
+<!--                              <input #password="ngModel" [(ngModel)]="form.password" class="form-control"-->
+<!--                                     minlength="6" name="password"-->
+<!--                                     required type="password"/>-->
+<!--                              <div *ngIf="f.submitted && password.invalid">-->
+<!--                                <div *ngIf="password.errors.required">Password is-->
+<!--                                  required-->
+<!--                                </div>-->
+<!--                                <div *ngIf="password.errors.minlength">Password must be-->
+<!--                                  at least 6 characters-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                              <button class="btn btn-primary">Login</button>-->
+<!--                              <div *ngIf="f.submitted && isLoginFailed"-->
+<!--                                   class="alert alert-danger">-->
+<!--                                Login failed: {{errorMessage}}-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                          </form>-->
+<!--                          <hr/>-->
+<!--                          <p>Don't have an account?</p>-->
+<!--                          <a class="btn btn-success" href="signup">Sign Up</a>-->
+<!--                        </div>-->
+<!--                      </ng-template>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </mat-card-content>-->
+<!--        <div>-->
+<!--        </div>-->
+<!--      </mat-card>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

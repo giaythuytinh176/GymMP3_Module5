@@ -14,7 +14,7 @@
             nextSelector: 'a.jscroll-next:last'
           }">
           <div class="row">
-            <div *ngFor="let i=index, let song of songs" class="col-xs-4 col-sm-4 col-md-3">
+            <div *ngFor="let song of songs; let i=index;" class="col-xs-4 col-sm-4 col-md-3">
               <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
                 <div class="item-media">
                   <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
@@ -31,8 +31,8 @@
                   <div class="item-title text-ellipsis">
                     <a href="track.detail.html">{{ song.nameSong }}</a> &nbsp;
                     <a [routerLink]="['/editsong', song.id]" color="primary" mat-raised-button>Edit</a> &nbsp;
-<!--                    <a (click)="deleteSong(song.id)" color="warn" mat-raised-button>Delete</a>-->
-                    <button mat-raised-button color="warn" (click)="openDialog(song.id, song.nameSong)">Delete</button>
+                    <!--                    <a (click)="deleteSong(song.id)" color="warn" mat-raised-button>Delete</a>-->
+                    <button (click)="openDialog(song.id, song.nameSong)" color="warn" mat-raised-button>Delete</button>
                   </div>
                   <div class="item-author text-sm text-ellipsis ">
                     <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
@@ -87,7 +87,7 @@
 <!--                      <tr *ngFor="let i=index, let song of songs">-->
 <!--                        <td>{{i + 1}}</td>-->
 <!--                        <td><strong>{{song.nameSong}}</strong></td>-->
-<!--                        <td>{{song.describes.substring(0, 50)}}...</td>-->
+<!--                        <td>{{song.describes.substring(0, 100)}} ...</td>-->
 <!--                        <td>{{song.author}}</td>-->
 <!--                        <td>{{song.views}}</td>-->
 <!--                        <td>{{song.singer_list_name}}</td>-->

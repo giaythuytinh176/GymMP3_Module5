@@ -16,11 +16,16 @@ import {UpdateInfo} from "../../../model/userManager/updateinfo";
 import {UserService} from "../../../services/user.service";
 import {ToastrService} from "ngx-toastr";
 import {TokenStorageService} from "../../../auth/token-storage.service";
+import {transition, trigger, useAnimation} from "@angular/animations";
+import {shake} from "ng-animate";
 
 @Component({
   selector: 'app-update-song',
   templateUrl: './update-song.component.html',
-  styleUrls: ['./update-song.component.css']
+  styleUrls: ['./update-song.component.css'],
+  animations: [
+    trigger('shake', [transition('* => *', useAnimation(shake))])
+  ],
 })
 export class UpdateSongComponent implements OnInit {
   updateMusicForm: FormGroup
@@ -38,6 +43,9 @@ export class UpdateSongComponent implements OnInit {
   author: any;
   views: any;
   id: number;
+  shake: any;
+  avatarUrl: any;
+  mp3Url: any;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -80,14 +88,14 @@ export class UpdateSongComponent implements OnInit {
 
     this.updateMusicForm = this.fb.group({
       nameSong: ['', [Validators.required]],
-      avatarUrl: ['', [Validators.required]],
-      mp3Url: ['', [Validators.required]],
+      avatarUrl: [''],
+      mp3Url: [''],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
       views: ['', [Validators.required]],
-      singer_id: ['', [Validators.required]],
-      category_id: ['', [Validators.required]],
-      album_id: ['', [Validators.required]],
+      singer_id: [''],
+      category_id: [''],
+      album_id: [''],
     });
 
     this.routes.paramMap.subscribe(paramMap => {
@@ -102,6 +110,11 @@ export class UpdateSongComponent implements OnInit {
             this.describes = data.describes;
             this.author = data.author;
             this.views = data.views;
+            this.category_id = data.category_id;
+            this.album_id = data.album_id;
+            this.avatarUrl = data.avatarUrl;
+            this.mp3Url = data.mp3Url;
+
           }
         },
         error => {

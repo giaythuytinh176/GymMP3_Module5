@@ -19,6 +19,7 @@ export class UserService {
   }
   private getUserUrl = environment.apiUrl + '/user';
   private updateUserUrl = environment.apiUrl + '/users';
+  private apiCheckExistUserUrl = environment.apiUrl + '/checkExistUsername';
 
   constructor(private http: HttpClient) {
   }
@@ -29,5 +30,9 @@ export class UserService {
 
   getInfoUserToken(): Observable<UpdateInfo> {
     return this.http.get<UpdateInfo>(this.getUserUrl, this.httpJson);
+  }
+
+  checkExistUser(username: string): Observable<any> {
+    return this.http.post<UpdateInfo>(this.apiCheckExistUserUrl, {username: username});
   }
 }

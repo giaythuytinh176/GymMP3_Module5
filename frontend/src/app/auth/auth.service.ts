@@ -62,7 +62,7 @@ export class AuthService {
     if (this.token) {
       return true;
     } else {
-      this.toasrt.warning('You haven\'t login ...');
+      this.toasrt.warning('Session expired, please login again!');
       return false;
     }
   }

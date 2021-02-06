@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -27,11 +28,22 @@ class UserController extends Controller
         return response()->json(compact('token'));
     }
 
+    public function checkExistUsername(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string|max:100|unique:users',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        return response()->json('valid', 200);
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:100|unique:users',
-            'phone' => 'required|string|max:11',
+            'phone' => 'required|string|max:11|unique:users',
             'password' => 'required|string|min:6|max:8|confirmed',
         ]);
 
@@ -119,7 +131,6 @@ class UserController extends Controller
     }
 
     // Reset password
-
     private function tokenNotFoundError()
     {
         return response()->json([

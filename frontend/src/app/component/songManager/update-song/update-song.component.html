@@ -2,99 +2,183 @@
   <h1 class="inline m-a-0" style="padding-left: 50px">Edit Song</h1>
 </div>
 
-<div class="container-fluid">
-  <form (ngSubmit)="updateSong()" [formGroup]="updateMusicForm">
-    <div class="row">
+<div class="container">
 
-      <div class="col-md-4">
-        <p></p>
-      </div>
-      <div class="col-md-2">
-        <mat-form-field appearance="fill" class="example-full-width">
-          <mat-label><strong style="color: darkgray;">Name Song: </strong></mat-label>
-          <input type="text" [(ngModel)]="nameSong" matInput formControlName="nameSong" placeholder="Hello">
-          <mat-error
-            *ngIf="updateMusicForm.get('nameSong').invalid && updateMusicForm.get('nameSong').touched">
-            Name Song is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label><strong>Image song: </strong></label> &nbsp;
-          <label class="label-input" for="avatar">
-            <div *ngIf="firebase.fileToUpload; else NoSelect">
-              Filename: {{ firebase.fileToUpload.name }}
+  <div class="b-t" style="margin-top: 50px; margin-left: 50px">
+    <form [formGroup]="updateMusicForm" name="form">
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Name song:</div>
+        <div class="col-sm-7">
+          <input [(ngModel)]="nameSong" [class.input-invalid]="updateMusicForm.get('nameSong')!.invalid && updateMusicForm.get('nameSong')!.touched" [class.input-valid]="updateMusicForm.get('nameSong')!.valid && updateMusicForm.get('nameSong')!.touched" class="form-control" formControlName="nameSong" placeholder="Name song" type="text">
+          <div *ngIf="updateMusicForm.get('nameSong').invalid && updateMusicForm.get('nameSong').touched"
+               style="margin-top: 10px;color: #ff0000; text-align: left !important;">
+            <div [@shake]="shake">
+              Name song is <strong>required.</strong>
             </div>
-            <ng-template #NoSelect>
-              Choose File
-            </ng-template>
-            <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control" formControlName="avatarUrl"
-                   id="avatar"
-                   type="file"
-            />
-          </label>
-
-          <div *ngIf="firebase.percentage | async as pct">
-            <!--  <mat-progress-bar mode="determinate" [value]="pct"></mat-progress-bar>-->
-            <div class="col-12">
-              <div class="progress">
-                <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100"
-                     aria-valuemin="0" aria-valuenow="{{ pct | number }}" class="progress-bar progress-bar-info progress-bar-striped"
-                     role="progressbar"> {{ pct | number }}%
-                </div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="firebase.fb as url">
-            <img [src]="firebase.fb" class="img-thumbnail img-fluid" style="width: 120px; height: 120px;"><br>
-          </div>
-
-          <div *ngIf="updateMusicForm.get('avatarUrl').invalid && updateMusicForm.get('avatarUrl').touched"
-               style="color: #ff0000">
-            Avatar is <strong>required</strong>.
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <p></p>
-      </div>
 
-
-    </div>
-
-    <div class="row">
-
-      <div class="col-md-4">
-        <p></p>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label><strong>Mp3 file: </strong> </label> &nbsp;
-          <label class="label-input" for="mp3Url">
-            <div *ngIf="firebaseMP3.fileToUpload; else NoSelect">
-              Filename: {{ firebaseMP3.fileToUpload.name }}
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Author:</div>
+        <div class="col-sm-7">
+          <input [(ngModel)]="author" [class.input-invalid]="updateMusicForm.get('author')!.invalid && updateMusicForm.get('author')!.touched" [class.input-valid]="updateMusicForm.get('author')!.valid && updateMusicForm.get('author')!.touched" class="form-control" formControlName="author" placeholder="Author" type="text">
+          <div *ngIf="updateMusicForm.get('author').invalid && updateMusicForm.get('author').touched"
+               style="margin-top: 10px;color: red; text-align: left !important;">
+            <div [@shake]="shake">
+              Author is <strong>required.</strong>
             </div>
-            <ng-template #NoSelect>
-              Choose File
-            </ng-template>
-            <input (change)="firebaseMP3.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control" formControlName="mp3Url"
-                   id="mp3Url"
-                   type="file"
-            />
-          </label>
+          </div>
+        </div>
+      </div>
 
-          <div *ngIf="firebaseMP3.percentage | async as pct">
-            <!--  <mat-progress-bar mode="determinate" [value]="pct"></mat-progress-bar>-->
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Singer:</div>
+        <div class="col-sm-7">
+          <mat-select [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" [placeholder]="'-- Select an Singer --'" class="form-control" formControlName="singer_id" multiple>
+            <!--            <mat-option disabled selected value>&#45;&#45; Select an Singer &#45;&#45;</mat-option>-->
+            <mat-option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="updateMusicForm.get('singer_id').invalid && updateMusicForm.get('singer_id').touched"
+                     style="margin-top: 10px;color: red; text-align: left !important;">
+            <div [@shake]="shake">
+              Singer is <strong>required.</strong>
+            </div>
+          </mat-error>
+          <!-- </mat-form-field> -->
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Category:</div>
+        <div class="col-sm-7">
+          <mat-select [class.input-invalid]="updateMusicForm.get('category_id')!.invalid && updateMusicForm.get('category_id')!.touched" [class.input-valid]="updateMusicForm.get('category_id')!.valid && updateMusicForm.get('category_id')!.touched" [placeholder]="'-- Select a Category --'" class="form-control" formControlName="category_id">
+            <!--            <mat-option disabled selected value>&#45;&#45; Select a Category &#45;&#45;</mat-option>-->
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="updateMusicForm.get('category_id').invalid && updateMusicForm.get('category_id').touched"
+                     style="margin-top: 10px;color: red; text-align: left !important;">
+            <div [@shake]="shake">
+              Category is <strong>required.</strong>
+            </div>
+          </mat-error>
+          <!-- </mat-form-field> -->
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Album:</div>
+        <div class="col-sm-7">
+          <mat-select [class.input-invalid]="updateMusicForm.get('album_id')!.invalid && updateMusicForm.get('album_id')!.touched" [class.input-valid]="updateMusicForm.get('album_id')!.valid && updateMusicForm.get('album_id')!.touched" [placeholder]="'-- Select an Album --'" class="form-control" formControlName="album_id">
+            <!--            <mat-option disabled selected value>&#45;&#45; Select an Album &#45;&#45;</mat-option>-->
+            <mat-option *ngFor="let album of albums" [value]="album.id">{{ album.album_name }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="updateMusicForm.get('album_id').invalid && updateMusicForm.get('album_id').touched"
+                     style="margin-top: 10px;color: red; text-align: left !important;">
+            <div [@shake]="shake">
+              Album is <strong>required.</strong>
+            </div>
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">View:</div>
+        <div class="col-sm-7">
+          <input [(ngModel)]="views" [class.input-invalid]="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" [class.input-valid]="updateMusicForm.get('views')!.valid && updateMusicForm.get('views')!.touched" class="form-control" formControlName="views" placeholder="View" type="text">
+          <div *ngIf="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+            <div *ngIf="updateMusicForm.get('views').hasError('required')">
+              <div [@shake]="shake">View is <strong>required.</strong>
+              </div>
+            </div>
+            <div *ngIf="updateMusicForm.get('views').hasError('pattern')">
+              <div [@shake]="shake">View must be <strong>numberic.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Describes:</div>
+        <div class="col-sm-7">
+          <textarea [(ngModel)]="describes" [class.input-invalid]="updateMusicForm.get('describes')!.invalid && updateMusicForm.get('describes')!.touched" [class.input-valid]="updateMusicForm.get('describes')!.valid && updateMusicForm.get('describes')!.touched" class="form-control" formControlName="describes" placeholder="Describes"
+                    style="height: 100px;"></textarea>
+          <div *ngIf="updateMusicForm.get('describes').invalid && updateMusicForm.get('describes').touched"
+               style="margin-top: 10px;color: red; text-align: left !important;">
+            <div [@shake]="shake">
+              Describes is <strong>required.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Avatar:</div>
+        <div class="col-sm-7">
+          <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
+                 formControlName="avatarUrl" id="avatar" type="file"/>
+          <br>
+          <!--          <div *ngIf="firebase.percentage | async as pct">-->
+          <!--            <div *ngIf="pct !== 100">-->
+          <div *ngIf="firebase.percentage | async as pct">
             <div class="col-12">
               <div class="progress">
-                <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100"
-                     aria-valuemin="0" aria-valuenow="{{ pct | number }}" class="progress-bar progress-bar-info progress-bar-striped"
+                <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100" aria-valuemin="0"
+                     aria-valuenow="{{ pct | number }}" class="progress-bar progress-bar-info progress-bar-striped"
                      role="progressbar"> {{ pct | number }}%
                 </div>
               </div>
             </div>
           </div>
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--          <div *ngIf="firebase.fileToUpload;">-->
+          <!--            Filename: {{ firebase.fileToUpload.name }}-->
+          <!--          </div>-->
+          <div *ngIf="updateMusicForm.get('avatarUrl').invalid && updateMusicForm.get('avatarUrl').touched"
+               style="margin-top: 10px;color: red; text-align: left !important;">
+            <div [@shake]="shake">
+              Avatar is <strong>required.</strong>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="firebase.fb as url" class="col-sm-2">
+          <img [src]="firebase.fb" class="img-thumbnail img-fluid"><br>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="col-sm-3 form-control-label text-muted">Mp3:</div>
+        <div class="col-sm-7">
+
+          <input (change)="firebaseMP3.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control"
+                 formControlName="mp3Url" id="mp3Url" type="file"/>
+
+          <br>
+          <!--          <div *ngIf="firebaseMP3.percentage | async as pct">-->
+          <!--            <div *ngIf="pct !== 100">-->
+          <div *ngIf="firebaseMP3.percentage | async as pct">
+            <div class="col-12">
+              <div class="progress">
+                <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100" aria-valuemin="0"
+                     aria-valuenow="{{ pct | number }}" class="progress-bar progress-bar-info progress-bar-striped"
+                     role="progressbar"> {{ pct | number }}%
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--          <div *ngIf="firebaseMP3.fileToUpload;">-->
+          <!--            Filename: {{ firebaseMP3.fileToUpload.name }}-->
+          <!--          </div>-->
+
           <div *ngIf="firebaseMP3.fb as urlMp3">
             <audio class="playlist" controls="controls" id="audio" style="width:100%">
               <source src="{{ urlMp3 }}" type="audio/mpeg">
@@ -107,123 +191,29 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2">
-        <mat-form-field appearance="fill" class="example-full-width">
-          <mat-label><strong style="color: darkgray;">Author: </strong></mat-label>
-          <input type="text" [(ngModel)]="author" matInput formControlName="author">
-          <mat-error
-            *ngIf="updateMusicForm.get('author').invalid && updateMusicForm.get('author').touched">
-            Author is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
+      <!--        <div class="m-b-md">-->
+      <!--          <label class="md-check">-->
+      <!--            <input type="checkbox"><i class="primary"></i> Keep me signed in-->
+      <!--          </label>-->
+      <!--        </div> -->
+
+
+      <div class="form-group row">
+        <div class="col-sm-10 text-center">
+          <a [routerLink]="['/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
+          <button (click)="updateSong()" [disabled]="!updateMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">
+            Edit song
+          </button>
+        </div>
       </div>
-      <div class="col-md-4">
-        <p></p>
-      </div>
+      <!-- <button type="submit" (click)="onSubmit()" [disabled]="!loginForm.valid" class="btn btn-lg black p-x-lg">Sign
+        in
+      </button>-->
+    </form>
+    <!--      <div class="m-y">-->
+    <!--        <a href="forgot-password.html" class="_600">Forgot password?</a>-->
+    <!--      </div>-->
 
+  </div>
 
-    </div>
-
-    <div class="row">
-
-      <div class="col-md-4">
-        <p></p>
-      </div>
-      <div class="col-md-2">
-        <mat-form-field appearance="fill" class="example-full-width">
-          <mat-label><strong style="color: darkgray;">Views: </strong></mat-label>
-          <input type="number" [(ngModel)]="views" matInput formControlName="views">
-          <mat-error
-            *ngIf="updateMusicForm.get('views').invalid && updateMusicForm.get('views').touched">
-            Views is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-md-2">
-        <mat-form-field appearance="fill" class="example-full-width">
-          <mat-label><strong style="color: darkgray;">Singer: </strong></mat-label>
-          <mat-select formControlName="singer_id" multiple>
-            <mat-option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="updateMusicForm.get('singer_id').invalid && updateMusicForm.get('singer_id').touched" style="color: #ff0000">
-            Singer is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-md-4">
-        <p></p>
-      </div>
-
-
-    </div>
-
-    <div class="row">
-
-      <div class="col-md-4">
-        <p></p>
-      </div>
-      <div class="col-md-2">
-        <mat-form-field appearance="fill" class="example-full-width">
-          <mat-label><strong style="color: darkgray;">Category: </strong></mat-label>
-          <mat-select formControlName="category_id">
-            <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="updateMusicForm.get('category_id').invalid && updateMusicForm.get('category_id').touched" style="color: #ff0000">
-            Category is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-md-2">
-        <mat-form-field appearance="fill" class="example-full-width">
-          <mat-label><strong style="color: darkgray;">Album: </strong></mat-label>
-          <mat-select formControlName="album_id">
-            <mat-option *ngFor="let album of albums" [value]="album.id">{{ album.album_name }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="updateMusicForm.get('album_id').invalid && updateMusicForm.get('album_id').touched" style="color: #ff0000">
-            Album is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-md-4">
-        <p></p>
-      </div>
-
-
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <p></p>
-      </div>
-      <div align="center" class="col-md-4" style="text-align: center">
-        <mat-form-field appearance="fill" class="example-full-width">
-          <mat-label><strong style="color: darkgray;">Describes: </strong></mat-label>
-          <textarea matInput [(ngModel)]="describes" formControlName="describes"></textarea>
-          <mat-error
-            *ngIf="updateMusicForm.get('describes').invalid && updateMusicForm.get('describes').touched">
-            Describes is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-md-4">
-        <p></p>
-      </div>
-
-    </div>
-
-    <div class="row">
-
-      <div class="col-md-4">
-        <p></p>
-      </div>
-      <div style="text-align: center" class="col-md-4">
-        <button [disabled]="!updateMusicForm.valid" class="btn btn-primary" type="submit">Sửa Bài Hát</button>
-      </div>q
-      <div class="col-md-4">
-        <p></p>
-      </div>
-
-
-    </div>
-  </form>
 </div>
