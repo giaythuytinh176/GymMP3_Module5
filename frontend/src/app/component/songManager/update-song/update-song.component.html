@@ -64,6 +64,7 @@
               Category is <strong>required.</strong>
             </div>
           </mat-error>
+          <input [(ngModel)]="old_category" formControlName="old_category" type="hidden">
           <!-- </mat-form-field> -->
         </div>
       </div>
@@ -123,6 +124,7 @@
           <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
                  formControlName="avatarUrl" id="avatar" type="file"/>
           <br>
+          <input [(ngModel)]="old_avatar" formControlName="old_avatar" type="hidden">
           <!--          <div *ngIf="firebase.percentage | async as pct">-->
           <!--            <div *ngIf="pct !== 100">-->
           <div *ngIf="firebase.percentage | async as pct">
@@ -150,6 +152,9 @@
         <div *ngIf="firebase.fb as url" class="col-sm-2">
           <img [src]="firebase.fb" class="img-thumbnail img-fluid"><br>
         </div>
+        <div *ngIf="!firebase.fb && old_avatar" class="col-sm-2">
+          <img [src]="old_avatar" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
+        </div>
       </div>
 
 
@@ -161,6 +166,7 @@
                  formControlName="mp3Url" id="mp3Url" type="file"/>
 
           <br>
+          <input [(ngModel)]="old_mp3" formControlName="old_mp3" type="hidden">
           <!--          <div *ngIf="firebaseMP3.percentage | async as pct">-->
           <!--            <div *ngIf="pct !== 100">-->
           <div *ngIf="firebaseMP3.percentage | async as pct">
@@ -188,6 +194,12 @@
           <div *ngIf="updateMusicForm.get('mp3Url').invalid && updateMusicForm.get('mp3Url').touched"
                style="color: #ff0000">
             Mp3 Url is <strong>required</strong>.
+          </div>
+
+          <div *ngIf="!firebaseMP3.fb && old_mp3">
+            <audio class="playlist" controls="controls" id="audio" style="width:100%">
+              <source src="{{ old_mp3 }}" type="audio/mpeg">
+            </audio>
           </div>
         </div>
       </div>

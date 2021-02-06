@@ -113,6 +113,16 @@ class SongController extends Controller
         return $list_singer_id;
     }
 
+    public function findSingerIDBySongID($id)
+    {
+        $list_singer_id = [];
+        $data = DB::table('song_singer')->where('song_singer.song_id', '=', $id)->get();
+        foreach ($data as $dt) {
+            $list_singer_id[] = $dt->singer_id;
+        }
+        return $list_singer_id;
+    }
+
     public function findSingerNameBySingerID($id)
     {
         $data = DB::table('singers')->where('singers.id', '=', $id)->first();

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Category} from "../../model/category";
+import {environment} from "../../../environments/environment";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -10,7 +11,7 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class CategoryService {
 
-  apiGetAllCategories = 'http://127.0.0.1:8000/api/categories/list';
+  apiGetAllCategories = environment.apiUrl + '/categories/list';
 
   token = sessionStorage.getItem(TOKEN_KEY);
   httpJson = {

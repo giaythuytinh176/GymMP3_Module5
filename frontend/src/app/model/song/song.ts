@@ -8,8 +8,8 @@ export class Song {
   views?: number;
   user_id?: number;
   singer_id?: any;
-  category_id?: number;
-  album_id?: number;
+  category_id?: any;
+  album_id?: any;
   singer_name?: any;
   category_name?: any;
   album_name?: any;

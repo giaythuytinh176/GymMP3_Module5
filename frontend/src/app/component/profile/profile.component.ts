@@ -104,6 +104,7 @@ export class ProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogDeleteMyList, {
       width: '300px',
       data: {id, nameSong},
+      panelClass: 'custom-dialog',
     });
 
     dialogRef.afterClosed().subscribe(result => {
