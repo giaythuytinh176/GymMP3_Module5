@@ -1,7 +1,8 @@
-import {Updateinfo} from './updateinfo';
+import {UpdateInfo} from "./updateinfo";
 
 describe('Updateinfo', () => {
   it('should create an instance', () => {
-    expect(new Updateinfo()).toBeTruthy();
+    // @ts-ignore
+    expect(new UpdateInfo()).toBeTruthy();
   });
 });

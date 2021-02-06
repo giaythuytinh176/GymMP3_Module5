@@ -46,6 +46,7 @@ export class ShowSongsUserComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to see list songs.');
+        this.routes.navigate(['/login'])
       } else {
         this.userInfor = data.user;
         this.getSongDetail();
@@ -58,6 +59,7 @@ export class ShowSongsUserComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.status) {
           this.token.signOut();
+          this.routes.navigate(['/login'])
         } else {
           console.log(data);
           this.songs = data;

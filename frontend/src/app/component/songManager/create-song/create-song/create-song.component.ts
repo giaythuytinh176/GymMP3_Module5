@@ -72,6 +72,7 @@ export class CreateSongComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to create Song.');
+        this.routes.navigate(['/login'])
       } else {
         this.userinfo = data.user;
       }
@@ -102,6 +103,7 @@ export class CreateSongComponent implements OnInit {
         if (data.error || data.status) {
           this.token.signOut();
           this.toastr.warning('You must login to create song.');
+          this.routes.navigate(['/login'])
         } else {
           this.toastr.success('Add song success');
           this.routes.navigate(['/profile']);

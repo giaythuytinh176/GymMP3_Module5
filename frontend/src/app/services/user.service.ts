@@ -20,8 +20,13 @@ export class UserService {
   private getUserUrl = environment.apiUrl + '/user';
   private updateUserUrl = environment.apiUrl + '/users';
   private apiCheckExistUserUrl = environment.apiUrl + '/checkExistUsername';
+  private apiRemoveToken = environment.apiUrl + '/removeToken';
 
   constructor(private http: HttpClient) {
+  }
+
+  removeToken(token: string): Observable<any> {
+    return this.http.post<any>(`${this.apiRemoveToken}`, {token: token});
   }
 
   updateUser(data: any, id: number): Observable<any> {

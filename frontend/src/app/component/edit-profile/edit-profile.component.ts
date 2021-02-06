@@ -54,6 +54,7 @@ export class EditProfileComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update profile.');
+        this.routes.navigate(['/login']);
       } else {
         this.userinfo = data.user;
         this.profileForm.value.name = this.userinfo.name;
@@ -72,6 +73,7 @@ export class EditProfileComponent implements OnInit {
             if (data.status) {
               this.toastr.warning('You must login to edit profile!')
               this.token.signOut();
+              this.routes.navigate(['/login'])
             } else {
               console.log(data);
               this.songs = data;
@@ -115,6 +117,7 @@ export class EditProfileComponent implements OnInit {
             if (data.status) {
               this.token.signOut();
               this.toastr.warning('You must login to update profile.');
+              this.routes.navigate(['/login'])
             } else {
               // this.routes.navigate(['list']);
               this.toastr.success('Updated profile successfully!');

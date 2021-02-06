@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
+import {UserService} from "../services/user.service";
 
 const TOKEN_KEY = 'AuthToken';
 const Login_KEY = 'AuthLogin';
@@ -8,22 +9,33 @@ const Login_KEY = 'AuthLogin';
   providedIn: 'root'
 })
 export class TokenStorageService {
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {
   }
 
-  signOut() {
-    window.sessionStorage.clear();
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.removeItem(Login_KEY);
-    this.router.navigate(['/login'])
+  signOut(): void {
+    this.userService.removeToken(this.getToken()).subscribe((res: any) => {
+      console.log(res);
+      window.sessionStorage.clear();
+      window.sessionStorage.removeItem(TOKEN_KEY);
+      window.sessionStorage.removeItem(Login_KEY);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 1000);
+      // this.router.navigate(['/browse'])
+    }, (error: any) => {
+      console.log(error);
+    });
   }
 
-  public saveToken(token: string) {
+  public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  public saveLogin(login: string) {
+  public saveLogin(login: string): void {
     window.sessionStorage.removeItem(Login_KEY);
     window.sessionStorage.setItem(Login_KEY, login);
   }
