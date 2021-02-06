@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Album} from "../../model/album";
+import {environment} from "../../../environments/environment";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -10,7 +11,7 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class AlbumService {
 
-  apiGetAllAlbum = 'http://127.0.0.1:8000/api/albums/list';
+  apiGetAllAlbum = environment.apiUrl + '/albums/list';
 
   token = sessionStorage.getItem(TOKEN_KEY);
   httpJson = {

@@ -36,9 +36,9 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private toasrt: ToastrService,
+              private tokenStorage: TokenStorageService,
   ) {
   }
-
 
   signUp(info: SignupInfo): Observable<string> {
     console.log(info);
@@ -53,13 +53,26 @@ export class AuthService {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  authToken(token: string): Observable<any> {
+   authToken(): Promise<any> {
     // console.log(token);
-    return this.http.get<string>(this.authUrl, this.httpJson);
+    return this.http.get<any>(this.authUrl, this.httpJson).toPromise().then(r => {
+      if (r.user.username) {
+        this.tokenStorage.saveLogin('true');
+        return true;
+      }
+      else {
+        this.tokenStorage.saveLogin('false');
+        this.tokenStorage.signOut();
+        return false;
+      }
+    }).catch(error => {
+      return Promise.reject(error);
+    });
   }
 
   loggined(): boolean {
     if (this.token) {
+      this.authToken();
       return true;
     } else {
       this.toasrt.warning('Session expired, please login again!');

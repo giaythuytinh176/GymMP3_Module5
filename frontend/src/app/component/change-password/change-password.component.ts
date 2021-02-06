@@ -44,7 +44,6 @@ export class ChangePasswordComponent implements OnInit {
       confirm_new_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
     }, {validator: this.checkPasswords});
 
-
     this.userService.getInfoUserToken().subscribe((data: any) => {
       console.log(data);
       if (data.status) {
@@ -54,8 +53,6 @@ export class ChangePasswordComponent implements OnInit {
         this.userinfo = data.user;
       }
     }, error => console.log(error));
-
-
   }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
@@ -64,9 +61,7 @@ export class ChangePasswordComponent implements OnInit {
     return new_password === confirm_new_password ? null : {passwordnotmatch: true}
   }
 
-
   ngSubmit() {
-    // debugger;
     this.changePassword = new ChangePassword(
       this.ChangePassForm.value.password,
       this.ChangePassForm.value.new_password,
@@ -84,7 +79,7 @@ export class ChangePasswordComponent implements OnInit {
             setTimeout(() => {
               this.toastr.success('You have successfully changed your Password!');
             }, 500);
-            this.router.navigate(['/browser']);
+            this.router.navigate(['/browse']);
           } else {
             this.toastr.warning('Something wrong.');
             window.location.reload();
@@ -104,7 +99,6 @@ export class ChangePasswordComponent implements OnInit {
           }
         });
   }
-
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

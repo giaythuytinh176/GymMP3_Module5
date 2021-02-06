@@ -11,8 +11,6 @@ import {CreateSongComponent} from "./component/songManager/create-song/create-so
 import {UpdateSongComponent} from "./component/songManager/update-song/update-song.component";
 import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component'
-import firebase from "firebase";
-import Auth = firebase.auth.Auth;
 import {EditProfileComponent} from "./component/edit-profile/edit-profile.component";
 
 const routes: Routes = [

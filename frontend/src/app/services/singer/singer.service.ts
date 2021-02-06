@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Singer} from "../../model/singer";
+import {environment} from "../../../environments/environment";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -10,7 +11,8 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class SingerService {
 
-  apiGetAllSingers = 'http://127.0.0.1:8000/api/singers/list';
+  apiGetAllSingers = environment.apiUrl + '/singers/list';
+  apiGetSingerIDBySongID = environment.apiUrl + '/findSingerIDBySongID';
 
   token = sessionStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -21,6 +23,10 @@ export class SingerService {
   }
 
   constructor(private http: HttpClient) {
+  }
+
+  getSingerIDBySongID(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiGetSingerIDBySongID}/${id}`, this.httpJson);
   }
 
   getAllSingers(): Observable<Singer[]> {

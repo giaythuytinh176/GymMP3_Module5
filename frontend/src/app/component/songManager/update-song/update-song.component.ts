@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../../services/category/caterory.service";
 import {SingerService} from "../../../services/singer/singer.service";
 import {AlbumService} from "../../../services/album/album.service";
-import {environment} from 'src/environments/environment';
 import {FirebaseComponent} from "../../firebase/firebase.component";
 import {Album} from "../../../model/album";
 import {Category} from "../../../model/category";
@@ -46,6 +45,11 @@ export class UpdateSongComponent implements OnInit {
   shake: any;
   avatarUrl: any;
   mp3Url: any;
+  old_avatar = '';
+  old_mp3 = '';
+  old_singer: any;
+  old_category: any;
+  old_album: any;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -83,38 +87,38 @@ export class UpdateSongComponent implements OnInit {
         this.toastr.warning('You must login to create Song.');
       } else {
         this.userinfo = data.user;
+        this.old_avatar = this.userinfo.avatar;
       }
     }, error => console.log(error));
-
-    this.updateMusicForm = this.fb.group({
-      nameSong: ['', [Validators.required]],
-      avatarUrl: [''],
-      mp3Url: [''],
-      describes: ['', [Validators.required]],
-      author: ['', [Validators.required]],
-      views: ['', [Validators.required]],
-      singer_id: [''],
-      category_id: [''],
-      album_id: [''],
-    });
 
     this.routes.paramMap.subscribe(paramMap => {
       this.id = +paramMap.get('id');
       this.songService.getSongById(this.id).subscribe(
         (data: any) => {
+          console.log(data);
           if (data.status) {
             this.toastr.warning('You must login to update song.');
             this.token.signOut();
           } else {
+            this.singerService.getSingerIDBySongID(this.id).subscribe((res: any) => {
+              console.log(res);
+              this.old_singer = JSON.stringify(res);
+            }, (error: any) => console.log(error));
+            // console.log(111);
+            // console.log(data);
+            // console.log(222);
             this.nameSong = data.nameSong;
             this.describes = data.describes;
             this.author = data.author;
             this.views = data.views;
-            this.category_id = data.category_id;
-            this.album_id = data.album_id;
             this.avatarUrl = data.avatarUrl;
             this.mp3Url = data.mp3Url;
-
+            this.singer_id = data.singer_id;
+            this.category_id = data.category_id;
+            this.album_id = data.album_id;
+            this.old_mp3 = data.mp3Url;
+            this.old_category = data.category_id;
+            this.old_album = data.album_id;
           }
         },
         error => {
@@ -122,25 +126,69 @@ export class UpdateSongComponent implements OnInit {
         }
       );
     });
+
+    this.updateMusicForm = this.fb.group({
+      nameSong: ['', [Validators.required]],
+      describes: ['', [Validators.required]],
+      author: ['', [Validators.required]],
+      views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      avatarUrl: [''],
+      mp3Url: [''],
+      singer_id: [''],
+      category_id: [''],
+      album_id: [''],
+      old_avatar: [this.old_avatar],
+      old_mp3: [this.old_mp3],
+      old_singer: [this.old_singer],
+      old_category: [this.old_category],
+      old_album: [this.old_album],
+    });
   }
 
   updateSong() {
-    console.log(this.userinfo);
+    // console.log(this.userinfo);
     this.updateMusicForm.value.avatarUrl = this.firebase.fb;
     this.updateMusicForm.value.mp3Url = this.firebaseMP3.fb;
     this.song = this.updateMusicForm.value;
-    this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
     this.song.user_id = this.userinfo.id;
-    console.log(this.song);
+    // console.log(this.song);
+    // console.log(this.updateMusicForm.value);
+    if (!this.updateMusicForm.value.avatarUrl) {
+      this.song.avatarUrl = this.old_avatar;
+    } else {
+      this.song.avatarUrl = this.updateMusicForm.value.avatarUrl;
+    }
+    if (!this.updateMusicForm.value.mp3Url) {
+      this.song.mp3Url = this.old_mp3;
+    } else {
+      this.song.mp3Url = this.updateMusicForm.value.mp3Url;
+    }
+    if (this.updateMusicForm.value.singer_id == '""' || !this.updateMusicForm.value.singer_id) {
+      this.song.singer_id = this.old_singer;
+    } else {
+      this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
+    }
+    if (!this.updateMusicForm.value.category_id) {
+      this.song.category_id = this.old_category;
+    } else {
+      this.song.category_id = this.updateMusicForm.value.category_id;
+    }
+    if (!this.updateMusicForm.value.album_id) {
+      this.song.album_id = this.old_album;
+    } else {
+      this.song.album_id = this.updateMusicForm.value.album_id;
+    }
+    // console.log(this.song);
     this.songService.updateSong(this.song, this.id).subscribe((data: any) => {
       if (data.status) {
         this.toastr.warning('You must login to update song.');
         this.token.signOut();
       } else {
-        this.toastr.success('Updated Song Sucessfully.');
-        this.route.navigate(['/listsongs']);
+        this.toastr.success('Updated Song Sucessfully!');
+        this.route.navigate(['/profile']);
       }
     }, error => {
+      this.toastr.warning('Something wrong.');
       console.log(error);
     });
   }

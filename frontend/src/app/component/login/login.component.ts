@@ -57,10 +57,10 @@ export class LoginComponent implements OnInit {
             this.toasrt.warning('Login Failed!!! Please login again!.')
           } else {
             this.tokenStorage.saveToken(data.token);
-            this.toasrt.success('Login successfully.');
             setTimeout(() => {
               window.location.reload();
-            }, 1);
+            }, 1000);
+            this.toasrt.success('Login successfully.');
             this.route.navigate(['/browse']);
           }
         },

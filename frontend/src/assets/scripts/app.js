@@ -7,14 +7,14 @@
         folded: false,
         container: false,
         color: 'primary',
-        bg: ''
+        bg: 'grey'
       }
     };
 
     var setting = 'jqStorage-'+app.name+'-Setting',
         storage = $.localStorage,
         color;
-    
+
     if( storage.isEmpty(setting) ){
         storage.set(setting, app.setting);
     }else{
@@ -42,7 +42,7 @@
 
       $('[data-target="folded"] input').prop('checked', app.setting.folded);
       $('[data-target="container"] input').prop('checked', app.setting.container);
-      
+      console.log(color);
       if(color != app.setting.color){
         uiLoad.remove('css/theme/'+color+'.css');
         uiLoad.load('css/theme/'+app.setting.color+'.css');
