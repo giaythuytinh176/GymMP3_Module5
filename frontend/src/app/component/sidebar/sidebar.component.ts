@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginComponent} from "../login/login.component";
 import {UserService} from "../../services/user.service";
-import {TokenStorageService} from "../../auth/token-storage.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {Users} from "../../model/users/users";
+import {TokenStorageService} from "../../auth/token-storage.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -34,7 +34,10 @@ export class SidebarComponent implements OnInit {
           this.user = data.user;
           this.isLoggedIn = true;
         }
-      }, error => console.log(error));
+      }, error => {
+        console.log(error);
+        this.isLoggedIn = false;
+      });
     }
   }
 

@@ -23,6 +23,7 @@ Route::post('login', '\App\Http\Controllers\UserController@authenticate');
 Route::get('/songs/list', [\App\Http\Controllers\SongController::class, 'allSongs']);
 Route::post('/search','\App\Http\Controllers\SongController@search');
 Route::post('/checkExistUsername','\App\Http\Controllers\UserController@checkExistUsername');
+Route::post('/removeToken','\App\Http\Controllers\UserController@removeToken');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', '\App\Http\Controllers\UserController@getAuthenticatedUser');

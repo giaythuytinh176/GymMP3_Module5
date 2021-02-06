@@ -50,6 +50,7 @@ export class ProfileComponent implements OnInit {
         this.token.signOut();
         this.toastr.warning('You must login to see profile.');
         window.location.reload();
+        this.routes.navigate(['/login'])
       } else {
         this.userinfo = data.user;
         this.name = this.userinfo.name;
@@ -62,6 +63,7 @@ export class ProfileComponent implements OnInit {
           .subscribe((data: any) => {
             if (data.status) {
               this.token.signOut();
+              this.routes.navigate(['/login'])
             } else {
               console.log(data);
               this.songs = data;
@@ -91,6 +93,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.status) {
           this.token.signOut();
+          this.routes.navigate(['/login'])
         } else {
           console.log(data);
           this.songs = data;

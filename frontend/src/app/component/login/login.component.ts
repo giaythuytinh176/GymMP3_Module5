@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {LoginInfo} from "../../auth/login-info";
 import {AuthService} from "../../auth/auth.service";
 import {Router} from "@angular/router";
-import {TokenStorageService} from "../../token-storage.service";
 import {ToastrService} from "ngx-toastr";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
+import {TokenStorageService} from "../../auth/token-storage.service";
 
 @Component({
   selector: 'app-login',
@@ -79,10 +79,10 @@ export class LoginComponent implements OnInit {
 
   signOut() {
     this.tokenStorage.signOut();
+    this.toasrt.success('Logout successfully.');
     setTimeout(() => {
       window.location.reload();
     }, 1000);
-    this.toasrt.success('Logout successfully.');
     this.route.navigate(['/browse']);
   }
 

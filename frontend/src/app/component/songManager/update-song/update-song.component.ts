@@ -85,6 +85,7 @@ export class UpdateSongComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to create Song.');
+        this.route.navigate(['/login'])
       } else {
         this.userinfo = data.user;
         this.old_avatar = this.userinfo.avatar;
@@ -99,6 +100,7 @@ export class UpdateSongComponent implements OnInit {
           if (data.status) {
             this.toastr.warning('You must login to update song.');
             this.token.signOut();
+            this.route.navigate(['/login'])
           } else {
             this.singerService.getSingerIDBySongID(this.id).subscribe((res: any) => {
               console.log(res);
@@ -183,6 +185,7 @@ export class UpdateSongComponent implements OnInit {
       if (data.status) {
         this.toastr.warning('You must login to update song.');
         this.token.signOut();
+        this.route.navigate(['/login'])
       } else {
         this.toastr.success('Updated Song Sucessfully!');
         this.route.navigate(['/profile']);

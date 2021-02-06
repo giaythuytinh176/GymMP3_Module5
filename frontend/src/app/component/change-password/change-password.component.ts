@@ -49,6 +49,7 @@ export class ChangePasswordComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to change password.');
+        this.router.navigate(['/login'])
       } else {
         this.userinfo = data.user;
       }
@@ -76,10 +77,18 @@ export class ChangePasswordComponent implements OnInit {
           if (data.error || data.status) {
             this.toastr.warning('You must login to change password.');
           } else if (data.data == 'Password has been updated.') {
+            this.router.navigate(['/login']);
+            // setTimeout(() => {
+            //   this.toastr.success('You have successfully changed your Password, please login again!');
+            // }, 1000);
+            this.toastr.success('You have successfully changed your Password, please login again!');
+            this.token.signOut();
+            // window.location.reload();
+            // this.router.navigate(['/login']);
             setTimeout(() => {
-              this.toastr.success('You have successfully changed your Password!');
-            }, 500);
-            this.router.navigate(['/browse']);
+              window.location.reload();
+            }, 1000);
+
           } else {
             this.toastr.warning('Something wrong.');
             window.location.reload();
