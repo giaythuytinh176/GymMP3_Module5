@@ -38,7 +38,7 @@
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Singer:</mat-label>
             <mat-select [compareWith]="compareWithFunc" [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" class="form-control" formControlName="singer_id" multiple>
-<!--              <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>-->
+              <!--              <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>-->
               <!--              [placeholder]="'&#45;&#45; Select an Singer &#45;&#45;'"-->
               <mat-option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</mat-option>
             </mat-select>
@@ -57,12 +57,13 @@
         <div class="col-sm-7">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Category:</mat-label>
-            <mat-select [(ngModel)]="category_id" [class.input-invalid]="updateMusicForm.get('category_id')!.invalid && updateMusicForm.get('category_id')!.touched" [class.input-valid]="updateMusicForm.get('category_id')!.valid && updateMusicForm.get('category_id')!.touched" class="form-control" formControlName="category_id">
-              <!--            <mat-option disabled selected value>&#45;&#45; Select a Category &#45;&#45;</mat-option>-->
-              <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}
+            <input type="text" matInput [(ngModel)]="category_id" [matAutocomplete]="auto" [class.input-invalid]="updateMusicForm.get('myControl')!.invalid && updateMusicForm.get('myControl')!.touched" [class.input-valid]="updateMusicForm.get('myControl')!.valid && updateMusicForm.get('myControl')!.touched" class="form-control" formControlName="myControl">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option.category_name}}
               </mat-option>
-            </mat-select>
-            <mat-error *ngIf="updateMusicForm.get('category_id').invalid && updateMusicForm.get('category_id').touched"
+            </mat-autocomplete>
+            <mat-error *ngIf="updateMusicForm.get('myControl').invalid && updateMusicForm.get('myControl').touched"
                        style="margin-top: 10px;color: red; text-align: left !important;">
               <div [@shake]="shake">
                 Category is <strong>required.</strong>

@@ -12,6 +12,7 @@ const TOKEN_KEY = 'AuthToken';
 export class CategoryService {
 
   apiGetAllCategories = environment.apiUrl + '/categories/list';
+  apiGetCategoryInfo = environment.apiUrl + '/findCategory';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -22,6 +23,10 @@ export class CategoryService {
   }
 
   constructor(private http: HttpClient) {
+  }
+
+  getCategoryInfo(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiGetCategoryInfo}/${id}`, this.httpJson);
   }
 
   getAllCategories(): Observable<Category[]> {

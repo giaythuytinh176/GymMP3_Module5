@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../../services/category/caterory.service";
 import {SingerService} from "../../../services/singer/singer.service";
@@ -17,6 +17,8 @@ import {Album} from 'src/app/model/album/album';
 import {Category} from "../../../model/category/category";
 import {Singer} from "../../../model/singer/singer";
 import {UserService} from "../../../services/userManager/user.service";
+import {Observable} from "rxjs";
+import {map, startWith} from "rxjs/operators";
 
 @Component({
   selector: 'app-update-song',
@@ -34,7 +36,6 @@ export class UpdateSongComponent implements OnInit {
   song: Song;
   user_id: any;
   singer_id: any;
-  category_id: any;
   album_id: any;
   userinfo!: UpdateInfo;
   nameSong: any;
@@ -47,6 +48,8 @@ export class UpdateSongComponent implements OnInit {
   mp3Url: any;
   old_avatar = '';
   old_mp3 = '';
+  filteredOptions: any;
+  category_id: any;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -63,17 +66,50 @@ export class UpdateSongComponent implements OnInit {
   ) {
   }
 
+  displayFn(category: Category): string {
+    return category && category.category_name ? category.category_name : '';
+  }
+
+  private _filter(name: any): Category[] {
+    const filterValue = name.toLowerCase();
+    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
+  }
+
   compareWithFunc(a, b) {
     return a === b;
   }
 
   ngOnInit() {
+    this.updateMusicForm = this.fb.group({
+      nameSong: ['', [Validators.required]],
+      describes: ['', [Validators.required]],
+      author: ['', [Validators.required]],
+      views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      avatarUrl: [''],
+      mp3Url: [''],
+      myControl: new FormControl('', Validators.required),
+      singer_id: ['', [Validators.required]],
+      album_id: ['', [Validators.required]],
+      old_avatar: [this.old_avatar],
+      old_mp3: [this.old_mp3],
+    });
+
     this.albumService.getAllAlbum().subscribe((albums: any) => {
       this.albums = albums.data;
       // console.log(this.albums);
     }, (error) => console.log(error));
     this.categoryService.getAllCategories().subscribe((categories: any) => {
       this.categories = categories.data;
+      // console.log(categories.data);
+      this.filteredOptions = this.updateMusicForm.get('myControl').valueChanges
+        .pipe(
+          startWith(''),
+          // @ts-ignore
+          map(value => typeof value === 'string' ? value : value!.name),
+          // @ts-ignore
+          map(name => name ? this._filter(name) : this.categories.slice()
+          )
+        );
       // console.log(this.categories);
     }, (error) => console.log(error));
     this.singerService.getAllSingers().subscribe((singers: any) => {
@@ -114,7 +150,11 @@ export class UpdateSongComponent implements OnInit {
             this.views = data.views;
             this.avatarUrl = data.avatarUrl;
             this.mp3Url = data.mp3Url;
-            this.category_id = data.category_id;
+            this.categoryService.getCategoryInfo(data.category_id).subscribe((res: any) => {
+                this.category_id = res;
+                // console.log(res);
+              }, (error: any) => console.log(error)
+            );
             this.album_id = data.album_id;
             this.old_mp3 = data.mp3Url;
             this.old_avatar = data.avatarUrl;
@@ -126,19 +166,6 @@ export class UpdateSongComponent implements OnInit {
       );
     });
 
-    this.updateMusicForm = this.fb.group({
-      nameSong: ['', [Validators.required]],
-      describes: ['', [Validators.required]],
-      author: ['', [Validators.required]],
-      views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      avatarUrl: [''],
-      mp3Url: [''],
-      singer_id: ['', [Validators.required]],
-      category_id: ['', [Validators.required]],
-      album_id: ['', [Validators.required]],
-      old_avatar: [this.old_avatar],
-      old_mp3: [this.old_mp3],
-    });
   }
 
   updateSong() {
@@ -156,7 +183,7 @@ export class UpdateSongComponent implements OnInit {
     } else {
       this.song.mp3Url = this.updateMusicForm.value.mp3Url;
     }
-    this.song.category_id = this.updateMusicForm.value.category_id;
+    this.song.category_id = this.updateMusicForm.value.myControl.id;
     this.song.album_id = this.updateMusicForm.value.album_id;
     this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
     // console.log(this.song);
@@ -170,8 +197,12 @@ export class UpdateSongComponent implements OnInit {
         this.route.navigate(['/profile']);
       }
     }, error => {
-      this.toastr.warning('Something wrong.');
-      // console.log(error);
+      if ((JSON.parse(error.error)).category_id) {
+        this.toastr.warning((JSON.parse(error.error)).category_id);
+      } else {
+        this.toastr.warning('Something wrong.');
+        console.log(error);
+      }
     });
   }
 }

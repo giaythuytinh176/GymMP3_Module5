@@ -55,10 +55,15 @@
   animation: 3s rotate infinite linear;
 }
 
-.item.r.active .item-media-content {
-  animation: 7s rotate infinite linear;
+.is-playing .mejs-track-artwork {
+  animation: 5s rotate infinite linear;
   border-radius: 50%;
 }
+
+/*.item.r.active .item-media-content {*/
+/*  animation: 7s rotate infinite linear;*/
+/*  border-radius: 50%;*/
+/*}*/
 
 @keyframes rotate {
   100% {
