@@ -14,7 +14,7 @@ export class SingerService {
   apiGetAllSingers = environment.apiUrl + '/singers/list';
   apiGetSingerIDBySongID = environment.apiUrl + '/findSingerIDBySongID';
 
-  token = sessionStorage.getItem(TOKEN_KEY);
+  token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

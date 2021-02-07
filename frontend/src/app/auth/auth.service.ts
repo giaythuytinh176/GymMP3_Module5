@@ -22,7 +22,7 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class AuthService {
   error_msg = '';
-  token = sessionStorage.getItem(TOKEN_KEY);
+  token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -66,12 +66,13 @@ export class AuthService {
         this.tokenStorage.saveLogin('true');
         return true;
       } else {
-        this.tokenStorage.saveLogin('false');
         this.tokenStorage.signOut();
         return false;
       }
     }).catch(error => {
-      return Promise.reject(error);
+      this.tokenStorage.signOut();
+      return false;
+      // return Promise.reject(error);
     });
   }
 
@@ -81,36 +82,36 @@ export class AuthService {
       .pipe(
         map((res) => {
           console.log(res);
-          console.log(333);
           return res;
         })
       );
   }
 
-  loggined(): boolean {
-    // const check = this.authToken2();
-    // console.log(111);
-    // console.log(check.value);
-    // console.log(222);
+  checkAuthToken(): void {
     this.http.get<any>(this.authUrl, this.httpJson).subscribe((res: any) => {
       if (res.user?.username) {
-        // console.log(5555555);
+        console.log(res);
+        this.tokenStorage.saveLogin('true');
       } else {
         this.tokenStorage.signOut();
       }
     }, (error: any) => {
       // console.log(error);
     });
+  }
+
+  loggined(): boolean {
     if (this.token) {
-      if (this.tokenStorage.getToken()) {
-        if (this.tokenExpired()) {
-          return false;
-        } else {
-          return true;
-        }
+      this.checkAuthToken();
+      // if (this.tokenExpired()) {
+      //   return false;
+      // } else {
+      if (this.token) {
+        return true;
       } else {
         return false;
       }
+      //}
     } else {
       this.toasrt.warning('Session expired or Not login yet, please login again!');
       return false;

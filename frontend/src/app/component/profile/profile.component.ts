@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TokenStorageService} from "../../auth/token-storage.service";
@@ -43,9 +43,18 @@ export class ProfileComponent implements OnInit {
   ) {
   }
 
+
+
+  ngAfterViewChecked() {
+    // console.log(7);
+    // console.log(window.localStorage.getItem('mep-currentTime'));
+    // console.log(window.localStorage.getItem('mep-status'));
+    // window.localStorage.getItem('mep-status');
+  }
+
   ngOnInit(): void {
     this.userService.getInfoUserToken().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data.status) {
         this.toastr.warning('You must login to see profile.');
         this.token.signOut();
@@ -64,13 +73,12 @@ export class ProfileComponent implements OnInit {
               this.token.signOut();
               this.routes.navigate(['/login'])
             } else {
-              console.log(data);
+              // console.log(data);
               this.songs = data;
             }
           }, error => {
             console.log(error);
           });
-        console.log(this.showSongsUser.songs);
       }
     }, error => console.log(error));
 
@@ -79,7 +87,7 @@ export class ProfileComponent implements OnInit {
   deleteSong(id: number) {
     this.songService.deleteSong(id).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.getSongDetail();
         this.toastr.success('Deleted song sucessfully!');
         this.routes.navigate(['/profile']);
@@ -94,7 +102,7 @@ export class ProfileComponent implements OnInit {
           this.token.signOut();
           this.routes.navigate(['/login'])
         } else {
-          console.log(data);
+          // console.log(data);
           this.songs = data;
         }
       }, error => {
@@ -118,7 +126,6 @@ export class ProfileComponent implements OnInit {
       // console.log(result);
     });
   }
-
 }
 
 @Component({
@@ -144,7 +151,6 @@ export class DialogDeleteMyList {
     this.dialogRef.close();
   }
 }
-
 
 export interface DialogData {
   id: number;

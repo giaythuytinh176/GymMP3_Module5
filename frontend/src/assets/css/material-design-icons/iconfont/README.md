@@ -1,5 +1,4 @@
-The recommended way to use the Material Icons font is hosted by Google Fonts,
-available here:
+The recommended way to use the Material Icons font is hosted by Google Fonts, available here:
 
 ```
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"

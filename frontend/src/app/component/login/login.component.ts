@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
           if (data.error || data.status) {
             this.toasrt.warning('Login Failed!!! Please login again!.')
           } else {
+            this.tokenStorage.saveLogin('true');
             this.tokenStorage.saveToken(data.token);
             setTimeout(() => {
               window.location.reload();

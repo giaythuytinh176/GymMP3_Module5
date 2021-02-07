@@ -11,7 +11,7 @@
     <div class="app-header hidden-lg-up white lt box-shadow-z1">
       <div class="navbar">
         <!-- brand -->
-        <a class="navbar-brand md" href="index.html">
+        <a class="navbar-brand md" href="index.html" routerLink="/browse">
           <svg height="32" viewBox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
             <circle cx="24" cy="24" fill="rgba(255,255,255,0.2)" r="24"/>
             <circle class="brand-color" cx="24" cy="24" fill="#1c202b" r="22"/>
@@ -50,7 +50,7 @@
           <div class="row-col">
             <div class="col-sm w w-auto-xs m-b">
               <div class="item w rounded">
-                <div class="item-media">
+                <div class="item-media avatar-user">
                   <div [ngStyle]="{'background-image': 'url(' + avatar + ')'}" class="item-media-content"></div>
                 </div>
               </div>
@@ -101,7 +101,7 @@
                   <div class="row item-list item-list-by m-b">
                     <div *ngFor="let song of songs; let i=index;" class="col-xs-12">
                       <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
-                        <div class="item-media ">
+                        <div class="item-media">
                           <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
                           <div class="item-overlay center">
                             <button class="btn-playpause">Play</button>

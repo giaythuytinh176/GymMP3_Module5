@@ -46,7 +46,9 @@ html {
 // Wrap `@viewport` with `@at-root` for when folks do a nested import (e.g.,
 // `.class-name { @import "bootstrap"; }`).
 @at-root {
-  @-ms-viewport { width: device-width; }
+  @-ms-viewport {
+    width: device-width;
+  }
 }
 
 
@@ -65,7 +67,7 @@ html {
   // See https://github.com/twbs/bootstrap/issues/18543
   -ms-overflow-style: scrollbar;
   // Changes the default tap highlight to be completely transparent in iOS.
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -113,7 +115,7 @@ p {
 
 // Abbreviations and acronyms
 abbr[title],
-// Add data-* attribute to help out our tooltip plugin, per https://github.com/twbs/bootstrap/issues/5257
+  // Add data-* attribute to help out our tooltip plugin, per https://github.com/twbs/bootstrap/issues/5257
 abbr[data-original-title] {
   cursor: help;
   border-bottom: 1px dotted $abbr-border-color;
@@ -382,9 +384,9 @@ input[type="search"] {
 // todo: needed?
 output {
   display: inline-block;
-//  font-size: $font-size-base;
-//  line-height: $line-height;
-//  color: $input-color;
+  //  font-size: $font-size-base;
+  //  line-height: $line-height;
+  //  color: $input-color;
 }
 
 // Always hide an element with the `hidden` HTML attribute (from PureCSS).

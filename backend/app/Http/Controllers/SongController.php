@@ -18,8 +18,8 @@ class SongController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nameSong' => 'required|string',
-            'avatarUrl' => 'required|string',
-            'mp3Url' => 'required|string|unique:songs',
+            'avatarUrl' => 'required|url',
+            'mp3Url' => 'required|url|unique:songs',
             'describes' => 'required|string',
             'author' => 'required|string',
             'views' => 'required|integer',
@@ -174,11 +174,11 @@ class SongController extends Controller
             'author' => 'required|string',
             'views' => 'required|integer',
             'user_id' => 'required|integer',
-//            'avatarUrl' => 'required|string',
-//            'mp3Url' => 'required|string',
-//            'singer_id' => 'required|string',
-//            'category_id' => 'required|integer',
-//            'album_id' => 'required|integer',
+            'avatarUrl' => 'required|url',
+            'mp3Url' => 'required|url',
+            'singer_id' => 'required|string',
+            'category_id' => 'required|integer',
+            'album_id' => 'required|integer',
         ]);
 
         if ($validator->fails()) {
@@ -210,6 +210,10 @@ class SongController extends Controller
 
     public function search(Request $request)
     {
+        if ($request->search == '' || !$request->search) {
+            return response()->json(['keyword' => 'You haven\'t enter Keywords.'], 200);
+        }
+
         $songs = DB::table('songs')
             ->select('songs.*', 'users.username', 'categories.category_name', 'albums.album_name')
             ->join('users', 'users.id', '=', 'songs.user_id')

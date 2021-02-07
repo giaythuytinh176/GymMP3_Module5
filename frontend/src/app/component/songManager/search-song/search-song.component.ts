@@ -16,6 +16,7 @@ export class SearchSongComponent implements OnInit {
   count!: any;
   isSearch = false;
   search$ = new Subject<string>();
+  keywordEnter = false;
 
   constructor(
     private songService: SongService,
@@ -35,9 +36,16 @@ export class SearchSongComponent implements OnInit {
     ).subscribe(
       (next) => {
         this.song = next || [];
-        this.isSearch = true;
+        if (next.keyword) {
+          this.keywordEnter = true;
+          this.isSearch = false;
+        } else {
+          this.isSearch = true;
+          this.keywordEnter = false;
+        }
         this.count = next.length;
         // console.log(this.song);
+
       });
     // this.songService.searchSong(this.search).subscribe(
     //   data => {

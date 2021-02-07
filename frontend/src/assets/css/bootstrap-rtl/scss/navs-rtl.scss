@@ -4,11 +4,13 @@
 }
 
 .nav-tabs {
-  .nav-item{
+  .nav-item {
     float: right;
   }
+
   > li {
     float: right;
+
     > a {
       margin-left: auto;
       margin-right: -2px;
@@ -18,11 +20,13 @@
 }
 
 .nav-pills {
-  .nav-item{
+  .nav-item {
     float: right;
   }
+
   > li {
     float: right;
+
     + li {
       margin-right: 2px;
       margin-left: auto;
@@ -31,11 +35,13 @@
 }
 
 .nav-stacked {
-  .nav-item{
+  .nav-item {
     float: none;
   }
+
   > li {
     float: none;
+
     + li {
       margin-right: 0;
       margin-left: auto;

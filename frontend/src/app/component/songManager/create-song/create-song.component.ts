@@ -105,7 +105,7 @@ export class CreateSongComponent implements OnInit {
           this.toastr.warning('You must login to create song.');
           this.routes.navigate(['/login'])
         } else {
-          this.toastr.success('Add song success');
+          this.toastr.success('Add song successfully!');
           this.routes.navigate(['/profile']);
         }
       }, error => {

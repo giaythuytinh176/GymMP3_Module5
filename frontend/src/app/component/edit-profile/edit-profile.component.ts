@@ -1,14 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
-import {Song} from "../../model/song/song";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {ToastrService} from "ngx-toastr";
 import {FirebaseComponent} from "../firebase/firebase.component";
-import {ShowSongsUserComponent} from "../show-songs-user/show-songs-user.component";
-import {SongService} from "../../services/song/song.service";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
 import {UserService} from "../../services/userManager/user.service";
@@ -31,7 +28,6 @@ export class EditProfileComponent implements OnInit {
   phone = '';
   avatar = '';
   username = '';
-  songs: Song[];
   shake: any;
   old_avatar = '';
 
@@ -43,8 +39,6 @@ export class EditProfileComponent implements OnInit {
               private token: TokenStorageService,
               private toastr: ToastrService,
               public firebase: FirebaseComponent,
-              public showSongsUser: ShowSongsUserComponent,
-              private songService: SongService,
   ) {
   }
 
@@ -68,20 +62,6 @@ export class EditProfileComponent implements OnInit {
         this.avatar = this.userinfo.avatar;
         this.old_avatar = this.userinfo.avatar;
         this.username = this.userinfo.username;
-        this.songService.getSongDetail(this.userinfo.id)
-          .subscribe((data: any) => {
-            if (data.status) {
-              this.toastr.warning('You must login to edit profile!')
-              this.token.signOut();
-              this.routes.navigate(['/login'])
-            } else {
-              // console.log(data);
-              this.songs = data;
-            }
-          }, error => {
-            console.log(error);
-          });
-        // console.log(this.showSongsUser.songs);
       }
     }, error => console.log(error));
 
@@ -118,12 +98,18 @@ export class EditProfileComponent implements OnInit {
               this.routes.navigate(['/login'])
             } else {
               // this.routes.navigate(['list']);
-              this.toastr.success('Updated profile successfully!');
+              this.toastr.success('Updated Profile Successfully!');
               this.routes.navigate(['/profile']);
             }
           }, error => {
-            console.log(JSON.parse(error.error));
-            this.toastr.warning(JSON.parse(error.error).avatar);
+            // console.log(JSON.parse(error.error));
+            // console.log(error.error.email);
+            if (error.error.email) {
+              this.toastr.warning(error.error.email);
+            }
+            else {
+              this.toastr.warning(JSON.parse(error.error).avatar);
+            }
           });
       }
     }

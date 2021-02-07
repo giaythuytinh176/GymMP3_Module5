@@ -156,6 +156,11 @@ class UserController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
+        $data = DB::table('users')->where('email', '=', $request->email)->where('id', '!=', $id)->first();
+        if ($data) {
+            return response()->json(['email'=>'Email is exist!'], 400);
+        }
+
         $user = User::findOrFail($id);
         $user->fill($request->all());
         $user->save();

@@ -47,9 +47,6 @@ export class UpdateSongComponent implements OnInit {
   mp3Url: any;
   old_avatar = '';
   old_mp3 = '';
-  old_singer: any;
-  old_category: any;
-  old_album: any;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -64,6 +61,10 @@ export class UpdateSongComponent implements OnInit {
               private fb: FormBuilder,
               private token: TokenStorageService,
   ) {
+  }
+
+  compareWithFunc(a, b) {
+    return a === b;
   }
 
   ngOnInit() {
@@ -81,7 +82,7 @@ export class UpdateSongComponent implements OnInit {
     }, (error) => console.log(error));
 
     this.userService.getInfoUserToken().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update Song.');
@@ -95,15 +96,14 @@ export class UpdateSongComponent implements OnInit {
       this.id = +paramMap.get('id');
       this.songService.getSongById(this.id).subscribe(
         (data: any) => {
-          console.log(data);
           if (data.status) {
             this.toastr.warning('You must login to update song.');
             this.token.signOut();
             this.route.navigate(['/login'])
           } else {
             this.singerService.getSingerIDBySongID(this.id).subscribe((res: any) => {
-              console.log(res);
-              this.old_singer = JSON.stringify(res);
+              // console.log(res);
+              this.singer_id = res;
             }, (error: any) => console.log(error));
             // console.log(111);
             // console.log(data);
@@ -114,12 +114,9 @@ export class UpdateSongComponent implements OnInit {
             this.views = data.views;
             this.avatarUrl = data.avatarUrl;
             this.mp3Url = data.mp3Url;
-            this.singer_id = data.singer_id;
             this.category_id = data.category_id;
             this.album_id = data.album_id;
             this.old_mp3 = data.mp3Url;
-            this.old_category = data.category_id;
-            this.old_album = data.album_id;
             this.old_avatar = data.avatarUrl;
           }
         },
@@ -136,25 +133,19 @@ export class UpdateSongComponent implements OnInit {
       views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       avatarUrl: [''],
       mp3Url: [''],
-      singer_id: [''],
-      category_id: [''],
-      album_id: [''],
+      singer_id: ['', [Validators.required]],
+      category_id: ['', [Validators.required]],
+      album_id: ['', [Validators.required]],
       old_avatar: [this.old_avatar],
       old_mp3: [this.old_mp3],
-      old_singer: [this.old_singer],
-      old_category: [this.old_category],
-      old_album: [this.old_album],
     });
   }
 
   updateSong() {
-    // console.log(this.userinfo);
     this.updateMusicForm.value.avatarUrl = this.firebase.fb;
     this.updateMusicForm.value.mp3Url = this.firebaseMP3.fb;
     this.song = this.updateMusicForm.value;
     this.song.user_id = this.userinfo.id;
-    // console.log(this.song);
-    // console.log(this.updateMusicForm.value);
     if (!this.updateMusicForm.value.avatarUrl) {
       this.song.avatarUrl = this.old_avatar;
     } else {
@@ -165,21 +156,9 @@ export class UpdateSongComponent implements OnInit {
     } else {
       this.song.mp3Url = this.updateMusicForm.value.mp3Url;
     }
-    if (this.updateMusicForm.value.singer_id == '""' || !this.updateMusicForm.value.singer_id) {
-      this.song.singer_id = this.old_singer;
-    } else {
-      this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
-    }
-    if (!this.updateMusicForm.value.category_id) {
-      this.song.category_id = this.old_category;
-    } else {
-      this.song.category_id = this.updateMusicForm.value.category_id;
-    }
-    if (!this.updateMusicForm.value.album_id) {
-      this.song.album_id = this.old_album;
-    } else {
-      this.song.album_id = this.updateMusicForm.value.album_id;
-    }
+    this.song.category_id = this.updateMusicForm.value.category_id;
+    this.song.album_id = this.updateMusicForm.value.album_id;
+    this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
     // console.log(this.song);
     this.songService.updateSong(this.song, this.id).subscribe((data: any) => {
       if (data.status) {

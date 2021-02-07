@@ -1,9 +1,9 @@
 (function ($) {
   "use strict";
 
-  if($('.playlist').length == 0) return;
+  if ($('.playlist').length === 0) return;
 
-  var playlist = $( '.playlist' ).mepPlaylist({
+  var playlist = $('.playlist').mepPlaylist({
     audioHeight: '40',
     audioWidth: '100%',
     videoHeight: '40',
@@ -42,57 +42,23 @@
     ],
     mepPlaylistTracks: [
       {
-            "id": "item-1",
-            "title": "Vùng Lá Me Bay",
-            "except": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quamquam tu hanc copiosiorem etiam soles dicere. Nihil illinc huc pervenit.",
-            "link": "track.detail.html",
-            "thumb": { "src": "https://i.ytimg.com/vi/z8DLkLnemFY/mqdefault.jpg" },
-            "src": "https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2FVungLaMeBay1-NhuQuynh-4453354.mp3?alt=media&token=8af81cc7-c90b-4a28-b48f-137884833541",
-            "meta": {
-                "author": "Trần Quang Lộc",
-                "authorlink": "artist.detail.html",
-                "date": "30.05.2016",
-                "category": "Blue",
-                "tag": "Holiday",
-                "play": 3200,
-                "like": 210,
-                "duration": "5:20"
-            }
-        },
-      //   {
-      //       "id": "item-2",
-      //       "title": "Fireworks",
-      //       "except": "Hidem saepe faciamus. Quid ad utilitatem tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.",
-      //       "link": "track.detail.html",
-      //       "thumb": { "src": "images/b1.jpg" },
-      //       "src": "https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2F1612089505857_Dap-Mo-Cuoc-Tinh-Le-Sang.mp3?alt=media&token=ff4fd457-df41-46a9-8ea0-d46ba34f9517",
-      //       "meta": {
-      //           "author": "Kygo",
-      //           "authorlink": "artist.detail.html",
-      //           "date": "02.05.2016",
-      //           "category": "Jazz",
-      //           "play": 30,
-      //           "like": 10,
-      //           "duration": "4:25"
-      //       }
-      //   },
-      //   {
-      //       "id": "item-3",
-      //       "title": "I Wanna Be In the Cavalry",
-      //       "except": "Tantae pecuniae? Utram tandem linguam nescio? Sed hoc sane concedamus.",
-      //       "link": "track.detail.html",
-      //       "thumb": { "src": "images/b2.jpg" },
-      //       "src": "https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2F1612089505857_Dap-Mo-Cuoc-Tinh-Le-Sang.mp3?alt=media&token=ff4fd457-df41-46a9-8ea0-d46ba34f9517",
-      //       "meta": {
-      //           "author": "Jeremy Scott",
-      //           "authorlink": "artist.detail.html",
-      //           "date": "09.04.2016",
-      //           "category": "DJ",
-      //           "play": 300,
-      //           "like": 10,
-      //           "duration": "2:50"
-      //       }
-      //   }
+        "id": "item-1",
+        "title": "Vùng Lá Me Bay",
+        "except": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quamquam tu hanc copiosiorem etiam soles dicere. Nihil illinc huc pervenit.",
+        "link": "track.detail.html",
+        "thumb": {"src": "https://i.ytimg.com/vi/z8DLkLnemFY/mqdefault.jpg"},
+        "src": "https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/test%2FVungLaMeBay1-NhuQuynh-4453354.mp3?alt=media&token=8af81cc7-c90b-4a28-b48f-137884833541",
+        "meta": {
+          "author": "Trần Quang Lộc",
+          "authorlink": "artist.detail.html",
+          "date": "30.05.2016",
+          "category": "Blue",
+          "tag": "Holiday",
+          "play": 3200,
+          "like": 210,
+          "duration": "5:20"
+        }
+      },
     ]
   });
 
@@ -100,72 +66,73 @@
   var player = playlist.find('audio, video')[0].player;
 
   // event on like btn
-  player.$node.on('like.mep', function(e, trackid){
-    $('[track-id='+trackid+']').toggleClass('is-like');
+  player.$node.on('like.mep', function (e, trackid) {
+    $('[track-id=' + trackid + ']').toggleClass('is-like');
   });
 
   // event on play
-  player.$node.on('play', function(e){
+  player.$node.on('play', function (e) {
     updateDisplay();
   });
 
   // event on pause
-  player.$node.on('pause', function(e){
+  player.$node.on('pause', function (e) {
     updateDisplay();
   });
 
   // update when pjax end
-  $(document).on('pjaxEnd', function() {
+  $(document).on('pjaxEnd', function () {
     updateDisplay();
   });
 
   // simulate the play btn
-  $(document).on('click.btn', '.btn-playpause', function(e){
-      e.stopPropagation();
-      var self = $(this);
-      if( self.hasClass('is-playing') ){
-        self.removeClass('is-playing');
-        player.pause();
-      }else{
-        var item = getItem(self);
-        item && player.mepAdd(item, true);
-      }
+  $(document).on('click.btn', '.btn-playpause', function (e) {
+    e.stopPropagation();
+    var self = $(this);
+    if (self.hasClass('is-playing')) {
+      self.removeClass('is-playing');
+      player.pause();
+    } else {
+      var item = getItem(self);
+      console.log(item);
+      item && player.mepAdd(item, true);
+    }
   });
 
-  function updateDisplay(){
+  function updateDisplay() {
     $('[data-id]').removeClass('active').find('.btn-playpause').removeClass('is-playing').parent().removeClass('active');
     var track = player.mepGetCurrentTrack();
-    if(!track || !track.id) return;
-    var item = $('[data-id="'+track.id+'"]');
-    if( player.media.paused ){
+    if (!track || !track.id) return;
+    var item = $('[data-id="' + track.id + '"]');
+    if (player.media.paused) {
       item.removeClass('active').find('.btn-playpause').removeClass('is-playing').parent().removeClass('active');
-    }else{
+    } else {
       item.addClass('active').find('.btn-playpause').addClass('is-playing').parent().addClass('active');
     }
   }
 
   // get item data, you can use ajax to get data from server
-  function getItem(self){
+  function getItem(self) {
     var item = self.closest('.item');
     // track detail
-    if(!item.attr('data-src')){
+    if (!item.attr('data-src')) {
       self.toggleClass('is-playing');
       $('#tracks').find('.btn-playpause').first().trigger('click');
       return false;
     }
 
     var obj = {
-        meta: {
-           author: item.find('.item-author').find('a').text()
-          ,authorlink : item.find('.item-author').find('a').attr('href')
-        }
-        ,src: self.closest('[data-src]').attr("data-src")
-        ,thumb: {
-          src: item.find('.item-media-content').css("background-image").replace(/^url\(["']?/, '').replace(/["']?\)$/, '')
-        }
-        ,title: item.find('.item-title').find('a').text()
-        ,link: item.find('.item-title').find('a').attr('href')
-        ,id: self.attr("data-id") ? self.attr("data-id") : self.closest('[data-id]').attr("data-id")
+      meta: {
+        author: item.find('.item-author').find('a').text()
+        , authorlink: item.find('.item-author').find('a').attr('href')
+      }
+      , src: self.closest('[data-src]').attr("data-src")
+      , thumb: {
+        src: item.find('.item-media-content').css("background-image").replace(/^url\(["']?/, '').replace(/["']?\)$/, '')
+      }
+      , title: item.find('.item-title').find('a').text()
+      , link: item.find('.item-title').find('a').attr('href')
+      , id: self.attr("data-id") ? self.attr("data-id") : self.closest('[data-id]').attr("data-id")
     };
     return obj;
   }
