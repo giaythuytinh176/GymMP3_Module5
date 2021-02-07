@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {UpdateInfo} from "../model/userManager/updateinfo";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
+import {UpdateInfo} from "../../model/userManager/updateinfo";
 
 const TOKEN_KEY = 'AuthToken';
 

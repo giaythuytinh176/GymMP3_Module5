@@ -6,12 +6,12 @@ import {ProfileComponent} from "./component/profile/profile.component";
 import {AuthGuard} from "./services/userManager/auth.guard";
 import {NotGuardComponent} from "./component/layout/not-guard/not-guard/not-guard.component";
 import {LoginComponent} from "./component/login/login.component";
-import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song/all-list-song.component";
-import {CreateSongComponent} from "./component/songManager/create-song/create-song/create-song.component";
 import {UpdateSongComponent} from "./component/songManager/update-song/update-song.component";
 import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component'
 import {EditProfileComponent} from "./component/edit-profile/edit-profile.component";
+import {CreateSongComponent} from "./component/songManager/create-song/create-song.component";
+import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song.component";
 
 const routes: Routes = [
   {
@@ -56,7 +56,7 @@ const routes: Routes = [
   //   canActivate: [AuthGuard],
   // },
   {
-    path: 'editsong/:id',
+    path: 'edit-song/:id',
     component: UpdateSongComponent,
     canActivate: [AuthGuard],
   },

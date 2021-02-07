@@ -20,6 +20,7 @@
       </div>
       <form [formGroup]="registerForm">
         <div class="form-group">
+<!--          #checkUsername (input)="check$.next(checkUsername.value)" -->
           <input (input)="onInput($event)" [class.input-invalid]="registerForm.get('username')!.invalid && registerForm.get('username')!.touched" [class.input-valid]="registerForm.get('username')!.valid && registerForm.get('username')!.touched" class="form-control" formControlName="username" placeholder="Username" type="text">
           <div *ngIf="registerForm.get('username')!.invalid && registerForm.get('username')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
             <div *ngIf="registerForm.get('username').hasError('required')">
@@ -27,7 +28,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="existUserMess === true" style="margin-top: 10px;color: red; text-align: left !important;">
+          <div *ngIf="existUserMess" style="margin-top: 10px;color: red; text-align: left !important;">
             <div [@shake]="shake">The username already <strong>exists!.</strong>
             </div>
           </div>

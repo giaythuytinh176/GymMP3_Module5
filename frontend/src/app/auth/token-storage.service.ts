@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
-import {UserService} from "../services/user.service";
+import {UserService} from "../services/userManager/user.service";
 
 const TOKEN_KEY = 'AuthToken';
 const Login_KEY = 'AuthLogin';
@@ -17,7 +17,7 @@ export class TokenStorageService {
 
   signOut(): void {
     this.userService.removeToken(this.getToken()).subscribe((res: any) => {
-      console.log(res);
+      // console.log(res);
       window.sessionStorage.clear();
       window.sessionStorage.removeItem(TOKEN_KEY);
       window.sessionStorage.removeItem(Login_KEY);

@@ -10,17 +10,17 @@
 
 .custom-modalbox > mat-dialog-container {
   padding: 0px;
-  background-color: #d8d1be;
+  background-color: #BBBBBB;
 }
 
 ::ng-deep .custom-dialog > mat-dialog-container {
-  background-color: #d8d1be;
+  background-color: #BBBBBB;
 }
 
 :root {
-  --main-bg-color: #d8d1be;
+  --main-bg-color: #BBBBBB;
 }
 
-.custom-dialog >  mat-dialog-container {
+.custom-dialog > mat-dialog-container {
   background: var(--main-bg-color);
 }

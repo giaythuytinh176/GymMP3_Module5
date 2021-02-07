@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, Component, OnChanges, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from 'src/app/auth/auth.service';
 import {ChangePassword} from 'src/app/auth/change-password';
-import {UserService} from "../../services/user.service";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {ToastrService} from "ngx-toastr";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
@@ -10,6 +9,7 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {ErrorStateMatcher} from "@angular/material/core";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
+import {UserService} from "../../services/userManager/user.service";
 
 @Component({
   selector: 'app-change-password',
@@ -19,13 +19,14 @@ import {shake} from "ng-animate";
     trigger('shake', [transition('* => *', useAnimation(shake))])
   ],
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit, OnChanges, AfterContentChecked {
   title = 'Change Password';
   form: any = {};
   changePassword: ChangePassword;
   userinfo!: UpdateInfo;
   ChangePassForm: FormGroup;
   shake: any;
+  isSamePass = false;
 
   constructor(
     private authService: AuthService,
@@ -42,10 +43,10 @@ export class ChangePasswordComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
       new_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
       confirm_new_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
-    }, {validator: this.checkPasswords});
+    }, {validator: this.checkPasswords});//, validators: this.checkPasswords2
 
     this.userService.getInfoUserToken().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to change password.');
@@ -56,10 +57,30 @@ export class ChangePasswordComponent implements OnInit {
     }, error => console.log(error));
   }
 
+  ngAfterContentChecked() {
+    // console.log(11111);
+    if (this.ChangePassForm.value.password !== this.ChangePassForm.value.new_password) {
+      this.isSamePass = false;
+    }
+    if ((this.ChangePassForm.value.password === this.ChangePassForm.value.new_password) && (this.ChangePassForm.value.password !== '')) {
+      this.isSamePass = true;
+    }
+  }
+
+  ngOnChanges() {
+
+  }
+
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     const new_password = group.get('new_password').value;
     const confirm_new_password = group.get('confirm_new_password').value;
     return new_password === confirm_new_password ? null : {passwordnotmatch: true}
+  }
+
+  checkPasswords2(group: FormGroup) { // here we have the 'passwords' group
+    const new_password = group.get('new_password').value;
+    const password = group.get('password').value;
+    return password === new_password ? {passwordmatch: true} : null;
   }
 
   ngSubmit() {
@@ -68,45 +89,59 @@ export class ChangePasswordComponent implements OnInit {
       this.ChangePassForm.value.new_password,
       this.ChangePassForm.value.confirm_new_password);
     this.changePassword.username = this.userinfo.username;
-    console.log(this.changePassword);
-    this.authService
-      .changePasswordAuth(this.changePassword)
-      .subscribe(
-        (data: any) => {
-          console.log(data);
-          if (data.error || data.status) {
-            this.toastr.warning('You must login to change password.');
-          } else if (data.data == 'Password has been updated.') {
-            this.router.navigate(['/login']);
-            // setTimeout(() => {
-            //   this.toastr.success('You have successfully changed your Password, please login again!');
-            // }, 1000);
-            this.toastr.success('You have successfully changed your Password, please login again!');
-            this.token.signOut();
-            // window.location.reload();
-            // this.router.navigate(['/login']);
-            setTimeout(() => {
-              window.location.reload();
-            }, 1000);
+    // console.log(this.ChangePassForm.value);
+    if (this.ChangePassForm.value.password === this.ChangePassForm.value.new_password) {
+      this.isSamePass = true;
+    } else {
+      this.authService
+        .changePasswordAuth(this.changePassword)
+        .subscribe(
+          (data: any) => {
+            // console.log(data);
+            if (data.error || data.status) {
+              // console.log(data.error);
+              if (data.error) {
+                this.toastr.warning(data.error);
+              } else {
+                this.toastr.warning('You must login to change password.');
+                this.router.navigate(['/login']);
+              }
+            } else if (data.data == 'Password has been updated.') {
+              this.router.navigate(['/login']);
+              // setTimeout(() => {
+              //   this.toastr.success('You have successfully changed your Password, please login again!');
+              // }, 1000);
+              this.toastr.success('You have successfully changed your Password, please login again!');
+              this.token.signOut();
+              // window.location.reload();
+              // this.router.navigate(['/login']);
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
 
-          } else {
-            this.toastr.warning('Something wrong.');
-            window.location.reload();
-            this.router.navigate(['/login']);
-          }
-        },
-        error => {
-          console.log(error);
-          if (error.error.error == 'Either your email or token is wrong.') {
-            setTimeout(() => {
-              this.toastr.warning('Old password is incorrect!')
-            }, 500);
-          } else {
-            this.toastr.warning('Something wrong.');
-            window.location.reload();
-            this.router.navigate(['/login']);
-          }
-        });
+            } else {
+              this.toastr.warning('Something wrong.');
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+              this.router.navigate(['/login']);
+            }
+          },
+          error => {
+            // console.log(error);
+            if (error.error.error == 'Either your email or token is wrong.') {
+              setTimeout(() => {
+                this.toastr.warning('Old password is incorrect!')
+              }, 500);
+            } else {
+              this.toastr.warning('Something wrong.');
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+              this.router.navigate(['/login']);
+            }
+          });
+    }
   }
 }
 

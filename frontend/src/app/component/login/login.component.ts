@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm);
+    // console.log(this.loginForm);
     if (this.loginForm.value.password.length < 6) {
       this.toasrt.warning('Password is too short.')
     } else if (this.loginForm.value.password.length > 8) {
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       );
       this.authService.attemptAuth(this.loginInfo).subscribe(
         (data: any) => {
-          console.log(data);
+          // console.log(data);
           if (data.error || data.status) {
             this.toasrt.warning('Login Failed!!! Please login again!.')
           } else {

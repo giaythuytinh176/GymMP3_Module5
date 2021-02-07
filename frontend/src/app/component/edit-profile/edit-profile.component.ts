@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
 import {Song} from "../../model/song/song";
-import {UserService} from "../../services/user.service";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TokenStorageService} from "../../auth/token-storage.service";
@@ -12,6 +11,7 @@ import {ShowSongsUserComponent} from "../show-songs-user/show-songs-user.compone
 import {SongService} from "../../services/song/song.service";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
+import {UserService} from "../../services/userManager/user.service";
 
 @Component({
   selector: 'app-edit-profile',
@@ -50,7 +50,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getInfoUserToken().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update profile.');
@@ -75,13 +75,13 @@ export class EditProfileComponent implements OnInit {
               this.token.signOut();
               this.routes.navigate(['/login'])
             } else {
-              console.log(data);
+              // console.log(data);
               this.songs = data;
             }
           }, error => {
             console.log(error);
           });
-        console.log(this.showSongsUser.songs);
+        // console.log(this.showSongsUser.songs);
       }
     }, error => console.log(error));
 
@@ -104,16 +104,14 @@ export class EditProfileComponent implements OnInit {
       this.toastr.warning('Avatar is required!');
     } else {
       if (this.profileForm.value.avatar && this.profileForm.value.avatar.includes('http')) {
-
       } else {
         this.profileForm.value.avatar = this.old_avatar;
       }
-
       if (this.profileForm.valid) {
         const data = this.profileForm.value;
         this.userService.updateUser(data, data.id)
           .subscribe((data: any) => {
-            console.log(data);
+            // console.log(data);
             if (data.status) {
               this.token.signOut();
               this.toastr.warning('You must login to update profile.');

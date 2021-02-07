@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Singer} from "../../model/singer";
 import {environment} from "../../../environments/environment";
+import {Singer} from "../../model/singer/singer";
 
 const TOKEN_KEY = 'AuthToken';
 

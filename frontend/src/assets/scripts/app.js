@@ -42,7 +42,6 @@
 
       $('[data-target="folded"] input').prop('checked', app.setting.folded);
       $('[data-target="container"] input').prop('checked', app.setting.container);
-      console.log(color);
       if(color != app.setting.color){
         uiLoad.remove('css/theme/'+color+'.css');
         uiLoad.load('css/theme/'+app.setting.color+'.css');

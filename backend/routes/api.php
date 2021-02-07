@@ -21,11 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('signup', '\App\Http\Controllers\UserController@register');
 Route::post('login', '\App\Http\Controllers\UserController@authenticate');
 Route::get('/songs/list', [\App\Http\Controllers\SongController::class, 'allSongs']);
-Route::post('/search','\App\Http\Controllers\SongController@search');
-Route::post('/checkExistUsername','\App\Http\Controllers\UserController@checkExistUsername');
-Route::post('/removeToken','\App\Http\Controllers\UserController@removeToken');
+Route::post('/search', '\App\Http\Controllers\SongController@search');
+Route::post('/checkExistUsername', '\App\Http\Controllers\UserController@checkExistUsername');
+Route::post('/removeToken', '\App\Http\Controllers\UserController@removeToken');
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', '\App\Http\Controllers\UserController@getAuthenticatedUser');
     Route::put('/users/{id}', '\App\Http\Controllers\UserController@update')->name('users.update');
     Route::post('changePassword', '\App\Http\Controllers\UserController@changePassword');
@@ -36,11 +36,11 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('/songs/{id}', [\App\Http\Controllers\SongController::class, 'update']);
     Route::get('/songs/{id}', [\App\Http\Controllers\SongController::class, 'showidsong']);
     Route::delete('/songs/{id}', [\App\Http\Controllers\SongController::class, 'destroy']);
-    Route::get('/songs',[\App\Http\Controllers\SongController::class,'index']);
+    Route::get('/songs', [\App\Http\Controllers\SongController::class, 'index']);
     Route::post('/songs', [\App\Http\Controllers\SongController::class, 'store']);
-    Route::get('listsongs/{id}','\App\Http\Controllers\SongController@show');
-    Route::get('findSingerBySongID/{id}','\App\Http\Controllers\SongController@findSingerBySongID');
-    Route::get('findSingerIDBySongID/{id}','\App\Http\Controllers\SongController@findSingerIDBySongID');
+    Route::get('listsongs/{id}', '\App\Http\Controllers\SongController@show');
+    Route::get('findSingerBySongID/{id}', '\App\Http\Controllers\SongController@findSingerBySongID');
+    Route::get('findSingerIDBySongID/{id}', '\App\Http\Controllers\SongController@findSingerIDBySongID');
 
 });
 
