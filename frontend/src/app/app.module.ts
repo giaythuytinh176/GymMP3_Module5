@@ -62,8 +62,6 @@ import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guar
 import {AngularFireStorageModule,} from "@angular/fire/storage";
 import {FirebaseComponent} from "./component/firebase/firebase.component";
 import {LoginComponent} from './component/login/login.component';
-import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song/all-list-song.component';
-import {CreateSongComponent} from './component/songManager/create-song/create-song/create-song.component';
 import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.component";
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
 import {
@@ -75,6 +73,9 @@ import {SearchSongComponent} from './component/songManager/search-song/search-so
 import {EditProfileComponent} from './component/edit-profile/edit-profile.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {CreateSongComponent} from "./component/songManager/create-song/create-song.component";
+import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song.component";
+import { CdkDragDropOverviewExampleComponent } from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
     DialogContentExampleDialog,
     DialogDeleteMyList,
     EditProfileComponent,
+    CdkDragDropOverviewExampleComponent,
   ],
   imports: [
     BrowserModule,

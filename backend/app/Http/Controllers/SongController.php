@@ -113,6 +113,12 @@ class SongController extends Controller
         return $list_singer_id;
     }
 
+    public function findSingerNameBySingerID($id)
+    {
+        $data = DB::table('singers')->where('singers.id', '=', $id)->first();
+        return $data->singer_name;
+    }
+
     public function findSingerIDBySongID($id)
     {
         $list_singer_id = [];
@@ -121,12 +127,6 @@ class SongController extends Controller
             $list_singer_id[] = $dt->singer_id;
         }
         return $list_singer_id;
-    }
-
-    public function findSingerNameBySingerID($id)
-    {
-        $data = DB::table('singers')->where('singers.id', '=', $id)->first();
-        return $data->singer_name;
     }
 
     public function allSongs()
@@ -211,7 +211,7 @@ class SongController extends Controller
     public function search(Request $request)
     {
         $songs = DB::table('songs')
-            ->select('songs.*', 'users.username', 'categories.category_name','albums.album_name')
+            ->select('songs.*', 'users.username', 'categories.category_name', 'albums.album_name')
             ->join('users', 'users.id', '=', 'songs.user_id')
             ->join('categories', 'categories.id', '=', 'songs.category_id')
             ->join('albums', 'albums.id', '=', 'songs.album_id')

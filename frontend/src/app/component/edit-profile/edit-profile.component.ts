@@ -50,7 +50,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getInfoUserToken().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update profile.');
@@ -75,13 +75,13 @@ export class EditProfileComponent implements OnInit {
               this.token.signOut();
               this.routes.navigate(['/login'])
             } else {
-              console.log(data);
+              // console.log(data);
               this.songs = data;
             }
           }, error => {
             console.log(error);
           });
-        console.log(this.showSongsUser.songs);
+        // console.log(this.showSongsUser.songs);
       }
     }, error => console.log(error));
 
@@ -104,16 +104,14 @@ export class EditProfileComponent implements OnInit {
       this.toastr.warning('Avatar is required!');
     } else {
       if (this.profileForm.value.avatar && this.profileForm.value.avatar.includes('http')) {
-
       } else {
         this.profileForm.value.avatar = this.old_avatar;
       }
-
       if (this.profileForm.valid) {
         const data = this.profileForm.value;
         this.userService.updateUser(data, data.id)
           .subscribe((data: any) => {
-            console.log(data);
+            // console.log(data);
             if (data.status) {
               this.token.signOut();
               this.toastr.warning('You must login to update profile.');

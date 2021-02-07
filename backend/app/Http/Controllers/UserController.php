@@ -74,29 +74,26 @@ class UserController extends Controller
     public function getAuthenticatedUser()
     {
         try {
-
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
-
         } catch (TokenExpiredException $e) {
-
             return response()->json(['token_expired'], $e->getStatusCode());
-
         } catch (TokenInvalidException $e) {
-
             return response()->json(['token_invalid'], $e->getStatusCode());
-
         } catch (JWTException $e) {
-
             return response()->json(['token_absent'], $e->getStatusCode());
         }
-
         return response()->json(compact('user'));
     }
 
     public function changePassword(Request $request)
     {
+        if ($request->new_password === $request->password) {
+            $error = ['Your new password must be different from your previous password.'];
+            return response()->json(compact('error'));
+        }
+
         if ($request->new_password !== $request->confirm_new_password) {
             $error = ['Passwords do not match'];
             return response()->json(compact('error'));

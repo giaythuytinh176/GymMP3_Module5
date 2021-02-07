@@ -69,26 +69,25 @@ export class UpdateSongComponent implements OnInit {
   ngOnInit() {
     this.albumService.getAllAlbum().subscribe((albums: any) => {
       this.albums = albums.data;
-      console.log(this.albums);
+      // console.log(this.albums);
     }, (error) => console.log(error));
     this.categoryService.getAllCategories().subscribe((categories: any) => {
       this.categories = categories.data;
-      console.log(this.categories);
+      // console.log(this.categories);
     }, (error) => console.log(error));
     this.singerService.getAllSingers().subscribe((singers: any) => {
       this.singers = singers.data;
-      console.log(this.singers);
+      // console.log(this.singers);
     }, (error) => console.log(error));
 
     this.userService.getInfoUserToken().subscribe((data: any) => {
       console.log(data);
       if (data.status) {
         this.token.signOut();
-        this.toastr.warning('You must login to create Song.');
+        this.toastr.warning('You must login to update Song.');
         this.route.navigate(['/login'])
       } else {
         this.userinfo = data.user;
-        this.old_avatar = this.userinfo.avatar;
       }
     }, error => console.log(error));
 
@@ -121,6 +120,7 @@ export class UpdateSongComponent implements OnInit {
             this.old_mp3 = data.mp3Url;
             this.old_category = data.category_id;
             this.old_album = data.album_id;
+            this.old_avatar = data.avatarUrl;
           }
         },
         error => {
@@ -187,14 +187,12 @@ export class UpdateSongComponent implements OnInit {
         this.token.signOut();
         this.route.navigate(['/login'])
       } else {
-        this.toastr.success('Updated Song Sucessfully!');
+        this.toastr.success('Updated Song Successfully!');
         this.route.navigate(['/profile']);
       }
     }, error => {
       this.toastr.warning('Something wrong.');
-      console.log(error);
+      // console.log(error);
     });
   }
-
-
 }

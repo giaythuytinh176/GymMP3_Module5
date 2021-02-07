@@ -42,7 +42,7 @@ export class ShowSongsUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getInfoUserToken().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to see list songs.');
@@ -61,11 +61,11 @@ export class ShowSongsUserComponent implements OnInit {
           this.token.signOut();
           this.routes.navigate(['/login'])
         } else {
-          console.log(data);
+          // console.log(data);
           this.songs = data;
         }
       }, error => {
-        console.log(error);
+        // console.log(error);
         this.isUpdate = false;
         this.isUpdateFailed = true;
       });
@@ -74,7 +74,7 @@ export class ShowSongsUserComponent implements OnInit {
   deleteSong(id: number) {
     this.songService.deleteSong(id).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.getSongDetail();
         this.toastr.success('Deleted sucessfully.');
         this.routes.navigate(['/listsongs']);
@@ -89,12 +89,12 @@ export class ShowSongsUserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       // this.title = result;
       if (result) {
         this.deleteSong(id);
       }
-      console.log(result);
+      // console.log(result);
     });
   }
 }
