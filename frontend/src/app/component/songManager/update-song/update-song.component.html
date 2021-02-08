@@ -8,7 +8,7 @@
       <div class="form-group row">
         <!--        <div class="col-sm-3 form-control-label text-muted">Name song:</div>-->
         <div class="col-sm-8">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Name song:</mat-label>
             <input [(ngModel)]="nameSong" [class.input-invalid]="updateMusicForm.get('nameSong')!.invalid && updateMusicForm.get('nameSong')!.touched" [class.input-valid]="updateMusicForm.get('nameSong')!.valid && updateMusicForm.get('nameSong')!.touched" class="form-control" formControlName="nameSong" matInput placeholder="Name song" type="text">
             <div *ngIf="updateMusicForm.get('nameSong').invalid && updateMusicForm.get('nameSong').touched"
@@ -24,7 +24,7 @@
       <div class="form-group row">
         <!--        <div class="col-sm-3 form-control-label text-muted">Author:</div>-->
         <div class="col-sm-8">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Author:</mat-label>
             <input [(ngModel)]="author" [class.input-invalid]="updateMusicForm.get('author')!.invalid && updateMusicForm.get('author')!.touched" [class.input-valid]="updateMusicForm.get('author')!.valid && updateMusicForm.get('author')!.touched" class="form-control" formControlName="author" matInput placeholder="Author" type="text">
             <div *ngIf="updateMusicForm.get('author').invalid && updateMusicForm.get('author').touched"
@@ -40,7 +40,7 @@
       <div class="form-group row">
         <!--        <div class="col-sm-3 form-control-label text-muted">Singer:</div>-->
         <div class="col-sm-8">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Select a Singer:</mat-label>
             <mat-select [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" [compareWith]="compareWithFunc" class="form-control" formControlName="singer_id" multiple>
               <!--              <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>-->
@@ -60,7 +60,7 @@
       <div class="form-group row">
         <!--        <div class="col-sm-3 form-control-label text-muted">Category:</div>-->
         <div class="col-sm-8">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Select a Category:</mat-label>
             <input [(ngModel)]="category_id" [class.input-invalid]="updateMusicForm.get('myControl')!.invalid && updateMusicForm.get('myControl')!.touched" [class.input-valid]="updateMusicForm.get('myControl')!.valid && updateMusicForm.get('myControl')!.touched" [matAutocomplete]="auto" class="form-control" formControlName="myControl" matInput type="text">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
@@ -82,7 +82,7 @@
       <div class="form-group row">
         <!--        <div class="col-sm-3 form-control-label text-muted"> Album:</div>-->
         <div class="col-sm-8">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Select an Album:</mat-label>
             <mat-select [(ngModel)]="album_id" [class.input-invalid]="updateMusicForm.get('album_id')!.invalid && updateMusicForm.get('album_id')!.touched" [class.input-valid]="updateMusicForm.get('album_id')!.valid && updateMusicForm.get('album_id')!.touched" class="form-control" formControlName="album_id">
               <!--            <mat-option disabled selected value>&#45;&#45; Select an Album &#45;&#45;</mat-option>-->
@@ -102,7 +102,7 @@
       <div class="form-group row">
         <!--        <div class="col-sm-3 form-control-label text-muted">View:</div>-->
         <div class="col-sm-8">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>View:</mat-label>
             <input [(ngModel)]="views" [class.input-invalid]="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" [class.input-valid]="updateMusicForm.get('views')!.valid && updateMusicForm.get('views')!.touched" class="form-control" formControlName="views" matInput placeholder="View" type="text">
             <div *ngIf="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
@@ -122,7 +122,7 @@
       <div class="form-group row">
         <!--        <div class="col-sm-3 form-control-label text-muted">Describes:</div>-->
         <div class="col-sm-8">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Describes:</mat-label>
             <textarea [(ngModel)]="describes" [class.input-invalid]="updateMusicForm.get('describes')!.invalid && updateMusicForm.get('describes')!.touched" [class.input-valid]="updateMusicForm.get('describes')!.valid && updateMusicForm.get('describes')!.touched" class="form-control" formControlName="describes" matInput placeholder="Describes"
                       style="height: 100px;"></textarea>
@@ -136,7 +136,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row" style="margin-top: 80px">
         <!--        <div class="col-sm-3 form-control-label text-muted">Avatar:</div>-->
         <div class="col-sm-8">
           <mat-label>Avatar:</mat-label>
@@ -214,7 +214,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row" style="margin-top: 50px">
         <div class="col-sm-8 text-center">
           <a [routerLink]="['/user/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
           <button (click)="updateSong()" [disabled]="!updateMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">

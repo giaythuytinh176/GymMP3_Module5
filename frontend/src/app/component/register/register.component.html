@@ -19,7 +19,7 @@
         OR
       </div>
       <form [formGroup]="registerForm">
-        <mat-form-field appearance="fill" class="example-full-width">
+        <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
           <mat-label>Username:</mat-label>
           <div class="form-group">
             <!--          #checkUsername (input)="check$.next(checkUsername.value)" -->
@@ -38,7 +38,7 @@
         </mat-form-field>
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Username:</mat-label>
             <input [class.input-invalid]="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched" [class.input-valid]="registerForm.get('phone')!.valid && registerForm.get('phone')!.touched" class="form-control" formControlName="phone" matInput placeholder="Phone" type="text">
             <div *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
@@ -55,7 +55,7 @@
         </div>
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Password:</mat-label>
             <input [class.input-invalid]="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" [class.input-valid]="registerForm.get('password')!.valid && registerForm.get('password')!.touched" [errorStateMatcher]="matcher" class="form-control" formControlName="password" matInput placeholder="Password" type="password">
             <div *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
@@ -76,7 +76,7 @@
         </div>
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
             <mat-label>Password:</mat-label>
             <input [class.input-invalid]="(registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched) || registerForm.hasError('passwordnotmatch')" [class.input-valid]="registerForm.get('password_confirmation')!.valid && registerForm.get('password_confirmation')!.touched && !registerForm.hasError('passwordnotmatch')" [errorStateMatcher]="matcher" class="form-control" formControlName="password_confirmation" matInput placeholder="Password Confirmation" type="password">
             <div style="margin-top: 10px;color: red; text-align: left !important;">
