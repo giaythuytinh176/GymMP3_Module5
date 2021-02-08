@@ -121,7 +121,6 @@ class UserController extends Controller
     }
 
     // Token not found response
-
     private function resetPassword($request)
     {
         // find email

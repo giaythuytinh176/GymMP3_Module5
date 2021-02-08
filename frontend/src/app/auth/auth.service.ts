@@ -30,10 +30,10 @@ export class AuthService {
     })
   }
   auth = false;
-  private signupUrl = environment.apiUrl + '/signup';
-  private changePassUrl = environment.apiUrl + '/changePassword';
-  private loginUrl = environment.apiUrl + '/login';
-  private authUrl = environment.apiUrl + '/user';
+  private signupUrl = environment.apiUrl + '/user/signup';
+  private changePassUrl = environment.apiUrl + '/user/change-password';
+  private loginUrl = environment.apiUrl + '/user/login';
+  private authUrl = environment.apiUrl + '/user/token';
 
   constructor(private http: HttpClient,
               private toasrt: ToastrService,

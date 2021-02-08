@@ -18,34 +18,61 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('signup', '\App\Http\Controllers\UserController@register');
-Route::post('login', '\App\Http\Controllers\UserController@authenticate');
-Route::get('/songs/list', [\App\Http\Controllers\SongController::class, 'allSongs']);
-Route::post('/search', '\App\Http\Controllers\SongController@search');
-Route::post('/checkExistUsername', '\App\Http\Controllers\UserController@checkExistUsername');
-Route::post('/removeToken', '\App\Http\Controllers\UserController@removeToken');
 
-Route::group(['middleware' => ['jwt.verify']], function () {
-    Route::get('user', '\App\Http\Controllers\UserController@getAuthenticatedUser');
-    Route::put('/users/{id}', '\App\Http\Controllers\UserController@update')->name('users.update');
-    Route::post('changePassword', '\App\Http\Controllers\UserController@changePassword');
-    Route::post('/song/create', '\App\Http\Controllers\SongController@createSong');
-    Route::get('/albums/list', '\App\Http\Controllers\AlbumController@index');
-    Route::get('/categories/list', '\App\Http\Controllers\CategoryController@index');
-    Route::get('/singers/list', '\App\Http\Controllers\SingerController@index');
-    Route::put('/songs/{id}', [\App\Http\Controllers\SongController::class, 'update']);
-    Route::get('/songs/{id}', [\App\Http\Controllers\SongController::class, 'showidsong']);
-    Route::delete('/songs/{id}', [\App\Http\Controllers\SongController::class, 'destroy']);
-    Route::get('/songs', [\App\Http\Controllers\SongController::class, 'index']);
-    Route::post('/songs', [\App\Http\Controllers\SongController::class, 'store']);
-    Route::get('listsongs/{id}', '\App\Http\Controllers\SongController@show');
-    Route::get('findSingerBySongID/{id}', '\App\Http\Controllers\SongController@findSingerBySongID');
-    Route::get('findSingerIDBySongID/{id}', '\App\Http\Controllers\SongController@findSingerIDBySongID');
+Route::prefix('user')->group(function () {
+    Route::post('/signup', 'UserController@register');
+    Route::post('/login', 'UserController@authenticate');
+    Route::post('/check-username', 'UserController@checkExistUsername');
+    Route::post('/remove-token', 'UserController@removeToken');
 
 });
 
-// Route::prefix('songs')->group(function(){
-//     Route::get('/{id}','\App\Http\Controllers\SongController@show');
-// });
+Route::prefix('song')->group(function () {
+    Route::get('/list', 'SongController@allSongs');
 
+});
+
+Route::post('/search', 'SongController@search');
+
+Route::group(['middleware' => ['jwt.verify']], function () {
+
+    Route::prefix('song')->group(function () {
+        Route::get('/user/list/{id}', 'SongController@show');
+        Route::get('/{id}', 'SongController@showidsong');
+        Route::get('/', 'SongController@index');
+
+        Route::post('/create', 'SongController@store');
+
+        Route::put('/{id}', 'SongController@update');
+
+        Route::delete('/{id}', 'SongController@destroy');
+
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::get('/token', 'UserController@getAuthenticatedUser');
+        Route::put('/update/{id}', 'UserController@update');
+        Route::post('/change-password', 'UserController@changePassword');
+    });
+
+    Route::prefix('album')->group(function () {
+        Route::get('/list', 'AlbumController@index');
+
+    });
+
+    Route::prefix('category')->group(function () {
+        Route::get('/list', 'CategoryController@index');
+        Route::get('/{id}', 'CategoryController@findCategory');
+
+    });
+
+    Route::prefix('singer')->group(function () {
+        Route::get('/list', 'SingerController@index');
+        Route::get('/id/song-id/{id}', 'SongController@findSingerIDBySongID');
+        // for test
+        Route::get('/name/song-id/{id}', 'SongController@findSingerBySongID');
+
+    });
+
+});
 

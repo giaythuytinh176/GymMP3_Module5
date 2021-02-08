@@ -77,7 +77,7 @@ export class ShowSongsUserComponent implements OnInit {
         // console.log(data);
         this.getSongDetail();
         this.toastr.success('Deleted sucessfully.');
-        this.routes.navigate(['/listsongs']);
+        this.routes.navigate(['/profile']);
       }, error => console.log(error)
     )
   }

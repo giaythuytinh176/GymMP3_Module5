@@ -11,8 +11,8 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class CategoryService {
 
-  apiGetAllCategories = environment.apiUrl + '/categories/list';
-  apiGetCategoryInfo = environment.apiUrl + '/findCategory';
+  apiGetAllCategories = environment.apiUrl + '/category/list';
+  apiGetCategoryInfo = environment.apiUrl + '/category';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {

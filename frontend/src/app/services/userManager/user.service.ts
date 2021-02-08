@@ -17,10 +17,10 @@ export class UserService {
       'Authorization': 'Bearer ' + this.token
     })
   }
-  private getUserUrl = environment.apiUrl + '/user';
-  private updateUserUrl = environment.apiUrl + '/users';
-  private apiCheckExistUserUrl = environment.apiUrl + '/checkExistUsername';
-  private apiRemoveToken = environment.apiUrl + '/removeToken';
+  private getUserUrl = environment.apiUrl + '/user/token';
+  private updateUserUrl = environment.apiUrl + '/user/update';
+  private apiCheckExistUserUrl = environment.apiUrl + '/user/check-username';
+  private apiRemoveToken = environment.apiUrl + '/user/remove-token';
 
   constructor(private http: HttpClient) {
   }

@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function findCategory(Request $request)
+    {
+        $data = Category::find($request->id);
+        return response()->json($data, 200);
+    }
+
     /**
      * Display a listing of the resource.
      *
