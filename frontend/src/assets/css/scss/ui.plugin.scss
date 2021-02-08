@@ -1,51 +1,56 @@
 // settings
-.switcher{
+.switcher {
   z-index: 1000;
   position: fixed;
   top: 60px;
   right: -240px;
   width: 240px;
   @include transition(right 0.2s ease);
-  border: 1px solid rgba(120,120,120,0.1);
+  border: 1px solid rgba(120, 120, 120, 0.1);
   background-clip: padding-box;
-  &.active{
+
+  &.active {
     right: -2px;
     z-index: 1060;
   }
 }
-.switcher .sw-btn{
+
+.switcher .sw-btn {
   position: absolute;
   left: -43px;
   top: -1px;
   padding: 10px 15px;
-  z-index:1045;
-  border: 1px solid rgba(120,120,120,0.1);
+  z-index: 1045;
+  border: 1px solid rgba(120, 120, 120, 0.1);
   border-right-width: 0;
   background-clip: padding-box;
   border-radius: 24px 0 0 24px;
 }
-#sw-demo{
+
+#sw-demo {
   top: 118px;
-  &.active{
+
+  &.active {
     top: 78px;
   }
 }
 
 // icon list
-.list-icon i{
+.list-icon i {
   margin-right: 16px
 }
-.list-icon div{
-  line-height: 40px; 
-  white-space: nowrap; 
-  overflow: hidden; 
+
+.list-icon div {
+  line-height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
 
 /*Charts*/
-.jqstooltip{
-  background-color: rgba(0,0,0,0.8) !important;
+.jqstooltip {
+  background-color: rgba(0, 0, 0, 0.8) !important;
   border: solid 1px #000 !important;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -58,16 +63,19 @@
 .easyPieChart {
   position: relative;
   text-align: center;
-  > div{
+
+  > div {
     position: absolute;
     width: 100%;
     line-height: 1;
     top: 40%;
-    img{
+
+    img {
       margin-top: -4px;
     }
   }
-  canvas{
+
+  canvas {
     vertical-align: middle;
   }
 }
@@ -76,7 +84,7 @@
 #flotTip,
 .flotTip {
   padding: 4px 10px;
-  background-color: rgba(0,0,0,0.8) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
   border: solid 1px #000 !important;
   z-index: 100;
   font-size: 12px;
@@ -87,11 +95,12 @@
 }
 
 // flot lengend
-.legendColorBox{
-  > div{
+.legendColorBox {
+  > div {
     border: none !important;
     margin: 5px;
-    > div{
+
+    > div {
       border-radius: 10px;
     }
   }
@@ -101,10 +110,12 @@
 .st-sort-ascent:before {
   content: '\25B2';
 }
+
 .st-sort-descent:before {
   content: '\25BC';
 }
-.st-selected td{
+
+.st-selected td {
   background: $min-black;
 }
 
@@ -116,7 +127,8 @@
   background-color: rgba(255, 255, 255, 0.1) !important;
   color: inherit !important;
 }
-.ui-select-bootstrap > .ui-select-choices{
+
+.ui-select-bootstrap > .ui-select-choices {
   overflow-y: scroll;
 }
 
@@ -132,47 +144,53 @@
 .box .dataTables_wrapper > .row > .col-sm-12 {
   padding: 0;
 }
-.dataTables_wrapper.form-inline .form-control{
+
+.dataTables_wrapper.form-inline .form-control {
   width: auto;
 }
-.footable-odd{
+
+.footable-odd {
   background-color: $table-striped-color !important;
 }
 
-.note-editor{
+.note-editor {
   border-width: 0 !important;
   overflow: visible !important;
   background-color: inherit;
 }
-.note-toolbar .note-color .dropdown-toggle{
+
+.note-toolbar .note-color .dropdown-toggle {
   padding-left: 2px !important;
 }
+
 .note-editor .note-editing-area .note-editable,
-.note-editor .note-statusbar{
+.note-editor .note-statusbar {
   background-color: transparent !important;
   color: inherit !important;
 }
-.note-toolbar{
-  background-color: rgba(120,130,140,0.1);
+
+.note-toolbar {
+  background-color: rgba(120, 130, 140, 0.1);
 }
 
-.ie .ie-show{
-  display:block
+.ie .ie-show {
+  display: block
 }
 
-.nav a.waves-effect{
+.nav a.waves-effect {
   -webkit-mask-image: -webkit-radial-gradient(circle, #ffffff 100%, #000000 100%);
 }
 
-.sortable-placeholder{
+.sortable-placeholder {
   list-style: none;
   border: 1px dashed #fff;
   min-height: 40px;
 }
 
-.jscroll-loading{
+.jscroll-loading {
   padding: 5px 10px;
 }
-.jscroll-loading-center .jscroll-loading{
+
+.jscroll-loading-center .jscroll-loading {
   text-align: center;
 }

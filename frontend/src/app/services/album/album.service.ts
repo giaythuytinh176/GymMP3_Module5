@@ -11,9 +11,9 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class AlbumService {
 
-  apiGetAllAlbum = environment.apiUrl + '/albums/list';
+  apiGetAllAlbum = environment.apiUrl + '/album/list';
 
-  token = sessionStorage.getItem(TOKEN_KEY);
+  token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

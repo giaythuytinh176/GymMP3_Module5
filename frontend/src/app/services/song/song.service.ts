@@ -12,7 +12,7 @@ const TOKEN_KEY = 'AuthToken';
   providedIn: 'root'
 })
 export class SongService {
-  token = sessionStorage.getItem(TOKEN_KEY);
+  token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -20,12 +20,12 @@ export class SongService {
     })
   }
   private API_URL_CREATE = environment.apiUrl + '/song/create';
-  private apiListSongUser = environment.apiUrl + '/listsongs';
-  private updateSongUrl = environment.apiUrl + '/songs';
-  private getUserUrl = environment.apiUrl + '/user';
-  private apiGetAllSongs = environment.apiUrl + '/songs/list';
+  private apiListSongUser = environment.apiUrl + '/song/user/list';
+  private updateSongUrl = environment.apiUrl + '/song';
+  private getUserUrl = environment.apiUrl + '/user/token';
+  private apiGetAllSongs = environment.apiUrl + '/song/list';
   private search = environment.apiUrl + '/search';
-  private deleteSongsUrl = environment.apiUrl + '/songs'
+  private deleteSongsUrl = environment.apiUrl + '/song';
 
   constructor(
     private http: HttpClient,

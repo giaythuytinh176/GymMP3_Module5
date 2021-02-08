@@ -10,17 +10,17 @@ const TOKEN_KEY = 'AuthToken';
   providedIn: 'root'
 })
 export class UserService {
-  token = sessionStorage.getItem(TOKEN_KEY);
+  token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
     })
   }
-  private getUserUrl = environment.apiUrl + '/user';
-  private updateUserUrl = environment.apiUrl + '/users';
-  private apiCheckExistUserUrl = environment.apiUrl + '/checkExistUsername';
-  private apiRemoveToken = environment.apiUrl + '/removeToken';
+  private getUserUrl = environment.apiUrl + '/user/token';
+  private updateUserUrl = environment.apiUrl + '/user/update';
+  private apiCheckExistUserUrl = environment.apiUrl + '/user/check-username';
+  private apiRemoveToken = environment.apiUrl + '/user/remove-token';
 
   constructor(private http: HttpClient) {
   }

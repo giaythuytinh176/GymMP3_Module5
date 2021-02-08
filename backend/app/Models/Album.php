@@ -11,7 +11,7 @@ class Album extends Model
 
     protected $fillable = [
         'album_name',
-        'image'
+        'image',
     ];
 
     public function Song()

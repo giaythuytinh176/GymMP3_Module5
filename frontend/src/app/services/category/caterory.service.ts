@@ -11,9 +11,10 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class CategoryService {
 
-  apiGetAllCategories = environment.apiUrl + '/categories/list';
+  apiGetAllCategories = environment.apiUrl + '/category/list';
+  apiGetCategoryInfo = environment.apiUrl + '/category';
 
-  token = sessionStorage.getItem(TOKEN_KEY);
+  token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -22,6 +23,10 @@ export class CategoryService {
   }
 
   constructor(private http: HttpClient) {
+  }
+
+  getCategoryInfo(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiGetCategoryInfo}/${id}`, this.httpJson);
   }
 
   getAllCategories(): Observable<Category[]> {

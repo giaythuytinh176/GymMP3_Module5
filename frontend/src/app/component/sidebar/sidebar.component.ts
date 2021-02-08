@@ -19,15 +19,13 @@ export class SidebarComponent implements OnInit {
     public loginComponent: LoginComponent,
     private userService: UserService,
     private token: TokenStorageService,
-    private toastr: ToastrService,
-    private router: Router,
   ) {
   }
 
   ngOnInit(): void {
     if (this.token.getToken()) {
       this.userService.getInfoUserToken().subscribe((data: any) => {
-        console.log(data);
+        // console.log(data);
         if (data.status) {
           this.isLoggedIn = false;
         } else {

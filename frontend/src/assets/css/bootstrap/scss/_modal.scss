@@ -29,8 +29,12 @@
     transition: transform .3s ease-out;
     transform: translate(0, -25%);
   }
-  &.in .modal-dialog { transform: translate(0, 0); }
+
+  &.in .modal-dialog {
+    transform: translate(0, 0);
+  }
 }
+
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: auto;
@@ -66,8 +70,13 @@
   background-color: $modal-backdrop-bg;
 
   // Fade for backdrop
-  &.fade { opacity: 0; }
-  &.in { opacity: $modal-backdrop-opacity; }
+  &.fade {
+    opacity: 0;
+  }
+
+  &.in {
+    opacity: $modal-backdrop-opacity;
+  }
 }
 
 // Modal header
@@ -77,6 +86,7 @@
   border-bottom: $modal-header-border-width solid $modal-header-border-color;
   @include clearfix;
 }
+
 // Close icon
 .modal-header .close {
   margin-top: -2px;
@@ -124,9 +134,13 @@
     @include box-shadow($modal-content-sm-up-box-shadow);
   }
 
-  .modal-sm { max-width: $modal-sm; }
+  .modal-sm {
+    max-width: $modal-sm;
+  }
 }
 
 @include media-breakpoint-up(lg) {
-  .modal-lg { max-width: $modal-lg; }
+  .modal-lg {
+    max-width: $modal-lg;
+  }
 }

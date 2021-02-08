@@ -143,11 +143,13 @@
   display: inline-block;
   max-width: 100%;
   padding: $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) $custom-select-padding-y $custom-select-padding-x;
-  padding-right: $custom-select-padding-x \9;
+  padding-right: $custom-select-padding-x \9
+;
   color: $custom-select-color;
   vertical-align: middle;
   background: $custom-select-bg $custom-select-indicator no-repeat right $custom-select-padding-x center;
-  background-image: none \9;
+  background-image: none \9
+;
   background-size: $custom-select-bg-size;
   border: $custom-select-border-width solid $custom-select-border-color;
   @include border-radius($custom-select-border-radius);
@@ -211,7 +213,7 @@
   min-width: $custom-file-width;
   max-width: 100%;
   margin: 0;
-  filter: alpha(opacity = 0);
+  filter: alpha(opacity=0);
   opacity: 0;
 
   &:focus ~ .custom-file-control {

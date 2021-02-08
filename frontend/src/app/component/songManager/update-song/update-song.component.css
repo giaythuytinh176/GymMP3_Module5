@@ -22,6 +22,10 @@
   font-size: 14px;
 }
 
+input {
+  font-size: 18px;
+}
+
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
   color: rgba(37, 31, 31, 0.87) !important;
   /*font-weight: bold;*/
