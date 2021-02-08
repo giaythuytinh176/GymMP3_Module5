@@ -15,9 +15,9 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
-    public function removeToken(Request $request)
+    public function removeToken(Request $request, $requestOther = null)
     {
-        $token = $request->token;
+        $token = $requestOther ? $requestOther : $request->token;
         $data = JWTAuth::setToken($token)->invalidate();
         return response()->json(compact('data'), 200);
     }
@@ -157,7 +157,7 @@ class UserController extends Controller
 
         $data = DB::table('users')->where('email', '=', $request->email)->where('id', '!=', $id)->first();
         if ($data) {
-            return response()->json(['email'=>'Email is exist!'], 400);
+            return response()->json(['email' => 'Email is exist!'], 400);
         }
 
         $user = User::findOrFail($id);

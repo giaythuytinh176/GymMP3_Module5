@@ -106,7 +106,12 @@ import {CdkDragDropOverviewExampleComponent} from './component/dragdrop/cdk-drag
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        timeOut: 3000,
+        preventDuplicates: true,
+      }
+    ),
     // meterial
     A11yModule,
     ClipboardModule,

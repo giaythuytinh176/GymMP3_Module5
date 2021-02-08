@@ -136,7 +136,7 @@
 
                           <div class="item-action visible-list m-t-sm">
                             <a [routerLink]="['/user/edit-song', song.id]" class="btn btn-xs white" href="#">Edit</a>
-                            <button (click)="openDialog(song.id, song.nameSong)" class="btn btn-xs white">Delete
+                            <button (click)="openDialog(song.id, song.nameSong, userinfo.id)" class="btn btn-xs white">Delete
                             </button>
                             <!--                            data-toggle="modal" data-target="#delete-modal"-->
                             <!--                            <button mat-raised-button color="warn" (click)="openDialog(song.id, song.nameSong)">Xoá</button>-->

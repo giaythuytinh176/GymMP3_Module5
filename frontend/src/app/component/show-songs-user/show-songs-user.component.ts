@@ -71,8 +71,8 @@ export class ShowSongsUserComponent implements OnInit {
       });
   }
 
-  deleteSong(id: number) {
-    this.songService.deleteSong(id).subscribe(
+  deleteSong(id: number, user_id: number) {
+    this.songService.deleteSong(id, user_id).subscribe(
       data => {
         // console.log(data);
         this.getSongDetail();
@@ -82,17 +82,17 @@ export class ShowSongsUserComponent implements OnInit {
     )
   }
 
-  openDialog(id: number, nameSong: string): void {
+  openDialog(id: number, nameSong: string, user_id: number): void {
     const dialogRef = this.dialog.open(DialogContentExampleDialog, {
       width: '300px',
-      data: {id, nameSong}
+      data: {id, nameSong, user_id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
       // this.title = result;
       if (result) {
-        this.deleteSong(id);
+        this.deleteSong(id, user_id);
       }
       // console.log(result);
     });
@@ -129,4 +129,5 @@ export class DialogContentExampleDialog {
 export interface DialogData {
   id: number;
   nameSong: string;
+  user_id: string;
 }

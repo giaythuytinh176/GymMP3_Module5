@@ -7,7 +7,6 @@ import {ToastrService} from "ngx-toastr";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
 import {FirebaseComponent} from "../firebase/firebase.component";
 import {Song} from "../../model/song/song";
-import {ShowSongsUserComponent} from "../show-songs-user/show-songs-user.component";
 import {SongService} from "../../services/song/song.service";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
 import {UserService} from "../../services/userManager/user.service";
@@ -37,7 +36,6 @@ export class ProfileComponent implements OnInit {
               private token: TokenStorageService,
               private toastr: ToastrService,
               public firebase: FirebaseComponent,
-              public showSongsUser: ShowSongsUserComponent,
               private songService: SongService,
               public dialog: MatDialog,
   ) {
@@ -83,8 +81,8 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  deleteSong(id: number) {
-    this.songService.deleteSong(id).subscribe(
+  deleteSong(id: number, user_id: number) {
+    this.songService.deleteSong(id, user_id).subscribe(
       data => {
         // console.log(data);
         this.getSongDetail();
@@ -109,10 +107,10 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  openDialog(id: number, nameSong: string): void {
+  openDialog(id: number, nameSong: string, user_id: number): void {
     const dialogRef = this.dialog.open(DialogDeleteMyList, {
       width: '300px',
-      data: {id, nameSong},
+      data: {id, nameSong, user_id},
       panelClass: 'custom-dialog',
     });
 
@@ -120,7 +118,7 @@ export class ProfileComponent implements OnInit {
       // console.log('The dialog was closed');
       // this.title = result;
       if (result) {
-        this.deleteSong(id);
+        this.deleteSong(id, user_id);
       }
       // console.log(result);
     });
@@ -154,4 +152,5 @@ export class DialogDeleteMyList {
 export interface DialogData {
   id: number;
   nameSong: string;
+  user_id: number;
 }

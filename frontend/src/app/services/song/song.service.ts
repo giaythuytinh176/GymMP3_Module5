@@ -61,8 +61,16 @@ export class SongService {
     return this.http.post(`${this.search}`, {search: key});
   }
 
-  deleteSong(id: number) {
-    return this.http.delete(`${this.deleteSongsUrl}/${id}`, this.httpJson);
-
+  deleteSong(id: number, user_id: number) {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token
+      }),
+      body: {
+        user_id: user_id,
+      },
+    };
+    return this.http.delete(`${this.deleteSongsUrl}/${id}`, httpHeader);
   }
 }

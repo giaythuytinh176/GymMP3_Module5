@@ -43,14 +43,23 @@ class SongController extends Controller
         return response()->json($songs);
     }
 
-    public function show($id)
+    public function show($user_id, Request $request, UserController $userController)
     {
+        if (!$user_id) {
+            return response()->json(['error' => 'User ID not found.'], 400);
+        }
+        $token = $userController->getAuthenticatedUser();
+        if ($token->getData()->user->id !== (int)$user_id) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'invalid_access'], 400);
+        }
+
         $songs = DB::table('songs')
             ->select('songs.*', 'users.username', 'categories.category_name', 'albums.album_name')
             ->join('users', 'users.id', '=', 'songs.user_id')
             ->join('albums', 'albums.id', '=', 'songs.album_id')
             ->join('categories', 'categories.id', '=', 'songs.category_id')
-            ->where('users.id', '=', $id)
+            ->where('users.id', '=', (int)$user_id)
             ->get()
             ->toArray();
         $data = [];
@@ -100,8 +109,14 @@ class SongController extends Controller
         return response()->json($song);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, UserController $userController)
     {
+        $token = $userController->getAuthenticatedUser();
+        if (!$this->getUserIDbySongID($request->id) || ($token->getData()->user->id !== $this->getUserIDbySongID($request->id))) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'invalid_access'], 400);
+        }
+
         $validator = Validator::make($request->all(), [
             'nameSong' => 'required|string',
             'describes' => 'required|string',
@@ -131,8 +146,26 @@ class SongController extends Controller
         return response()->json(compact('data'));
     }
 
-    public function destroy(Request $request)
+    public function getUserIDbySongID($song_id)
     {
+        $data = DB::table('songs')->where('id', '=', $song_id)->first();
+        return $data->user_id;
+    }
+
+    public function destroy(Request $request, UserController $userController)
+    {
+        $token = $userController->getAuthenticatedUser();
+        if (!$request->user_id || ($request->user_id !== $token->getData()->user->id)) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'User ID invalid or not found.'], 400);
+        }
+        if (!$this->getUserIDbySongID($request->id) ||
+            ($token->getData()->user->id !== $this->getUserIDbySongID($request->id))
+        ) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'invalid_access'], 400);
+        }
+
         $song = Song::findOrFail($request->id);
         $song->singers()->detach();
         $song->delete();
