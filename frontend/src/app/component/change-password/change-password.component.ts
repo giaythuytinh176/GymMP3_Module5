@@ -50,7 +50,7 @@ export class ChangePasswordComponent implements OnInit, OnChanges, AfterContentC
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to change password.');
-        this.router.navigate(['/login'])
+        this.router.navigate(['/user/login'])
       } else {
         this.userinfo = data.user;
       }
@@ -104,17 +104,17 @@ export class ChangePasswordComponent implements OnInit, OnChanges, AfterContentC
                 this.toastr.warning(data.error);
               } else {
                 this.toastr.warning('You must login to change password.');
-                this.router.navigate(['/login']);
+                this.router.navigate(['/user/login']);
               }
             } else if (data.data == 'Password has been updated.') {
-              this.router.navigate(['/login']);
+              this.router.navigate(['/user/login']);
               // setTimeout(() => {
               //   this.toastr.success('You have successfully changed your Password, please login again!');
               // }, 1000);
               this.toastr.success('You have successfully changed your Password, please login again!');
               this.token.signOut();
               // window.location.reload();
-              // this.router.navigate(['/login']);
+              // this.router.navigate(['/user/login']);
               setTimeout(() => {
                 window.location.reload();
               }, 1000);
@@ -124,7 +124,7 @@ export class ChangePasswordComponent implements OnInit, OnChanges, AfterContentC
               setTimeout(() => {
                 window.location.reload();
               }, 1000);
-              this.router.navigate(['/login']);
+              this.router.navigate(['/user/login']);
             }
           },
           error => {
@@ -138,7 +138,7 @@ export class ChangePasswordComponent implements OnInit, OnChanges, AfterContentC
               setTimeout(() => {
                 window.location.reload();
               }, 1000);
-              this.router.navigate(['/login']);
+              this.router.navigate(['/user/login']);
             }
           });
     }

@@ -70,11 +70,6 @@ export class UpdateSongComponent implements OnInit {
     return category && category.category_name ? category.category_name : '';
   }
 
-  private _filter(name: any): Category[] {
-    const filterValue = name.toLowerCase();
-    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
-  }
-
   compareWithFunc(a, b) {
     return a === b;
   }
@@ -122,7 +117,7 @@ export class UpdateSongComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update Song.');
-        this.route.navigate(['/login'])
+        this.route.navigate(['/user/login'])
       } else {
         this.userinfo = data.user;
       }
@@ -135,7 +130,7 @@ export class UpdateSongComponent implements OnInit {
           if (data.status) {
             this.toastr.warning('You must login to update song.');
             this.token.signOut();
-            this.route.navigate(['/login'])
+            this.route.navigate(['/user/login'])
           } else {
             this.singerService.getSingerIDBySongID(this.id).subscribe((res: any) => {
               // console.log(res);
@@ -191,10 +186,10 @@ export class UpdateSongComponent implements OnInit {
       if (data.status) {
         this.toastr.warning('You must login to update song.');
         this.token.signOut();
-        this.route.navigate(['/login'])
+        this.route.navigate(['/user/login'])
       } else {
         this.toastr.success('Updated Song Successfully!');
-        this.route.navigate(['/profile']);
+        this.route.navigate(['/user/profile']);
       }
     }, error => {
       if ((JSON.parse(error.error)).category_id) {
@@ -204,5 +199,10 @@ export class UpdateSongComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  private _filter(name: any): Category[] {
+    const filterValue = name.toLowerCase();
+    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
   }
 }

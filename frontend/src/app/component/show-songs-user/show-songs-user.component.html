@@ -30,7 +30,7 @@
                   </div>
                   <div class="item-title text-ellipsis">
                     <a href="track.detail.html">{{ song.nameSong }}</a> &nbsp;
-                    <a [routerLink]="['/edit-song', song.id]" color="primary" mat-raised-button>Edit</a> &nbsp;
+                    <a [routerLink]="['/user/edit-song', song.id]" color="primary" mat-raised-button>Edit</a> &nbsp;
                     <!--                    <a (click)="deleteSong(song.id)" color="warn" mat-raised-button>Delete</a>-->
                     <button (click)="openDialog(song.id, song.nameSong)" color="warn" mat-raised-button>Delete</button>
                   </div>
@@ -100,7 +100,7 @@
 <!--                          </audio>-->
 <!--                        </td>-->
 <!--                        <td>-->
-<!--                          <a [routerLink]="['/edit-song', song.id]" color="primary" mat-raised-button>Edit</a> &nbsp;-->
+<!--                          <a [routerLink]="['/user/edit-song', song.id]" color="primary" mat-raised-button>Edit</a> &nbsp;-->
 <!--                          <a (click)="deleteSong(song.id)" color="warn" mat-raised-button>Delete</a>-->
 <!--                        </td>-->
 <!--                      </tr>-->

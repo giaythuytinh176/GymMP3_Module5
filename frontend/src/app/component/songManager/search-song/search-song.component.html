@@ -5,14 +5,17 @@
 <div class="padding" style="margin-left: 50px; margin-right: 50px;">
   <form action="#" class="m-b-md">
     <div class="input-group input-group-lg">
-      <input #searchBox (input)="search$.next(searchBox.value)" class="form-control" placeholder="Enter keyword to search ..." type="text">
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Enter keyword here:</mat-label>
+        <input #searchBox (input)="search$.next(searchBox.value)" class="form-control" matInput placeholder="Enter keyword to search ..." type="text">
+      </mat-form-field>
     </div>
 
   </form>
 
   <div *ngIf="isSearch && !keywordEnter && (count > 0)" class="m-y">
     <div class="row item-list item-list-lg item-list-by m-b">
-      <p class="m-b-md"><strong></strong> Results found for: {{ count }} <strong>Keyword</strong></p>
+      <p class="m-b-md">Results found for: <strong>{{ count }} Keyword</strong></p>
       <div *ngFor="let val of song" class="col-xs-12">
         <div [attr.data-id]="val.id" [attr.data-src]="val.mp3Url" class="item r">
           <div class="item-media ">
@@ -49,11 +52,11 @@
 
   <div *ngIf="isSearch && (count == 0)" class="m-y">
     <div class="row item-list item-list-lg item-list-by m-b">
-      <p class="m-b-md"><strong></strong> Results found for: Not found keyword</p>
+      <p class="m-b-md">Results found for: <strong>Not found keyword.</strong></p>
     </div>
   </div>
 
   <div *ngIf="keywordEnter">
-    You haven't enter Keywords.
+    <strong>You haven't enter Keywords.</strong>
   </div>
 </div>

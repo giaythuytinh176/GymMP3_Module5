@@ -46,7 +46,7 @@ export class ShowSongsUserComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to see list songs.');
-        this.routes.navigate(['/login'])
+        this.routes.navigate(['/user/login'])
       } else {
         this.userInfor = data.user;
         this.getSongDetail();
@@ -59,7 +59,7 @@ export class ShowSongsUserComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.status) {
           this.token.signOut();
-          this.routes.navigate(['/login'])
+          this.routes.navigate(['/user/login'])
         } else {
           // console.log(data);
           this.songs = data;
@@ -77,7 +77,7 @@ export class ShowSongsUserComponent implements OnInit {
         // console.log(data);
         this.getSongDetail();
         this.toastr.success('Deleted sucessfully.');
-        this.routes.navigate(['/profile']);
+        this.routes.navigate(['/user/profile']);
       }, error => console.log(error)
     )
   }

@@ -65,7 +65,7 @@
       </a>
     </li>
     <li *ngIf="isLoggedIn">
-      <a [routerLink]="['/profile']">
+      <a [routerLink]="['/user/profile']">
                   <span class="nav-icon">
                     <i class="material-icons">
                         person
@@ -85,7 +85,7 @@
     <!--      </a>-->
     <!--    </li>-->
     <li *ngIf="isLoggedIn">
-      <a [routerLink]="['/create-song']">
+      <a [routerLink]="['/user/create-song']">
                   <span class="nav-icon">
                     <i class="material-icons">
                         add
@@ -95,7 +95,7 @@
       </a>
     </li>
     <li *ngIf="!isLoggedIn">
-      <a [routerLink]="['/login']">
+      <a [routerLink]="['/user/login']">
                   <span class="nav-icon">
                     <i class="material-icons">
                         login
@@ -105,7 +105,7 @@
       </a>
     </li>
     <li *ngIf="!isLoggedIn">
-      <a [routerLink]="['/signup']">
+      <a [routerLink]="['/user/signup']">
                   <span class="nav-icon">
                     <i class="material-icons">
                         app_registration

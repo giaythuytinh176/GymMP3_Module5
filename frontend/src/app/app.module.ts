@@ -75,7 +75,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {CreateSongComponent} from "./component/songManager/create-song/create-song.component";
 import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song.component";
-import { CdkDragDropOverviewExampleComponent } from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
+import {CdkDragDropOverviewExampleComponent} from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
 
 @NgModule({
   declarations: [

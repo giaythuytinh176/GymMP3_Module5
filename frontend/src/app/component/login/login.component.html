@@ -2,7 +2,7 @@
   <h1 class="inline m-a-0" style="padding-left: 50px">Login</h1>
 </div>
 
-<div class="b-t" style="margin-top: 50px">
+<div class="b-t" style="margin-top: 10px">
   <div class="center-block w-xxl w-auto-xs p-y-md text-center">
     <div class="p-a-md">
       <div>
@@ -19,32 +19,41 @@
         OR
       </div>
       <form [formGroup]="loginForm" name="form">
+
         <div class="form-group">
-          <input [class.input-invalid]="loginForm.get('username')!.invalid && loginForm.get('username')!.touched" [class.input-valid]="loginForm.get('username')!.valid && loginForm.get('username')!.touched" class="form-control" formControlName="username" placeholder="Username" type="text">
-          <div *ngIf="loginForm.get('username')!.invalid && loginForm.get('username')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
-            <div *ngIf="loginForm.get('username').hasError('required')">
-              <div [@shake]="shake">Username is <strong>required.</strong>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Username:</mat-label>
+            <input [class.input-invalid]="loginForm.get('username')!.invalid && loginForm.get('username')!.touched" [class.input-valid]="loginForm.get('username')!.valid && loginForm.get('username')!.touched" class="form-control" formControlName="username" matInput placeholder="Username" type="text">
+            <div *ngIf="loginForm.get('username')!.invalid && loginForm.get('username')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+              <div *ngIf="loginForm.get('username').hasError('required')">
+                <div [@shake]="shake">Username is <strong>required.</strong>
+                </div>
               </div>
             </div>
-          </div>
+          </mat-form-field>
         </div>
+
         <div class="form-group">
-          <input [class.input-valid]="loginForm.get('password')!.valid && loginForm.get('password')!.touched" [ngClass]="{'input-invalid': loginForm.get('password')!.invalid && loginForm.get('password')!.touched}" class="form-control" formControlName="password" placeholder="Password" type="password">
-          <div *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
-            <div *ngIf="loginForm.get('password').hasError('required')">
-              <div [@shake]="shake">Password is <strong>required.</strong>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Password:</mat-label>
+            <input [class.input-valid]="loginForm.get('password')!.valid && loginForm.get('password')!.touched" [ngClass]="{'input-invalid': loginForm.get('password')!.invalid && loginForm.get('password')!.touched}" class="form-control" formControlName="password" matInput placeholder="Password" type="password">
+            <div *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+              <div *ngIf="loginForm.get('password').hasError('required')">
+                <div [@shake]="shake">Password is <strong>required.</strong>
+                </div>
+              </div>
+              <div *ngIf="loginForm.get('password').hasError('minlength')">
+                <div [@shake]="shake">Password must be at least <strong>6 characters long.</strong>
+                </div>
+              </div>
+              <div *ngIf="loginForm.get('password').hasError('maxlength')">
+                <div [@shake]="shake">Password can be max <strong>10 characters long.</strong>
+                </div>
               </div>
             </div>
-            <div *ngIf="loginForm.get('password').hasError('minlength')">
-              <div [@shake]="shake">Password must be at least <strong>6 characters long.</strong>
-              </div>
-            </div>
-            <div *ngIf="loginForm.get('password').hasError('maxlength')">
-              <div [@shake]="shake">Password can be max <strong>10 characters long.</strong>
-              </div>
-            </div>
-          </div>
+          </mat-form-field>
         </div>
+
         <div class="m-b-md">
           <label class="md-check">
             <input type="checkbox"><i class="primary"></i> Keep me signed in
@@ -53,14 +62,17 @@
         <button (click)="onSubmit()" [disabled]="!loginForm.valid" class="btn btn-md black p-x-lg" type="submit">Sign
           in
         </button>
+
       </form>
+
       <div class="m-y">
-        <a href="forgot-password.html" class="_600">Forgot password?</a>
+        <a class="_600" href="forgot-password.html">Forgot password?</a>
       </div>
       <div>
         Do not have an account?
-        <a [routerLink]="['/signup']" class="text-primary _600" href="signup.html">Sign up</a>
+        <a [routerLink]="['/user/signup']" class="text-primary _600" href="signup.html">Sign up</a>
       </div>
+
     </div>
   </div>
 </div>

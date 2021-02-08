@@ -44,7 +44,6 @@ export class ProfileComponent implements OnInit {
   }
 
 
-
   ngAfterViewChecked() {
     // console.log(7);
     // console.log(window.localStorage.getItem('mep-currentTime'));
@@ -58,7 +57,7 @@ export class ProfileComponent implements OnInit {
       if (data.status) {
         this.toastr.warning('You must login to see profile.');
         this.token.signOut();
-        this.routes.navigate(['/login'])
+        this.routes.navigate(['/user/login'])
       } else {
         this.userinfo = data.user;
         this.name = this.userinfo.name;
@@ -71,7 +70,7 @@ export class ProfileComponent implements OnInit {
           .subscribe((data: any) => {
             if (data.status) {
               this.token.signOut();
-              this.routes.navigate(['/login'])
+              this.routes.navigate(['/user/login'])
             } else {
               // console.log(data);
               this.songs = data;
@@ -90,7 +89,7 @@ export class ProfileComponent implements OnInit {
         // console.log(data);
         this.getSongDetail();
         this.toastr.success('Deleted song sucessfully!');
-        this.routes.navigate(['/profile']);
+        this.routes.navigate(['/user/profile']);
       }, error => console.log(error)
     )
   }
@@ -100,7 +99,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.status) {
           this.token.signOut();
-          this.routes.navigate(['/login'])
+          this.routes.navigate(['/user/login'])
         } else {
           // console.log(data);
           this.songs = data;

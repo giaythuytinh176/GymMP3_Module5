@@ -60,9 +60,9 @@ export class LoginComponent implements OnInit {
             this.tokenStorage.saveToken(data.token);
             setTimeout(() => {
               window.location.reload();
-            }, 1000);
-            this.toasrt.success('Login successfully.');
+            }, 1111);
             this.route.navigate(['/browse']);
+            this.toasrt.success('Login successfully.');
           }
         },
         err => {
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
             this.toasrt.error('Username or Password is incorrect!');
           } else {
             this.toasrt.warning('Something wrong.');
-            this.route.navigate(['/login']);
+            this.route.navigate(['/user/login']);
           }
         }
       );
@@ -80,11 +80,11 @@ export class LoginComponent implements OnInit {
 
   signOut() {
     this.tokenStorage.signOut();
-    this.toasrt.success('Logout successfully.');
     setTimeout(() => {
       window.location.reload();
-    }, 1000);
+    }, 1111);
     this.route.navigate(['/browse']);
+    this.toasrt.success('Logout successfully.');
   }
 
 }

@@ -48,7 +48,7 @@ export class EditProfileComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update profile.');
-        this.routes.navigate(['/login']);
+        this.routes.navigate(['/user/login']);
       } else {
         this.userinfo = data.user;
         this.profileForm.value.name = this.userinfo.name;
@@ -95,19 +95,18 @@ export class EditProfileComponent implements OnInit {
             if (data.status) {
               this.token.signOut();
               this.toastr.warning('You must login to update profile.');
-              this.routes.navigate(['/login'])
+              this.routes.navigate(['/user/login'])
             } else {
               // this.routes.navigate(['list']);
               this.toastr.success('Updated Profile Successfully!');
-              this.routes.navigate(['/profile']);
+              this.routes.navigate(['/user/profile']);
             }
           }, error => {
             // console.log(JSON.parse(error.error));
             // console.log(error.error.email);
             if (error.error.email) {
               this.toastr.warning(error.error.email);
-            }
-            else {
+            } else {
               this.toastr.warning(JSON.parse(error.error).avatar);
             }
           });

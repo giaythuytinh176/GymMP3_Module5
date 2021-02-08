@@ -15,37 +15,42 @@ import {AllListSongComponent} from "./component/songManager/all-list-song/all-li
 
 const routes: Routes = [
   {
-    path: 'signup',
-    component: RegisterComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'change-password',
-    component: ChangePasswordComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'edit-profile',
-    component: EditProfileComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'create-song',
-    component: CreateSongComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'edit-song/:id',
-    component: UpdateSongComponent,
-    canActivate: [AuthGuard],
+    path: 'user',
+    children: [
+      {
+        path: 'signup',
+        component: RegisterComponent,
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'edit-profile',
+        component: EditProfileComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'create-song',
+        component: CreateSongComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'edit-song/:id',
+        component: UpdateSongComponent,
+        canActivate: [AuthGuard],
+      },
+    ]
   },
   {
     path: 'browse',
@@ -56,15 +61,16 @@ const routes: Routes = [
     component: SearchSongComponent
   },
   {
-    path: 'error404',
-    component: NotGuardComponent
+    path: '',
+    redirectTo: 'browse',
+    pathMatch: 'full'
   },
 
 
   // otherwise redirect to home
   {
     path: '**', redirectTo: '',
-    component: AllListSongComponent,
+    component: NotGuardComponent,
   },
 ];
 

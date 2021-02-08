@@ -77,8 +77,8 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
     }, {validators: this.checkPasswords});
   }
 
-  onInput(event): any {
-    this.username = event.target.value;
+  onInput(value: string): any {
+    this.username = value;
     this.userService.checkExistUser(this.username).subscribe(
       (data: any) => {
         this.existUserMess = false;
@@ -124,7 +124,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
           setTimeout(() => {
             window.location.reload();
           }, 1000);
-          this.route.navigate(['/signup']);
+          this.route.navigate(['/user/signup']);
         } else {
           this.toastr.success('Your account has been created successfully!');
           this.route.navigate(['/browse']);

@@ -18,9 +18,9 @@ export class TokenStorageService {
   signOut(): void {
     this.userService.removeToken(this.getToken()).subscribe((res: any) => {
       // console.log(res);
-     window.localStorage.clear();
-     window.localStorage.removeItem(TOKEN_KEY);
-     window.localStorage.removeItem(Login_KEY);
+      // window.localStorage.clear();
+      window.localStorage.removeItem(TOKEN_KEY);
+      window.localStorage.removeItem(Login_KEY);
       this.saveLogin('false');
       // setTimeout(() => {
       //   window.location.reload();
@@ -32,13 +32,13 @@ export class TokenStorageService {
   }
 
   public saveToken(token: string): void {
-   window.localStorage.removeItem(TOKEN_KEY);
-   window.localStorage.setItem(TOKEN_KEY, token);
+    window.localStorage.removeItem(TOKEN_KEY);
+    window.localStorage.setItem(TOKEN_KEY, token);
   }
 
   public saveLogin(login: string): void {
-   window.localStorage.removeItem(Login_KEY);
-   window.localStorage.setItem(Login_KEY, login);
+    window.localStorage.removeItem(Login_KEY);
+    window.localStorage.setItem(Login_KEY, login);
   }
 
   public getToken(): string {
