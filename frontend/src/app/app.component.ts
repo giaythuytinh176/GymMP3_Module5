@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, OnChanges, DoCheck, AfterContentIni
   mep_status: any;
   mep_currentTime: any;
 
+
   constructor() {
     // console.log(0);
   }

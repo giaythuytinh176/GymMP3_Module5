@@ -100,6 +100,14 @@ export class AuthService {
     });
   }
 
+  checkToken(): boolean {
+    if (this.token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   loggined(): boolean {
     if (this.token) {
       this.checkAuthToken();

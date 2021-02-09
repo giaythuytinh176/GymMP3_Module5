@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // if (this.tokenStorage.getToken()) {
+    // if (this.authService.checkToken()) {
     //   this.route.navigate(['/browse']);
     // }
     this.loginForm = this.fb.group({
@@ -58,9 +58,9 @@ export class LoginComponent implements OnInit {
           } else {
             this.tokenStorage.saveLogin('true');
             this.tokenStorage.saveToken(data.token);
-            setTimeout(() => {
-              window.location.reload();
-            }, 1111);
+            // setTimeout(() => {
+            //   window.location.reload();
+            // }, 1111);
             this.route.navigate(['/browse']);
             this.toasrt.success('Login successfully.');
           }
@@ -80,9 +80,9 @@ export class LoginComponent implements OnInit {
 
   signOut() {
     this.tokenStorage.signOut();
-    setTimeout(() => {
-      window.location.reload();
-    }, 1111);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1111);
     this.route.navigate(['/browse']);
     this.toasrt.success('Logout successfully.');
   }
