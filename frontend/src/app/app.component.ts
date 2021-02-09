@@ -20,13 +20,9 @@ export class AppComponent implements OnInit, OnChanges, DoCheck, AfterContentIni
   isPause: any;
   mep_status: any;
   mep_currentTime: any;
-  isReady = false;
 
   constructor() {
     // console.log(0);
-    setTimeout(() => {
-      this.isReady = true;
-    }, 1000);
   }
 
 

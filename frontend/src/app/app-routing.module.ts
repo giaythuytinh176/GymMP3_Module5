@@ -11,6 +11,7 @@ import {SearchSongComponent} from './component/songManager/search-song/search-so
 import {EditProfileComponent} from "./component/edit-profile/edit-profile.component";
 import {CreateSongComponent} from "./component/songManager/create-song/create-song.component";
 import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song.component";
+import {GetAllSongsResolver} from "./resolver/GetAllSongsResolver";
 
 const routes: Routes = [
   {
@@ -54,6 +55,9 @@ const routes: Routes = [
   {
     path: 'browse',
     component: AllListSongComponent,
+    resolve: {
+      allsongs: GetAllSongsResolver
+    }
   },
   {
     path: 'search',

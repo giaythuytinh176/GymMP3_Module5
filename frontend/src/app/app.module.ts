@@ -72,6 +72,7 @@ import {CreateSongComponent} from "./component/songManager/create-song/create-so
 import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song.component";
 import {CdkDragDropOverviewExampleComponent} from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
 import {environment} from "../environments/environment";
+import {GetAllSongsResolver} from "./resolver/GetAllSongsResolver";
 
 @NgModule({
   declarations: [
@@ -164,6 +165,7 @@ import {environment} from "../environments/environment";
     FirebaseComponent,
     FirebaseMP3Component,
     LoginComponent,
+    GetAllSongsResolver,
   ],
   bootstrap: [
     AppComponent,

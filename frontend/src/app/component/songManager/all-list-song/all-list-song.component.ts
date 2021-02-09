@@ -3,7 +3,7 @@ import {SongService} from "../../../services/song/song.service";
 import {Song} from "../../../model/song/song";
 import {Subject} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {takeUntil} from "rxjs/operators";
+import {distinctUntilChanged, takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-all-list-song',
@@ -12,7 +12,7 @@ import {takeUntil} from "rxjs/operators";
 })
 export class AllListSongComponent implements OnInit, OnDestroy {
 
-  allsongs: Song[];
+  allsongs: any;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -21,17 +21,15 @@ export class AllListSongComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  getSongs(): void {
-    this.songService.getAllSongs().subscribe((res: any) => {
-      this.allsongs = res.data;
-      // console.log(this.allsongs);
-    }, (error) => console.log(error));
-  }
-
   ngOnInit(): void {
-    this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      this.getSongs();
-    });
+    console.log("Go here");
+    this.route.params.pipe(
+      takeUntil(this.onDestroy$),
+      distinctUntilChanged()
+    ).subscribe(params => {
+      console.log(this.route.snapshot.data.allsongs.data);
+      this.allsongs = this.route.snapshot.data.allsongs.data;
+    })
   }
 
   ngOnDestroy(): void {
