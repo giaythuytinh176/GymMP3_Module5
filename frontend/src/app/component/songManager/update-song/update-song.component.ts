@@ -61,6 +61,7 @@ export class UpdateSongComponent implements OnInit {
   categoryInfo$: Observable<Category[]>;
   singerInfo$: Observable<Singer[]>;
   isLoadingSongName = false;
+  isLoading = false;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -94,7 +95,7 @@ export class UpdateSongComponent implements OnInit {
     // this.getSingers();
 
     this.getUserInfo();
-
+    this.isLoading = true;
     this.updateForm();
   }
 
