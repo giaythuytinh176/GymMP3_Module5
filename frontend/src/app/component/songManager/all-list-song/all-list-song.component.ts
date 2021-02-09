@@ -31,7 +31,9 @@ export class AllListSongComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroy$),
       distinctUntilChanged()
     ).subscribe(params => {
-      this.isReady = true;
+      setTimeout(() => {
+        this.isReady = true;
+      }, 1000);
       console.log(this.isReady);
       console.log("Go here3");
       this.allsongs = this.route.snapshot.data.allsongs.data;
