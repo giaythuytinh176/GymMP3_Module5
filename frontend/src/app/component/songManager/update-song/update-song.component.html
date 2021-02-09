@@ -2,10 +2,10 @@
   <h1 class="inline m-a-0" style="padding-left: 50px">Edit Song <i>{{ nameSong }}</i></h1>
 </div>
 
-<div *ngIf="songInfo$ | async as songInfo else loading" class="container">
-  <div *ngIf="albumInfo$ | async as albumList else loading" class="b-t" style="margin-top: 10px; margin-left: 50px">
-    <div *ngIf="categoryInfo$ | async as categoryList else loading">
-      <div *ngIf="singerInfo$ | async as singerList else loading">
+<ng-container *ngIf="songInfo$ | async as songInfo else loading" class="container">
+  <ng-container *ngIf="albumInfo$ | async as albumList else loading" class="b-t" style="margin-top: 10px; margin-left: 50px">
+    <ng-container *ngIf="categoryInfo$ | async as categoryList else loading">
+      <ng-container *ngIf="singerInfo$ | async as singerList else loading">
         <form [formGroup]="updateMusicForm" name="form">
           <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted">Name song:</div>-->
@@ -225,28 +225,10 @@
             </div>
           </div>
         </form>
-      </div>
-      <ng-template #loading>
-        <div class="centered">
-          <h1>Loading ...</h1>
-          <mat-spinner></mat-spinner>
-        </div>
-      </ng-template>
-    </div>
-    <ng-template #loading>
-      <div class="centered">
-        <h1>Loading ...</h1>
-        <mat-spinner></mat-spinner>
-      </div>
-    </ng-template>
-  </div>
-  <ng-template #loading>
-    <div class="centered">
-      <h1>Loading ...</h1>
-      <mat-spinner></mat-spinner>
-    </div>
-  </ng-template>
-</div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>
 <ng-template #loading>
   <div class="centered">
     <h1>Loading ...</h1>
