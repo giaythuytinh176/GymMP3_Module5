@@ -7,7 +7,6 @@ import {AuthGuard} from "./services/userManager/auth.guard";
 import {NotGuardComponent} from "./component/layout/not-guard/not-guard/not-guard.component";
 import {LoginComponent} from "./component/login/login.component";
 import {UpdateSongComponent} from "./component/songManager/update-song/update-song.component";
-import {ShowSongsUserComponent} from './component/show-songs-user/show-songs-user.component';
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component'
 import {EditProfileComponent} from "./component/edit-profile/edit-profile.component";
 import {CreateSongComponent} from "./component/songManager/create-song/create-song.component";

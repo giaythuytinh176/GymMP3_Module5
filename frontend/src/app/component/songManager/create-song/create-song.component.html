@@ -203,7 +203,7 @@
       <div class="form-group row" style="margin-top: 50px">
         <div class="col-sm-8 text-center">
           <a [routerLink]="['/user/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
-          <button (click)="createSong()" [disabled]="!createMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">
+          <button (click)="createSongSubmit()" [disabled]="!createMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">
             Add song
           </button>
         </div>

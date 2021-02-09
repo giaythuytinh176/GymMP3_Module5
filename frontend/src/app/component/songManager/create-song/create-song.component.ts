@@ -53,20 +53,28 @@ export class CreateSongComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  getAlbums(): void {
     this.albumService.getAllAlbum().subscribe((albums: any) => {
       this.albums = albums.data;
       // console.log(this.albums);
     }, (error) => console.log(error));
+  }
+
+  getCategories(): void {
     this.categoryService.getAllCategories().subscribe((categories: any) => {
       this.categories = categories.data;
       // console.log(this.categories);
     }, (error) => console.log(error));
+  }
+
+  getSingers(): void {
     this.singerService.getAllSingers().subscribe((singers: any) => {
       this.singers = singers.data;
       // console.log(this.singers);
     }, (error) => console.log(error));
+  }
 
+  getUserInfo(): void {
     this.userService.getInfoUserToken().subscribe((data: any) => {
       // console.log(data);
       if (data.status) {
@@ -77,7 +85,9 @@ export class CreateSongComponent implements OnInit {
         this.userinfo = data.user;
       }
     }, error => console.log(error));
+  }
 
+  createForm(): void {
     this.createMusicForm = this.fb.group({
       nameSong: ['', [Validators.required]],
       avatarUrl: ['', [Validators.required]],
@@ -91,14 +101,17 @@ export class CreateSongComponent implements OnInit {
     });
   }
 
-  createSong() {
-    this.createMusicForm.value.avatarUrl = this.firebase.fb;
-    this.createMusicForm.value.mp3Url = this.firebaseMP3.fb;
-    this.song = this.createMusicForm.value;
-    this.song.singer_id = JSON.stringify(this.createMusicForm.value.singer_id);
-    this.song.user_id = this.userinfo.id;
-    // console.log(this.song);
-    this.songService.createSong(this.song).subscribe((data: any) => {
+  ngOnInit(): void {
+    this.getAlbums();
+    this.getCategories();
+    this.getSingers();
+    this.getUserInfo();
+
+    this.createForm();
+  }
+
+  createSong(song: Song): void {
+    this.songService.createSong(song).subscribe((data: any) => {
         // console.log(data);
         if (data.error || data.status) {
           this.token.signOut();
@@ -113,5 +126,17 @@ export class CreateSongComponent implements OnInit {
         this.toastr.warning("Something wrong.");
       }
     );
+  }
+
+  createSongSubmit() {
+    this.createMusicForm.value.avatarUrl = this.firebase.fb;
+    this.createMusicForm.value.mp3Url = this.firebaseMP3.fb;
+    this.song = this.createMusicForm.value;
+    //Stringify to JSon
+    this.song.singer_id = JSON.stringify(this.createMusicForm.value.singer_id);
+    this.song.user_id = this.userinfo.id;
+    // console.log(this.song);
+
+    this.createSong(this.song);
   }
 }

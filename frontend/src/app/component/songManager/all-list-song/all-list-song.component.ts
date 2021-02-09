@@ -16,11 +16,14 @@ export class AllListSongComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  getSongs(): void {
     this.songService.getAllSongs().subscribe((res: any) => {
       this.allsongs = res.data;
       // console.log(this.allsongs);
     }, (error) => console.log(error));
   }
 
+  ngOnInit(): void {
+    this.getSongs();
+  }
 }

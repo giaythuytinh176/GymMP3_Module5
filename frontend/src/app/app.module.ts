@@ -63,10 +63,6 @@ import {FirebaseComponent} from "./component/firebase/firebase.component";
 import {LoginComponent} from './component/login/login.component';
 import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.component";
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
-import {
-  DialogContentExampleDialog,
-  ShowSongsUserComponent
-} from './component/show-songs-user/show-songs-user.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component';
 import {EditProfileComponent} from './component/edit-profile/edit-profile.component';
@@ -90,10 +86,8 @@ import {environment} from "../environments/environment";
     AllListSongComponent,
     CreateSongComponent,
     UpdateSongComponent,
-    ShowSongsUserComponent,
     SidebarComponent,
     SearchSongComponent,
-    DialogContentExampleDialog,
     DialogDeleteMyList,
     EditProfileComponent,
     CdkDragDropOverviewExampleComponent,
@@ -169,7 +163,6 @@ import {environment} from "../environments/environment";
   providers: [
     FirebaseComponent,
     FirebaseMP3Component,
-    ShowSongsUserComponent,
     LoginComponent,
   ],
   bootstrap: [
