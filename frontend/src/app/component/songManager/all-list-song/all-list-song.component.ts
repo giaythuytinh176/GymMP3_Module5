@@ -23,6 +23,7 @@ export class AllListSongComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log("Go here");
     this.route.params.pipe(
       takeUntil(this.onDestroy$),
       distinctUntilChanged()
