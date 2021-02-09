@@ -95,7 +95,7 @@
                  placeholder="Avatar"
                  type="file">
           <br>
-          <input [(ngModel)]="infoUser!.user.old_avatar" formControlName="old_avatar" type="hidden">
+          <input [(ngModel)]="infoUser!.user.avatar" formControlName="old_avatar" type="hidden">
           <div *ngIf="firebase.percentage | async as pct">
             <div class="col-12">
               <div class="progress">
@@ -108,8 +108,8 @@
             <img [src]="firebase.fb" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
           </div>
 
-          <div *ngIf="!firebase.fb && infoUser!.user.old_avatar">
-            <img [src]="infoUser!.user.old_avatar" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
+          <div *ngIf="!firebase.fb && infoUser!.user.avatar">
+            <img [src]="infoUser!.user.avatar" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
           </div>
 
           <!--            <div *ngIf="profileForm.get('avatar')!.invalid && profileForm.get('avatar')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">-->
