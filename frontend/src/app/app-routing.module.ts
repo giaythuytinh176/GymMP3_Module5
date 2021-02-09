@@ -55,9 +55,9 @@ const routes: Routes = [
   {
     path: 'browse',
     component: AllListSongComponent,
-    resolve: {
-      allsongs: GetAllSongsResolver
-    }
+    // resolve: {
+    //   allsongs: GetAllSongsResolver
+    // }
   },
   {
     path: 'search',
