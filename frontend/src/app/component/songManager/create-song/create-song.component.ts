@@ -18,6 +18,7 @@ import {Album} from 'src/app/model/album/album';
 import {Category} from 'src/app/model/category/category';
 import {Singer} from "../../../model/singer/singer";
 import {UserService} from "../../../services/userManager/user.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-create-song',
@@ -36,6 +37,7 @@ export class CreateSongComponent implements OnInit {
   categories: Category[];
   singers: Singer[];
   shake: any;
+  loadUserInfo$: Observable<UpdateInfo>;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -51,6 +53,17 @@ export class CreateSongComponent implements OnInit {
               private categoryService: CategoryService,
               private singerService: SingerService,
   ) {
+  }
+
+  ngOnInit(): void {
+    this.loadUserInfo$ = this.userService.getInfoUserToken();
+    this.getUserInfo();
+
+    this.getAlbums();
+    this.getCategories();
+    this.getSingers();
+
+    this.createForm();
   }
 
   getAlbums(): void {
@@ -99,15 +112,6 @@ export class CreateSongComponent implements OnInit {
       category_id: ['', [Validators.required]],
       album_id: ['', [Validators.required]],
     });
-  }
-
-  ngOnInit(): void {
-    this.getAlbums();
-    this.getCategories();
-    this.getSingers();
-    this.getUserInfo();
-
-    this.createForm();
   }
 
   createSong(song: Song): void {
