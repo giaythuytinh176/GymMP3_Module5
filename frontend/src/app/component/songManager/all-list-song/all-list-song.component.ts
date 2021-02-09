@@ -1,18 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SongService} from "../../../services/song/song.service";
 import {Song} from "../../../model/song/song";
+import {Subject} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-all-list-song',
   templateUrl: './all-list-song.component.html',
   styleUrls: ['./all-list-song.component.css']
 })
-export class AllListSongComponent implements OnInit {
+export class AllListSongComponent implements OnInit, OnDestroy {
 
   allsongs: Song[];
+  private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private songService: SongService,
+    private readonly route: ActivatedRoute
   ) {
   }
 
@@ -24,6 +29,13 @@ export class AllListSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSongs();
+    this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
+      this.getSongs();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
   }
 }
