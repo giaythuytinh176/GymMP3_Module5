@@ -57,6 +57,9 @@ export class UpdateSongComponent implements OnInit {
   shake: any;
 
   songInfo$: Observable<Song>;
+  albumInfo$: Observable<Album[]>;
+  categoryInfo$: Observable<Category[]>;
+  singerInfo$: Observable<Singer[]>;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -80,11 +83,18 @@ export class UpdateSongComponent implements OnInit {
       this.songInfo$ = this.songService.getSongById(this.id);
       this.getSongById(this.id);
     });
-    this.updateForm();
+    this.albumInfo$ = this.albumService.getAllAlbum();
     this.getAlbums();
+
+    this.categoryInfo$ = this.categoryService.getAllCategories();
     this.getCategories();
+
+    this.singerInfo$ = this.singerService.getAllSingers();
+    this.getSingers();
+
     this.getUserInfo();
 
+    this.updateForm();
   }
 
   updateForm(): void {
@@ -101,6 +111,13 @@ export class UpdateSongComponent implements OnInit {
       old_avatar: [this.old_avatar],
       old_mp3: [this.old_mp3],
     });
+  }
+
+  getSingers(): void {
+    this.singerService.getAllSingers().subscribe((singers: any) => {
+      this.singers = singers.data;
+      // console.log(this.singers);
+    }, (error) => console.log(error));
   }
 
   getAlbums(): void {
@@ -124,10 +141,6 @@ export class UpdateSongComponent implements OnInit {
           )
         );
       // console.log(this.categories);
-    }, (error) => console.log(error));
-    this.singerService.getAllSingers().subscribe((singers: any) => {
-      this.singers = singers.data;
-      // console.log(this.singers);
     }, (error) => console.log(error));
   }
 
