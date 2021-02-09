@@ -6,12 +6,15 @@ import {SongService} from "../services/song/song.service";
 
 @Injectable()
 export class GetAllSongsResolver implements Resolve<any> {
-  constructor(private songService: SongService, private router: Router) {
+  constructor(
+    private songService: SongService,
+    private router: Router,
+  ) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.songService.getAllSongs(route.params['id']).pipe(
-      //delay(1),
+      delay(1),
       catchError(error => {
           this.router.navigateByUrl('/404');
           return of(null);

@@ -12,7 +12,7 @@ import {distinctUntilChanged, takeUntil} from "rxjs/operators";
 })
 export class AllListSongComponent implements OnInit, OnDestroy {
 
-  allsongs: any;
+  allsongs: Song[];
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
   isReady = false;
 
@@ -24,18 +24,14 @@ export class AllListSongComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log("Go here");
-    console.log(this.isReady);
-    console.log("Go here2");
-    this.isReady = false;
     this.route.params.pipe(
       takeUntil(this.onDestroy$),
       distinctUntilChanged()
     ).subscribe(params => {
       setTimeout(() => {
         this.isReady = true;
-      }, 1000);
-      console.log(this.isReady);
-      console.log("Go here3");
+      }, 500);
+      console.log("Go here2");
       this.allsongs = this.route.snapshot.data.allsongs.data;
     })
   }

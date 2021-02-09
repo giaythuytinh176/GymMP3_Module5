@@ -64,6 +64,10 @@ const routes: Routes = [
     component: SearchSongComponent
   },
   {
+    path: '404',
+    component: NotGuardComponent
+  },
+  {
     path: '',
     redirectTo: 'browse',
     pathMatch: 'full'
