@@ -24,13 +24,16 @@ export class AllListSongComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log("Go here");
+    console.log(this.isReady);
+    console.log("Go here2");
     this.isReady = false;
     this.route.params.pipe(
       takeUntil(this.onDestroy$),
       distinctUntilChanged()
     ).subscribe(params => {
-      console.log(this.route.snapshot.data.allsongs.data);
       this.isReady = true;
+      console.log(this.isReady);
+      console.log("Go here3");
       this.allsongs = this.route.snapshot.data.allsongs.data;
     })
   }

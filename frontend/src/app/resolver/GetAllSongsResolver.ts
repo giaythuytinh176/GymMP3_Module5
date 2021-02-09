@@ -11,7 +11,7 @@ export class GetAllSongsResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.songService.getAllSongs(route.params['id']).pipe(
-      delay(1),
+      //delay(1),
       catchError(error => {
           this.router.navigateByUrl('/404');
           return of(null);
