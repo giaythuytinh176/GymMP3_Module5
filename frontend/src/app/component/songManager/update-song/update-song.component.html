@@ -217,7 +217,7 @@
       <div class="form-group row" style="margin-top: 50px">
         <div class="col-sm-8 text-center">
           <a [routerLink]="['/user/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
-          <button (click)="updateSong()" [disabled]="!updateMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">
+          <button (click)="updateSongSubmit()" [disabled]="!updateMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">
             Edit song
           </button>
         </div>

@@ -55,7 +55,6 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
-import {environment} from "../environments/environment";
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
 import {DialogDeleteMyList, ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
@@ -76,6 +75,7 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {CreateSongComponent} from "./component/songManager/create-song/create-song.component";
 import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song.component";
 import {CdkDragDropOverviewExampleComponent} from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
