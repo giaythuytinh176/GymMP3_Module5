@@ -80,6 +80,9 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
     this.getUserInfo();
 
     this.routes.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
+      setTimeout(() => {
+        this.isReady = true;
+      }, 500);
       this.id = params;
       this.getSongById(this.id);
     });
