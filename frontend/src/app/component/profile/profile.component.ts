@@ -10,6 +10,7 @@ import {Song} from "../../model/song/song";
 import {SongService} from "../../services/song/song.service";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
 import {UserService} from "../../services/userManager/user.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-profile',
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
   avatar: string;
   username: string;
   songs: Song[];
+  allsongs$: Observable<Song[]>;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -50,6 +52,25 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUserInfo();
+  }
+
+  getSongDetailbyID(id: number): void {
+    this.allsongs$ = this.songService.getSongDetail(id);
+    this.songService.getSongDetail(id).subscribe((data: any) => {
+      if (data.status) {
+        this.token.signOut();
+        this.routes.navigate(['/user/login'])
+      } else {
+        // console.log(data);
+        this.songs = data;
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getUserInfo(): void {
     this.userService.getInfoUserToken().subscribe((data: any) => {
       // console.log(data);
       if (data.status) {
@@ -64,21 +85,9 @@ export class ProfileComponent implements OnInit {
         this.phone = this.userinfo.phone;
         this.avatar = this.userinfo.avatar;
         this.username = this.userinfo.username;
-        this.songService.getSongDetail(this.userinfo.id)
-          .subscribe((data: any) => {
-            if (data.status) {
-              this.token.signOut();
-              this.routes.navigate(['/user/login'])
-            } else {
-              // console.log(data);
-              this.songs = data;
-            }
-          }, error => {
-            console.log(error);
-          });
+        this.getSongDetailbyID(this.userinfo.id);
       }
     }, error => console.log(error));
-
   }
 
   deleteSong(id: number, user_id: number) {

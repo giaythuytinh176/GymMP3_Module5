@@ -7,7 +7,7 @@
   <!-- ############ LAYOUT START-->
 
   <!-- content -->
-  <div class="app-content white bg box-shadow-z2" id="content" role="main">
+  <div *ngIf="allsongs$ | async as listSong else loading" class="app-content white bg box-shadow-z2" id="content" role="main">
     <div class="app-header hidden-lg-up white lt box-shadow-z1">
       <div class="navbar">
         <!-- brand -->
@@ -100,7 +100,7 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="track">
                   <div class="row item-list item-list-by m-b">
-                    <div *ngFor="let song of songs; let i=index;" class="col-xs-12">
+                    <div *ngFor="let song of listSong; let i = index;" class="col-xs-12">
                       <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
                         <div class="item-media">
                           <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
@@ -136,7 +136,8 @@
 
                           <div class="item-action visible-list m-t-sm">
                             <a [routerLink]="['/user/edit-song', song.id]" class="btn btn-xs white" href="#">Edit</a>
-                            <button (click)="openDialog(song.id, song.nameSong, userinfo.id)" class="btn btn-xs white">Delete
+                            <button (click)="openDialog(song.id, song.nameSong, userinfo.id)" class="btn btn-xs white">
+                              Delete
                             </button>
                             <!--                            data-toggle="modal" data-target="#delete-modal"-->
                             <!--                            <button mat-raised-button color="warn" (click)="openDialog(song.id, song.nameSong)">Xoá</button>-->
@@ -499,6 +500,12 @@
 
     </div>
   </div>
+  <ng-template #loading>
+    <div class="centered">
+      <h1>Loading ...</h1>
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
   <!-- / -->
 
 
