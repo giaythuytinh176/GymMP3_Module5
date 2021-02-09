@@ -1,6 +1,6 @@
 <div class="page-title m-b">
   <h1 class="inline m-a-0" style="padding-left: 50px">Edit Song
-    <div *ngIf="isLoadingSongName else loadTEMP"><i>{{ nameSong }}</i></div>
+    <div class="inline m-a-0" *ngIf="isLoadingSongName else loadTEMP"><i>{{ nameSong }}</i></div>
     <ng-template #loadTEMP>
       ...
     </ng-template>
