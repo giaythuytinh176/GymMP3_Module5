@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   shake: any;
   private loginInfo: LoginInfo;
+  isLoading = false;
 
   constructor(private authService: AuthService,
               private route: Router,
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     // console.log(this.loginForm);
     if (this.loginForm.value.password.length < 6) {
       this.toasrt.warning('Password is too short.')
@@ -56,6 +58,9 @@ export class LoginComponent implements OnInit {
           if (data.error || data.status) {
             this.toasrt.warning('Login Failed!!! Please login again!.')
           } else {
+            setTimeout( () => {
+              this.isLoading = false;
+            }, 1000);
             this.tokenStorage.saveLogin('true');
             this.tokenStorage.saveToken(data.token);
             setTimeout(() => {
@@ -66,6 +71,9 @@ export class LoginComponent implements OnInit {
           }
         },
         err => {
+          setTimeout( () => {
+            this.isLoading = false;
+          }, 1000);
           // console.log(err.error.error);
           if (err.error.error == 'invalid_credentials') {
             this.toasrt.error('Username or Password is incorrect!');

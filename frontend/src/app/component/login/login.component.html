@@ -59,6 +59,11 @@
             <input type="checkbox"><i class="primary"></i> Keep me signed in
           </label>
         </div>
+
+        <div *ngIf="isLoading" class="m-y">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+
         <button (click)="onSubmit()" [disabled]="!loginForm.valid" class="btn btn-md black p-x-lg" type="submit">Sign
           in
         </button>
