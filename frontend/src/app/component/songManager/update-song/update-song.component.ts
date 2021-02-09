@@ -56,6 +56,8 @@ export class UpdateSongComponent implements OnInit {
   views: any;
   shake: any;
 
+  loading = false;
+
   constructor(private songService: SongService,
               private route: Router,
               private routes: ActivatedRoute,
@@ -72,6 +74,7 @@ export class UpdateSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = false;
     this.updateForm();
     this.getAlbums();
     this.getCategories();
@@ -80,6 +83,7 @@ export class UpdateSongComponent implements OnInit {
     this.routes.paramMap.subscribe(paramMap => {
       this.id = +paramMap.get('id');
       this.getSongById(this.id);
+      this.loading = true;
     });
   }
 
