@@ -74,11 +74,12 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.updateForm();
+    this.getAlbums();
+    this.getCategories();
+    this.getUserInfo();
+
     this.routes.paramMap.pipe(takeUntil(this.onDestroy$)).subscribe((paramMap: any) => {
-      this.updateForm();
-      this.getAlbums();
-      this.getCategories();
-      this.getUserInfo();
       this.id = +paramMap.get('id');
       this.getSongById(this.id);
     });
