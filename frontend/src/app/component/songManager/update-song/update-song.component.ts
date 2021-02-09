@@ -60,6 +60,7 @@ export class UpdateSongComponent implements OnInit {
   albumInfo$: Observable<Album[]>;
   categoryInfo$: Observable<Category[]>;
   singerInfo$: Observable<Singer[]>;
+  isLoadingSongName = false;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -182,6 +183,8 @@ export class UpdateSongComponent implements OnInit {
         } else {
           this.getSingerIDbySongID(id);
           this.getCategoryInfo(data.category_id);
+
+          this.isLoadingSongName = true;
 
           this.nameSong = data.nameSong;
           this.describes = data.describes;
