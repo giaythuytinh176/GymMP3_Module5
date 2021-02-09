@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../../services/category/caterory.service";
@@ -17,8 +17,8 @@ import {Album} from 'src/app/model/album/album';
 import {Category} from "../../../model/category/category";
 import {Singer} from "../../../model/singer/singer";
 import {UserService} from "../../../services/userManager/user.service";
-import {Observable, Subject} from "rxjs";
-import {map, startWith, takeUntil} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {map, startWith} from "rxjs/operators";
 
 @Component({
   selector: 'app-update-song',
@@ -28,7 +28,7 @@ import {map, startWith, takeUntil} from "rxjs/operators";
     trigger('shake', [transition('* => *', useAnimation(shake))])
   ],
 })
-export class UpdateSongComponent implements OnInit, OnDestroy {
+export class UpdateSongComponent implements OnInit {
   updateMusicForm: FormGroup
   filteredOptions: any;
 
@@ -55,8 +55,8 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
   author: any;
   views: any;
   shake: any;
-  isReady = false;
-  private onDestroy$: Subject<boolean> = new Subject<boolean>();
+
+  songInfo$: Observable<Song>;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -74,25 +74,17 @@ export class UpdateSongComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.routes.paramMap.subscribe(paramMap => {
+      this.id = +paramMap.get('id');
+      this.songInfo$ = this.songService.getSongById(this.id);
+      this.getSongById(this.id);
+    });
     this.updateForm();
     this.getAlbums();
     this.getCategories();
     this.getUserInfo();
 
-    this.routes.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-
-      setTimeout(() => {
-        this.isReady = true;
-      }, 500);
-      this.id = params;
-      this.getSongById(this.id);
-    });
-
-  }
-
-  ngOnDestroy(): void {
-    this.onDestroy$.next(true);
-    this.onDestroy$.complete();
   }
 
   updateForm(): void {
