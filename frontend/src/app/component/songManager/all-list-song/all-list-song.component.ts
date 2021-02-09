@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SongService} from "../../../services/song/song.service";
 import {Song} from "../../../model/song/song";
-import {Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {distinctUntilChanged, takeUntil} from "rxjs/operators";
 
@@ -12,9 +12,8 @@ import {distinctUntilChanged, takeUntil} from "rxjs/operators";
 })
 export class AllListSongComponent implements OnInit, OnDestroy {
 
-  allsongs: Song[];
+  allsongs$: Observable<Song[]>;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
-  isReady = false;
 
   constructor(
     private songService: SongService,
@@ -23,18 +22,22 @@ export class AllListSongComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log("Go here");
-    this.route.params.pipe(
-      takeUntil(this.onDestroy$),
-      distinctUntilChanged()
-    ).subscribe(params => {
-      setTimeout(() => {
-        this.isReady = true;
-      }, 500);
-      console.log(this.route.snapshot.data.allsongs.data);
-      this.allsongs = this.route.snapshot.data.allsongs.data;
-    })
+    this.allsongs$ = this.songService.getAllSongs();
   }
+
+  // ngOnInit(): void {
+  //   console.log("Go here");
+  //   this.route.params.pipe(
+  //     takeUntil(this.onDestroy$),
+  //     distinctUntilChanged()
+  //   ).subscribe(params => {
+  //     setTimeout(() => {
+  //       this.isReady = true;
+  //     }, 500);
+  //     console.log(this.route.snapshot.data.allsongs.data);
+  //     this.allsongs$ = this.route.snapshot.data.allsongs.data;
+  //   })
+  // }
 
   ngOnDestroy(): void {
     this.onDestroy$.next(true);

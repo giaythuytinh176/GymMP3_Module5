@@ -1,8 +1,8 @@
-<div class="centered" *ngIf="!isReady">
+<ng-template class="centered" #loading>
   <h1>Loading ...</h1>
   <mat-spinner></mat-spinner>
-</div>
-<div *ngIf="isReady">
+</ng-template>
+<div *ngIf="allsongs$ | async as listSong else loading">
   <div class="page-content">
     <div class="row-col">
       <div class="col-lg-9 b-r no-border-md">
@@ -93,7 +93,7 @@
             nextSelector: 'a.jscroll-next:last'
           }">
             <div class="row">
-              <div *ngFor="let song of allsongs" class="col-xs-4 col-sm-4 col-md-3">
+              <div *ngFor="let song of listSong.data" class="col-xs-4 col-sm-4 col-md-3">
                 <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
                   <div class="item-media">
                     <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
@@ -240,3 +240,4 @@
     </div>
   </div>
 </div>
+
