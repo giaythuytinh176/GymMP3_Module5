@@ -23,7 +23,6 @@ export class AllListSongComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log("Go here");
     this.route.params.pipe(
       takeUntil(this.onDestroy$),
       distinctUntilChanged()
@@ -31,7 +30,7 @@ export class AllListSongComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.isReady = true;
       }, 500);
-      console.log("Go here2");
+      console.log(this.route.snapshot.data.allsongs.data);
       this.allsongs = this.route.snapshot.data.allsongs.data;
     })
   }

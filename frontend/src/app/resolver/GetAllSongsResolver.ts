@@ -13,7 +13,7 @@ export class GetAllSongsResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.songService.getAllSongs(route.params['id']).pipe(
+    return this.songService.getAllSongs().pipe(
       delay(1),
       catchError(error => {
           this.router.navigateByUrl('/404');

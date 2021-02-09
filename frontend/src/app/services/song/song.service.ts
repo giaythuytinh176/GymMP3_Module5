@@ -33,7 +33,7 @@ export class SongService {
   ) {
   }
 
-  getAllSongs(param: any): Observable<Song[]> {
+  getAllSongs(): Observable<Song[]> {
     return this.http.get<Song[]>(this.apiGetAllSongs);
   }
 
