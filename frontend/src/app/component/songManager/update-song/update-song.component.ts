@@ -84,13 +84,13 @@ export class UpdateSongComponent implements OnInit {
       this.getSongById(this.id);
     });
     this.albumInfo$ = this.albumService.getAllAlbum();
-    this.getAlbums();
+    // this.getAlbums();
 
     this.categoryInfo$ = this.categoryService.getAllCategories();
     this.getCategories();
 
     this.singerInfo$ = this.singerService.getAllSingers();
-    this.getSingers();
+    // this.getSingers();
 
     this.getUserInfo();
 
