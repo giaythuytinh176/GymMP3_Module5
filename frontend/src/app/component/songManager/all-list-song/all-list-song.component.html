@@ -81,13 +81,13 @@
             </div>
           </div>
         </div>
-        <div class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
+        <div *ngIf="allsongs$ | async as listSong else loading" class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
             autoTrigger: true,
             loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
             padding: 50,
             nextSelector: 'a.jscroll-next:last'
           }">
-          <div *ngIf="allsongs$ | async as listSong else loading" class="row">
+          <div class="row">
             <div>
               <div *ngFor="let song of listSong.data" class="col-xs-4 col-sm-4 col-md-3">
                 <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
