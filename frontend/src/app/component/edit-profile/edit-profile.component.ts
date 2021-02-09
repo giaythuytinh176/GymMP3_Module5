@@ -9,6 +9,7 @@ import {FirebaseComponent} from "../firebase/firebase.component";
 import {transition, trigger, useAnimation} from "@angular/animations";
 import {shake} from "ng-animate";
 import {UserService} from "../../services/userManager/user.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-edit-profile',
@@ -30,6 +31,7 @@ export class EditProfileComponent implements OnInit {
   username = '';
   shake: any;
   old_avatar = '';
+  loadUserInfo$: Observable<UpdateInfo>;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -43,6 +45,12 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadUserInfo$ = this.userService.getInfoUserToken();
+    this.getInfoUserToken();
+    this.profileFormSubmit();
+  }
+
+  getInfoUserToken(): void {
     this.userService.getInfoUserToken().subscribe((data: any) => {
       // console.log(data);
       if (data.status) {
@@ -64,7 +72,9 @@ export class EditProfileComponent implements OnInit {
         this.username = this.userinfo.username;
       }
     }, error => console.log(error));
+  }
 
+  profileFormSubmit(): void {
     this.profileForm = this.fb.group({
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
@@ -74,7 +84,6 @@ export class EditProfileComponent implements OnInit {
       old_avatar: [this.old_avatar],
     });
   }
-
 
   updateUser() {
     this.profileForm.value.avatar = this.firebase.fb;
