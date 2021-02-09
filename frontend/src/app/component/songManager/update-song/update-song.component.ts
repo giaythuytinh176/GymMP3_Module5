@@ -79,8 +79,9 @@ export class UpdateSongComponent implements OnInit {
     this.getAlbums();
     this.getCategories();
     this.getUserInfo();
-
+    this.loading = false;
     this.routes.paramMap.subscribe(paramMap => {
+      this.loading = false;
       this.id = +paramMap.get('id');
       this.getSongById(this.id);
       this.loading = true;
