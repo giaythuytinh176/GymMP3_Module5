@@ -14,6 +14,7 @@ export class AllListSongComponent implements OnInit, OnDestroy {
 
   allsongs: any;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
+  isReady = false;
 
   constructor(
     private songService: SongService,
@@ -23,11 +24,13 @@ export class AllListSongComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log("Go here");
+    this.isReady = false;
     this.route.params.pipe(
       takeUntil(this.onDestroy$),
       distinctUntilChanged()
     ).subscribe(params => {
       console.log(this.route.snapshot.data.allsongs.data);
+      this.isReady = true;
       this.allsongs = this.route.snapshot.data.allsongs.data;
     })
   }
