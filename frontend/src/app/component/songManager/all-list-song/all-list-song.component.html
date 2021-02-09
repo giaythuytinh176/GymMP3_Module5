@@ -87,8 +87,8 @@
             padding: 50,
             nextSelector: 'a.jscroll-next:last'
           }">
-          <div class="row">
-            <div *ngIf="allsongs$ | async as listSong else loading">
+          <div *ngIf="allsongs$ | async as listSong else loading" class="row">
+            <div>
               <div *ngFor="let song of listSong.data" class="col-xs-4 col-sm-4 col-md-3">
                 <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
                   <div class="item-media">
