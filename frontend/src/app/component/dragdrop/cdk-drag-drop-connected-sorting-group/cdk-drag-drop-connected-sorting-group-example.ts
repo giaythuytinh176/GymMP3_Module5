@@ -11,16 +11,16 @@ import {CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem} from '@a
 })
 export class CdkDragDropConnectedSortingGroupExample implements OnInit {
 
+  idToMove: number;
+  listSongs: Song[] = [];
+  moveListSongs: Song[] = [];
+  dataToMove: Song;
+
   constructor(
     private http: HttpClient,
     private songService: SongService,
   ) {
   }
-
-  idToMove: number;
-  listSongs: Song[] = [];
-  moveListSongs: Song[] = [];
-  dataToMove: Song;
 
   ngOnInit(): void {
     this.songService.getAllSongs().subscribe((data: any) => {
@@ -70,8 +70,6 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-
-
 
 
       console.log(this.listSongs);

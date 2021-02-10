@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getInfoUserToken().subscribe((data: any) => {
       // console.log(data);
       if (data.status) {
-        this.toastr.warning('You must login to see profile.');
+        this.toastr.warning('You must login to see Profile.');
         this.token.signOut();
         this.routes.navigate(['/user/login'])
       } else {

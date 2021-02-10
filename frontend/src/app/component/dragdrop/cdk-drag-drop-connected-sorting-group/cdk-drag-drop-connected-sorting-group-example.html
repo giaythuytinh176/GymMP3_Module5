@@ -9,11 +9,11 @@
       <div class="example-container">
         <h2>To do</h2>
         <div
-          cdkDropList
+          (cdkDropListDropped)="drop($event)"
           [cdkDropListData]="listSongs"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of listSongs; let i = index" cdkDrag>
+          cdkDropList
+          class="example-list">
+          <div *ngFor="let item of listSongs; let i = index" cdkDrag class="example-box">
             Index: {{ i }}- {{item.nameSong}}- {{item.id}}- {{item.author}}
             <!--            <audio controls="controls" id="audio" style="width:100%">-->
             <!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
@@ -25,11 +25,11 @@
       <div class="example-container2">
         <h2>Done</h2>
         <div
-          cdkDropList
+          (cdkDropListDropped)="drop($event)"
           [cdkDropListData]="moveListSongs"
-          class="example-list2"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box2" *ngFor="let item of moveListSongs; let i2 = index;" cdkDrag>
+          cdkDropList
+          class="example-list2">
+          <div *ngFor="let item of moveListSongs; let i2 = index;" cdkDrag class="example-box2">
             Index: {{ i2 }}- {{item.nameSong}}- {{item.id}}- {{item.author}}
             <!--            <audio controls="controls" id="audio" style="width:100%">-->
             <!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->

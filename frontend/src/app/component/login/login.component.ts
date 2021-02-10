@@ -19,8 +19,8 @@ import {TokenStorageService} from "../../auth/token-storage.service";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   shake: any;
-  private loginInfo: LoginInfo;
   isLoading = false;
+  private loginInfo: LoginInfo;
 
   constructor(private authService: AuthService,
               private route: Router,
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         if (data.error || data.status) {
           this.toasrt.warning('Login Failed!!! Please login again!.')
         } else {
-          setTimeout( () => {
+          setTimeout(() => {
             this.isLoading = false;
           }, 1000);
           this.tokenStorage.saveLogin('true');
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
         }
       },
       err => {
-        setTimeout( () => {
+        setTimeout(() => {
           this.isLoading = false;
         }, 1000);
         // console.log(err.error.error);

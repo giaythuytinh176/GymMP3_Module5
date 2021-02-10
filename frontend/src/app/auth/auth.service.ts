@@ -26,7 +26,7 @@ export class AuthService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token
+      Authorization: 'Bearer ' + this.token
     })
   }
   auth = false;
@@ -97,7 +97,7 @@ export class AuthService {
       }
     }, (error: any) => {
       console.log(error);
-      this.tokenStorage.signOut();
+      // this.tokenStorage.signOut();
     });
   }
 

@@ -24,17 +24,22 @@ export class TokenStorageService {
       window.localStorage.removeItem(TOKEN_KEY);
       window.localStorage.removeItem(Login_KEY);
       this.saveLogin('false');
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 1000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1111);
       // this.router.navigate(['/browse'])
     }, (error: any) => {
       console.log(error);
-      this.toastr.warning(error.error.message);
+      // if (error.error.message) {
+      //   this.toastr.warning('You must log in to perform this action.');
+      // }
       window.localStorage.removeItem(TOKEN_KEY);
       window.localStorage.removeItem(Login_KEY);
       this.saveLogin('false');
-      this.router.navigate(['/login'])
+      setTimeout(() => {
+        window.location.reload();
+      }, 1111);
+      // this.router.navigate(['/login'])
     });
   }
 

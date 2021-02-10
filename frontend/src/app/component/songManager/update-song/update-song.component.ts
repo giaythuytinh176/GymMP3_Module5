@@ -142,11 +142,6 @@ export class UpdateSongComponent implements OnInit {
     return category && category.category_name ? category.category_name : '';
   }
 
-  private _filter_category(name: any): Category[] {
-    const filterValue = name.toLowerCase();
-    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
-  }
-
   getCategories(): void {
     this.categoryService.getAllCategories().subscribe((categories: any) => {
       this.categories = categories.data;
@@ -264,6 +259,11 @@ export class UpdateSongComponent implements OnInit {
 
   compareWithFunc(a, b) {
     return a === b;
+  }
+
+  private _filter_category(name: any): Category[] {
+    const filterValue = name.toLowerCase();
+    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
   }
 
 }
