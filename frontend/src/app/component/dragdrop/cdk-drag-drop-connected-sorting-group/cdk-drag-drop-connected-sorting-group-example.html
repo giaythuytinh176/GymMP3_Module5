@@ -13,11 +13,11 @@
           [cdkDropListData]="listSongs"
           class="example-list"
           (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of listSongs" cdkDrag>
-            {{item.nameSong}}- {{item.id}}- {{item.author}}
-<!--            <audio controls="controls" id="audio" style="width:100%">-->
-<!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
-<!--            </audio>-->
+          <div class="example-box" *ngFor="let item of listSongs; let i = index" cdkDrag>
+            Index: {{ i }}- {{item.nameSong}}- {{item.id}}- {{item.author}}
+            <!--            <audio controls="controls" id="audio" style="width:100%">-->
+            <!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
+            <!--            </audio>-->
           </div>
         </div>
       </div>
@@ -29,11 +29,11 @@
           [cdkDropListData]="moveListSongs"
           class="example-list2"
           (cdkDropListDropped)="drop($event)">
-          <div class="example-box2" *ngFor="let item of moveListSongs" cdkDrag>
-            {{item.nameSong}}- {{item.id}}- {{item.author}}
-<!--            <audio controls="controls" id="audio" style="width:100%">-->
-<!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
-<!--            </audio>-->
+          <div class="example-box2" *ngFor="let item of moveListSongs; let i2 = index;" cdkDrag>
+            Index: {{ i2 }}- {{item.nameSong}}- {{item.id}}- {{item.author}}
+            <!--            <audio controls="controls" id="audio" style="width:100%">-->
+            <!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
+            <!--            </audio>-->
           </div>
         </div>
       </div>
@@ -41,12 +41,34 @@
   </div>
 </div>
 
-<div class="text-center">
-  {{ idToDelete }}
-  {{ dataToDelete?.nameSong }}
-  {{ dataToDelete?.id }}
+
+<div *ngIf="dataToMove" class="text-center">
+  Id to move: {{ idToMove }} <br>
+  Name song Data: {{ dataToMove.nameSong }} <br>
+  Id Data: {{ dataToMove.id }} <br>
 </div>
 
+
+<div class="row">
+  <div class="col-lg-6">
+    <div style="margin-left: 50px">
+      <strong>Current listSongs:</strong>
+      <div *ngFor="let lS of listSongs; let i = index;">
+        Index:{{i}}- nameSong:{{lS.nameSong}}- id:{{lS.id}}- author:{{lS.author}}
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div style="margin-left: 50px">
+      <strong>Current moveListSongs:</strong>
+      <div *ngFor="let mvS of moveListSongs; let i2 = index;">
+        Index:{{i2}}- nameSong:{{mvS.nameSong}}- id:{{mvS.id}}- author:{{mvS.author}}
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
 
 
 <!--<div class="text-center">-->

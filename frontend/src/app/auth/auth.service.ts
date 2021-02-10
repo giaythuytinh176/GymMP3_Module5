@@ -97,6 +97,7 @@ export class AuthService {
       }
     }, (error: any) => {
       console.log(error);
+      this.tokenStorage.signOut();
     });
   }
 

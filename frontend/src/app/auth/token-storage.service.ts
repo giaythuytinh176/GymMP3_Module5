@@ -34,6 +34,7 @@ export class TokenStorageService {
       window.localStorage.removeItem(TOKEN_KEY);
       window.localStorage.removeItem(Login_KEY);
       this.saveLogin('false');
+      this.router.navigate(['/login'])
     });
   }
 
