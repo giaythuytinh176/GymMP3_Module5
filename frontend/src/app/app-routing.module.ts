@@ -66,7 +66,8 @@ const routes: Routes = [
   },
   {
     path: 'dragdrop',
-    component: CdkDragDropConnectedSortingGroupExample
+    component: CdkDragDropConnectedSortingGroupExample,
+    canActivate: [AuthGuard],
   },
   {
     path: '404',

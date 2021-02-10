@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../services/userManager/user.service";
+import {ToastrService} from "ngx-toastr";
 
 const TOKEN_KEY = 'AuthToken';
 const Login_KEY = 'AuthLogin';
@@ -11,7 +12,8 @@ const Login_KEY = 'AuthLogin';
 export class TokenStorageService {
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService,
   ) {
   }
 
@@ -28,6 +30,10 @@ export class TokenStorageService {
       // this.router.navigate(['/browse'])
     }, (error: any) => {
       console.log(error);
+      this.toastr.warning(error.error.message);
+      window.localStorage.removeItem(TOKEN_KEY);
+      window.localStorage.removeItem(Login_KEY);
+      this.saveLogin('false');
     });
   }
 
