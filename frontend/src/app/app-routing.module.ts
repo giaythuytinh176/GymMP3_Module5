@@ -12,6 +12,7 @@ import {EditProfileComponent} from "./component/edit-profile/edit-profile.compon
 import {CreateSongComponent} from "./component/songManager/create-song/create-song.component";
 import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song.component";
 import {GetAllSongsResolver} from "./resolver/GetAllSongsResolver";
+import {CdkDragDropConnectedSortingGroupExample} from "./component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example";
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchSongComponent
+  },
+  {
+    path: 'dragdrop',
+    component: CdkDragDropConnectedSortingGroupExample
   },
   {
     path: '404',

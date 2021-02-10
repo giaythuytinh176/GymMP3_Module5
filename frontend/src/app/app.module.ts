@@ -73,6 +73,7 @@ import {AllListSongComponent} from "./component/songManager/all-list-song/all-li
 import {CdkDragDropOverviewExampleComponent} from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
 import {environment} from "../environments/environment";
 import {GetAllSongsResolver} from "./resolver/GetAllSongsResolver";
+import {CdkDragDropConnectedSortingGroupExample} from "./component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example";
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import {GetAllSongsResolver} from "./resolver/GetAllSongsResolver";
     DialogDeleteMyList,
     EditProfileComponent,
     CdkDragDropOverviewExampleComponent,
+    CdkDragDropConnectedSortingGroupExample,
   ],
   imports: [
     BrowserModule,
@@ -166,6 +168,7 @@ import {GetAllSongsResolver} from "./resolver/GetAllSongsResolver";
     FirebaseMP3Component,
     LoginComponent,
     GetAllSongsResolver,
+
   ],
   bootstrap: [
     AppComponent,

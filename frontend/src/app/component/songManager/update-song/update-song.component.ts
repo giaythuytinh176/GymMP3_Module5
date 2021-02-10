@@ -106,7 +106,7 @@ export class UpdateSongComponent implements OnInit {
       views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       avatarUrl: [''],
       mp3Url: [''],
-      myControl: new FormControl('', Validators.required),
+      myControl_category: new FormControl('', Validators.required),
       singer_id: ['', [Validators.required]],
       album_id: ['', [Validators.required]],
       old_avatar: [this.old_avatar],
@@ -128,19 +128,30 @@ export class UpdateSongComponent implements OnInit {
     }, (error) => console.log(error));
   }
 
+  filteredOption_category() {
+    this.filteredOptions = this.updateMusicForm.get('myControl_category').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value!.name),
+        map(name => name ? this._filter_category(name) : this.categories.slice()
+        )
+      );
+  }
+
+  displayFn_category(category: Category): string {
+    return category && category.category_name ? category.category_name : '';
+  }
+
+  private _filter_category(name: any): Category[] {
+    const filterValue = name.toLowerCase();
+    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
+  }
+
   getCategories(): void {
     this.categoryService.getAllCategories().subscribe((categories: any) => {
       this.categories = categories.data;
       // console.log(categories.data);
-      this.filteredOptions = this.updateMusicForm.get('myControl').valueChanges
-        .pipe(
-          startWith(''),
-          // @ts-ignore
-          map(value => typeof value === 'string' ? value : value!.name),
-          // @ts-ignore
-          map(name => name ? this._filter(name) : this.categories.slice()
-          )
-        );
+      this.filteredOption_category();
       // console.log(this.categories);
     }, (error) => console.log(error));
   }
@@ -242,7 +253,7 @@ export class UpdateSongComponent implements OnInit {
       this.song.mp3Url = this.updateMusicForm.value.mp3Url;
     }
 
-    this.song.category_id = this.updateMusicForm.value.myControl.id;
+    this.song.category_id = this.updateMusicForm.value.myControl_category.id;
     this.song.album_id = this.updateMusicForm.value.album_id;
     // stringify to JSON
     this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
@@ -251,16 +262,8 @@ export class UpdateSongComponent implements OnInit {
     this.updateSong(this.song, this.id);
   }
 
-  displayFn(category: Category): string {
-    return category && category.category_name ? category.category_name : '';
-  }
-
   compareWithFunc(a, b) {
     return a === b;
   }
 
-  private _filter(name: any): Category[] {
-    const filterValue = name.toLowerCase();
-    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
-  }
 }

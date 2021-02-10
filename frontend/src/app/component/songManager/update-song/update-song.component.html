@@ -69,13 +69,13 @@
             <div class="col-sm-8">
               <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
                 <mat-label>Select a Category:</mat-label>
-                <input [(ngModel)]="category_id" [class.input-invalid]="updateMusicForm.get('myControl')!.invalid && updateMusicForm.get('myControl')!.touched" [class.input-valid]="updateMusicForm.get('myControl')!.valid && updateMusicForm.get('myControl')!.touched" [matAutocomplete]="auto" class="form-control" formControlName="myControl" matInput type="text">
-                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <input [(ngModel)]="category_id" [matAutocomplete]="auto" matInput [class.input-invalid]="updateMusicForm.get('myControl_category')!.invalid && updateMusicForm.get('myControl_category')!.touched" [class.input-valid]="updateMusicForm.get('myControl_category')!.valid && updateMusicForm.get('myControl_category')!.touched" class="form-control" formControlName="myControl_category" type="text">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn_category">
                   <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                     {{option.category_name}}
                   </mat-option>
                 </mat-autocomplete>
-                <div *ngIf="updateMusicForm.get('myControl').invalid && updateMusicForm.get('myControl').touched"
+                <div *ngIf="updateMusicForm.get('myControl_category').invalid && updateMusicForm.get('myControl_category').touched"
                      style="margin-top: 10px;color: red; text-align: left !important;">
                   <div [@shake]="shake">
                     Category is <strong>required.</strong>

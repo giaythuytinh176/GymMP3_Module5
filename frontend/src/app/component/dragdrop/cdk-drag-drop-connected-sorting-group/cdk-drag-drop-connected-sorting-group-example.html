@@ -1,0 +1,95 @@
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Drag&Drop connected sorting group
+  </h1>
+</div>
+
+<div class="page-content text-center">
+  <div class="row-col">
+    <div cdkDropListGroup>
+      <div class="example-container">
+        <h2>To do</h2>
+        <div
+          cdkDropList
+          [cdkDropListData]="listSongs"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of listSongs" cdkDrag>
+            {{item.nameSong}}- {{item.id}}- {{item.author}}
+<!--            <audio controls="controls" id="audio" style="width:100%">-->
+<!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
+<!--            </audio>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="example-container2">
+        <h2>Done</h2>
+        <div
+          cdkDropList
+          [cdkDropListData]="moveListSongs"
+          class="example-list2"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box2" *ngFor="let item of moveListSongs" cdkDrag>
+            {{item.nameSong}}- {{item.id}}- {{item.author}}
+<!--            <audio controls="controls" id="audio" style="width:100%">-->
+<!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
+<!--            </audio>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  {{ idToDelete }}
+  {{ dataToDelete?.nameSong }}
+  {{ dataToDelete?.id }}
+</div>
+
+
+
+<!--<div class="text-center">-->
+<!--  Todo-->
+<!--  <textarea cols="55" [(ngModel)]="todo"></textarea>-->
+<!--  Done-->
+<!--  <textarea cols="55" [(ngModel)]="done"></textarea>-->
+<!--</div>-->
+
+<!--<div class="page-title m-b">-->
+<!--  <h1 class="inline m-a-0" style="padding-left: 50px">Drag&Drop connected sorting-->
+
+<!--  </h1>-->
+<!--</div>-->
+
+<!--<div class="page-content text-center">-->
+<!--  <div class="row-col">-->
+<!--    <div class="example-container">-->
+<!--      <h2>To do</h2>-->
+
+<!--      <div-->
+<!--        cdkDropList-->
+<!--        #todoList="cdkDropList"-->
+<!--        [cdkDropListData]="todo"-->
+<!--        [cdkDropListConnectedTo]="[doneList]"-->
+<!--        class="example-list"-->
+<!--        (cdkDropListDropped)="drop($event)">-->
+<!--        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="example-container">-->
+<!--      <h2>Done</h2>-->
+<!--      <div-->
+<!--        cdkDropList-->
+<!--        #doneList="cdkDropList"-->
+<!--        [cdkDropListData]="done"-->
+<!--        [cdkDropListConnectedTo]="[todoList]"-->
+<!--        class="example-list"-->
+<!--        (cdkDropListDropped)="drop($event)">-->
+<!--        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+

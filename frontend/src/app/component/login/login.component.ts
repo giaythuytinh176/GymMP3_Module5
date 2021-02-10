@@ -40,6 +40,40 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  attemptLogin(loginInfo: LoginInfo) {
+    this.authService.attemptAuth(loginInfo).subscribe(
+      (data: any) => {
+        // console.log(data);
+        if (data.error || data.status) {
+          this.toasrt.warning('Login Failed!!! Please login again!.')
+        } else {
+          setTimeout( () => {
+            this.isLoading = false;
+          }, 1000);
+          this.tokenStorage.saveLogin('true');
+          this.tokenStorage.saveToken(data.token);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1111);
+          this.route.navigate(['/browse']);
+          this.toasrt.success('Login successfully.');
+        }
+      },
+      err => {
+        setTimeout( () => {
+          this.isLoading = false;
+        }, 1000);
+        // console.log(err.error.error);
+        if (err.error.error == 'invalid_credentials') {
+          this.toasrt.error('Username or Password is incorrect!');
+        } else {
+          this.toasrt.warning('Something wrong.');
+          this.route.navigate(['/user/login']);
+        }
+      }
+    );
+  }
+
   onSubmit() {
     this.isLoading = true;
     // console.log(this.loginForm);
@@ -52,37 +86,7 @@ export class LoginComponent implements OnInit {
         this.loginForm.value.username,
         this.loginForm.value.password
       );
-      this.authService.attemptAuth(this.loginInfo).subscribe(
-        (data: any) => {
-          // console.log(data);
-          if (data.error || data.status) {
-            this.toasrt.warning('Login Failed!!! Please login again!.')
-          } else {
-            setTimeout( () => {
-              this.isLoading = false;
-            }, 1000);
-            this.tokenStorage.saveLogin('true');
-            this.tokenStorage.saveToken(data.token);
-            setTimeout(() => {
-              window.location.reload();
-            }, 1111);
-            this.route.navigate(['/browse']);
-            this.toasrt.success('Login successfully.');
-          }
-        },
-        err => {
-          setTimeout( () => {
-            this.isLoading = false;
-          }, 1000);
-          // console.log(err.error.error);
-          if (err.error.error == 'invalid_credentials') {
-            this.toasrt.error('Username or Password is incorrect!');
-          } else {
-            this.toasrt.warning('Something wrong.');
-            this.route.navigate(['/user/login']);
-          }
-        }
-      );
+      this.attemptLogin(this.loginInfo);
     }
   }
 
