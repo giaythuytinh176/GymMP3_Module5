@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {SongService} from "../../../services/song/song.service";
-import {Song} from "../../../model/song/song";
+import {HttpClient} from '@angular/common/http';
+import {SongService} from '../../../services/song/song.service';
+import {Song} from '../../../model/song/song';
 import {CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
@@ -11,7 +11,6 @@ import {CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem} from '@a
 })
 export class CdkDragDropConnectedSortingGroupExample implements OnInit {
 
-  idToMove: number;
   listSongs: Song[] = [];
   moveListSongs: Song[] = [];
   dataToMove: Song;
@@ -34,15 +33,13 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
   drop(event: CdkDragDrop<Song[]>) {
     console.log('GoHere: ' + 0);
     console.log(event);
+
     if (event.previousContainer === event.container) {
       console.log('GoHere: ' + 1);
       console.log(event.container.data);
       console.log(event.previousIndex);
       console.log(event.currentIndex);
       console.log('GoHere: ' + 2);
-
-      // this.idToMove = event.previousIndex;
-      // this.dataToMove = this.listSongs[this.idToDelete];
 
       moveItemInArray(
         event.container.data,
@@ -60,17 +57,26 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
       console.log(event.currentIndex);
       console.log('GoHere: ' + 5);
 
-      this.idToMove = event.previousIndex;
-      this.dataToMove = this.listSongs[this.idToMove];
+      const lengthBeforeMove = this.listSongs.length;
 
       transferArrayItem(
-        // copyArrayItem(
+      // copyArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
 
+      const lengthAfterMove = this.listSongs.length;
+
+      if (lengthBeforeMove > lengthAfterMove) {
+        this.dataToMove = this.moveListSongs[event.currentIndex];
+      } else if (lengthBeforeMove < lengthAfterMove) {
+        this.dataToMove = this.listSongs[event.currentIndex];
+      }
+
+      console.log(lengthBeforeMove);
+      console.log(lengthAfterMove);
 
       console.log(this.listSongs);
       console.log(this.moveListSongs);

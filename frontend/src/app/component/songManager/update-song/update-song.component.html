@@ -12,9 +12,10 @@
     <div *ngIf="categoryInfo$ | async as categoryList else loading">
       <div *ngIf="singerInfo$ | async as singerList else loading">
         <form [formGroup]="updateMusicForm" name="form">
+
           <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted">Name song:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-4">
               <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>Name song:</mat-label>
                 <input [(ngModel)]="songInfo.nameSong" [class.input-invalid]="updateMusicForm.get('nameSong')!.invalid && updateMusicForm.get('nameSong')!.touched" [class.input-valid]="updateMusicForm.get('nameSong')!.valid && updateMusicForm.get('nameSong')!.touched" class="form-control" formControlName="nameSong" matInput placeholder="Name song" type="text">
@@ -26,11 +27,9 @@
                 </div>
               </mat-form-field>
             </div>
-          </div>
 
-          <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted">Author:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-4">
               <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>Author:</mat-label>
                 <input [(ngModel)]="songInfo.author" [class.input-invalid]="updateMusicForm.get('author')!.invalid && updateMusicForm.get('author')!.touched" [class.input-valid]="updateMusicForm.get('author')!.valid && updateMusicForm.get('author')!.touched" class="form-control" formControlName="author" matInput placeholder="Author" type="text">
@@ -42,11 +41,9 @@
                 </div>
               </mat-form-field>
             </div>
-          </div>
 
-          <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted">Singer:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-4">
               <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>Select a Singer:</mat-label>
                 <mat-select [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" [compareWith]="compareWithFunc" class="form-control" formControlName="singer_id" multiple>
@@ -65,8 +62,9 @@
           </div>
 
           <div class="form-group row">
+
             <!--        <div class="col-sm-3 form-control-label text-muted">Category:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-4">
               <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>Select a Category:</mat-label>
                 <input [(ngModel)]="category_id" [class.input-invalid]="updateMusicForm.get('myControl_category')!.invalid && updateMusicForm.get('myControl_category')!.touched" [class.input-valid]="updateMusicForm.get('myControl_category')!.valid && updateMusicForm.get('myControl_category')!.touched" [matAutocomplete]="auto" class="form-control" formControlName="myControl_category" matInput type="text">
@@ -83,12 +81,9 @@
                 </div>
               </mat-form-field>
             </div>
-          </div>
 
-
-          <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted"> Album:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-4">
               <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>Select an Album:</mat-label>
                 <mat-select [(ngModel)]="album_id" [class.input-invalid]="updateMusicForm.get('album_id')!.invalid && updateMusicForm.get('album_id')!.touched" [class.input-valid]="updateMusicForm.get('album_id')!.valid && updateMusicForm.get('album_id')!.touched" class="form-control" formControlName="album_id">
@@ -103,12 +98,9 @@
                 </div>
               </mat-form-field>
             </div>
-          </div>
 
-
-          <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted">View:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-4">
               <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>View:</mat-label>
                 <input [(ngModel)]="songInfo.views" [class.input-invalid]="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" [class.input-valid]="updateMusicForm.get('views')!.valid && updateMusicForm.get('views')!.touched" class="form-control" formControlName="views" matInput placeholder="View" type="text">
@@ -128,7 +120,7 @@
 
           <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted">Describes:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-12">
               <mat-form-field appearance="fill" class="example-full-width">
                 <mat-label>Describes:</mat-label>
                 <textarea [(ngModel)]="songInfo.describes" [class.input-invalid]="updateMusicForm.get('describes')!.invalid && updateMusicForm.get('describes')!.touched" [class.input-valid]="updateMusicForm.get('describes')!.valid && updateMusicForm.get('describes')!.touched" class="form-control" formControlName="describes" matInput placeholder="Describes"
@@ -145,7 +137,7 @@
 
           <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted">Avatar:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-6">
               <mat-label>Avatar:</mat-label>
               <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
                      formControlName="avatarUrl" id="avatar" type="file"/>
@@ -181,7 +173,7 @@
 
           <div class="form-group row">
             <!--        <div class="col-sm-3 form-control-label text-muted">Mp3:</div>-->
-            <div class="col-sm-8">
+            <div class="col-sm-6">
               <mat-label>Mp3:</mat-label>
               <input (change)="firebaseMP3.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control"
                      formControlName="mp3Url" id="mp3Url" type="file"/>
@@ -208,13 +200,13 @@
               </div>
             </div>
 
-            <div *ngIf="firebaseMP3.fb as urlMp3" class="col-sm-4">
+            <div *ngIf="firebaseMP3.fb as urlMp3" class="col-sm-6">
               <audio class="playlist" controls="controls" id="audio" style="width:100%">
                 <source src="{{ urlMp3 }}" type="audio/mpeg">
               </audio>
             </div>
 
-            <div *ngIf="!firebaseMP3.fb && songInfo.mp3Url" class="col-sm-4">
+            <div *ngIf="!firebaseMP3.fb && songInfo.mp3Url" class="col-sm-6">
               <audio class="playlist" controls="controls" id="audio" style="width:100%">
                 <source src="{{ songInfo.mp3Url }}" type="audio/mpeg">
               </audio>
@@ -222,7 +214,7 @@
           </div>
 
           <div class="form-group row">
-            <div class="col-sm-8 text-center">
+            <div class="col-sm-12 text-center">
               <a [routerLink]="['/user/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
               <button (click)="updateSongSubmit()" [disabled]="!updateMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">
                 Edit song
