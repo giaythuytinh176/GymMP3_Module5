@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ChangeListManager">
-    <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/SongController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/SongController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Models/Singer.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/Singer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/song/song.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/song/song.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/song/song.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/song/song.service.ts" afterDir="false" />
-    </list>
-    <option name="SHOW_DIALOG" value="false" />
-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
-    <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="ComposerSettings" doNotAsk="true">
-    <pharConfigPath>$PROJECT_DIR$/backend/composer.json</pharConfigPath>
-    <execution />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/backend/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/backend/vendor/guzzlehttp/psr7" />
@@ -141,101 +116,12 @@
       <path value="$PROJECT_DIR$/backend/vendor/sebastian/lines-of-code" />
     </include_path>
   </component>
-  <component name="ProjectId" id="1oIttfUGti9RRfnFPvMhzgqBOi3" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-    <option name="showMembers" value="true" />
-    <option name="sortByType" value="true" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/app/Models" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/frontend/node_modules/typescript/lib" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/backend/app/Models" />
-    </key>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="" />
-      <created>1612986149536</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1612986149536</updated>
-      <workItem from="1612986152478" duration="173000" />
-      <workItem from="1612986401168" duration="459000" />
-      <workItem from="1612988004277" duration="9302000" />
-      <workItem from="1613036208461" duration="10513000" />
-    </task>
-    <task id="LOCAL-00001" summary="tesing dragdrop6">
-      <created>1612986188568</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1612986188568</updated>
-    </task>
-    <task id="LOCAL-00002" summary="tesing dragdrop6">
-      <created>1612986223238</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1612986223238</updated>
-    </task>
-    <task id="LOCAL-00003" summary="tesing dragdrop , change layout profile, song">
-      <created>1613022052464</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1613022052464</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
-    <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="tesing dragdrop6" />
-    <MESSAGE value="tesing dragdrop , change layout profile, song" />
-    <option name="LAST_COMMIT_MESSAGE" value="tesing dragdrop , change layout profile, song" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts</url>
-          <line>70</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts</url>
-          <line>22</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/backend/vendor/autoload.php" />
+    </phpunit_settings>
   </component>
 </project>
