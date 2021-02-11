@@ -32,6 +32,7 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
   dataToMove: Song;
   userinfo!: UpdateInfo;
   song: Song;
+  isLoading = false;
 
   constructor(
     private http: HttpClient,
@@ -58,9 +59,22 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
     );
   }
 
+  getListSongsByID2(id: number): void {
+    this.songService.getSongDetailV2(id).subscribe((data: any) => {
+        this.listSongs = data.data;
+        console.log(5);
+        this.isLoading = false;
+        this.toastr.success('Move song successfully!');
+        // console.log(this.listSongs);
+      },
+      (error: any) => console.log(error)
+    );
+  }
+
   getMovedSongs(): void {
     this.songService.getMovedSongs().subscribe((data: any) => {
         this.moveListSongs = data.data;
+        console.log(6);
         // console.log(this.moveListSongs);
       },
       (error: any) => console.log(error)
@@ -76,8 +90,22 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
         this.routes.navigate(['/user/login']);
       } else {
         this.userinfo = data.user;
-
         this.getListSongsByID(this.userinfo.id);
+      }
+    }, error => console.log(error));
+  }
+
+  getUserInfo2(): void {
+    this.userService.getInfoUserToken().subscribe((data: any) => {
+      // console.log(data);
+      if (data.status) {
+        this.toastr.warning('You must login to move song.');
+        this.token.signOut();
+        this.routes.navigate(['/user/login']);
+      } else {
+        this.userinfo = data.user;
+        console.log(4);
+        this.getListSongsByID2(this.userinfo.id);
       }
     }, error => console.log(error));
   }
@@ -98,8 +126,8 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
           this.token.signOut();
           this.toastr.warning('You must login to move song.');
         } else {
-          this.toastr.success('Move song successfully!');
-          this.getUserInfo();
+          console.log(3);
+          this.getUserInfo2();
           // this.getAllSongs();
           this.getMovedSongs();
         }
@@ -117,8 +145,7 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
           this.token.signOut();
           this.toastr.warning('You must login to move song.');
         } else {
-          this.toastr.success('Move song successfully!');
-          this.getUserInfo();
+          this.getUserInfo2();
           // this.getAllSongs();
           this.getMovedSongs();
         }
@@ -151,14 +178,17 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
 
       this.idAfterMove = event.currentIndex;
       this.idBeforeMove = event.previousIndex;
+      this.isLoading = true;
 
       if (lengthBeforeMove > lengthAfterMove) {
+        console.log(1);
         this.dataToMove = this.moveListSongs[event.currentIndex];
         console.log('data1', this.dataToMove.id, this.userinfo.id);
         this.songService.deleteSong(this.dataToMove.id, this.userinfo.id).subscribe(
           (data: any) => {
             // console.log(data);
             // this.toastr.success('Deleted song sucessfully!');
+            console.log(2);
 
             const singerIdList = [];
             for (const singerId of this.dataToMove.singers) {
