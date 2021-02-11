@@ -20,12 +20,16 @@ export class SongService {
     })
   }
   private API_URL_CREATE = environment.apiUrl + '/song/create';
+  private API_URL_CREATE_MOVED = environment.apiUrl + '/song/moved/create';
   private apiListSongUser = environment.apiUrl + '/song/user/list';
+  private apiListSongV2User = environment.apiUrl + '/song/user/listv2';
   private updateSongUrl = environment.apiUrl + '/song';
   private getUserUrl = environment.apiUrl + '/user/token';
   private apiGetAllSongs = environment.apiUrl + '/song/list';
+  private apiGetMovedSongs = environment.apiUrl + '/song/moved/list';
   private search = environment.apiUrl + '/search';
   private deleteSongsUrl = environment.apiUrl + '/song';
+  private deleteMovedSongsUrl = environment.apiUrl + '/song/moved';
 
   constructor(
     private http: HttpClient,
@@ -37,12 +41,24 @@ export class SongService {
     return this.http.get<Song[]>(this.apiGetAllSongs);
   }
 
+  getMovedSongs(): Observable<Song[]> {
+    return this.http.get<Song[]>(this.apiGetMovedSongs);
+  }
+
   createSong(song: Song): Observable<Song> {
     return this.http.post<Song>(this.API_URL_CREATE, song, this.httpJson);
   }
 
+  createMovedSong(song: Song): Observable<Song> {
+    return this.http.post<Song>(this.API_URL_CREATE_MOVED, song, this.httpJson);
+  }
+
   getSongDetail(id: number): Observable<any> {
-    return this.http.get(`${this.apiListSongUser}/${id}`, this.httpJson)
+    return this.http.get(`${this.apiListSongUser}/${id}`, this.httpJson);
+  }
+
+  getSongDetailV2(id: number): Observable<any> {
+    return this.http.get(`${this.apiListSongV2User}/${id}`, this.httpJson);
   }
 
   getSongById(id: number): Observable<Song> {
@@ -72,5 +88,18 @@ export class SongService {
       },
     };
     return this.http.delete(`${this.deleteSongsUrl}/${id}`, httpHeader);
+  }
+
+  deleteMovedSong(id: number, user_id: number) {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token
+      }),
+      body: {
+        user_id: user_id,
+      },
+    };
+    return this.http.delete(`${this.deleteMovedSongsUrl}/${id}`, httpHeader);
   }
 }

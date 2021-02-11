@@ -136,7 +136,7 @@ export class CreateSongComponent implements OnInit {
     this.createMusicForm.value.avatarUrl = this.firebase.fb;
     this.createMusicForm.value.mp3Url = this.firebaseMP3.fb;
     this.song = this.createMusicForm.value;
-    //Stringify to JSon
+    // Stringify to JSon
     this.song.singer_id = JSON.stringify(this.createMusicForm.value.singer_id);
     this.song.user_id = this.userinfo.id;
     // console.log(this.song);

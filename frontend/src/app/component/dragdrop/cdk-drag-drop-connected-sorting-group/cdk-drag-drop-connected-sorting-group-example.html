@@ -14,7 +14,7 @@
           cdkDropList
           class="example-list">
           <div *ngFor="let item of listSongs; let i = index" cdkDrag class="example-box">
-            Index: {{ i }}- {{item.nameSong}}- {{item.id}}- {{item.author}}
+            Index: {{ i }}- {{item.nameSong}}- id:{{item.id}}- {{item.author}}
             <!--            <audio controls="controls" id="audio" style="width:100%">-->
             <!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
             <!--            </audio>-->
@@ -30,7 +30,7 @@
           cdkDropList
           class="example-list2">
           <div *ngFor="let item of moveListSongs; let i2 = index;" cdkDrag class="example-box2">
-            Index: {{ i2 }}- {{item.nameSong}}- {{item.id}}- {{item.author}}
+            Index: {{ i2 }}- {{item.nameSong}}- id:{{item.id}}- {{item.author}}
             <!--            <audio controls="controls" id="audio" style="width:100%">-->
             <!--              <source src="{{ item.mp3Url }}" type="audio/mpeg">-->
             <!--            </audio>-->
@@ -43,7 +43,8 @@
 
 
 <div *ngIf="dataToMove" class="text-center">
-  Id to move: {{ idToMove }} <br>
+  Id before move: {{ idBeforeMove }} <br>
+  Id after move: {{ idAfterMove }} <br>
   Name song Data: {{ dataToMove.nameSong }} <br>
   Id Data: {{ dataToMove.id }} <br>
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MovedSong;
 use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -29,6 +30,34 @@ class SongController extends Controller
         }
 
         $data = new Song();
+        $data->fill($request->all());
+        $data->save();
+        foreach (json_decode($request->singer_id, true) as $s_id) {
+            $data->singers()->attach($s_id);
+        }
+        return response()->json(compact('data'));
+    }
+
+    public function store_moved(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nameSong' => 'required|string',
+            'avatarUrl' => 'required|url',
+            'mp3Url' => 'required|url|unique:moved_songs',
+            'describes' => 'required|string',
+            'author' => 'required|string',
+            'views' => 'required|integer',
+            'user_id' => 'required|integer',
+            'singer_id' => 'required|string',
+            'category_id' => 'required|integer',
+            'album_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $data = new MovedSong();
         $data->fill($request->all());
         $data->save();
         foreach (json_decode($request->singer_id, true) as $s_id) {
@@ -103,6 +132,22 @@ class SongController extends Controller
         return response()->json(compact('data'), 200);
     }
 
+    public function allSongsByID($id)
+    {
+        $res = Song::with('singers')->get()->toArray();
+        $data = array_filter($res, function ($row) use ($id) {
+            return $row['user_id'] === (int)$id;
+        });
+        $data = array_values($data);
+        return response()->json(compact('data'), 200);
+    }
+
+    public function allMovedSongs()
+    {
+        $data = MovedSong::with('singers')->get();
+        return response()->json(compact('data'), 200);
+    }
+
     public function showidsong($id)
     {
         $song = Song::find($id);
@@ -152,6 +197,12 @@ class SongController extends Controller
         return $data->user_id;
     }
 
+    public function getUserIDbyMovedSongID($song_id)
+    {
+        $data = DB::table('moved_songs')->where('id', '=', $song_id)->first();
+        return $data->user_id;
+    }
+
     public function destroy(Request $request, UserController $userController)
     {
         $token = $userController->getAuthenticatedUser();
@@ -170,6 +221,26 @@ class SongController extends Controller
         $song->singers()->detach();
         $song->delete();
         return response()->json($song);
+    }
+
+    public function destroyMoved(Request $request, UserController $userController)
+    {
+        $token = $userController->getAuthenticatedUser();
+        if (!$request->user_id || ($request->user_id !== $token->getData()->user->id)) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'User ID invalid or not found.'], 400);
+        }
+        if (!$this->getUserIDbyMovedSongID($request->id) ||
+            ($token->getData()->user->id !== $this->getUserIDbyMovedSongID($request->id))
+        ) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'invalid_access'], 400);
+        }
+
+        $movedSong = MovedSong::findOrFail($request->id);
+        $movedSong->singers()->detach();
+        $movedSong->delete();
+        return response()->json($movedSong);
     }
 
     public function search(Request $request)

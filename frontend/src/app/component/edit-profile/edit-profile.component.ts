@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UpdateInfo} from "../../model/userManager/updateinfo";
-import {AngularFireStorage} from "@angular/fire/storage";
-import {ActivatedRoute, Router} from "@angular/router";
-import {TokenStorageService} from "../../auth/token-storage.service";
-import {ToastrService} from "ngx-toastr";
-import {FirebaseComponent} from "../firebase/firebase.component";
-import {transition, trigger, useAnimation} from "@angular/animations";
-import {shake} from "ng-animate";
-import {UserService} from "../../services/userManager/user.service";
-import {Observable} from "rxjs";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UpdateInfo} from '../../model/userManager/updateinfo';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TokenStorageService} from '../../auth/token-storage.service';
+import {ToastrService} from 'ngx-toastr';
+import {FirebaseComponent} from '../firebase/firebase.component';
+import {transition, trigger, useAnimation} from '@angular/animations';
+import {shake} from 'ng-animate';
+import {UserService} from '../../services/userManager/user.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
@@ -104,7 +104,7 @@ export class EditProfileComponent implements OnInit {
             if (data.status) {
               this.token.signOut();
               this.toastr.warning('You must login to update profile.');
-              this.routes.navigate(['/user/login'])
+              this.routes.navigate(['/user/login']);
             } else {
               // this.routes.navigate(['list']);
               this.toastr.success('Updated Profile Successfully!');
