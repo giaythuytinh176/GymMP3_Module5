@@ -29,7 +29,7 @@ export class SearchSongComponent implements OnInit {
       //throttleTime(300),
       debounceTime(300),
       distinctUntilChanged(),
-      //concatMap(value =>
+      // concatMap(value =>
       switchMap(value =>
         this.songService.searchSong(value)
       )

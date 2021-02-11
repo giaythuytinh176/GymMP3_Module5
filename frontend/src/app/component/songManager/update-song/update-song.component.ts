@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CategoryService} from "../../../services/category/caterory.service";
-import {SingerService} from "../../../services/singer/singer.service";
-import {AlbumService} from "../../../services/album/album.service";
-import {FirebaseComponent} from "../../firebase/firebase.component";
-import {FirebaseMP3Component} from "../../firebaseMP3/firebaseMP3.component";
-import {SongService} from "../../../services/song/song.service";
-import {Song} from "../../../model/song/song";
-import {UpdateInfo} from "../../../model/userManager/updateinfo";
-import {ToastrService} from "ngx-toastr";
-import {TokenStorageService} from "../../../auth/token-storage.service";
-import {transition, trigger, useAnimation} from "@angular/animations";
-import {shake} from "ng-animate";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CategoryService} from '../../../services/category/caterory.service';
+import {SingerService} from '../../../services/singer/singer.service';
+import {AlbumService} from '../../../services/album/album.service';
+import {FirebaseComponent} from '../../firebase/firebase.component';
+import {FirebaseMP3Component} from '../../firebaseMP3/firebaseMP3.component';
+import {SongService} from '../../../services/song/song.service';
+import {Song} from '../../../model/song/song';
+import {UpdateInfo} from '../../../model/userManager/updateinfo';
+import {ToastrService} from 'ngx-toastr';
+import {TokenStorageService} from '../../../auth/token-storage.service';
+import {transition, trigger, useAnimation} from '@angular/animations';
+import {shake} from 'ng-animate';
 import {Album} from 'src/app/model/album/album';
-import {Category} from "../../../model/category/category";
-import {Singer} from "../../../model/singer/singer";
-import {UserService} from "../../../services/userManager/user.service";
-import {Observable} from "rxjs";
-import {map, startWith} from "rxjs/operators";
+import {Category} from '../../../model/category/category';
+import {Singer} from '../../../model/singer/singer';
+import {UserService} from '../../../services/userManager/user.service';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-song',
@@ -29,7 +29,7 @@ import {map, startWith} from "rxjs/operators";
   ],
 })
 export class UpdateSongComponent implements OnInit {
-  updateMusicForm: FormGroup
+  updateMusicForm: FormGroup;
   filteredOptions: any;
 
   userinfo!: UpdateInfo;
@@ -61,6 +61,7 @@ export class UpdateSongComponent implements OnInit {
   categoryInfo$: Observable<Category[]>;
   singerInfo$: Observable<Singer[]>;
   isLoadingSongName = false;
+  isLoading = false;
 
   constructor(private songService: SongService,
               private route: Router,
@@ -78,24 +79,30 @@ export class UpdateSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.isLoading = true;
+    console.log(1);
     this.routes.paramMap.subscribe(paramMap => {
       this.id = +paramMap.get('id');
+      console.log(2);
       this.songInfo$ = this.songService.getSongById(this.id);
       this.getSongById(this.id);
     });
-    this.albumInfo$ = this.albumService.getAllAlbum();
-    // this.getAlbums();
+    console.log(5);
+    // this.albumInfo$ = this.albumService.getAllAlbum();
+    console.log(12);
+    this.getAlbums();
 
-    this.categoryInfo$ = this.categoryService.getAllCategories();
+    // this.categoryInfo$ = this.categoryService.getAllCategories();
     this.getCategories();
 
-    this.singerInfo$ = this.singerService.getAllSingers();
-    // this.getSingers();
+    console.log(9);
+    // this.singerInfo$ = this.singerService.getAllSingers();
+    this.getSingers();
 
     this.getUserInfo();
 
     this.updateForm();
+    console.log(11);
   }
 
   updateForm(): void {
@@ -103,7 +110,7 @@ export class UpdateSongComponent implements OnInit {
       nameSong: ['', [Validators.required]],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       avatarUrl: [''],
       mp3Url: [''],
       myControl_category: new FormControl('', Validators.required),
@@ -128,7 +135,8 @@ export class UpdateSongComponent implements OnInit {
     }, (error) => console.log(error));
   }
 
-  filteredOption_category() {
+  filteredOption_category(): void {
+    console.log(8);
     this.filteredOptions = this.updateMusicForm.get('myControl_category').valueChanges
       .pipe(
         startWith(''),
@@ -146,6 +154,7 @@ export class UpdateSongComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe((categories: any) => {
       this.categories = categories.data;
       // console.log(categories.data);
+      console.log(7);
       this.filteredOption_category();
       // console.log(this.categories);
     }, (error) => console.log(error));
@@ -157,8 +166,10 @@ export class UpdateSongComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update Song.');
-        this.route.navigate(['/user/login'])
+        this.route.navigate(['/user/login']);
       } else {
+        console.log(10);
+        // this.isLoading = false;
         this.userinfo = data.user;
       }
     }, error => console.log(error));
@@ -167,6 +178,7 @@ export class UpdateSongComponent implements OnInit {
   getSingerIDbySongID(id: number): void {
     this.singerService.getSingerIDBySongID(id).subscribe((res: any) => {
       // console.log(res);
+      console.log(4);
       this.singer_id = res;
     }, (error: any) => console.log(error));
   }
@@ -174,6 +186,8 @@ export class UpdateSongComponent implements OnInit {
   getCategoryInfo(id: number): void {
     this.categoryService.getCategoryInfo(id).subscribe((res: any) => {
         this.category_id = res;
+        console.log(6);
+        this.isLoading = false;
         // console.log(res);
       }, (error: any) => console.log(error)
     );
@@ -185,10 +199,13 @@ export class UpdateSongComponent implements OnInit {
         if (data.status) {
           this.toastr.warning('You must login to update song.');
           this.token.signOut();
-          this.route.navigate(['/user/login'])
+          this.route.navigate(['/user/login']);
         } else {
+          console.log(3);
           this.getSingerIDbySongID(id);
-          this.getCategoryInfo(data.category_id);
+          setTimeout(() => {
+            this.getCategoryInfo(data.category_id);
+          }, 0);
 
           this.isLoadingSongName = true;
 
@@ -214,7 +231,7 @@ export class UpdateSongComponent implements OnInit {
       if (data.status) {
         this.toastr.warning('You must login to update song.');
         this.token.signOut();
-        this.route.navigate(['/user/login'])
+        this.route.navigate(['/user/login']);
       } else {
         this.toastr.success('Updated Song Successfully!');
         this.route.navigate(['/user/profile']);
@@ -236,7 +253,7 @@ export class UpdateSongComponent implements OnInit {
     this.song = this.updateMusicForm.value;
     this.song.user_id = this.userinfo.id;
 
-    //get OLD value
+    // get OLD value
     if (!this.updateMusicForm.value.avatarUrl) {
       this.song.avatarUrl = this.old_avatar;
     } else {

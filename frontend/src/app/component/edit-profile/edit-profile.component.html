@@ -2,7 +2,7 @@
   <h1 class="inline m-a-0" style="padding-left: 50px">Edit Profile</h1>
 </div>
 
-<div *ngIf="loadUserInfo$ | async as infoUser else loading" class="container">
+<div *ngIf="!isLoading && loadUserInfo$ | async as infoUser else loadingTEMP" class="container">
   <div class="b-t" style="margin-top: 10px; margin-left: 50px">
     <form [formGroup]="profileForm" name="form">
       <div class="form-group row">
@@ -130,7 +130,7 @@
   </div>
 
 </div>
-<ng-template #loading>
+<ng-template #loadingTEMP>
   <div class="centered">
     <h1>Loading ...</h1>
     <mat-spinner></mat-spinner>

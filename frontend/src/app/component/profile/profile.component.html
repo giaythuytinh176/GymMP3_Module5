@@ -7,7 +7,7 @@
   <!-- ############ LAYOUT START-->
 
   <!-- content -->
-  <div *ngIf="allsongs$ | async as listSong else loading" class="app-content white bg box-shadow-z2" id="content" role="main">
+  <div *ngIf="!isLoading && allsongs$ | async as listSong else loadingTEMP" class="app-content white bg box-shadow-z2" id="content" role="main">
     <div class="app-header hidden-lg-up white lt box-shadow-z1">
       <div class="navbar">
         <!-- brand -->
@@ -500,7 +500,7 @@
 
     </div>
   </div>
-  <ng-template #loading>
+  <ng-template #loadingTEMP>
     <div class="centered">
       <h1>Loading ...</h1>
       <mat-spinner></mat-spinner>

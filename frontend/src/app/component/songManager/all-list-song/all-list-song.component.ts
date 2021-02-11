@@ -13,7 +13,9 @@ import {distinctUntilChanged, takeUntil} from "rxjs/operators";
 export class AllListSongComponent implements OnInit, OnDestroy {
 
   allsongs$: Observable<Song[]>;
+  allsongs: Song[];
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
+  isLoading = false;
 
   constructor(
     private songService: SongService,
@@ -22,7 +24,15 @@ export class AllListSongComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.allsongs$ = this.songService.getAllSongs();
+    console.log(1);
+    this.isLoading = true;
+    // this.allsongs$ = this.songService.getAllSongs();
+    this.songService.getAllSongs().subscribe((res: any) => {
+      this.allsongs = res.data;
+      this.isLoading = false;
+      console.log(2);
+      // console.log(this.allsongs);
+    }, (error) => console.log(error));
   }
 
   // ngOnInit(): void {

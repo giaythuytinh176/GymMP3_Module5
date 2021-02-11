@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {AngularFireStorage} from "@angular/fire/storage";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TokenStorageService} from "../../../auth/token-storage.service";
-import {ToastrService} from "ngx-toastr";
-import {FirebaseComponent} from "../../firebase/firebase.component";
-import {UpdateInfo} from "../../../model/userManager/updateinfo";
-import {Song} from "../../../model/song/song";
-import {SongService} from "../../../services/song/song.service";
-import {FirebaseMP3Component} from "../../firebaseMP3/firebaseMP3.component";
+import {AngularFireStorage} from '@angular/fire/storage';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TokenStorageService} from '../../../auth/token-storage.service';
+import {ToastrService} from 'ngx-toastr';
+import {FirebaseComponent} from '../../firebase/firebase.component';
+import {UpdateInfo} from '../../../model/userManager/updateinfo';
+import {Song} from '../../../model/song/song';
+import {SongService} from '../../../services/song/song.service';
+import {FirebaseMP3Component} from '../../firebaseMP3/firebaseMP3.component';
 import {AlbumService} from '../../../services/album/album.service';
-import {CategoryService} from "../../../services/category/caterory.service";
-import {SingerService} from "../../../services/singer/singer.service";
-import {transition, trigger, useAnimation} from "@angular/animations";
-import {shake} from "ng-animate";
+import {CategoryService} from '../../../services/category/caterory.service';
+import {SingerService} from '../../../services/singer/singer.service';
+import {transition, trigger, useAnimation} from '@angular/animations';
+import {shake} from 'ng-animate';
 import {Album} from 'src/app/model/album/album';
 import {Category} from 'src/app/model/category/category';
-import {Singer} from "../../../model/singer/singer";
-import {UserService} from "../../../services/userManager/user.service";
-import {Observable} from "rxjs";
+import {Singer} from '../../../model/singer/singer';
+import {UserService} from '../../../services/userManager/user.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-create-song',
@@ -38,6 +38,7 @@ export class CreateSongComponent implements OnInit {
   singers: Singer[];
   shake: any;
   loadUserInfo$: Observable<UpdateInfo>;
+  isLoading = false;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -56,13 +57,18 @@ export class CreateSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
+    console.log(1);
     this.loadUserInfo$ = this.userService.getInfoUserToken();
-    this.getUserInfo();
+
+    setTimeout(() => {
+      this.getUserInfo();
+    }, 0);
 
     this.getAlbums();
     this.getCategories();
     this.getSingers();
-
+    console.log(6);
     this.createForm();
   }
 
@@ -70,6 +76,7 @@ export class CreateSongComponent implements OnInit {
     this.albumService.getAllAlbum().subscribe((albums: any) => {
       this.albums = albums.data;
       // console.log(this.albums);
+      console.log(3);
     }, (error) => console.log(error));
   }
 
@@ -77,6 +84,7 @@ export class CreateSongComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe((categories: any) => {
       this.categories = categories.data;
       // console.log(this.categories);
+      console.log(4);
     }, (error) => console.log(error));
   }
 
@@ -84,6 +92,7 @@ export class CreateSongComponent implements OnInit {
     this.singerService.getAllSingers().subscribe((singers: any) => {
       this.singers = singers.data;
       // console.log(this.singers);
+      console.log(5);
     }, (error) => console.log(error));
   }
 
@@ -93,9 +102,11 @@ export class CreateSongComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to create Song.');
-        this.routes.navigate(['/user/login'])
+        this.routes.navigate(['/user/login']);
       } else {
+        console.log(2);
         this.userinfo = data.user;
+        this.isLoading = false;
       }
     }, error => console.log(error));
   }
@@ -107,7 +118,7 @@ export class CreateSongComponent implements OnInit {
       mp3Url: ['', [Validators.required]],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       singer_id: ['', [Validators.required]],
       category_id: ['', [Validators.required]],
       album_id: ['', [Validators.required]],
@@ -120,14 +131,14 @@ export class CreateSongComponent implements OnInit {
         if (data.error || data.status) {
           this.token.signOut();
           this.toastr.warning('You must login to create song.');
-          this.routes.navigate(['/user/login'])
+          this.routes.navigate(['/user/login']);
         } else {
           this.toastr.success('Add song successfully!');
           this.routes.navigate(['/user/profile']);
         }
       }, error => {
         // console.log(error);
-        this.toastr.warning("Something wrong.");
+        this.toastr.warning('Something wrong.');
       }
     );
   }

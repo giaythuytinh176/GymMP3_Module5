@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
   username: string;
   songs: Song[];
   allsongs$: Observable<Song[]>;
+  isLoading = false;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -43,15 +44,9 @@ export class ProfileComponent implements OnInit {
   ) {
   }
 
-
-  ngAfterViewChecked() {
-    // console.log(7);
-    // console.log(window.localStorage.getItem('mep-currentTime'));
-    // console.log(window.localStorage.getItem('mep-status'));
-    // window.localStorage.getItem('mep-status');
-  }
-
   ngOnInit(): void {
+    this.isLoading = true;
+    console.log(1);
     this.getUserInfo();
   }
 
@@ -62,6 +57,8 @@ export class ProfileComponent implements OnInit {
         this.token.signOut();
         this.routes.navigate(['/user/login'])
       } else {
+        console.log(3);
+        this.isLoading = false;
         // console.log(data);
         this.songs = data;
       }
@@ -78,6 +75,7 @@ export class ProfileComponent implements OnInit {
         this.token.signOut();
         this.routes.navigate(['/user/login'])
       } else {
+        console.log(2);
         this.userinfo = data.user;
         this.name = this.userinfo.name;
         this.address = this.userinfo.address;

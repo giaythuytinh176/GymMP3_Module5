@@ -81,7 +81,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="allsongs$ | async as listSong else loading" class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
+        <div *ngIf="!isLoading else loadingTEMP" class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
             autoTrigger: true,
             loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
             padding: 50,
@@ -89,7 +89,7 @@
           }">
           <div class="row">
             <div>
-              <div *ngFor="let song of listSong.data" class="col-xs-4 col-sm-4 col-md-3">
+              <div *ngFor="let song of allsongs" class="col-xs-4 col-sm-4 col-md-3">
                 <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
                   <div class="item-media">
                     <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
@@ -121,7 +121,7 @@
             <a class="btn btn-sm white rounded jscroll-next" href="scroll.item.html">Show More</a>
           </div>
         </div>
-        <ng-template #loading>
+        <ng-template #loadingTEMP>
           <div class="centered">
             <h1>Loading ...</h1>
             <mat-spinner></mat-spinner>
@@ -130,7 +130,7 @@
 
       </div>
     </div>
-    <div class="col-lg-3 w-xxl w-auto-md">
+    <div *ngIf="!isLoading" class="col-lg-3 w-xxl w-auto-md">
       <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
         <h6 class="text text-muted">5 Likes</h6>
         <div class="row item-list item-list-sm m-b">

@@ -32,6 +32,7 @@ export class EditProfileComponent implements OnInit {
   shake: any;
   old_avatar = '';
   loadUserInfo$: Observable<UpdateInfo>;
+  isLoading = false;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -45,7 +46,10 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
+    console.log(1);
     this.loadUserInfo$ = this.userService.getInfoUserToken();
+    console.log(2);
     this.getInfoUserToken();
     this.profileFormSubmit();
   }
@@ -58,6 +62,7 @@ export class EditProfileComponent implements OnInit {
         this.toastr.warning('You must login to update profile.');
         this.routes.navigate(['/user/login']);
       } else {
+        console.log(3);
         this.userinfo = data.user;
         this.profileForm.value.name = this.userinfo.name;
         this.profileForm.value.address = this.userinfo.address;
@@ -70,6 +75,7 @@ export class EditProfileComponent implements OnInit {
         this.avatar = this.userinfo.avatar;
         this.old_avatar = this.userinfo.avatar;
         this.username = this.userinfo.username;
+        this.isLoading = false;
       }
     }, error => console.log(error));
   }

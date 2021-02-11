@@ -3,15 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/SongController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/SongController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Models/Singer.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/Singer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/all-list-song/all-list-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/all-list-song/all-list-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/all-list-song/all-list-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/all-list-song/all-list-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/song/song.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/song/song.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/song/song.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/song/song.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/search-song/search-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/search-song/search-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +27,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -176,7 +187,7 @@
       <workItem from="1612986152478" duration="173000" />
       <workItem from="1612986401168" duration="459000" />
       <workItem from="1612988004277" duration="9302000" />
-      <workItem from="1613036208461" duration="10513000" />
+      <workItem from="1613036208461" duration="18693000" />
     </task>
     <task id="LOCAL-00001" summary="tesing dragdrop6">
       <created>1612986188568</created>
@@ -199,7 +210,21 @@
       <option name="project" value="LOCAL" />
       <updated>1613022052464</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="testing dragdrop 2 tables">
+      <created>1613054252380</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1613054252381</updated>
+    </task>
+    <task id="LOCAL-00005" summary="testing dragdrop 2 tables 2">
+      <created>1613068723062</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1613068723063</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,20 +245,28 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tesing dragdrop6" />
     <MESSAGE value="tesing dragdrop , change layout profile, song" />
-    <option name="LAST_COMMIT_MESSAGE" value="tesing dragdrop , change layout profile, song" />
+    <MESSAGE value="testing dragdrop 2 tables" />
+    <MESSAGE value="testing dragdrop 2 tables 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing dragdrop 2 tables 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts</url>
-          <line>70</line>
+          <line>67</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts</url>
           <line>22</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html</url>
+          <line>9</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
