@@ -58,7 +58,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
 import {DialogDeleteMyList, ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
-import {AngularFireStorageModule,} from '@angular/fire/storage';
+import {AngularFireStorageModule, } from '@angular/fire/storage';
 import {FirebaseComponent} from './component/firebase/firebase.component';
 import {LoginComponent} from './component/login/login.component';
 import {FirebaseMP3Component} from './component/firebaseMP3/firebaseMP3.component';
@@ -76,10 +76,10 @@ import {GetAllSongsResolver} from './resolver/GetAllSongsResolver';
 import {CdkDragDropConnectedSortingGroupExample} from './component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example';
 import {GetUserInfoResolver} from './resolver/GetUserInfoResolver';
 import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
-import {GetAlbumsResolver} from "./resolver/GetAlbumsResolver";
-import {GetCategoriesResolver} from "./resolver/GetCategoriesResolver";
-import {GetSingersResolver} from "./resolver/GetSingersResolver";
-import {ActivatedRouteSnapshot} from "@angular/router";
+import {GetAlbumsResolver} from './resolver/GetAlbumsResolver';
+import {GetCategoriesResolver} from './resolver/GetCategoriesResolver';
+import {GetSingersResolver} from './resolver/GetSingersResolver';
+import {ActivatedRouteSnapshot} from '@angular/router';
 
 @NgModule({
   declarations: [

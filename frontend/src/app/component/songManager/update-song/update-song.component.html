@@ -41,6 +41,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Singer:</mat-label>
+            <mat-hint>Enter text to find Singer by name</mat-hint>
             <mat-select [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" [compareWith]="compareWithFunc" class="form-control" formControlName="singer_id" multiple>
               <!--              <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>-->
               <!--              [placeholder]="'&#45;&#45; Select an Singer &#45;&#45;'"-->
@@ -62,6 +63,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Category:</mat-label>
+            <mat-hint>Enter text to find Category by name</mat-hint>
             <input [(ngModel)]="category" [class.input-invalid]="updateMusicForm.get('myControl_category')!.invalid && updateMusicForm.get('myControl_category')!.touched" [class.input-valid]="updateMusicForm.get('myControl_category')!.valid && updateMusicForm.get('myControl_category')!.touched" [matAutocomplete]="auto_category" class="form-control" formControlName="myControl_category" matInput type="text">
             <mat-autocomplete #auto_category="matAutocomplete" [displayWith]="displayFn_category">
               <mat-option *ngFor="let option of filteredOptionsCategory | async" [value]="option">
@@ -96,6 +98,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select an Album:</mat-label>
+            <mat-hint>Enter text to find Album by name</mat-hint>
             <input [(ngModel)]="album" [class.input-invalid]="updateMusicForm.get('myControl_album')!.invalid && updateMusicForm.get('myControl_album')!.touched" [class.input-valid]="updateMusicForm.get('myControl_album')!.valid && updateMusicForm.get('myControl_album')!.touched" [matAutocomplete]="auto_album" class="form-control" formControlName="myControl_album" matInput type="text">
             <mat-autocomplete #auto_album="matAutocomplete" [displayWith]="displayFn_album">
               <mat-option *ngFor="let option of filteredOptionsAlbum | async" [value]="option">
