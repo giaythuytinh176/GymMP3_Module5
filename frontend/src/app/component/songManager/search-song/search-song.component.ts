@@ -26,10 +26,10 @@ export class SearchSongComponent implements OnInit {
 
   ngOnInit(): void {// https://angular.io/tutorial/toh-pt6 The searchTerms RxJS subject
     this.search$.pipe(
-      //throttleTime(300),
+      // throttleTime(300),
       debounceTime(300),
       distinctUntilChanged(),
-      //concatMap(value =>
+      // concatMap(value =>
       switchMap(value =>
         this.songService.searchSong(value)
       )

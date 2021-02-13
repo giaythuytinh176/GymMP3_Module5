@@ -14,7 +14,7 @@ export class Song {
   category_name?: any;
   album_name?: any;
   singer_list_name?: any;
-  singers?: [{ singer_name: string }];
+  singers?: [{ singer_name: string, id: number }];
 
   constructor(
     id: number,

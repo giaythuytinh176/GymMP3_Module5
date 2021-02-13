@@ -3,9 +3,16 @@
 
   // btn more
   $(document).on('click.site', '.btn-more', function (e) {
+    console.log('this', this);
     var $dp = $(this).next('.dropdown-menu');
-    if ($dp.html() == "") {
-      $dp.append('<a class="dropdown-item" href="#"><i class="fa fa-plus fa-fw text-left"></i> Add to Queque</a><a class="dropdown-item" href="#"><i class="fa fa-music fa-fw text-left"></i> Add to Playlist</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-share-alt fa-fw text-left"></i> Share</a>');
+    var songID = $(this).attr('data-song-id');
+    console.log('song-id', songID);
+    console.log('$dp', $dp);
+    if ($dp.html() === "") {
+      $dp.append('<a class="dropdown-item" data-queue="' + songID + '" href="#"><i class="fa fa-plus fa-fw text-left"></i> Add to Queque</a>' +
+        '<a class="dropdown-item" data-playlist="' + songID + '" href="#"><i class="fa fa-music fa-fw text-left"></i> Add to Playlist</a>' +
+        '<div class="dropdown-divider"></div>' +
+        '<a class="dropdown-item" data-share="' + songID + '" href="#"><i class="fa fa-share-alt fa-fw text-left"></i> Share</a>');
     }
 
     if ((e.pageY + $dp.height() + 60) > $('body').height()) {

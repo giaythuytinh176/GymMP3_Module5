@@ -19,6 +19,7 @@ import {TokenStorageService} from "../../auth/token-storage.service";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   shake: any;
+  isLoading = false;
   private loginInfo: LoginInfo;
 
   constructor(private authService: AuthService,
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // if (this.tokenStorage.getToken()) {
+    // if (this.authService.checkToken()) {
     //   this.route.navigate(['/browse']);
     // }
     this.loginForm = this.fb.group({
@@ -39,7 +40,42 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  attemptLogin(loginInfo: LoginInfo) {
+    this.authService.attemptAuth(loginInfo).subscribe(
+      (data: any) => {
+        // console.log(data);
+        if (data.error || data.status) {
+          this.toasrt.warning('Login Failed!!! Please login again!.')
+        } else {
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
+          this.tokenStorage.saveLogin('true');
+          this.tokenStorage.saveToken(data.token);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1111);
+          this.route.navigate(['/browse']);
+          this.toasrt.success('Login successfully.');
+        }
+      },
+      err => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+        // console.log(err.error.error);
+        if (err.error.error == 'invalid_credentials') {
+          this.toasrt.error('Username or Password is incorrect!');
+        } else {
+          this.toasrt.warning('Something wrong.');
+          this.route.navigate(['/user/login']);
+        }
+      }
+    );
+  }
+
   onSubmit() {
+    this.isLoading = true;
     // console.log(this.loginForm);
     if (this.loginForm.value.password.length < 6) {
       this.toasrt.warning('Password is too short.')
@@ -50,41 +86,17 @@ export class LoginComponent implements OnInit {
         this.loginForm.value.username,
         this.loginForm.value.password
       );
-      this.authService.attemptAuth(this.loginInfo).subscribe(
-        (data: any) => {
-          // console.log(data);
-          if (data.error || data.status) {
-            this.toasrt.warning('Login Failed!!! Please login again!.')
-          } else {
-            this.tokenStorage.saveLogin('true');
-            this.tokenStorage.saveToken(data.token);
-            setTimeout(() => {
-              window.location.reload();
-            }, 1000);
-            this.toasrt.success('Login successfully.');
-            this.route.navigate(['/browse']);
-          }
-        },
-        err => {
-          // console.log(err.error.error);
-          if (err.error.error == 'invalid_credentials') {
-            this.toasrt.error('Username or Password is incorrect!');
-          } else {
-            this.toasrt.warning('Something wrong.');
-            this.route.navigate(['/login']);
-          }
-        }
-      );
+      this.attemptLogin(this.loginInfo);
     }
   }
 
   signOut() {
     this.tokenStorage.signOut();
-    this.toasrt.success('Logout successfully.');
     setTimeout(() => {
       window.location.reload();
-    }, 1000);
+    }, 1111);
     this.route.navigate(['/browse']);
+    this.toasrt.success('Logout successfully.');
   }
 
 }

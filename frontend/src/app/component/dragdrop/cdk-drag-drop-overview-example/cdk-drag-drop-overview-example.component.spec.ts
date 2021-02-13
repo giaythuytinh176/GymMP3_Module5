@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CdkDragDropOverviewExampleComponent } from './cdk-drag-drop-overview-example.component';
+import {CdkDragDropOverviewExampleComponent} from './cdk-drag-drop-overview-example.component';
 
 describe('CdkDragDropOverviewExampleComponent', () => {
   let component: CdkDragDropOverviewExampleComponent;
@@ -8,9 +8,9 @@ describe('CdkDragDropOverviewExampleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CdkDragDropOverviewExampleComponent ]
+      declarations: [CdkDragDropOverviewExampleComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

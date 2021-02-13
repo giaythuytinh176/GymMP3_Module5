@@ -7,10 +7,10 @@ import {ToastrService} from "ngx-toastr";
 import {UpdateInfo} from "../../model/userManager/updateinfo";
 import {FirebaseComponent} from "../firebase/firebase.component";
 import {Song} from "../../model/song/song";
-import {ShowSongsUserComponent} from "../show-songs-user/show-songs-user.component";
 import {SongService} from "../../services/song/song.service";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
 import {UserService} from "../../services/userManager/user.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +28,8 @@ export class ProfileComponent implements OnInit {
   avatar: string;
   username: string;
   songs: Song[];
+  allsongs$: Observable<Song[]>;
+  isLoading = false;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -37,70 +39,67 @@ export class ProfileComponent implements OnInit {
               private token: TokenStorageService,
               private toastr: ToastrService,
               public firebase: FirebaseComponent,
-              public showSongsUser: ShowSongsUserComponent,
               private songService: SongService,
               public dialog: MatDialog,
   ) {
   }
 
-
-
-  ngAfterViewChecked() {
-    // console.log(7);
-    // console.log(window.localStorage.getItem('mep-currentTime'));
-    // console.log(window.localStorage.getItem('mep-status'));
-    // window.localStorage.getItem('mep-status');
-  }
-
   ngOnInit(): void {
-    this.userService.getInfoUserToken().subscribe((data: any) => {
-      // console.log(data);
-      if (data.status) {
-        this.toastr.warning('You must login to see profile.');
-        this.token.signOut();
-        this.routes.navigate(['/login'])
-      } else {
-        this.userinfo = data.user;
-        this.name = this.userinfo.name;
-        this.address = this.userinfo.address;
-        this.email = this.userinfo.email;
-        this.phone = this.userinfo.phone;
-        this.avatar = this.userinfo.avatar;
-        this.username = this.userinfo.username;
-        this.songService.getSongDetail(this.userinfo.id)
-          .subscribe((data: any) => {
-            if (data.status) {
-              this.token.signOut();
-              this.routes.navigate(['/login'])
-            } else {
-              // console.log(data);
-              this.songs = data;
-            }
-          }, error => {
-            console.log(error);
-          });
-      }
-    }, error => console.log(error));
+    this.isLoading = true;
+    console.log(1);
+    this.getUserInfo();
+
+    this.songs = this.route.snapshot.data.getSongByUserID;
+
+    // this.getSongDetailById(this.userinfo.id);
 
   }
 
-  deleteSong(id: number) {
-    this.songService.deleteSong(id).subscribe(
+  getSongDetailById(id: number): void {
+    this.allsongs$ = this.songService.getSongByUserID(id);
+    // this.songService.getSongByUserID(id).subscribe((data: any) => {
+    //   if (data.status) {
+    //     this.token.signOut();
+    //     this.routes.navigate(['/user/login'])
+    //   } else {
+    console.log(3);
+    this.isLoading = false;
+    //     // console.log(data);
+    //     this.songs = data;
+    //   }
+    // }, error => {
+    //   console.log(error);
+    // });
+  }
+
+  getUserInfo(): void {
+    this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    this.name = this.userinfo.name;
+    this.address = this.userinfo.address;
+    this.email = this.userinfo.email;
+    this.phone = this.userinfo.phone;
+    this.avatar = this.userinfo.avatar;
+    this.username = this.userinfo.username;
+    console.log(2);
+  }
+
+  deleteSong(id: number, user_id: number): void {
+    this.songService.deleteSong(id, user_id).subscribe(
       data => {
         // console.log(data);
-        this.getSongDetail();
+        this.getSongByUserID();
         this.toastr.success('Deleted song sucessfully!');
-        this.routes.navigate(['/profile']);
+        this.routes.navigate(['/user/profile', this.userinfo.id]);
       }, error => console.log(error)
-    )
+    );
   }
 
-  getSongDetail() {
-    this.songService.getSongDetail(this.userinfo.id)
+  getSongByUserID() {
+    this.songService.getSongByUserID(this.userinfo.id)
       .subscribe((data: any) => {
         if (data.status) {
           this.token.signOut();
-          this.routes.navigate(['/login'])
+          this.routes.navigate(['/user/login'])
         } else {
           // console.log(data);
           this.songs = data;
@@ -110,10 +109,10 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  openDialog(id: number, nameSong: string): void {
+  openDialog(id: number, nameSong: string, user_id: number): void {
     const dialogRef = this.dialog.open(DialogDeleteMyList, {
       width: '300px',
-      data: {id, nameSong},
+      data: {id, nameSong, user_id},
       panelClass: 'custom-dialog',
     });
 
@@ -121,7 +120,7 @@ export class ProfileComponent implements OnInit {
       // console.log('The dialog was closed');
       // this.title = result;
       if (result) {
-        this.deleteSong(id);
+        this.deleteSong(id, user_id);
       }
       // console.log(result);
     });
@@ -155,4 +154,5 @@ export class DialogDeleteMyList {
 export interface DialogData {
   id: number;
   nameSong: string;
+  user_id: number;
 }

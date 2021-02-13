@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CategoryService} from "../../../services/category/caterory.service";
-import {SingerService} from "../../../services/singer/singer.service";
-import {AlbumService} from "../../../services/album/album.service";
-import {FirebaseComponent} from "../../firebase/firebase.component";
-import {FirebaseMP3Component} from "../../firebaseMP3/firebaseMP3.component";
-import {SongService} from "../../../services/song/song.service";
-import {Song} from "../../../model/song/song";
-import {UpdateInfo} from "../../../model/userManager/updateinfo";
-import {ToastrService} from "ngx-toastr";
-import {TokenStorageService} from "../../../auth/token-storage.service";
-import {transition, trigger, useAnimation} from "@angular/animations";
-import {shake} from "ng-animate";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {CategoryService} from '../../../services/category/caterory.service';
+import {SingerService} from '../../../services/singer/singer.service';
+import {AlbumService} from '../../../services/album/album.service';
+import {FirebaseComponent} from '../../firebase/firebase.component';
+import {FirebaseMP3Component} from '../../firebaseMP3/firebaseMP3.component';
+import {SongService} from '../../../services/song/song.service';
+import {Song} from '../../../model/song/song';
+import {UpdateInfo} from '../../../model/userManager/updateinfo';
+import {ToastrService} from 'ngx-toastr';
+import {TokenStorageService} from '../../../auth/token-storage.service';
+import {transition, trigger, useAnimation} from '@angular/animations';
+import {shake} from 'ng-animate';
 import {Album} from 'src/app/model/album/album';
-import {Category} from "../../../model/category/category";
-import {Singer} from "../../../model/singer/singer";
-import {UserService} from "../../../services/userManager/user.service";
-import {Observable} from "rxjs";
-import {map, startWith} from "rxjs/operators";
+import {Category} from '../../../model/category/category';
+import {Singer} from '../../../model/singer/singer';
+import {UserService} from '../../../services/userManager/user.service';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-song',
@@ -28,32 +28,41 @@ import {map, startWith} from "rxjs/operators";
     trigger('shake', [transition('* => *', useAnimation(shake))])
   ],
 })
+// multiselection-in-autocomplete-angular https://stackblitz.com/edit/angular-sx79hu?embed=1&file=app/multiselect-autocomplete-example.html
 export class UpdateSongComponent implements OnInit {
-  updateMusicForm: FormGroup
+  updateMusicForm: FormGroup;
+  filteredOptionsCategory: Observable<Category[]>;
+  filteredOptionsAlbum: Observable<Album[]>;
+
+  userinfo!: UpdateInfo;
+
   albums: Album[];
   categories: Category[];
   singers: Singer[];
+
   song: Song;
-  user_id: any;
   singer_id: any;
-  album_id: any;
-  userinfo!: UpdateInfo;
-  nameSong: any;
-  describes: any;
-  author: any;
-  views: any;
-  id: number;
-  shake: any;
+  album: any;
+  category: any;
+
   avatarUrl: any;
   mp3Url: any;
   old_avatar = '';
   old_mp3 = '';
-  filteredOptions: any;
-  category_id: any;
+
+  id: number;
+  nameSong: any;
+  describes: any;
+  author: any;
+  views: any;
+  shake: any;
+
+  songInfo: Song;
+  isLoading = false;
 
   constructor(private songService: SongService,
-              private route: Router,
-              private routes: ActivatedRoute,
+              private router: Router,
+              private route: ActivatedRoute,
               private categoryService: CategoryService,
               private singerService: SingerService,
               private albumService: AlbumService,
@@ -66,113 +75,137 @@ export class UpdateSongComponent implements OnInit {
   ) {
   }
 
-  displayFn(category: Category): string {
-    return category && category.category_name ? category.category_name : '';
+  ngOnInit(): void {
+    this.isLoading = true;
+    this.updateForm();
+
+    this.id = +this.route.snapshot.paramMap.get('id');
+    this.songInfo = this.route.snapshot.data.getSongDetailById;
+    this.albums = this.route.snapshot.data.getAlbums.data;
+    this.categories = this.route.snapshot.data.getCategories.data;
+    this.singers = this.route.snapshot.data.getSingers.data;
+    this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    this.singer_id = this.route.snapshot.data.getSingerIDbySongID;
+
+    this.filteredOption_category();
+    this.filteredOption_album();
+
+    this.getSongDetailById();
   }
 
-  private _filter(name: any): Category[] {
-    const filterValue = name.toLowerCase();
-    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-  compareWithFunc(a, b) {
-    return a === b;
-  }
-
-  ngOnInit() {
+  updateForm(): void {
     this.updateMusicForm = this.fb.group({
       nameSong: ['', [Validators.required]],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      views: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       avatarUrl: [''],
       mp3Url: [''],
-      myControl: new FormControl('', Validators.required),
+      myControl_category: ['', Validators.required],
+      myControl_album: ['', Validators.required],
       singer_id: ['', [Validators.required]],
-      album_id: ['', [Validators.required]],
       old_avatar: [this.old_avatar],
       old_mp3: [this.old_mp3],
     });
-
-    this.albumService.getAllAlbum().subscribe((albums: any) => {
-      this.albums = albums.data;
-      // console.log(this.albums);
-    }, (error) => console.log(error));
-    this.categoryService.getAllCategories().subscribe((categories: any) => {
-      this.categories = categories.data;
-      // console.log(categories.data);
-      this.filteredOptions = this.updateMusicForm.get('myControl').valueChanges
-        .pipe(
-          startWith(''),
-          // @ts-ignore
-          map(value => typeof value === 'string' ? value : value!.name),
-          // @ts-ignore
-          map(name => name ? this._filter(name) : this.categories.slice()
-          )
-        );
-      // console.log(this.categories);
-    }, (error) => console.log(error));
-    this.singerService.getAllSingers().subscribe((singers: any) => {
-      this.singers = singers.data;
-      // console.log(this.singers);
-    }, (error) => console.log(error));
-
-    this.userService.getInfoUserToken().subscribe((data: any) => {
-      // console.log(data);
-      if (data.status) {
-        this.token.signOut();
-        this.toastr.warning('You must login to update Song.');
-        this.route.navigate(['/login'])
-      } else {
-        this.userinfo = data.user;
-      }
-    }, error => console.log(error));
-
-    this.routes.paramMap.subscribe(paramMap => {
-      this.id = +paramMap.get('id');
-      this.songService.getSongById(this.id).subscribe(
-        (data: any) => {
-          if (data.status) {
-            this.toastr.warning('You must login to update song.');
-            this.token.signOut();
-            this.route.navigate(['/login'])
-          } else {
-            this.singerService.getSingerIDBySongID(this.id).subscribe((res: any) => {
-              // console.log(res);
-              this.singer_id = res;
-            }, (error: any) => console.log(error));
-            // console.log(111);
-            // console.log(data);
-            // console.log(222);
-            this.nameSong = data.nameSong;
-            this.describes = data.describes;
-            this.author = data.author;
-            this.views = data.views;
-            this.avatarUrl = data.avatarUrl;
-            this.mp3Url = data.mp3Url;
-            this.categoryService.getCategoryInfo(data.category_id).subscribe((res: any) => {
-                this.category_id = res;
-                // console.log(res);
-              }, (error: any) => console.log(error)
-            );
-            this.album_id = data.album_id;
-            this.old_mp3 = data.mp3Url;
-            this.old_avatar = data.avatarUrl;
-          }
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    });
-
   }
 
-  updateSong() {
+  // Category
+  filteredOption_category(): void {
+    this.filteredOptionsCategory = this.updateMusicForm.get('myControl_category').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value?.name),
+        map(name => name ? this._filter_category(name) : this.categories.slice()
+        )
+      );
+  }
+
+  displayFn_category(category: Category): string {
+    return category && category.category_name ? category.category_name : '';
+  }
+
+  // Album
+  filteredOption_album(): void {
+    this.filteredOptionsAlbum = this.updateMusicForm.get('myControl_album').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value?.name),
+        map(name => name ? this._filter_album(name) : this.albums.slice()
+        )
+      );
+  }
+
+  displayFn_album(album: Album): string {
+    return album && album.album_name ? album.album_name : '';
+  }
+
+  getCategoryInfo(id: number): void {
+    this.categoryService.getCategoryInfo(id).subscribe((res: any) => {
+        this.category = res;
+        console.log(2);
+        this.isLoading = false;
+      }, (error: any) => console.log(error)
+    );
+  }
+
+  getAlbumInfo(id: number): void {
+    this.albumService.getAlbumInfo(id).subscribe((res: any) => {
+        this.album = res;
+        console.log(1);
+        // this.isLoading = false;
+      }, (error: any) => console.log(error)
+    );
+  }
+
+  getSongDetailById(): void {
+    const songDetailById = this.route.snapshot.data.getSongDetailById;
+    this.nameSong = songDetailById.nameSong;
+    this.describes = songDetailById.describes;
+    this.author = songDetailById.author;
+    this.views = songDetailById.views;
+    this.avatarUrl = songDetailById.avatarUrl;
+    this.mp3Url = songDetailById.mp3Url;
+    this.old_mp3 = songDetailById.mp3Url;
+    this.old_avatar = songDetailById.avatarUrl;
+
+    this.getAlbumInfo(songDetailById.album_id);
+    this.getCategoryInfo(songDetailById.category_id);
+  }
+
+  compareWithFunc(a, b): boolean {
+    return a === b;
+  }
+
+  updateSong(song: Song, id: number): void {
+    this.songService.updateSong(song, id).subscribe((data: any) => {
+      if (data.status) {
+        this.toastr.warning('You must login to update song.');
+        this.token.signOut();
+        this.router.navigate(['/user/login']);
+      } else {
+        this.toastr.success('Updated Song Successfully!');
+        this.router.navigate(['/user/profile', this.userinfo.id]);
+      }
+    }, error => {
+      if ((JSON.parse(error.error)).category_id) {
+        this.toastr.warning((JSON.parse(error.error)).category_id);
+      } else if ((JSON.parse(error.error)).album_id) {
+        this.toastr.warning((JSON.parse(error.error)).album_id);
+      } else {
+        this.toastr.warning('Something wrong.');
+        console.log(error);
+      }
+    });
+  }
+
+  updateSongSubmit(): void {
     this.updateMusicForm.value.avatarUrl = this.firebase.fb;
     this.updateMusicForm.value.mp3Url = this.firebaseMP3.fb;
+
     this.song = this.updateMusicForm.value;
     this.song.user_id = this.userinfo.id;
+
+    // get OLD value
     if (!this.updateMusicForm.value.avatarUrl) {
       this.song.avatarUrl = this.old_avatar;
     } else {
@@ -183,26 +216,23 @@ export class UpdateSongComponent implements OnInit {
     } else {
       this.song.mp3Url = this.updateMusicForm.value.mp3Url;
     }
-    this.song.category_id = this.updateMusicForm.value.myControl.id;
-    this.song.album_id = this.updateMusicForm.value.album_id;
+
+    this.song.category_id = this.updateMusicForm.value.myControl_category.id;
+    this.song.album_id = this.updateMusicForm.value.myControl_album.id;
+    // stringify to JSON
     this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
     // console.log(this.song);
-    this.songService.updateSong(this.song, this.id).subscribe((data: any) => {
-      if (data.status) {
-        this.toastr.warning('You must login to update song.');
-        this.token.signOut();
-        this.route.navigate(['/login'])
-      } else {
-        this.toastr.success('Updated Song Successfully!');
-        this.route.navigate(['/profile']);
-      }
-    }, error => {
-      if ((JSON.parse(error.error)).category_id) {
-        this.toastr.warning((JSON.parse(error.error)).category_id);
-      } else {
-        this.toastr.warning('Something wrong.');
-        console.log(error);
-      }
-    });
+
+    this.updateSong(this.song, this.id);
+  }
+
+  private _filter_category(name: string): Category[] {
+    const filterValue = name.toLowerCase();
+    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
+  }
+
+  private _filter_album(name: string): Album[] {
+    const filterValue = name.toLowerCase();
+    return this.albums.filter(option => option.album_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
   }
 }

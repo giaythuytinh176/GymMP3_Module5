@@ -16,7 +16,7 @@ export class UserService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
     })
-  }
+  };
   private getUserUrl = environment.apiUrl + '/user/token';
   private updateUserUrl = environment.apiUrl + '/user/update';
   private apiCheckExistUserUrl = environment.apiUrl + '/user/check-username';

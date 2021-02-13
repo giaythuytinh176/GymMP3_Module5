@@ -29,6 +29,7 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('song')->group(function () {
     Route::get('/list', 'SongController@allSongs');
+    Route::get('/moved/list', 'SongController@allMovedSongs');
 
 });
 
@@ -38,14 +39,17 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::prefix('song')->group(function () {
         Route::get('/user/list/{id}', 'SongController@show');
+        Route::get('/user/listv2/{id}', 'SongController@allSongsByID');
         Route::get('/{id}', 'SongController@showidsong');
         Route::get('/', 'SongController@index');
 
         Route::post('/create', 'SongController@store');
+        Route::post('/moved/create', 'SongController@store_moved');
 
         Route::put('/{id}', 'SongController@update');
 
         Route::delete('/{id}', 'SongController@destroy');
+        Route::delete('/moved/{id}', 'SongController@destroyMoved');
 
     });
 
@@ -57,6 +61,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::prefix('album')->group(function () {
         Route::get('/list', 'AlbumController@index');
+        Route::get('/{id}', 'AlbumController@findAlbum');
 
     });
 

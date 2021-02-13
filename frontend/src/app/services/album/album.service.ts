@@ -12,6 +12,7 @@ const TOKEN_KEY = 'AuthToken';
 export class AlbumService {
 
   apiGetAllAlbum = environment.apiUrl + '/album/list';
+  apiGetAlbumInfo = environment.apiUrl + '/album';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -22,6 +23,10 @@ export class AlbumService {
   }
 
   constructor(private http: HttpClient) {
+  }
+
+  getAlbumInfo(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiGetAlbumInfo}/${id}`, this.httpJson);
   }
 
   getAllAlbum(): Observable<Album[]> {

@@ -20,12 +20,16 @@ export class SongService {
     })
   }
   private API_URL_CREATE = environment.apiUrl + '/song/create';
+  private API_URL_CREATE_MOVED = environment.apiUrl + '/song/moved/create';
   private apiListSongUser = environment.apiUrl + '/song/user/list';
+  private apiListSongV2User = environment.apiUrl + '/song/user/listv2';
   private updateSongUrl = environment.apiUrl + '/song';
   private getUserUrl = environment.apiUrl + '/user/token';
   private apiGetAllSongs = environment.apiUrl + '/song/list';
+  private apiGetMovedSongs = environment.apiUrl + '/song/moved/list';
   private search = environment.apiUrl + '/search';
   private deleteSongsUrl = environment.apiUrl + '/song';
+  private deleteMovedSongsUrl = environment.apiUrl + '/song/moved';
 
   constructor(
     private http: HttpClient,
@@ -37,20 +41,32 @@ export class SongService {
     return this.http.get<Song[]>(this.apiGetAllSongs);
   }
 
+  getMovedSongs(): Observable<Song[]> {
+    return this.http.get<Song[]>(this.apiGetMovedSongs);
+  }
+
   createSong(song: Song): Observable<Song> {
     return this.http.post<Song>(this.API_URL_CREATE, song, this.httpJson);
   }
 
-  getSongDetail(id: number): Observable<any> {
-    return this.http.get(`${this.apiListSongUser}/${id}`, this.httpJson)
+  createMovedSong(song: Song): Observable<Song> {
+    return this.http.post<Song>(this.API_URL_CREATE_MOVED, song, this.httpJson);
   }
 
-  getSongById(id: number): Observable<Song> {
-    return this.http.get<Song>(`${this.updateSongUrl}/${id}`, this.httpJson)
+  getSongByUserID(id: number): Observable<Song[]> {
+    return this.http.get<Song[]>(`${this.apiListSongUser}/${id}`, this.httpJson);
+  }
+
+  getSongDetailV2(id: number): Observable<any> {
+    return this.http.get(`${this.apiListSongV2User}/${id}`, this.httpJson);
+  }
+
+  getSongDetailById(id: number): Observable<Song> {
+    return this.http.get<Song>(`${this.updateSongUrl}/${id}`, this.httpJson);
   }
 
   updateSong(song: Song, id: number): Observable<Song> {
-    return this.http.put<Song>(`${this.updateSongUrl}/${id}`, song, this.httpJson)
+    return this.http.put<Song>(`${this.updateSongUrl}/${id}`, song, this.httpJson);
   }
 
   getInfoUserToken(): Observable<UpdateInfo> {
@@ -61,8 +77,29 @@ export class SongService {
     return this.http.post(`${this.search}`, {search: key});
   }
 
-  deleteSong(id: number) {
-    return this.http.delete(`${this.deleteSongsUrl}/${id}`, this.httpJson);
+  deleteSong(id: number, user_id: number) {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token
+      }),
+      body: {
+        user_id: user_id,
+      },
+    };
+    return this.http.delete(`${this.deleteSongsUrl}/${id}`, httpHeader);
+  }
 
+  deleteMovedSong(id: number, user_id: number) {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token
+      }),
+      body: {
+        user_id: user_id,
+      },
+    };
+    return this.http.delete(`${this.deleteMovedSongsUrl}/${id}`, httpHeader);
   }
 }

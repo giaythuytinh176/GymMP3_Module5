@@ -2,8 +2,6 @@
   <div class="row-col">
     <div class="col-lg-9 b-r no-border-md">
       <div class="padding">
-
-
         <div class="page-title m-b">
           <h1 class="inline m-a-0">Browse</h1>
           <div class="dropdown inline">
@@ -82,48 +80,61 @@
               </a>
             </div>
           </div>
-        </div>
-        <div class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
+        </div><!-- !isLoading -->
+        <div *ngIf="!isLoading else loadingTEMP" class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
             autoTrigger: true,
             loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
             padding: 50,
             nextSelector: 'a.jscroll-next:last'
           }">
           <div class="row">
-            <div *ngFor="let song of allsongs" class="col-xs-4 col-sm-4 col-md-3">
-              <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
-                <div class="item-media">
-                  <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
-                  <div class="item-overlay center">
-                    <button class="btn-playpause">Play</button>
+            <div>
+              <div *ngFor="let song of allsongs" class="col-xs-4 col-sm-4 col-md-3">
+                <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+                  <div class="item-media">
+                    <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
+                    <div class="item-overlay center">
+                      <button class="btn-playpause">Play</button>
+                    </div>
                   </div>
-                </div>
-                <div class="item-info">
-                  <div class="item-overlay bottom text-right">
-                    <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                    <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
-                    <div class="dropdown-menu pull-right black lt"></div>
-                  </div>
-                  <div class="item-title text-ellipsis">
-                    <a href="track.detail.html">{{ song.nameSong }}</a>
-                  </div>
-                  <div class="item-author text-sm text-ellipsis ">
-                    <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
-                      {{ singer.singer_name }},
-                    </a>
+                  <div class="item-info">
+                    <div class="item-overlay bottom text-right">
+                      <a class="btn-favorite" href="#">
+                        <i class="fa fa-heart-o"></i>
+                      </a>
+                      <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </a>
+                      <div class="dropdown-menu pull-right black lt"></div>
+                    </div>
+                    <div class="item-title text-ellipsis">
+                      <a href="track.detail.html">{{ song.nameSong }}</a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis">
+                      <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                        {{ singer.singer_name }},
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="text-center">
             <a class="btn btn-sm white rounded jscroll-next" href="scroll.item.html">Show More</a>
           </div>
         </div>
+        <ng-template #loadingTEMP>
+          <div class="centered">
+            <h1>Loading ...</h1>
+            <mat-spinner></mat-spinner>
+          </div>
+        </ng-template>
 
       </div>
     </div>
-    <div class="col-lg-3 w-xxl w-auto-md">
+    <div *ngIf="!isLoading" class="col-lg-3 w-xxl w-auto-md">
       <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
         <h6 class="text text-muted">5 Likes</h6>
         <div class="row item-list item-list-sm m-b">

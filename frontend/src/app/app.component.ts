@@ -7,6 +7,15 @@ import {
   OnChanges, OnDestroy,
   OnInit
 } from '@angular/core';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart, ResolveEnd,
+  ResolveStart,
+  Router,
+  RouterEvent
+} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +30,55 @@ export class AppComponent implements OnInit, OnChanges, DoCheck, AfterContentIni
   mep_status: any;
   mep_currentTime: any;
 
-  constructor() {
-    // console.log(0);
+  // Sets initial value to true to show loading spinner on first load
+  loading = true;
+
+  // https://stackoverflow.com/questions/37069609/show-loading-screen-when-navigating-between-routes-in-angular-2
+  // https://stackoverflow.com/questions/42048142/angular-2-resolver-with-loading-indicator
+  constructor(private router: Router) {
+    this.router.events.subscribe((e: RouterEvent) => {
+      this.navigationInterceptor(e);
+    });
   }
+
+  // constructor(private router: Router) {
+  //   router.events.subscribe((routerEvent: RouterEvent) => {
+  //     this.checkRouterEvent(routerEvent);
+  //   });
+  // }
+
+  checkRouterEvent(routerEvent: RouterEvent): void {
+    if (routerEvent instanceof NavigationStart // ResolveStart
+    ) {
+      this.loading = true;
+    }
+
+    if (routerEvent instanceof NavigationEnd || // ResolveEnd
+      routerEvent instanceof NavigationCancel ||
+      routerEvent instanceof NavigationError) {
+      this.loading = false;
+    }
+  }
+
+  // Shows and hides the loading spinner during RouterEvent changes
+  navigationInterceptor(event: RouterEvent): void {
+    if (event instanceof NavigationStart
+    ) {
+      this.loading = true;
+    }
+    if (event instanceof NavigationEnd) {
+      this.loading = false;
+    }
+
+    // Set loading state to false in both of the below events to hide the spinner in case a request fails
+    if (event instanceof NavigationCancel) {
+      this.loading = false;
+    }
+    if (event instanceof NavigationError) {
+      this.loading = false;
+    }
+  }
+
 
   getPlayer() {
     return document.querySelector('audio');
@@ -43,23 +98,47 @@ export class AppComponent implements OnInit, OnChanges, DoCheck, AfterContentIni
   }
 
 
-  ngOnInit() {
+  ngOnInit(): void {
     // console.log(1);
-    // this.audio = document.querySelector('audio');
-    // this.audio.addEventListener('play', () => {
-    // // // console.log(audio);
-    // // // console.log(1 + "'");
-    // // // console.log(audio.autoplay);
-    // // // console.log(audio.buffered);
-    // // // console.log(audio.readyState);
-    // // // console.log(audio.src);
-    // // // console.log(audio.currentSrc);
-    // // // console.log(audio.currentTime);
-    // // // console.log(audio.duration);
+    const $ = document.querySelector.bind(document);
+
+    // Xử lý CD quay / dừng
+    // Handle CD spins / stops
+    const mejstrackartwork = $('.mejs-track-artwork');
+    const progress = $('.mejs-time-current');
+    this.audio = $('audio');
+    const mejstrackartworkAnimate = mejstrackartwork.animate(
+      [{transform: 'rotate(360deg)'}], {
+        duration: 10000, // 10 seconds
+        iterations: Infinity
+      });
+    mejstrackartworkAnimate.pause();
+
+    this.audio.onpause = () => {
+      mejstrackartworkAnimate.pause();
+    };
+    this.audio.onplay = () => {
+      mejstrackartworkAnimate.play();
+    };
+
+    // this.audio.addEventListener('onplay', () => {
+    //   mejstrackartworkAnimate.play();
+    //   console.log(this.audio);
+    //   console.log(mejstrackartwork);
+    //   console.log(mejstrackartworkAnimate);
+
+    // // console.log(1 + "'");
+    // // console.log(audio.autoplay);
+    // // console.log(audio.buffered);
+    // // console.log(audio.readyState);
+    // // console.log(audio.src);
+    // // console.log(audio.currentSrc);
+    // // console.log(audio.currentTime);
+    // // console.log(audio.duration);
     // this.isPlaying = this.isPlay();
     // this.isPause = this.isPaused();
-    // // console.log(this.isPlaying);
-    // // console.log(this.isPause);
+    // console.log(this.isPlaying);
+    // console.log(this.isPause);
     // });
 
     // audio.onplay = function () {
@@ -94,7 +173,7 @@ export class AppComponent implements OnInit, OnChanges, DoCheck, AfterContentIni
     //     //Not playing...maybe paused, stopped or never played.
     //
     //   }
-    //}
+    // }
   }
 
 
@@ -115,7 +194,7 @@ export class AppComponent implements OnInit, OnChanges, DoCheck, AfterContentIni
 
   ngDoCheck() {
     // console.log(3);
-    //this.mep_status = (window.sessionStorage.getItem('mep-status'));
+    // this.mep_status = (window.sessionStorage.getItem('mep-status'));
 
   }
 
@@ -126,7 +205,7 @@ export class AppComponent implements OnInit, OnChanges, DoCheck, AfterContentIni
 
   ngAfterContentChecked() {
     // console.log(5);
-    //this.mep_status = (window.sessionStorage.getItem('mep-status'));
+    // this.mep_status = (window.sessionStorage.getItem('mep-status'));
 
   }
 

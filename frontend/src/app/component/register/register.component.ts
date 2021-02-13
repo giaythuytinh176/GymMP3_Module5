@@ -50,6 +50,15 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
 
   }
 
+  registerFbForm(): void {
+    this.registerForm = this.fb.group({
+      username: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern(/^0\d{9,10}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
+      password_confirmation: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
+    }, {validators: this.checkPasswords});
+  }
+
   ngOnInit() {
     // this.check$.pipe(
     //   //throttleTime(300),
@@ -69,16 +78,11 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
     //       this.existUserMess = true;
     //     }
     //   });
-    this.registerForm = this.fb.group({
-      username: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern(/^0\d{9,10}$/)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
-      password_confirmation: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
-    }, {validators: this.checkPasswords});
+    this.registerFbForm();
   }
 
-  onInput(event): any {
-    this.username = event.target.value;
+  onInput(value: string): any {
+    this.username = value;
     this.userService.checkExistUser(this.username).subscribe(
       (data: any) => {
         this.existUserMess = false;
@@ -106,25 +110,16 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
     };
   }
 
-  onSubmit() {
-    // console.log(this.register);
-    this.register = this.registerForm.value;
-    this.signupInfo = new SignupInfo(
-      this.register.username,
-      this.register.phone,
-      this.register.password,
-      this.register.password_confirmation
-    );
-    this.authService.signUp(this.signupInfo).subscribe(
+  registerSubmit(signupInfo: { username: string, phone: string, password: string, password_confirmation: string }): void {
+    this.authService.signUp(signupInfo).subscribe(
       (data: any) => {
         // console.log(data);
-        // console.log(111);
         if (data.error || data.status) {
           this.toastr.warning('Something wrong.')
           setTimeout(() => {
             window.location.reload();
           }, 1000);
-          this.route.navigate(['/signup']);
+          this.route.navigate(['/user/signup']);
         } else {
           this.toastr.success('Your account has been created successfully!');
           this.route.navigate(['/browse']);
@@ -133,7 +128,6 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
       err => {
         // console.log(err);
         // console.log(JSON.parse(err.error));
-        // console.log(222);
         if ((JSON.parse(err.error)).username == 'The username has already been taken.') {
           this.toastr.warning('The username already exists!');
         } else if ((JSON.parse(err.error)).phone == 'The phone has already been taken.') {
@@ -143,6 +137,19 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
         }
       }
     );
+  }
+
+  registerFormSubmit() {
+    this.register = this.registerForm.value;
+    this.signupInfo = new SignupInfo(
+      this.register.username,
+      this.register.phone,
+      this.register.password,
+      this.register.password_confirmation
+    );
+    // console.log(this.signupInfo);
+
+    this.registerSubmit(this.signupInfo);
   }
 }
 

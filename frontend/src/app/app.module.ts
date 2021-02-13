@@ -52,30 +52,34 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-import {AngularFirestoreModule} from "@angular/fire/firestore";
-import {AngularFireModule} from "@angular/fire";
-import {AngularFireAuthModule} from "@angular/fire/auth";
-import {environment} from "../environments/environment";
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
 import {DialogDeleteMyList, ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
-import {AngularFireStorageModule,} from "@angular/fire/storage";
-import {FirebaseComponent} from "./component/firebase/firebase.component";
+import {AngularFireStorageModule, } from '@angular/fire/storage';
+import {FirebaseComponent} from './component/firebase/firebase.component';
 import {LoginComponent} from './component/login/login.component';
-import {FirebaseMP3Component} from "./component/firebaseMP3/firebaseMP3.component";
+import {FirebaseMP3Component} from './component/firebaseMP3/firebaseMP3.component';
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
-import {
-  DialogContentExampleDialog,
-  ShowSongsUserComponent
-} from './component/show-songs-user/show-songs-user.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component';
 import {EditProfileComponent} from './component/edit-profile/edit-profile.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
-import {CreateSongComponent} from "./component/songManager/create-song/create-song.component";
-import {AllListSongComponent} from "./component/songManager/all-list-song/all-list-song.component";
-import { CdkDragDropOverviewExampleComponent } from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import {CreateSongComponent} from './component/songManager/create-song/create-song.component';
+import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song.component';
+import {CdkDragDropOverviewExampleComponent} from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
+import {environment} from '../environments/environment';
+import {GetAllSongsResolver} from './resolver/GetAllSongsResolver';
+import {CdkDragDropConnectedSortingGroupExample} from './component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example';
+import {GetUserInfoResolver} from './resolver/GetUserInfoResolver';
+import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
+import {GetAlbumsResolver} from './resolver/GetAlbumsResolver';
+import {GetCategoriesResolver} from './resolver/GetCategoriesResolver';
+import {GetSingersResolver} from './resolver/GetSingersResolver';
+import {ActivatedRouteSnapshot} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -90,13 +94,12 @@ import { CdkDragDropOverviewExampleComponent } from './component/dragdrop/cdk-dr
     AllListSongComponent,
     CreateSongComponent,
     UpdateSongComponent,
-    ShowSongsUserComponent,
     SidebarComponent,
     SearchSongComponent,
-    DialogContentExampleDialog,
     DialogDeleteMyList,
     EditProfileComponent,
     CdkDragDropOverviewExampleComponent,
+    CdkDragDropConnectedSortingGroupExample,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,12 @@ import { CdkDragDropOverviewExampleComponent } from './component/dragdrop/cdk-dr
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        timeOut: 3000,
+        preventDuplicates: true,
+      }
+    ),
     // meterial
     A11yModule,
     ClipboardModule,
@@ -155,7 +163,7 @@ import { CdkDragDropOverviewExampleComponent } from './component/dragdrop/cdk-dr
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'cloud'),
     MatSelectModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
@@ -164,8 +172,13 @@ import { CdkDragDropOverviewExampleComponent } from './component/dragdrop/cdk-dr
   providers: [
     FirebaseComponent,
     FirebaseMP3Component,
-    ShowSongsUserComponent,
     LoginComponent,
+    GetAllSongsResolver,
+    GetUserInfoResolver,
+    GetSongByUserIDResolver,
+    GetAlbumsResolver,
+    GetCategoriesResolver,
+    GetSingersResolver,
   ],
   bootstrap: [
     AppComponent,

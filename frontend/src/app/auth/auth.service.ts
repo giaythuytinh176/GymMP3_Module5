@@ -26,9 +26,9 @@ export class AuthService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token
+      Authorization: 'Bearer ' + this.token
     })
-  }
+  };
   auth = false;
   private signupUrl = environment.apiUrl + '/user/signup';
   private changePassUrl = environment.apiUrl + '/user/change-password';
@@ -96,8 +96,17 @@ export class AuthService {
         this.tokenStorage.signOut();
       }
     }, (error: any) => {
-      // console.log(error);
+      console.log(error);
+      // this.tokenStorage.signOut();
     });
+  }
+
+  checkToken(): boolean {
+    if (this.token) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   loggined(): boolean {
@@ -111,7 +120,7 @@ export class AuthService {
       } else {
         return false;
       }
-      //}
+      // }
     } else {
       this.toasrt.warning('Session expired or Not login yet, please login again!');
       return false;
