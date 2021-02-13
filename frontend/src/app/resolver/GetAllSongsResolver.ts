@@ -1,10 +1,12 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router, ActivatedRoute} from '@angular/router';
 import {delay, catchError} from 'rxjs/operators';
-import {of} from 'rxjs';
-import {SongService} from "../services/song/song.service";
+import {Observable, of} from 'rxjs';
+import {SongService} from '../services/song/song.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class GetAllSongsResolver implements Resolve<any> {
   constructor(
     private songService: SongService,
@@ -12,9 +14,9 @@ export class GetAllSongsResolver implements Resolve<any> {
   ) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
     return this.songService.getAllSongs().pipe(
-      delay(1),
+      // delay(2000),
       catchError(error => {
           this.router.navigateByUrl('/404');
           return of(null);

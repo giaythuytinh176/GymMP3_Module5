@@ -16,7 +16,7 @@ import {ToastrService} from 'ngx-toastr';
 import {TokenStorageService} from '../../../auth/token-storage.service';
 import {Router} from '@angular/router';
 import {UpdateInfo} from '../../../model/userManager/updateinfo';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'cdk-drag-drop-connected-sorting-group-example',
@@ -33,6 +33,7 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
   userinfo!: UpdateInfo;
   song: Song;
   isLoading = false;
+  isLoadingFirst = false;
 
   constructor(
     private http: HttpClient,
@@ -45,6 +46,8 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoadingFirst = true;
+    console.log(1);
     this.getUserInfo();
     // this.getAllSongs();
     this.getMovedSongs();
@@ -53,6 +56,8 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
   getListSongsByID(id: number): void {
     this.songService.getSongDetailV2(id).subscribe((data: any) => {
         this.listSongs = data.data;
+        console.log(3);
+        this.isLoadingFirst = false;
         // console.log(this.listSongs);
       },
       (error: any) => console.log(error)
@@ -89,8 +94,11 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
         this.token.signOut();
         this.routes.navigate(['/user/login']);
       } else {
+        console.log(2);
         this.userinfo = data.user;
-        this.getListSongsByID(this.userinfo.id);
+        setTimeout(() => {
+          this.getListSongsByID(this.userinfo.id);
+        }, 0);
       }
     }, error => console.log(error));
   }
@@ -156,7 +164,10 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
     );
   }
 
-  drop(event: CdkDragDrop<Song[]>) {
+  drop(event: CdkDragDrop<Song[]>): void {
+
+    this.toastr.success('Moving song ...');
+
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

@@ -97,8 +97,14 @@
     <div class="app-body" id="view" style="padding-top: 20px">
 
       <!-- ############ PAGE START-->
-
-      <router-outlet></router-outlet>
+      <div *ngIf="loading else notLoading" class="centered">
+        <h1>Loading Data ...</h1>
+<!--        <mat-spinner></mat-spinner>-->
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <ng-template #notLoading>
+        <router-outlet></router-outlet>
+      </ng-template>
 
       <!-- ############ PAGE END-->
 

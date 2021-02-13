@@ -2,7 +2,7 @@
   <h1 class="inline m-a-0" style="padding-left: 50px">Edit Profile</h1>
 </div>
 
-<div *ngIf="!isLoading && loadUserInfo$ | async as infoUser else loadingTEMP" class="container">
+<div class="container">
   <div class="b-t" style="margin-top: 10px; margin-left: 50px">
     <form [formGroup]="profileForm" name="form">
       <div class="form-group row">
@@ -10,7 +10,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Name:</mat-label>
-            <input [(ngModel)]="infoUser!.user.name" [class.input-invalid]="profileForm.get('name')!.invalid && profileForm.get('name')!.touched" [class.input-valid]="profileForm.get('name')!.valid && profileForm.get('name')!.touched" class="form-control" formControlName="name" matInput placeholder="Name" type="text">
+            <input [(ngModel)]="userinfo.name" [class.input-invalid]="profileForm.get('name')!.invalid && profileForm.get('name')!.touched" [class.input-valid]="profileForm.get('name')!.valid && profileForm.get('name')!.touched" class="form-control" formControlName="name" matInput placeholder="Name" type="text">
             <div *ngIf="profileForm.get('name')!.invalid && profileForm.get('name')!.touched" style="margin-top: 10px;color: #ff0000; text-align: left !important;">
               <div *ngIf="profileForm.get('name').hasError('required')">
                 <div [@shake]="shake">
@@ -25,7 +25,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Address:</mat-label>
-            <input [(ngModel)]="infoUser!.user.address" [class.input-invalid]="profileForm.get('address')!.invalid && profileForm.get('address')!.touched" [class.input-valid]="profileForm.get('address')!.valid && profileForm.get('address')!.touched" class="form-control" formControlName="address" matInput placeholder="Address" type="text">
+            <input [(ngModel)]="userinfo.address" [class.input-invalid]="profileForm.get('address')!.invalid && profileForm.get('address')!.touched" [class.input-valid]="profileForm.get('address')!.valid && profileForm.get('address')!.touched" class="form-control" formControlName="address" matInput placeholder="Address" type="text">
             <div *ngIf="profileForm.get('address')!.invalid && profileForm.get('address')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
               <div *ngIf="profileForm.get('address').hasError('required')">
                 <div [@shake]="shake">Address is <strong>required.</strong>
@@ -39,7 +39,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Email:</mat-label>
-            <input [(ngModel)]="infoUser!.user.email" [class.input-invalid]="profileForm.get('email')!.invalid && profileForm.get('email')!.touched" [class.input-valid]="profileForm.get('email')!.valid && profileForm.get('email')!.touched" class="form-control" formControlName="email" matInput placeholder="Email" type="email">
+            <input [(ngModel)]="userinfo.email" [class.input-invalid]="profileForm.get('email')!.invalid && profileForm.get('email')!.touched" [class.input-valid]="profileForm.get('email')!.valid && profileForm.get('email')!.touched" class="form-control" formControlName="email" matInput placeholder="Email" type="email">
             <div *ngIf="profileForm.get('email')!.invalid && profileForm.get('email')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
               <div *ngIf="profileForm.get('email').hasError('required')">
                 <div [@shake]="shake">Email is <strong>required.</strong>
@@ -59,7 +59,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Phone:</mat-label>
-            <input [(ngModel)]="infoUser!.user.phone" [class.input-invalid]="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched" [class.input-valid]="profileForm.get('phone')!.valid && profileForm.get('phone')!.touched" class="form-control" formControlName="phone" matInput placeholder="Phone" type="text">
+            <input [(ngModel)]="userinfo.phone" [class.input-invalid]="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched" [class.input-valid]="profileForm.get('phone')!.valid && profileForm.get('phone')!.touched" class="form-control" formControlName="phone" matInput placeholder="Phone" type="text">
             <div *ngIf="profileForm.get('phone')!.invalid && profileForm.get('phone')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
               <div *ngIf="profileForm.get('phone').hasError('required')">
                 <div [@shake]="shake">Phone is <strong>required.</strong>
@@ -89,7 +89,7 @@
                  placeholder="Avatar"
                  type="file">
           <br>
-          <input [(ngModel)]="infoUser!.user.avatar" formControlName="old_avatar" type="hidden">
+          <input [(ngModel)]="userinfo.avatar" formControlName="old_avatar" type="hidden">
 
           <!--            <div *ngIf="profileForm.get('avatar')!.invalid && profileForm.get('avatar')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">-->
           <!--              <div *ngIf="profileForm.get('avatar').hasError('required')">-->
@@ -111,15 +111,15 @@
             <img alt="Image Error" [src]="firebase.fb" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
           </div>
 
-          <div *ngIf="!firebase.fb && infoUser!.user.avatar">
-            <img alt="Image Error" [src]="infoUser!.user.avatar" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
+          <div *ngIf="!firebase.fb && userinfo.avatar">
+            <img alt="Image Error" [src]="userinfo.avatar" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
           </div>
         </div>
       </div>
 
       <div class="form-group row">
         <div class="col-sm-6 text-center" style="float:none;margin:auto;">
-          <a [routerLink]="['/user/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
+          <a [routerLink]="['/user/profile', userinfo.id]" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
           <button (click)="updateUser()" [disabled]="!profileForm.valid" class="btn btn-md black p-x-md" type="submit">
             Update profile
           </button>
@@ -130,9 +130,3 @@
   </div>
 
 </div>
-<ng-template #loadingTEMP>
-  <div class="centered">
-    <h1>Loading ...</h1>
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-template>

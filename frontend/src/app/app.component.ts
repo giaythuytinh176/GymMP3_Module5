@@ -7,6 +7,15 @@ import {
   OnChanges, OnDestroy,
   OnInit
 } from '@angular/core';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart, ResolveEnd,
+  ResolveStart,
+  Router,
+  RouterEvent
+} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -21,9 +30,53 @@ export class AppComponent implements OnInit, OnChanges, DoCheck, AfterContentIni
   mep_status: any;
   mep_currentTime: any;
 
+  // Sets initial value to true to show loading spinner on first load
+  loading = true;
 
-  constructor() {
-    // console.log(0);
+  // https://stackoverflow.com/questions/37069609/show-loading-screen-when-navigating-between-routes-in-angular-2
+  // https://stackoverflow.com/questions/42048142/angular-2-resolver-with-loading-indicator
+  constructor(private router: Router) {
+    this.router.events.subscribe((e: RouterEvent) => {
+      this.navigationInterceptor(e);
+    });
+  }
+
+  // constructor(private router: Router) {
+  //   router.events.subscribe((routerEvent: RouterEvent) => {
+  //     this.checkRouterEvent(routerEvent);
+  //   });
+  // }
+
+  checkRouterEvent(routerEvent: RouterEvent): void {
+    if (routerEvent instanceof NavigationStart // ResolveStart
+    ) {
+      this.loading = true;
+    }
+
+    if (routerEvent instanceof NavigationEnd || // ResolveEnd
+      routerEvent instanceof NavigationCancel ||
+      routerEvent instanceof NavigationError) {
+      this.loading = false;
+    }
+  }
+
+  // Shows and hides the loading spinner during RouterEvent changes
+  navigationInterceptor(event: RouterEvent): void {
+    if (event instanceof NavigationStart
+    ) {
+      this.loading = true;
+    }
+    if (event instanceof NavigationEnd) {
+      this.loading = false;
+    }
+
+    // Set loading state to false in both of the below events to hide the spinner in case a request fails
+    if (event instanceof NavigationCancel) {
+      this.loading = false;
+    }
+    if (event instanceof NavigationError) {
+      this.loading = false;
+    }
   }
 
 

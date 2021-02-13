@@ -80,7 +80,7 @@
               </a>
             </div>
           </div>
-        </div>
+        </div><!-- !isLoading -->
         <div *ngIf="!isLoading else loadingTEMP" class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
             autoTrigger: true,
             loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
@@ -106,7 +106,7 @@
                     <div class="item-title text-ellipsis">
                       <a href="track.detail.html">{{ song.nameSong }}</a>
                     </div>
-                    <div class="item-author text-sm text-ellipsis ">
+                    <div class="item-author text-sm text-ellipsis">
                       <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
                         {{ singer.singer_name }},
                       </a>

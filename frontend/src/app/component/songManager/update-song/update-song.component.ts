@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
 import {CategoryService} from '../../../services/category/caterory.service';
 import {SingerService} from '../../../services/singer/singer.service';
 import {AlbumService} from '../../../services/album/album.service';
@@ -56,16 +56,15 @@ export class UpdateSongComponent implements OnInit {
   views: any;
   shake: any;
 
+  songInfo: Song;
   songInfo$: Observable<Song>;
   albumInfo$: Observable<Album[]>;
   categoryInfo$: Observable<Category[]>;
   singerInfo$: Observable<Singer[]>;
-  isLoadingSongName = false;
-  isLoading = false;
 
   constructor(private songService: SongService,
-              private route: Router,
-              private routes: ActivatedRoute,
+              private router: Router,
+              private route: ActivatedRoute,
               private categoryService: CategoryService,
               private singerService: SingerService,
               private albumService: AlbumService,
@@ -79,30 +78,17 @@ export class UpdateSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
-    console.log(1);
-    this.routes.paramMap.subscribe(paramMap => {
-      this.id = +paramMap.get('id');
-      console.log(2);
-      this.songInfo$ = this.songService.getSongById(this.id);
-      this.getSongById(this.id);
-    });
-    console.log(5);
-    // this.albumInfo$ = this.albumService.getAllAlbum();
-    console.log(12);
-    this.getAlbums();
-
-    // this.categoryInfo$ = this.categoryService.getAllCategories();
-    this.getCategories();
-
-    console.log(9);
-    // this.singerInfo$ = this.singerService.getAllSingers();
-    this.getSingers();
-
-    this.getUserInfo();
-
     this.updateForm();
-    console.log(11);
+
+    this.id = +this.route.snapshot.paramMap.get('id');
+    this.songInfo = this.route.snapshot.data.getSongDetailById;
+    this.albums = this.route.snapshot.data.getAlbums.data;
+    this.categories = this.route.snapshot.data.getCategories.data;
+    this.singers = this.route.snapshot.data.getSingers.data;
+    this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    this.singer_id = this.route.snapshot.data.getSingerIDbySongID;
+    this.getSongDetailById(this.id);
+    this.filteredOption_category();
   }
 
   updateForm(): void {
@@ -136,10 +122,10 @@ export class UpdateSongComponent implements OnInit {
   }
 
   filteredOption_category(): void {
-    console.log(8);
     this.filteredOptions = this.updateMusicForm.get('myControl_category').valueChanges
       .pipe(
         startWith(''),
+        // tslint:disable-next-line:no-non-null-assertion
         map(value => typeof value === 'string' ? value : value!.name),
         map(name => name ? this._filter_category(name) : this.categories.slice()
         )
@@ -166,10 +152,9 @@ export class UpdateSongComponent implements OnInit {
       if (data.status) {
         this.token.signOut();
         this.toastr.warning('You must login to update Song.');
-        this.route.navigate(['/user/login']);
+        this.router.navigate(['/user/login']);
       } else {
         console.log(10);
-        // this.isLoading = false;
         this.userinfo = data.user;
       }
     }, error => console.log(error));
@@ -187,43 +172,24 @@ export class UpdateSongComponent implements OnInit {
     this.categoryService.getCategoryInfo(id).subscribe((res: any) => {
         this.category_id = res;
         console.log(6);
-        this.isLoading = false;
-        // console.log(res);
+        console.log('category_id', res);
       }, (error: any) => console.log(error)
     );
   }
 
-  getSongById(id: number): void {
-    this.songService.getSongById(id).subscribe(
-      (data: any) => {
-        if (data.status) {
-          this.toastr.warning('You must login to update song.');
-          this.token.signOut();
-          this.route.navigate(['/user/login']);
-        } else {
-          console.log(3);
-          this.getSingerIDbySongID(id);
-          setTimeout(() => {
-            this.getCategoryInfo(data.category_id);
-          }, 0);
+  getSongDetailById(id: number): void {
+    const songDetailById = this.route.snapshot.data.getSongDetailById;
+    this.nameSong = songDetailById.nameSong;
+    this.describes = songDetailById.describes;
+    this.author = songDetailById.author;
+    this.views = songDetailById.views;
+    this.avatarUrl = songDetailById.avatarUrl;
+    this.mp3Url = songDetailById.mp3Url;
+    this.album_id = songDetailById.album_id;
+    this.old_mp3 = songDetailById.mp3Url;
+    this.old_avatar = songDetailById.avatarUrl;
 
-          this.isLoadingSongName = true;
-
-          this.nameSong = data.nameSong;
-          this.describes = data.describes;
-          this.author = data.author;
-          this.views = data.views;
-          this.avatarUrl = data.avatarUrl;
-          this.mp3Url = data.mp3Url;
-          this.album_id = data.album_id;
-          this.old_mp3 = data.mp3Url;
-          this.old_avatar = data.avatarUrl;
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.getCategoryInfo(songDetailById.category_id);
   }
 
   updateSong(song: Song, id: number): void {
@@ -231,10 +197,10 @@ export class UpdateSongComponent implements OnInit {
       if (data.status) {
         this.toastr.warning('You must login to update song.');
         this.token.signOut();
-        this.route.navigate(['/user/login']);
+        this.router.navigate(['/user/login']);
       } else {
         this.toastr.success('Updated Song Successfully!');
-        this.route.navigate(['/user/profile']);
+        this.router.navigate(['/user/profile', this.userinfo.id]);
       }
     }, error => {
       if ((JSON.parse(error.error)).category_id) {
@@ -274,7 +240,7 @@ export class UpdateSongComponent implements OnInit {
     this.updateSong(this.song, this.id);
   }
 
-  compareWithFunc(a, b) {
+  compareWithFunc(a, b): boolean {
     return a === b;
   }
 

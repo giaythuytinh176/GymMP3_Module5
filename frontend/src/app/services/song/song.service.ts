@@ -53,20 +53,20 @@ export class SongService {
     return this.http.post<Song>(this.API_URL_CREATE_MOVED, song, this.httpJson);
   }
 
-  getSongDetail(id: number): Observable<any> {
-    return this.http.get(`${this.apiListSongUser}/${id}`, this.httpJson);
+  getSongByUserID(id: number): Observable<Song[]> {
+    return this.http.get<Song[]>(`${this.apiListSongUser}/${id}`, this.httpJson);
   }
 
   getSongDetailV2(id: number): Observable<any> {
     return this.http.get(`${this.apiListSongV2User}/${id}`, this.httpJson);
   }
 
-  getSongById(id: number): Observable<Song> {
-    return this.http.get<Song>(`${this.updateSongUrl}/${id}`, this.httpJson)
+  getSongDetailById(id: number): Observable<Song> {
+    return this.http.get<Song>(`${this.updateSongUrl}/${id}`, this.httpJson);
   }
 
   updateSong(song: Song, id: number): Observable<Song> {
-    return this.http.put<Song>(`${this.updateSongUrl}/${id}`, song, this.httpJson)
+    return this.http.put<Song>(`${this.updateSongUrl}/${id}`, song, this.httpJson);
   }
 
   getInfoUserToken(): Observable<UpdateInfo> {

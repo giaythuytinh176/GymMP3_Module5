@@ -1,13 +1,10 @@
 <div class="page-title m-b">
   <h1 class="inline m-a-0" style="padding-left: 50px">Edit Song
-    <div *ngIf="isLoadingSongName else loadTEMP" class="inline m-a-0"><i>{{ nameSong }}</i></div>
-    <ng-template #loadTEMP>
-      ...
-    </ng-template>
+    <div class="inline m-a-0"><i>{{ nameSong }}</i></div>
   </h1>
 </div>
 
-<div *ngIf="!isLoading && songInfo$ | async as songInfo else loadingTEMP" class="container">
+<div class="container">
   <div class="b-t" style="margin-top: 10px; margin-left: 50px">
     <form [formGroup]="updateMusicForm" name="form">
 
@@ -44,7 +41,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Singer:</mat-label>
-            <mat-select [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" [compareWith]="compareWithFunc" class="form-control" formControlName="singer_id" multiple>
+            <mat-select [compareWith]="compareWithFunc" [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" class="form-control" formControlName="singer_id" multiple>
               <!--              <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>-->
               <!--              [placeholder]="'&#45;&#45; Select an Singer &#45;&#45;'"-->
               <mat-option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</mat-option>
@@ -217,7 +214,7 @@
 
       <div class="form-group row">
         <div class="col-sm-12 text-center">
-          <a [routerLink]="['/user/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
+          <a [routerLink]="['/user/profile', userinfo.id]" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
           <button (click)="updateSongSubmit()" [disabled]="!updateMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">
             Edit song
           </button>
@@ -226,9 +223,4 @@
     </form>
   </div>
 </div>
-<ng-template #loadingTEMP>
-  <div class="centered">
-    <h1>Loading ...</h1>
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-template>
+

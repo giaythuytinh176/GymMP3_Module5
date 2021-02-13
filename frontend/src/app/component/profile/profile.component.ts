@@ -48,59 +48,54 @@ export class ProfileComponent implements OnInit {
     this.isLoading = true;
     console.log(1);
     this.getUserInfo();
+
+    this.songs = this.route.snapshot.data.getSongByUserID;
+
+    // this.getSongDetailById(this.userinfo.id);
+
   }
 
-  getSongDetailbyID(id: number): void {
-    this.allsongs$ = this.songService.getSongDetail(id);
-    this.songService.getSongDetail(id).subscribe((data: any) => {
-      if (data.status) {
-        this.token.signOut();
-        this.routes.navigate(['/user/login'])
-      } else {
-        console.log(3);
-        this.isLoading = false;
-        // console.log(data);
-        this.songs = data;
-      }
-    }, error => {
-      console.log(error);
-    });
+  getSongDetailById(id: number): void {
+    this.allsongs$ = this.songService.getSongByUserID(id);
+    // this.songService.getSongByUserID(id).subscribe((data: any) => {
+    //   if (data.status) {
+    //     this.token.signOut();
+    //     this.routes.navigate(['/user/login'])
+    //   } else {
+    console.log(3);
+    this.isLoading = false;
+    //     // console.log(data);
+    //     this.songs = data;
+    //   }
+    // }, error => {
+    //   console.log(error);
+    // });
   }
 
   getUserInfo(): void {
-    this.userService.getInfoUserToken().subscribe((data: any) => {
-      // console.log(data);
-      if (data.status) {
-        this.toastr.warning('You must login to see Profile.');
-        this.token.signOut();
-        this.routes.navigate(['/user/login'])
-      } else {
-        console.log(2);
-        this.userinfo = data.user;
-        this.name = this.userinfo.name;
-        this.address = this.userinfo.address;
-        this.email = this.userinfo.email;
-        this.phone = this.userinfo.phone;
-        this.avatar = this.userinfo.avatar;
-        this.username = this.userinfo.username;
-        this.getSongDetailbyID(this.userinfo.id);
-      }
-    }, error => console.log(error));
+    this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    this.name = this.userinfo.name;
+    this.address = this.userinfo.address;
+    this.email = this.userinfo.email;
+    this.phone = this.userinfo.phone;
+    this.avatar = this.userinfo.avatar;
+    this.username = this.userinfo.username;
+    console.log(2);
   }
 
-  deleteSong(id: number, user_id: number) {
+  deleteSong(id: number, user_id: number): void {
     this.songService.deleteSong(id, user_id).subscribe(
       data => {
         // console.log(data);
-        this.getSongDetail();
+        this.getSongByUserID();
         this.toastr.success('Deleted song sucessfully!');
-        this.routes.navigate(['/user/profile']);
+        this.routes.navigate(['/user/profile', this.userinfo.id]);
       }, error => console.log(error)
-    )
+    );
   }
 
-  getSongDetail() {
-    this.songService.getSongDetail(this.userinfo.id)
+  getSongByUserID() {
+    this.songService.getSongByUserID(this.userinfo.id)
       .subscribe((data: any) => {
         if (data.status) {
           this.token.signOut();

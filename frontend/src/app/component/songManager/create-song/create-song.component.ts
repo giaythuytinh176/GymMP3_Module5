@@ -38,7 +38,8 @@ export class CreateSongComponent implements OnInit {
   singers: Singer[];
   shake: any;
   loadUserInfo$: Observable<UpdateInfo>;
-  isLoading = false;
+
+  // isLoading = false;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -57,58 +58,61 @@ export class CreateSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
+    // this.isLoading = true;
     console.log(1);
-    this.loadUserInfo$ = this.userService.getInfoUserToken();
-
-    setTimeout(() => {
-      this.getUserInfo();
-    }, 0);
+    // this.loadUserInfo$ = this.userService.getInfoUserToken();
+    this.getUserInfo();
 
     this.getAlbums();
     this.getCategories();
     this.getSingers();
-    console.log(6);
+
     this.createForm();
+    console.log(6);
+
   }
 
   getAlbums(): void {
-    this.albumService.getAllAlbum().subscribe((albums: any) => {
-      this.albums = albums.data;
-      // console.log(this.albums);
-      console.log(3);
-    }, (error) => console.log(error));
+    this.albums = this.route.snapshot.data.getAlbums.data;
+    // this.albumService.getAllAlbum().subscribe((albums: any) => {
+    //   this.albums = albums.data;
+    //   // console.log(this.albums);
+    console.log(3);
+    // }, (error) => console.log(error));
   }
 
   getCategories(): void {
-    this.categoryService.getAllCategories().subscribe((categories: any) => {
-      this.categories = categories.data;
-      // console.log(this.categories);
-      console.log(4);
-    }, (error) => console.log(error));
+    this.categories = this.route.snapshot.data.getCategories.data;
+    // this.categoryService.getAllCategories().subscribe((categories: any) => {
+    //   this.categories = categories.data;
+    //   // console.log(this.categories);
+    console.log(4);
+    // }, (error) => console.log(error));
   }
 
   getSingers(): void {
-    this.singerService.getAllSingers().subscribe((singers: any) => {
-      this.singers = singers.data;
-      // console.log(this.singers);
-      console.log(5);
-    }, (error) => console.log(error));
+    this.singers = this.route.snapshot.data.getSingers.data;
+    // this.singerService.getAllSingers().subscribe((singers: any) => {
+    //   this.singers = singers.data;
+    //   // console.log(this.singers);
+    console.log(5);
+    // }, (error) => console.log(error));
   }
 
   getUserInfo(): void {
-    this.userService.getInfoUserToken().subscribe((data: any) => {
-      // console.log(data);
-      if (data.status) {
-        this.token.signOut();
-        this.toastr.warning('You must login to create Song.');
-        this.routes.navigate(['/user/login']);
-      } else {
-        console.log(2);
-        this.userinfo = data.user;
-        this.isLoading = false;
-      }
-    }, error => console.log(error));
+    this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    // this.userService.getInfoUserToken().subscribe((data: any) => {
+    //   // console.log(data);
+    //   if (data.status) {
+    //     this.token.signOut();
+    //     this.toastr.warning('You must login to create Song.');
+    //     this.routes.navigate(['/user/login']);
+    //   } else {
+    console.log(2);
+    //     this.userinfo = data.user;
+    // this.isLoading = false;
+    //   }
+    // }, error => console.log(error));
   }
 
   createForm(): void {
@@ -134,7 +138,7 @@ export class CreateSongComponent implements OnInit {
           this.routes.navigate(['/user/login']);
         } else {
           this.toastr.success('Add song successfully!');
-          this.routes.navigate(['/user/profile']);
+          this.routes.navigate(['/user/profile', this.userinfo.id]);
         }
       }, error => {
         // console.log(error);
@@ -143,7 +147,7 @@ export class CreateSongComponent implements OnInit {
     );
   }
 
-  createSongSubmit() {
+  createSongSubmit(): void {
     this.createMusicForm.value.avatarUrl = this.firebase.fb;
     this.createMusicForm.value.mp3Url = this.firebaseMP3.fb;
     this.song = this.createMusicForm.value;

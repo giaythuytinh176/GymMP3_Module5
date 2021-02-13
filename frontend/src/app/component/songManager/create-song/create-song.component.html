@@ -2,7 +2,7 @@
   <h1 class="inline m-a-0" style="padding-left: 50px">Add New Song</h1>
 </div>
 
-<div *ngIf="!isLoading && loadUserInfo$ | async as infoUser else loadingTEMP" class="container">
+<div class="container">
   <div class="b-t" style="margin-top: 10px; margin-left: 50px">
     <form [formGroup]="createMusicForm" name="form">
       <div class="form-group row">
@@ -118,11 +118,11 @@
         <div class="col-sm-12">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Describes:</mat-label>
-            <textarea  matInput
-                       cdkTextareaAutosize
-                       #autosize="cdkTextareaAutosize"
-                       cdkAutosizeMinRows="1"
-                       cdkAutosizeMaxRows="1" [class.input-invalid]="createMusicForm.get('describes')!.invalid && createMusicForm.get('describes')!.touched" [class.input-valid]="createMusicForm.get('describes')!.valid && createMusicForm.get('describes')!.touched" class="form-control" formControlName="describes" matInput placeholder="Describes"
+            <textarea matInput
+                      cdkTextareaAutosize
+                      #autosize="cdkTextareaAutosize"
+                      cdkAutosizeMinRows="1"
+                      cdkAutosizeMaxRows="1" [class.input-invalid]="createMusicForm.get('describes')!.invalid && createMusicForm.get('describes')!.touched" [class.input-valid]="createMusicForm.get('describes')!.valid && createMusicForm.get('describes')!.touched" class="form-control" formControlName="describes" matInput placeholder="Describes"
                       style="height: 100px;"></textarea>
             <div *ngIf="createMusicForm.get('describes').invalid && createMusicForm.get('describes').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">
@@ -198,7 +198,7 @@
 
       <div class="form-group row">
         <div class="col-sm-12 text-center">
-          <a [routerLink]="['/user/profile']" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
+          <a [routerLink]="['/user/profile', userinfo.id]" class="btn btn-md dark p-x-md">Cancel</a> &nbsp;
           <button (click)="createSongSubmit()" [disabled]="!createMusicForm.valid" class="btn btn-md black p-x-lg" type="submit">
             Add song
           </button>
@@ -207,9 +207,3 @@
     </form>
   </div>
 </div>
-<ng-template #loadingTEMP>
-  <div class="centered">
-    <h1>Loading ...</h1>
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-template>

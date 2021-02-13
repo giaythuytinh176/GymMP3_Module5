@@ -28,7 +28,7 @@ export class AuthService {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.token
     })
-  }
+  };
   auth = false;
   private signupUrl = environment.apiUrl + '/user/signup';
   private changePassUrl = environment.apiUrl + '/user/change-password';
@@ -120,7 +120,7 @@ export class AuthService {
       } else {
         return false;
       }
-      //}
+      // }
     } else {
       this.toasrt.warning('Session expired or Not login yet, please login again!');
       return false;

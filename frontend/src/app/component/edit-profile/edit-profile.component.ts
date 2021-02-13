@@ -46,38 +46,39 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
-    console.log(1);
-    this.loadUserInfo$ = this.userService.getInfoUserToken();
-    console.log(2);
-    this.getInfoUserToken();
     this.profileFormSubmit();
+    console.log(1);
+    // this.loadUserInfo$ = this.userService.getInfoUserToken();
+    this.getUserInfo();
+    console.log(3);
   }
 
-  getInfoUserToken(): void {
-    this.userService.getInfoUserToken().subscribe((data: any) => {
-      // console.log(data);
-      if (data.status) {
-        this.token.signOut();
-        this.toastr.warning('You must login to update profile.');
-        this.routes.navigate(['/user/login']);
-      } else {
-        console.log(3);
-        this.userinfo = data.user;
-        this.profileForm.value.name = this.userinfo.name;
-        this.profileForm.value.address = this.userinfo.address;
-        this.profileForm.value.email = this.userinfo.email;
-        this.profileForm.value.phone = this.userinfo.phone;
-        this.name = this.userinfo.name;
-        this.address = this.userinfo.address;
-        this.email = this.userinfo.email;
-        this.phone = this.userinfo.phone;
-        this.avatar = this.userinfo.avatar;
-        this.old_avatar = this.userinfo.avatar;
-        this.username = this.userinfo.username;
-        this.isLoading = false;
-      }
-    }, error => console.log(error));
+  getUserInfo(): void {
+    this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    // console.log(this.userinfo);
+    // this.userService.getInfoUserToken().subscribe((data: any) => {
+    //   // console.log(data);
+    //   if (data.status) {
+    //     this.token.signOut();
+    //     this.toastr.warning('You must login to create Song.');
+    //     this.routes.navigate(['/user/login']);
+    //   } else {
+    this.profileForm.value.name = this.userinfo.name;
+    this.profileForm.value.address = this.userinfo.address;
+    this.profileForm.value.email = this.userinfo.email;
+    this.profileForm.value.phone = this.userinfo.phone;
+    this.name = this.userinfo.name;
+    this.address = this.userinfo.address;
+    this.email = this.userinfo.email;
+    this.phone = this.userinfo.phone;
+    this.avatar = this.userinfo.avatar;
+    this.old_avatar = this.userinfo.avatar;
+    this.username = this.userinfo.username;
+    console.log(2);
+    //     this.userinfo = data.user;
+    // this.isLoading = false;
+    //   }
+    // }, error => console.log(error));
   }
 
   profileFormSubmit(): void {
@@ -95,7 +96,7 @@ export class EditProfileComponent implements OnInit {
     this.profileForm.value.avatar = this.firebase.fb;
     this.profileForm.value.username = this.userinfo.username;
     this.profileForm.value.id = this.userinfo.id;
-    if ((this.profileForm.value.avatar == '') && (this.profileForm.value.old_avatar == '')) {
+    if ((this.profileForm.value.avatar === '') && (this.profileForm.value.old_avatar === '')) {
       this.toastr.warning('Avatar is required!');
     } else {
       if (this.profileForm.value.avatar && this.profileForm.value.avatar.includes('http')) {
@@ -114,7 +115,7 @@ export class EditProfileComponent implements OnInit {
             } else {
               // this.routes.navigate(['list']);
               this.toastr.success('Updated Profile Successfully!');
-              this.routes.navigate(['/user/profile']);
+              this.routes.navigate(['/user/profile', this.userinfo.id]);
             }
           }, error => {
             // console.log(JSON.parse(error.error));
