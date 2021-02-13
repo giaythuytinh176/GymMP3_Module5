@@ -28,9 +28,11 @@ import {map, startWith} from 'rxjs/operators';
     trigger('shake', [transition('* => *', useAnimation(shake))])
   ],
 })
+// multiselection-in-autocomplete-angular https://stackblitz.com/edit/angular-sx79hu?embed=1&file=app/multiselect-autocomplete-example.html
 export class UpdateSongComponent implements OnInit {
   updateMusicForm: FormGroup;
-  filteredOptions: any;
+  filteredOptionsCategory: Observable<Category[]>;
+  filteredOptionsAlbum: Observable<Album[]>;
 
   userinfo!: UpdateInfo;
 
@@ -39,10 +41,9 @@ export class UpdateSongComponent implements OnInit {
   singers: Singer[];
 
   song: Song;
-  user_id: any;
   singer_id: any;
-  album_id: any;
-  category_id: any;
+  album: any;
+  category: any;
 
   avatarUrl: any;
   mp3Url: any;
@@ -57,10 +58,7 @@ export class UpdateSongComponent implements OnInit {
   shake: any;
 
   songInfo: Song;
-  songInfo$: Observable<Song>;
-  albumInfo$: Observable<Album[]>;
-  categoryInfo$: Observable<Category[]>;
-  singerInfo$: Observable<Singer[]>;
+  isLoading = false;
 
   constructor(private songService: SongService,
               private router: Router,
@@ -78,6 +76,7 @@ export class UpdateSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.updateForm();
 
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -87,8 +86,11 @@ export class UpdateSongComponent implements OnInit {
     this.singers = this.route.snapshot.data.getSingers.data;
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
     this.singer_id = this.route.snapshot.data.getSingerIDbySongID;
-    this.getSongDetailById(this.id);
+
     this.filteredOption_category();
+    this.filteredOption_album();
+
+    this.getSongDetailById();
   }
 
   updateForm(): void {
@@ -99,34 +101,20 @@ export class UpdateSongComponent implements OnInit {
       views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       avatarUrl: [''],
       mp3Url: [''],
-      myControl_category: new FormControl('', Validators.required),
+      myControl_category: ['', Validators.required],
+      myControl_album: ['', Validators.required],
       singer_id: ['', [Validators.required]],
-      album_id: ['', [Validators.required]],
       old_avatar: [this.old_avatar],
       old_mp3: [this.old_mp3],
     });
   }
 
-  getSingers(): void {
-    this.singerService.getAllSingers().subscribe((singers: any) => {
-      this.singers = singers.data;
-      // console.log(this.singers);
-    }, (error) => console.log(error));
-  }
-
-  getAlbums(): void {
-    this.albumService.getAllAlbum().subscribe((albums: any) => {
-      this.albums = albums.data;
-      // console.log(this.albums);
-    }, (error) => console.log(error));
-  }
-
+  // Category
   filteredOption_category(): void {
-    this.filteredOptions = this.updateMusicForm.get('myControl_category').valueChanges
+    this.filteredOptionsCategory = this.updateMusicForm.get('myControl_category').valueChanges
       .pipe(
         startWith(''),
-        // tslint:disable-next-line:no-non-null-assertion
-        map(value => typeof value === 'string' ? value : value!.name),
+        map(value => typeof value === 'string' ? value : value?.name),
         map(name => name ? this._filter_category(name) : this.categories.slice()
         )
       );
@@ -136,48 +124,40 @@ export class UpdateSongComponent implements OnInit {
     return category && category.category_name ? category.category_name : '';
   }
 
-  getCategories(): void {
-    this.categoryService.getAllCategories().subscribe((categories: any) => {
-      this.categories = categories.data;
-      // console.log(categories.data);
-      console.log(7);
-      this.filteredOption_category();
-      // console.log(this.categories);
-    }, (error) => console.log(error));
+  // Album
+  filteredOption_album(): void {
+    this.filteredOptionsAlbum = this.updateMusicForm.get('myControl_album').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value?.name),
+        map(name => name ? this._filter_album(name) : this.albums.slice()
+        )
+      );
   }
 
-  getUserInfo(): void {
-    this.userService.getInfoUserToken().subscribe((data: any) => {
-      // console.log(data);
-      if (data.status) {
-        this.token.signOut();
-        this.toastr.warning('You must login to update Song.');
-        this.router.navigate(['/user/login']);
-      } else {
-        console.log(10);
-        this.userinfo = data.user;
-      }
-    }, error => console.log(error));
-  }
-
-  getSingerIDbySongID(id: number): void {
-    this.singerService.getSingerIDBySongID(id).subscribe((res: any) => {
-      // console.log(res);
-      console.log(4);
-      this.singer_id = res;
-    }, (error: any) => console.log(error));
+  displayFn_album(album: Album): string {
+    return album && album.album_name ? album.album_name : '';
   }
 
   getCategoryInfo(id: number): void {
     this.categoryService.getCategoryInfo(id).subscribe((res: any) => {
-        this.category_id = res;
-        console.log(6);
-        console.log('category_id', res);
+        this.category = res;
+        console.log(2);
+        this.isLoading = false;
       }, (error: any) => console.log(error)
     );
   }
 
-  getSongDetailById(id: number): void {
+  getAlbumInfo(id: number): void {
+    this.albumService.getAlbumInfo(id).subscribe((res: any) => {
+        this.album = res;
+        console.log(1);
+        // this.isLoading = false;
+      }, (error: any) => console.log(error)
+    );
+  }
+
+  getSongDetailById(): void {
     const songDetailById = this.route.snapshot.data.getSongDetailById;
     this.nameSong = songDetailById.nameSong;
     this.describes = songDetailById.describes;
@@ -185,11 +165,15 @@ export class UpdateSongComponent implements OnInit {
     this.views = songDetailById.views;
     this.avatarUrl = songDetailById.avatarUrl;
     this.mp3Url = songDetailById.mp3Url;
-    this.album_id = songDetailById.album_id;
     this.old_mp3 = songDetailById.mp3Url;
     this.old_avatar = songDetailById.avatarUrl;
 
+    this.getAlbumInfo(songDetailById.album_id);
     this.getCategoryInfo(songDetailById.category_id);
+  }
+
+  compareWithFunc(a, b): boolean {
+    return a === b;
   }
 
   updateSong(song: Song, id: number): void {
@@ -205,6 +189,8 @@ export class UpdateSongComponent implements OnInit {
     }, error => {
       if ((JSON.parse(error.error)).category_id) {
         this.toastr.warning((JSON.parse(error.error)).category_id);
+      } else if ((JSON.parse(error.error)).album_id) {
+        this.toastr.warning((JSON.parse(error.error)).album_id);
       } else {
         this.toastr.warning('Something wrong.');
         console.log(error);
@@ -232,7 +218,7 @@ export class UpdateSongComponent implements OnInit {
     }
 
     this.song.category_id = this.updateMusicForm.value.myControl_category.id;
-    this.song.album_id = this.updateMusicForm.value.album_id;
+    this.song.album_id = this.updateMusicForm.value.myControl_album.id;
     // stringify to JSON
     this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
     // console.log(this.song);
@@ -240,13 +226,13 @@ export class UpdateSongComponent implements OnInit {
     this.updateSong(this.song, this.id);
   }
 
-  compareWithFunc(a, b): boolean {
-    return a === b;
-  }
-
-  private _filter_category(name: any): Category[] {
+  private _filter_category(name: string): Category[] {
     const filterValue = name.toLowerCase();
-    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue) === 0);
+    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
   }
 
+  private _filter_album(name: string): Album[] {
+    const filterValue = name.toLowerCase();
+    return this.albums.filter(option => option.album_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
+  }
 }

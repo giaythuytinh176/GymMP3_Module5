@@ -61,6 +61,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::prefix('album')->group(function () {
         Route::get('/list', 'AlbumController@index');
+        Route::get('/{id}', 'AlbumController@findAlbum');
 
     });
 

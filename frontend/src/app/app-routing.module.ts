@@ -21,6 +21,7 @@ import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetSongDetailByIdResolver} from './resolver/GetSongDetailByIdResolver';
 import {GetSingerIDbySongIDResolver} from './resolver/GetSingerIDbySongIDResolver';
 import {GetCategoryInfoByIDResolver} from './resolver/GetCategoryInfoByIDResolver';
+import {GetAllMovedSongsResolver} from "./resolver/GetAllMovedSongsResolver";
 
 const routes: Routes = [
   {
@@ -101,6 +102,10 @@ const routes: Routes = [
     path: 'dragdrop',
     component: CdkDragDropConnectedSortingGroupExample,
     canActivate: [AuthGuard],
+    resolve: {
+      getUserInfo: GetUserInfoResolver,
+      getAllMovedSongs: GetAllMovedSongsResolver,
+    },
   },
   {
     path: '404',

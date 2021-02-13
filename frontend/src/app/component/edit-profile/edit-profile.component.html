@@ -108,11 +108,11 @@
                 </div>
               </div>
             </div>
-            <img alt="Image Error" [src]="firebase.fb" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
+            <img [src]="firebase.fb" alt="Image Error" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
           </div>
 
           <div *ngIf="!firebase.fb && userinfo.avatar">
-            <img alt="Image Error" [src]="userinfo.avatar" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
+            <img [src]="userinfo.avatar" alt="Image Error" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
           </div>
         </div>
       </div>

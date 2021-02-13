@@ -55,8 +55,16 @@
   animation: 3s rotate infinite linear;
 }
 
-.is-playing .mejs-track-artwork {
-  animation: 5s rotate infinite linear;
+.ic-gif-playing-white {
+  background-image: url(https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/icons/icon-playing.gif)
+}
+
+/*.btn-playpause .is-playing {*/
+/*  background-image: url(https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/icons/icon-playing.gif)*/
+/*}*/
+/*.is-playing*/
+.mejs-track-artwork {
+  /*animation: 5s rotate infinite linear;*/
   border-radius: 50%;
 }
 

@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="" />
+    <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/AlbumController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/AlbumController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pulseradio/html/libs/mediaelement/build/mediaelement-and-player.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pulseradio/html/libs/mediaelement/build/mediaelement-and-player.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/all-list-song/all-list-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/all-list-song/all-list-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/all-list-song/all-list-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/all-list-song/all-list-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/search-song/search-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/search-song/search-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/search-song/search-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/search-song/search-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/resolver/GetAllSongsResolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/resolver/GetAllSongsResolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/album/album.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/album/album.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/css/font-awesome/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/font-awesome/css/font-awesome.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/scripts/player.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/scripts/player.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/assets/scripts/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/scripts/site.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,7 +57,7 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
     <include_path>
       <path value="$PROJECT_DIR$/backend/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/backend/vendor/guzzlehttp/psr7" />
@@ -145,6 +173,9 @@
       <path value="$PROJECT_DIR$/backend/vendor/sebastian/lines-of-code" />
     </include_path>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectId" id="1oIttfUGti9RRfnFPvMhzgqBOi3" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -164,6 +195,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/frontend/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -189,6 +221,11 @@
       <workItem from="1613098393401" duration="14406000" />
       <workItem from="1613143458666" duration="13097000" />
       <workItem from="1613186913869" duration="1175000" />
+      <workItem from="1613196925545" duration="16000" />
+      <workItem from="1613196967043" duration="669000" />
+      <workItem from="1613198015690" duration="3212000" />
+      <workItem from="1613215957369" duration="16616000" />
+      <workItem from="1613249844894" duration="3795000" />
     </task>
     <task id="LOCAL-00001" summary="tesing dragdrop6">
       <created>1612986188568</created>
@@ -255,7 +292,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts</url>
-          <line>72</line>
+          <line>74</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -263,12 +300,11 @@
           <line>22</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html</url>
-          <line>6</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

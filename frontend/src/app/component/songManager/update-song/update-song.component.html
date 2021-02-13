@@ -4,7 +4,7 @@
   </h1>
 </div>
 
-<div class="container">
+<div *ngIf="!isLoading else loadingTEMP" class="container">
   <div class="b-t" style="margin-top: 10px; margin-left: 50px">
     <form [formGroup]="updateMusicForm" name="form">
 
@@ -41,7 +41,7 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Singer:</mat-label>
-            <mat-select [compareWith]="compareWithFunc" [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" class="form-control" formControlName="singer_id" multiple>
+            <mat-select [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" [compareWith]="compareWithFunc" class="form-control" formControlName="singer_id" multiple>
               <!--              <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>-->
               <!--              [placeholder]="'&#45;&#45; Select an Singer &#45;&#45;'"-->
               <mat-option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</mat-option>
@@ -62,9 +62,9 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Category:</mat-label>
-            <input [(ngModel)]="category_id" [class.input-invalid]="updateMusicForm.get('myControl_category')!.invalid && updateMusicForm.get('myControl_category')!.touched" [class.input-valid]="updateMusicForm.get('myControl_category')!.valid && updateMusicForm.get('myControl_category')!.touched" [matAutocomplete]="auto" class="form-control" formControlName="myControl_category" matInput type="text">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn_category">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            <input [(ngModel)]="category" [class.input-invalid]="updateMusicForm.get('myControl_category')!.invalid && updateMusicForm.get('myControl_category')!.touched" [class.input-valid]="updateMusicForm.get('myControl_category')!.valid && updateMusicForm.get('myControl_category')!.touched" [matAutocomplete]="auto_category" class="form-control" formControlName="myControl_category" matInput type="text">
+            <mat-autocomplete #auto_category="matAutocomplete" [displayWith]="displayFn_category">
+              <mat-option *ngFor="let option of filteredOptionsCategory | async" [value]="option">
                 {{option.category_name}}
               </mat-option>
             </mat-autocomplete>
@@ -78,14 +78,31 @@
         </div>
 
         <!--        <div class="col-sm-3 form-control-label text-muted"> Album:</div>-->
+        <!--        <div class="col-sm-4">-->
+        <!--          <mat-form-field appearance="fill" class="example-full-width">-->
+        <!--            <mat-label>Select an Album:</mat-label>-->
+        <!--            <mat-select [(ngModel)]="album_id" [class.input-invalid]="updateMusicForm.get('album_id')!.invalid && updateMusicForm.get('album_id')!.touched" [class.input-valid]="updateMusicForm.get('album_id')!.valid && updateMusicForm.get('album_id')!.touched" class="form-control" formControlName="album_id">-->
+        <!--              &lt;!&ndash;            <mat-option disabled selected value>&#45;&#45; Select an Album &#45;&#45;</mat-option>&ndash;&gt;-->
+        <!--              <mat-option *ngFor="let album of albums" [value]="album.id">{{ album.album_name }}</mat-option>-->
+        <!--            </mat-select>-->
+        <!--            <div *ngIf="updateMusicForm.get('album_id').invalid && updateMusicForm.get('album_id').touched"-->
+        <!--                 style="margin-top: 10px;color: red; text-align: left !important;">-->
+        <!--              <div [@shake]="shake">-->
+        <!--                Album is <strong>required.</strong>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </mat-form-field>-->
+        <!--        </div>-->
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select an Album:</mat-label>
-            <mat-select [(ngModel)]="album_id" [class.input-invalid]="updateMusicForm.get('album_id')!.invalid && updateMusicForm.get('album_id')!.touched" [class.input-valid]="updateMusicForm.get('album_id')!.valid && updateMusicForm.get('album_id')!.touched" class="form-control" formControlName="album_id">
-              <!--            <mat-option disabled selected value>&#45;&#45; Select an Album &#45;&#45;</mat-option>-->
-              <mat-option *ngFor="let album of albums" [value]="album.id">{{ album.album_name }}</mat-option>
-            </mat-select>
-            <div *ngIf="updateMusicForm.get('album_id').invalid && updateMusicForm.get('album_id').touched"
+            <input [(ngModel)]="album" [class.input-invalid]="updateMusicForm.get('myControl_album')!.invalid && updateMusicForm.get('myControl_album')!.touched" [class.input-valid]="updateMusicForm.get('myControl_album')!.valid && updateMusicForm.get('myControl_album')!.touched" [matAutocomplete]="auto_album" class="form-control" formControlName="myControl_album" matInput type="text">
+            <mat-autocomplete #auto_album="matAutocomplete" [displayWith]="displayFn_album">
+              <mat-option *ngFor="let option of filteredOptionsAlbum | async" [value]="option">
+                {{option.album_name}}
+              </mat-option>
+            </mat-autocomplete>
+            <div *ngIf="updateMusicForm.get('myControl_album').invalid && updateMusicForm.get('myControl_album').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">
               <div [@shake]="shake">
                 Album is <strong>required.</strong>
@@ -118,11 +135,11 @@
         <div class="col-sm-12">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Describes:</mat-label>
-            <textarea matInput
-                      cdkTextareaAutosize
-                      #autosize="cdkTextareaAutosize"
-                      cdkAutosizeMinRows="1"
-                      cdkAutosizeMaxRows="1" [(ngModel)]="songInfo.describes" [class.input-invalid]="updateMusicForm.get('describes')!.invalid && updateMusicForm.get('describes')!.touched" [class.input-valid]="updateMusicForm.get('describes')!.valid && updateMusicForm.get('describes')!.touched" class="form-control" formControlName="describes" matInput placeholder="Describes"
+            <textarea #autosize="cdkTextareaAutosize"
+                      [(ngModel)]="songInfo.describes"
+                      [class.input-invalid]="updateMusicForm.get('describes')!.invalid && updateMusicForm.get('describes')!.touched"
+                      [class.input-valid]="updateMusicForm.get('describes')!.valid && updateMusicForm.get('describes')!.touched"
+                      cdkAutosizeMaxRows="1" cdkAutosizeMinRows="1" cdkTextareaAutosize class="form-control" formControlName="describes" matInput matInput placeholder="Describes"
                       style="height: 100px;"></textarea>
             <div *ngIf="updateMusicForm.get('describes').invalid && updateMusicForm.get('describes').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">
@@ -223,4 +240,10 @@
     </form>
   </div>
 </div>
-
+<ng-template #loadingTEMP>
+  <div class="centered">
+    <h1>Loading Data ...</h1>
+    <!--        <mat-spinner></mat-spinner>-->
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+</ng-template>

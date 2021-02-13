@@ -92,6 +92,7 @@
     if (self.hasClass('is-playing')) {
       self.removeClass('is-playing');
       player.pause();
+      // console.log(self);
     } else {
       var item = getItem(self);
       console.log(item);
@@ -104,9 +105,12 @@
     var track = player.mepGetCurrentTrack();
     if (!track || !track.id) return;
     var item = $('[data-id="' + track.id + '"]');
+    console.log('item', item);
     if (player.media.paused) {
+      console.log('player-paused', 'paused');
       item.removeClass('active').find('.btn-playpause').removeClass('is-playing').parent().removeClass('active');
     } else {
+      console.log('player-play', 'play');
       item.addClass('active').find('.btn-playpause').addClass('is-playing').parent().addClass('active');
     }
   }

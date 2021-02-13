@@ -7,7 +7,7 @@ import {SongService} from '../services/song/song.service';
 @Injectable({
   providedIn: 'root'
 })
-export class GetAllSongsResolver implements Resolve<any> {
+export class GetAllMovedSongsResolver implements Resolve<any> {
   constructor(
     private songService: SongService,
     private router: Router,
@@ -15,7 +15,7 @@ export class GetAllSongsResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    return this.songService.getAllSongs().pipe(
+    return this.songService.getMovedSongs().pipe(
       // delay(2000),
       catchError(error => {
           this.router.navigateByUrl('/404');

@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class AlbumController extends Controller
 {
+    public function findAlbum(Request $request)
+    {
+        $data = Album::find($request->id);
+        return response()->json($data, 200);
+    }
+
     public function index()
     {
         $data = Album::all();

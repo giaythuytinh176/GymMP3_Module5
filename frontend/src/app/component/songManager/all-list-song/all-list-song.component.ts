@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SongService} from "../../../services/song/song.service";
-import {Song} from "../../../model/song/song";
-import {Observable, Subject} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
-import {distinctUntilChanged, takeUntil} from "rxjs/operators";
+import {SongService} from '../../../services/song/song.service';
+import {Song} from '../../../model/song/song';
+import {Observable, Subject} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-all-list-song',
@@ -14,8 +14,8 @@ export class AllListSongComponent implements OnInit, OnDestroy {
 
   allsongs$: Observable<Song[]>;
   allsongs: Song[];
-  private onDestroy$: Subject<boolean> = new Subject<boolean>();
   isLoading = false;
+  private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private songService: SongService,

@@ -14,7 +14,7 @@ import {CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem} from '@a
 import {UserService} from '../../../services/userManager/user.service';
 import {ToastrService} from 'ngx-toastr';
 import {TokenStorageService} from '../../../auth/token-storage.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UpdateInfo} from '../../../model/userManager/updateinfo';
 import {Observable} from 'rxjs';
 
@@ -42,15 +42,19 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
     private toastr: ToastrService,
     private token: TokenStorageService,
     private routes: Router,
+    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
     this.isLoadingFirst = true;
     console.log(1);
-    this.getUserInfo();
+    this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    this.getListSongsByID(this.userinfo.id);
+    this.moveListSongs = this.route.snapshot.data.getAllMovedSongs.data;
+    /// this.getUserInfo();
     // this.getAllSongs();
-    this.getMovedSongs();
+    // this.getMovedSongs();
   }
 
   getListSongsByID(id: number): void {

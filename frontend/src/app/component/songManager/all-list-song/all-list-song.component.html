@@ -99,8 +99,12 @@
                   </div>
                   <div class="item-info">
                     <div class="item-overlay bottom text-right">
-                      <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                      <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
+                      <a class="btn-favorite" href="#">
+                        <i class="fa fa-heart-o"></i>
+                      </a>
+                      <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </a>
                       <div class="dropdown-menu pull-right black lt"></div>
                     </div>
                     <div class="item-title text-ellipsis">
