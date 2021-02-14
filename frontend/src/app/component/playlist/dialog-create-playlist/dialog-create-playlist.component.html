@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Create a Playlist</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <form [formGroup]="createPlaylistDialogForm" name="form">
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Playlist Name:</mat-label>
+            <input [class.input-invalid]="createPlaylistDialogForm.get('name_playlist')!.invalid && createPlaylistDialogForm.get('name_playlist')!.touched"
+                   [class.input-valid]="createPlaylistDialogForm.get('name_playlist')!.valid && createPlaylistDialogForm.get('name_playlist')!.touched" class="form-control" formControlName="name_playlist" matInput placeholder="Playlist Name" type="text">
+            <div *ngIf="createPlaylistDialogForm.get('name_playlist').invalid && createPlaylistDialogForm.get('name_playlist').touched"
+                 style="margin-top: 10px;color: red; text-align: left !important;">
+              <div [@shake]="shake">
+                Playlist Name is <strong>required.</strong>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Description:</mat-label>
+            <textarea #autosize="cdkTextareaAutosize"
+                      [class.input-invalid]="createPlaylistDialogForm.get('description')!.invalid && createPlaylistDialogForm.get('description')!.touched"
+                      [class.input-valid]="createPlaylistDialogForm.get('description')!.valid && createPlaylistDialogForm.get('description')!.touched"
+                      cdkAutosizeMaxRows="5"
+                      cdkAutosizeMinRows="1" cdkTextareaAutosize class="form-control" formControlName="description" matInput placeholder="Description"
+                      style="height: 100px;"></textarea>
+            <div *ngIf="createPlaylistDialogForm.get('description').invalid && createPlaylistDialogForm.get('description').touched"
+                 style="margin-top: 10px;color: red; text-align: left !important;">
+              <div [@shake]="shake">
+                Description is <strong>required.</strong>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button (click)="onNoClick()" mat-button mat-dialog-close>Cancel</button>
+  <button (click)="createPlaylistSubmit()" [disabled]="!createPlaylistDialogForm.valid" [mat-dialog-close]="createPlaylistDialogForm" cdkFocusInitial mat-button>
+    Add
+  </button>
+</mat-dialog-actions>

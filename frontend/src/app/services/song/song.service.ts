@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {AuthService} from '../../auth/auth.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {UpdateInfo} from "../../model/userManager/updateinfo";
+import {UpdateInfo} from '../../model/userManager/updateinfo';
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -18,7 +18,7 @@ export class SongService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
     })
-  }
+  };
   private API_URL_CREATE = environment.apiUrl + '/song/create';
   private API_URL_CREATE_MOVED = environment.apiUrl + '/song/moved/create';
   private apiListSongUser = environment.apiUrl + '/song/user/list';

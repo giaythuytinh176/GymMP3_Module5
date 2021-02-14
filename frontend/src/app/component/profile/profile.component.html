@@ -102,7 +102,7 @@
                   <div class="row item-list item-list-by m-b">
                     <div *ngFor="let song of songs; let i = index;" class="col-xs-12">
                       <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
-                        <div class="item-media">
+                        <div class="item-media ">
                           <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
                           <div class="item-overlay center">
                             <button class="btn-playpause">Play</button>
@@ -136,11 +136,9 @@
 
                           <div class="item-action visible-list m-t-sm">
                             <a [routerLink]="['/user/edit-song', song.id]" class="btn btn-xs white" href="#">Edit</a>
-                            <button (click)="openDialog(song.id, song.nameSong, userinfo.id)" class="btn btn-xs white">
+                            <button (click)="openDialogDeleteSong(song.id, song.nameSong, userinfo.id)" class="btn btn-xs white">
                               Delete
                             </button>
-                            <!--                            data-toggle="modal" data-target="#delete-modal"-->
-                            <!--                            <button mat-raised-button color="warn" (click)="openDialog(song.id, song.nameSong)">Xoá</button>-->
                           </div>
                         </div>
                       </div>
@@ -148,8 +146,22 @@
                   </div>
                   <a class="btn btn-sm white rounded" href="#">Show More</a>
                 </div>
+                <!--                Empty Playlist, click to add new play list-->
                 <div class="tab-pane" id="playlist">
                   <div class="row m-b">
+                    <div class="col-xs-4 col-sm-4 col-md-3">
+                      <div class="item r">
+                        <div class="item-media ">
+                          <a class="item-media-content" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/dataimagemusic.appspot.com/o/images%2FA%CC%89nh%20chu%CC%A3p%20Ma%CC%80n%20hi%CC%80nh%202021-02-15%20lu%CC%81c%2002.03.33.png?alt=media&token=dc274aa8-a6be-4ff2-bd83-ad98bc64259d');"></a>
+                          <div class="centerEmpty text-center">
+                            <a (click)="createPlaylist.openDialogPlaylist(userinfo.id)">
+                              <i class="material-icons"> add </i><br>
+                              <span>Add New Playlist</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="col-xs-4 col-sm-4 col-md-3">
                       <div class="item r" data-id="item-2" data-src="http://api.soundcloud.com/tracks/259445397/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                         <div class="item-media ">

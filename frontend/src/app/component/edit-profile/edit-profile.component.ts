@@ -5,11 +5,11 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TokenStorageService} from '../../auth/token-storage.service';
 import {ToastrService} from 'ngx-toastr';
-import {FirebaseComponent} from '../firebase/firebase.component';
 import {transition, trigger, useAnimation} from '@angular/animations';
 import {shake} from 'ng-animate';
 import {UserService} from '../../services/userManager/user.service';
 import {Observable} from 'rxjs';
+import {FirebaseComponent} from "../firebase/firebase/firebase.component";
 
 @Component({
   selector: 'app-edit-profile',

@@ -1,11 +1,18 @@
 export class Singer {
   id: number;
+  // tslint:disable-next-line:variable-name
   singer_name: string;
   image: string;
+  description: string;
 
-  constructor(id: number, singer_name: string, image: string) {
-    this.id = id;
+  constructor(
+    // tslint:disable-next-line:variable-name
+    singer_name: string,
+    image: string,
+    description: string
+  ) {
     this.singer_name = singer_name;
     this.image = image;
+    this.description = description;
   }
 }

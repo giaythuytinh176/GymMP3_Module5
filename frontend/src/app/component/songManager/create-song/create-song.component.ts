@@ -1,14 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TokenStorageService} from '../../../auth/token-storage.service';
 import {ToastrService} from 'ngx-toastr';
-import {FirebaseComponent} from '../../firebase/firebase.component';
 import {UpdateInfo} from '../../../model/userManager/updateinfo';
 import {Song} from '../../../model/song/song';
 import {SongService} from '../../../services/song/song.service';
-import {FirebaseMP3Component} from '../../firebaseMP3/firebaseMP3.component';
 import {transition, trigger, useAnimation} from '@angular/animations';
 import {shake} from 'ng-animate';
 import {Album} from 'src/app/model/album/album';
@@ -17,20 +15,16 @@ import {Singer} from '../../../model/singer/singer';
 import {UserService} from '../../../services/userManager/user.service';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-
-export class Singers {
-  constructor(
-    public id: number,
-    // tslint:disable-next-line:variable-name
-    public singer_name: string,
-    public image: string,
-    public selected?: boolean,
-  ) {
-    if (selected === undefined) {
-      this.selected = false;
-    }
-  }
-}
+import {SingerV2} from '../../../model/singer/singerV2';
+import {SingerService} from '../../../services/singer/singer.service';
+import {CategoryService} from '../../../services/category/caterory.service';
+import {MatDialog} from '@angular/material/dialog';
+import {AlbumService} from '../../../services/album/album.service';
+import {CreateCategoryDialogComponent} from '../../category/create-category-dialog/create-category-dialog.component';
+import {DialogCreateAlbumComponent} from '../../album/dialog-create-album/dialog-create-album.component';
+import {DialogCreateSingerComponent} from "../../singer/dialog-create-singer/dialog-create-singer.component";
+import {FirebaseComponent} from "../../firebase/firebase/firebase.component";
+import {FirebaseMP3Component} from "../../firebase/firebaseMP3/firebaseMP3.component";
 
 @Component({
   selector: 'app-create-song',
@@ -53,9 +47,16 @@ export class CreateSongComponent implements OnInit {
   filteredOptionsCategory: Observable<Category[]>;
   filteredOptionsAlbum: Observable<Album[]>;
 
-  selectedSingers: Singers[] = new Array<Singers>();
-  filteredSingers: Observable<Singers[]>;
+  selectedSingers: SingerV2[] = new Array<SingerV2>();
+  filteredSingers: Observable<SingerV2[]>;
   lastFilterSinger = '';
+
+  notFoundCategory = false;
+  notFoundAlbum = false;
+  notFoundSinger = false;
+  toCreateSinger: string;
+  toCreateCategory: string;
+  toCreateAlbum: string;
 
   constructor(private userService: UserService,
               private storage: AngularFireStorage,
@@ -67,6 +68,10 @@ export class CreateSongComponent implements OnInit {
               public firebase: FirebaseComponent,
               public firebaseMP3: FirebaseMP3Component,
               private songService: SongService,
+              private singerService: SingerService,
+              private categoryService: CategoryService,
+              private albumService: AlbumService,
+              public dialog: MatDialog,
   ) {
   }
 
@@ -87,13 +92,13 @@ export class CreateSongComponent implements OnInit {
   filteredOption_singer(): void {
     this.filteredSingers = this.createMusicForm.get('myControl_singer').valueChanges
       .pipe(
-      startWith<string | Singers[]>(''),
-      map(value => typeof value === 'string' ? value : this.lastFilterSinger),
-      map(filter => this.filter_singer(filter))
-    );
+        startWith<string | SingerV2[]>(''),
+        map(value => typeof value === 'string' ? value : this.lastFilterSinger),
+        map(filter => this.filterNameSingerCheck(filter)),
+      );
   }
 
-  filter_singer(filter: string): Singers[] {
+  filter_singer(filter: string): SingerV2[] {
     this.lastFilterSinger = filter;
     if (filter) {
       return this.singers.filter(option => {
@@ -106,7 +111,7 @@ export class CreateSongComponent implements OnInit {
     }
   }
 
-  displayFn_singer(value: Singers[] | string): string | undefined {
+  displayFn_singer(value: SingerV2[] | string): string | undefined {
     let displayValue: string;
     if (Array.isArray(value)) {
       value.forEach((singer, index) => {
@@ -122,13 +127,26 @@ export class CreateSongComponent implements OnInit {
     return displayValue;
   }
 
+  filterNameSingerCheck(filter: any): any {
+    {
+      const filterNameSinger = this.filter_singer(filter);
+      if (filterNameSinger.length === 0) {
+        this.toCreateSinger = filter;
+        this.notFoundSinger = true;
+      } else {
+        this.notFoundSinger = false;
+      }
+      return filterNameSinger;
+    }
+  }
+
   // tslint:disable-next-line:typedef
-  optionClicked(event: Event, singer: Singers): void {
+  optionClicked(event: Event, singer: SingerV2): void {
     event.stopPropagation();
     this.toggleSelection(singer);
   }
 
-  toggleSelection(singer: Singers): void {
+  toggleSelection(singer: SingerV2): void {
     singer.selected = !singer.selected;
     if (singer.selected) {
       this.selectedSingers.push(singer);
@@ -146,13 +164,23 @@ export class CreateSongComponent implements OnInit {
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value?.name),
-        map(name => name ? this._filter_category(name) : this.categories.slice()
-        )
+        map(name => this.filterNameCategoryCheck(name)),
       );
   }
 
   displayFn_category(category: Category): string {
     return category && category.category_name ? category.category_name : '';
+  }
+
+  filterNameCategoryCheck(name: any): any {
+    const filterNameCategory = name ? this._filter_category(name) : this.categories.slice();
+    if (filterNameCategory.length === 0) {
+      this.toCreateCategory = name;
+      this.notFoundCategory = true;
+    } else {
+      this.notFoundCategory = false;
+    }
+    return filterNameCategory;
   }
 
   // Album
@@ -161,13 +189,23 @@ export class CreateSongComponent implements OnInit {
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value?.name),
-        map(name => name ? this._filter_album(name) : this.albums.slice()
-        )
+        map(name => this.filterNameAlbumCheck(name)),
       );
   }
 
   displayFn_album(album: Album): string {
     return album && album.album_name ? album.album_name : '';
+  }
+
+  filterNameAlbumCheck(name: any): any {
+    const filterNameAlbum = name ? this._filter_album(name) : this.albums.slice();
+    if (filterNameAlbum.length === 0) {
+      this.toCreateAlbum = name;
+      this.notFoundAlbum = true;
+    } else {
+      this.notFoundAlbum = false;
+    }
+    return filterNameAlbum;
   }
 
   createForm(): void {
@@ -204,18 +242,94 @@ export class CreateSongComponent implements OnInit {
 
   createSongSubmit(): void {
     if (this.createMusicForm.valid) {
+      console.log(this.createMusicForm.value);
       this.createMusicForm.value.avatarUrl = this.firebase.fb;
       this.createMusicForm.value.mp3Url = this.firebaseMP3.fb;
       this.song = this.createMusicForm.value;
       this.song.category_id = this.createMusicForm.value.myControl_category.id;
       this.song.album_id = this.createMusicForm.value.myControl_album.id;
-      // Stringify to JSon
-      this.song.singer_id = JSON.stringify(this.createMusicForm.value.myControl_singer.map(data => data.id));
-      this.song.user_id = this.userinfo.id;
       // console.log(this.song);
+      this.song.user_id = this.userinfo.id;
 
-      this.createSong(this.song);
+      if (this.createMusicForm.value.myControl_singer instanceof Array) {
+        // Stringify to JSon
+        this.song.singer_id = JSON.stringify(this.createMusicForm.value.myControl_singer.map((data) => {
+          return data.id;
+        }));
+        this.createSong(this.song);
+      } else {
+        this.toastr.warning('The singer field is required or does not exist yet.');
+      }
     }
+  }
+
+  // tslint:disable-next-line:variable-name
+  openDialogSinger(singer_name: string): void {
+    const dialogRef = this.dialog.open(DialogCreateSingerComponent, {
+      width: '456px',
+      data: {
+        singer_name,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('result', result);
+      if (result === undefined) {
+      } else if (result.valid) {
+        this.notFoundSinger = false;
+        this.createMusicForm.get('myControl_singer').reset();
+        this.singerService.getAllSingers().subscribe((res: any) => {
+          this.singers = res.data;
+        });
+      }
+    });
+  }
+
+  // tslint:disable-next-line:variable-name
+  openDialogCategory(category_name: string): void {
+    const dialogRef = this.dialog.open(CreateCategoryDialogComponent, {
+      width: '456px',
+      data: {
+        category_name,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('result', result);
+      if (result === undefined) {
+      } else if (result.valid) {
+        this.notFoundCategory = false;
+        this.createMusicForm.get('myControl_category').reset();
+        this.categoryService.getAllCategories().subscribe((res: any) => {
+          this.categories = res.data;
+        });
+      }
+    });
+  }
+
+  // tslint:disable-next-line:variable-name
+  openDialogAlbum(album_name: string): void {
+    const dialogRef = this.dialog.open(DialogCreateAlbumComponent, {
+      width: '456px',
+      data: {
+        album_name,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('result', result);
+      if (result === undefined) {
+      } else if (result.valid) {
+        this.notFoundAlbum = false;
+        this.createMusicForm.get('myControl_album').reset();
+        this.albumService.getAllAlbum().subscribe((res: any) => {
+          this.albums = res.data;
+        });
+      }
+    });
   }
 
   private _filter_category(name: string): Category[] {

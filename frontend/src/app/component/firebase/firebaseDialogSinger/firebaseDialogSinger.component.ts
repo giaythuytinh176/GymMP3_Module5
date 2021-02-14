@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {finalize, tap} from "rxjs/operators";
-import {AngularFireStorage, AngularFireUploadTask} from "@angular/fire/storage";
-import {AngularFirestore} from "@angular/fire/firestore";
-import {ToastrService} from "ngx-toastr";
+import {finalize, tap} from 'rxjs/operators';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-firebase',
-  templateUrl: './firebase.component.html',
-  styleUrls: ['./firebase.component.scss']
+  templateUrl: './FirebaseDialogSinger.component.html',
+  styleUrls: ['./FirebaseDialogSinger.component.scss']
 })
-export class FirebaseComponent implements OnInit {
-  title = "cloudsSorage";
+export class FirebaseDialogSingerComponent implements OnInit {
+  title = 'cloudsSorage';
   selectedFile: File = null;
   fileToUpload: File = null;
   fb: string;
@@ -46,7 +46,7 @@ export class FirebaseComponent implements OnInit {
 
   // Determines if the upload task is active
   isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
+    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
 
   reset() {
@@ -54,7 +54,7 @@ export class FirebaseComponent implements OnInit {
   }
 
   UploadFile() {
-    var n = Date.now();
+    let n = Date.now();
     const filePath = `RoomsImages/${n}`;
     const fileRef = this.storage.ref(filePath);
     // Totally optional metadata
@@ -65,7 +65,7 @@ export class FirebaseComponent implements OnInit {
     // observe percentage changes
     this.uploadPercent = this.task.percentageChanges();
     this.percentage = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges()
+    this.snapshot = this.task.snapshotChanges();
 
     // get notified when the download URL is available
     this.task
@@ -75,7 +75,7 @@ export class FirebaseComponent implements OnInit {
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe(url => {
             if (url) {
-              this.toastr.success('Uploaded Avatar Successfully!');
+              this.toastr.success('Uploaded Image Successfully!');
               this.fb = url;
             }
             // console.log(this.fb);
@@ -86,7 +86,7 @@ export class FirebaseComponent implements OnInit {
           // console.log(snap)
           if (snap.bytesTransferred === snap.totalBytes) {
             // Update firestore on completion
-            this.db.collection('photos').add({filePath, size: snap.totalBytes})
+            this.db.collection('photos').add({filePath, size: snap.totalBytes});
           }
         })
       )
@@ -127,10 +127,10 @@ export class FirebaseComponent implements OnInit {
         // console.log(snap)
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update firestore on completion
-          this.db.collection('photos').add({path, size: snap.totalBytes})
+          this.db.collection('photos').add({path, size: snap.totalBytes});
         }
       })
-    )
+    );
   }
 
   toggleHover(event: boolean) {

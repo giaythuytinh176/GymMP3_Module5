@@ -56,19 +56,19 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
-import {DialogDeleteMyList, ProfileComponent} from './component/profile/profile.component';
+import {ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
-import {AngularFireStorageModule, } from '@angular/fire/storage';
-import {FirebaseComponent} from './component/firebase/firebase.component';
+import {AngularFireStorageModule,} from '@angular/fire/storage';
 import {LoginComponent} from './component/login/login.component';
-import {FirebaseMP3Component} from './component/firebaseMP3/firebaseMP3.component';
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component';
 import {EditProfileComponent} from './component/edit-profile/edit-profile.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
-import {CreateSongComponent} from './component/songManager/create-song/create-song.component';
+import {
+  CreateSongComponent,
+} from './component/songManager/create-song/create-song.component';
 import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song.component';
 import {CdkDragDropOverviewExampleComponent} from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
 import {environment} from '../environments/environment';
@@ -79,7 +79,17 @@ import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetAlbumsResolver} from './resolver/GetAlbumsResolver';
 import {GetCategoriesResolver} from './resolver/GetCategoriesResolver';
 import {GetSingersResolver} from './resolver/GetSingersResolver';
-import {ActivatedRouteSnapshot} from '@angular/router';
+import {CreatePlaylistComponent} from './component/playlist/create-playlist/create-playlist.component';
+import {DialogCreatePlaylistComponent} from './component/playlist/dialog-create-playlist/dialog-create-playlist.component';
+import {DialogDeleteSongComponent} from './component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component';
+import {CreateCategoryDialogComponent} from './component/category/create-category-dialog/create-category-dialog.component';
+import {DialogCreateAlbumComponent} from './component/album/dialog-create-album/dialog-create-album.component';
+import {DialogCreateSingerComponent} from './component/singer/dialog-create-singer/dialog-create-singer.component';
+import {FirebaseComponent} from './component/firebase/firebase/firebase.component';
+import {FirebaseMP3Component} from './component/firebase/firebaseMP3/firebaseMP3.component';
+import {FirebaseDialogAlbumComponent} from './component/firebase/firebaseDialogAlbum/firebaseDialogAlbum.component';
+import {FirebaseDialogCategoryComponent} from './component/firebase/firebaseDialogCateogry/firebaseDialogCategory.component';
+import {FirebaseDialogSingerComponent} from './component/firebase/firebaseDialogSinger/firebaseDialogSinger.component';
 
 @NgModule({
   declarations: [
@@ -96,10 +106,20 @@ import {ActivatedRouteSnapshot} from '@angular/router';
     UpdateSongComponent,
     SidebarComponent,
     SearchSongComponent,
-    DialogDeleteMyList,
+    DialogDeleteSongComponent,
     EditProfileComponent,
     CdkDragDropOverviewExampleComponent,
     CdkDragDropConnectedSortingGroupExample,
+    DialogCreateSingerComponent,
+    FirebaseDialogSingerComponent,
+    CreateCategoryDialogComponent,
+    FirebaseDialogCategoryComponent,
+    DialogCreateAlbumComponent,
+    FirebaseDialogAlbumComponent,
+    CreatePlaylistComponent,
+    DialogCreatePlaylistComponent,
+    DialogDeleteSongComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -172,6 +192,7 @@ import {ActivatedRouteSnapshot} from '@angular/router';
   providers: [
     FirebaseComponent,
     FirebaseMP3Component,
+    FirebaseDialogSingerComponent,
     LoginComponent,
     GetAllSongsResolver,
     GetUserInfoResolver,
@@ -179,6 +200,11 @@ import {ActivatedRouteSnapshot} from '@angular/router';
     GetAlbumsResolver,
     GetCategoriesResolver,
     GetSingersResolver,
+    FirebaseDialogCategoryComponent,
+    FirebaseDialogAlbumComponent,
+    CreatePlaylistComponent,
+    DialogDeleteSongComponent,
+
   ],
   bootstrap: [
     AppComponent,

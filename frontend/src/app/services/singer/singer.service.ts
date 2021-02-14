@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Singer} from "../../model/singer/singer";
+import {Song} from "../../model/song/song";
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -14,6 +15,7 @@ export class SingerService {
   apiGetAllSingers = environment.apiUrl + '/singer/list';
   apiGetSingerIDBySongID = environment.apiUrl + '/singer/id/song-id';
   apiGetSingerIDBySongIDv2 = environment.apiUrl + '/singer/id/song-id-v2';
+  apiCreateSinger = environment.apiUrl + '/singer/create';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -24,6 +26,10 @@ export class SingerService {
   }
 
   constructor(private http: HttpClient) {
+  }
+
+  createSinger(singer: Singer): Observable<Song> {
+    return this.http.post<Song>(this.apiCreateSinger, singer, this.httpJson);
   }
 
   getSingerIDBySongID(id: number): Observable<any> {

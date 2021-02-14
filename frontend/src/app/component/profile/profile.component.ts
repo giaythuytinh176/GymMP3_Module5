@@ -5,12 +5,13 @@ import {TokenStorageService} from '../../auth/token-storage.service';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {ToastrService} from 'ngx-toastr';
 import {UpdateInfo} from '../../model/userManager/updateinfo';
-import {FirebaseComponent} from '../firebase/firebase.component';
 import {Song} from '../../model/song/song';
 import {SongService} from '../../services/song/song.service';
-import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {UserService} from '../../services/userManager/user.service';
-import {Observable} from 'rxjs';
+import {CreatePlaylistComponent} from '../playlist/create-playlist/create-playlist.component';
+import {DialogDeleteSongComponent} from '../songManager/delete-song/dialog-delete-song/dialog-delete-song.component';
+import {FirebaseComponent} from "../firebase/firebase/firebase.component";
 
 @Component({
   selector: 'app-profile',
@@ -40,6 +41,7 @@ export class ProfileComponent implements OnInit {
               public firebase: FirebaseComponent,
               private songService: SongService,
               public dialog: MatDialog,
+              public createPlaylist: CreatePlaylistComponent,
   ) {
   }
 
@@ -87,15 +89,15 @@ export class ProfileComponent implements OnInit {
   }
 
   // tslint:disable-next-line:variable-name
-  openDialog(id: number, nameSong: string, user_id: number): void {
-    const dialogRef = this.dialog.open(DialogDeleteMyList, {
+  openDialogDeleteSong(id: number, nameSong: string, user_id: number): void {
+    const dialogRef = this.dialog.open(DialogDeleteSongComponent, {
       width: '300px',
       data: {id, nameSong, user_id},
       panelClass: 'custom-dialog',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      console.log('The dialog was closed');
       // this.title = result;
       if (result) {
         this.deleteSong(id, user_id);
@@ -103,36 +105,4 @@ export class ProfileComponent implements OnInit {
       // console.log(result);
     });
   }
-}
-
-@Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'dialog-content-example-dialog',
-  template: `
-    <div mat-dialog-content class="mat-typography">
-      <p>Do you want to delete <strong>{{ data.nameSong }}</strong>?</p>
-    </div>
-    <div mat-dialog-actions>
-      <button mat-raised-button color="accent" [mat-dialog-close]="data.id" cdkFocusInitial>Delete</button>
-      <button mat-stroked-button color="basic" (click)="onNoClick()">Cancel</button>
-    </div>
-  `,
-})
-
-// tslint:disable-next-line:component-class-suffix
-export class DialogDeleteMyList {
-  constructor(
-    public dialogRef: MatDialogRef<DialogDeleteMyList>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
-
-export interface DialogData {
-  id: number;
-  nameSong: string;
-  user_id: number;
 }

@@ -1,0 +1,87 @@
+<!--<div class="dropzone"-->
+<!--     dropzone-->
+<!--     (hovered)="toggleHover($event)"-->
+<!--     (dropped)="startUpload($event)"-->
+<!--     [class.hovering]="isHovering">-->
+<!--  <h3>AngularFire Drop Zone</h3>-->
+<!--  <p>Drag and Drop a File</p>-->
+<!--  <div class="file">-->
+<!--    <label class="file-label">-->
+<!--      <input class="file-input" type="file" (change)="startUpload($event.target.files)">-->
+<!--      <span class="file-cta">-->
+<!--            <span class="file-icon">-->
+<!--              <i class="fa fa-upload"></i>-->
+<!--            </span>-->
+<!--            <span class="file-label">-->
+<!--              or choose a file…-->
+<!--            </span>-->
+<!--          </span>-->
+<!--    </label>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="form-group col-12">
+  <label class="label-input" for="file">
+    <div *ngIf="fileToUpload; else NoSelect">
+      Filename: {{ fileToUpload.name }}
+    </div>
+    <ng-template #NoSelect>
+      Choose File
+    </ng-template>
+    <input #userPhoto (change)="handleFileInput($event)" autocomplete="off"
+           class="form-control"
+           id="file"
+           multiple
+           name="image"
+           type="file"
+    />
+  </label>
+
+  <br>
+  <!--  <button (click)="UploadFile()" mat-icon-button>-->
+  <!--  <mat-icon>arrow_upward</mat-icon>-->
+  <!--  </button>-->
+  <button (click)="UploadFile()" color="primary" mat-raised-button>Submit</button>
+  <br>
+  <!--  <div>{{ uploadPercent | async }}</div>-->
+  <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+
+  <div *ngIf="percentage | async as pct">
+
+    <!--    <progress class="progress is-info"-->
+    <!--              [value]="pct | number"-->
+    <!--              max="100">-->
+    <!--    </progress>-->
+    <br>
+    <!--    <mat-progress-bar mode="determinate" [value]="pct"></mat-progress-bar>-->
+    <div class="col-3">
+      <div class="progress">
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ pct | number }}" class="progress-bar" role="progressbar" style="width: {{ pct | number }}%;">{{ pct | number }}
+          %
+        </div>
+      </div>
+    </div>
+
+    {{ pct | number }}%
+
+  </div>
+
+
+  <div *ngIf="snapshot | async as snap">
+    {{ snap.bytesTransferred }} of {{ snap.totalBytes }}
+
+    <div *ngIf="downloadURL | async as url">
+      <h3>Results!</h3>
+      <!--      <img [src]="url"><br>-->
+      <a [href]="url" rel="noopener" target="_blank">Download Me!</a>
+    </div>
+
+    <br>
+    <button (click)="task.pause()" [disabled]="!isActive(snap)" class="button btn-warning">Pause</button>
+    <button (click)="task.resume()" [disabled]="!(snap?.state === 'paused')" class="button btn-info">Resume</button>
+    <button (click)="task.cancel()" [disabled]="!isActive(snap)" class="button btn-danger">Cancel</button>
+    <button (click)="reset()" class="button btn-reset">Reset</button>
+
+  </div>
+</div>
