@@ -41,19 +41,39 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Singer:</mat-label>
-            <mat-hint>Enter text to find Singer by name</mat-hint>
-            <mat-select [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" [compareWith]="compareWithFunc" class="form-control" formControlName="singer_id" multiple>
-              <!--              <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>-->
-              <!--              [placeholder]="'&#45;&#45; Select an Singer &#45;&#45;'"-->
-              <mat-option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</mat-option>
-            </mat-select>
-            <div *ngIf="updateMusicForm.get('singer_id').invalid && updateMusicForm.get('singer_id').touched"
+            <input [(ngModel)]="singer" type="text" matInput [matAutocomplete]="auto_singer" formControlName="myControl_singer">
+            <mat-hint>Enter text to find singers by name</mat-hint>
+            <mat-autocomplete #auto_singer="matAutocomplete" [displayWith]="displayFn_singer">
+              <mat-option *ngFor="let sger of filteredSingers | async" [value]="selectedSingers">
+                <div (click)="optionClicked($event, sger)">
+                  <mat-checkbox [checked]="sger.selected" (change)="toggleSelection(sger)" (click)="$event.stopPropagation()">
+                    {{ sger.singer_name }}
+                  </mat-checkbox>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+            <div *ngIf="updateMusicForm.get('myControl_singer').invalid && updateMusicForm.get('myControl_singer').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">
               <div [@shake]="shake">
                 Singer is <strong>required.</strong>
               </div>
             </div>
           </mat-form-field>
+          <!--          <mat-form-field appearance="fill" class="example-full-width">-->
+          <!--            <mat-label>Select a Singer:</mat-label>-->
+          <!--            <mat-hint>Enter text to find Singer by name</mat-hint>-->
+          <!--            <mat-select [(ngModel)]="singer_id" [class.input-invalid]="updateMusicForm.get('singer_id')!.invalid && updateMusicForm.get('singer_id')!.touched" [class.input-valid]="updateMusicForm.get('singer_id')!.valid && updateMusicForm.get('singer_id')!.touched" [compareWith]="compareWithFunc" class="form-control" formControlName="singer_id" multiple>-->
+          <!--              &lt;!&ndash;              <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>&ndash;&gt;-->
+          <!--              &lt;!&ndash;              [placeholder]="'&#45;&#45; Select an Singer &#45;&#45;'"&ndash;&gt;-->
+          <!--              <mat-option *ngFor="let singer of singers" [value]="singer.id">{{ singer.singer_name }}</mat-option>-->
+          <!--            </mat-select>-->
+          <!--            <div *ngIf="updateMusicForm.get('singer_id').invalid && updateMusicForm.get('singer_id').touched"-->
+          <!--                 style="margin-top: 10px;color: red; text-align: left !important;">-->
+          <!--              <div [@shake]="shake">-->
+          <!--                Singer is <strong>required.</strong>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </mat-form-field>-->
         </div>
       </div>
 
@@ -64,7 +84,8 @@
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Category:</mat-label>
             <mat-hint>Enter text to find Category by name</mat-hint>
-            <input [(ngModel)]="category" [class.input-invalid]="updateMusicForm.get('myControl_category')!.invalid && updateMusicForm.get('myControl_category')!.touched" [class.input-valid]="updateMusicForm.get('myControl_category')!.valid && updateMusicForm.get('myControl_category')!.touched" [matAutocomplete]="auto_category" class="form-control" formControlName="myControl_category" matInput type="text">
+            <!--            [(ngModel)]="category"-->
+            <input [class.input-invalid]="updateMusicForm.get('myControl_category')!.invalid && updateMusicForm.get('myControl_category')!.touched" [class.input-valid]="updateMusicForm.get('myControl_category')!.valid && updateMusicForm.get('myControl_category')!.touched" [matAutocomplete]="auto_category" class="form-control" formControlName="myControl_category" matInput type="text">
             <mat-autocomplete #auto_category="matAutocomplete" [displayWith]="displayFn_category">
               <mat-option *ngFor="let option of filteredOptionsCategory | async" [value]="option">
                 {{option.category_name}}
@@ -99,7 +120,7 @@
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select an Album:</mat-label>
             <mat-hint>Enter text to find Album by name</mat-hint>
-            <input [(ngModel)]="album" [class.input-invalid]="updateMusicForm.get('myControl_album')!.invalid && updateMusicForm.get('myControl_album')!.touched" [class.input-valid]="updateMusicForm.get('myControl_album')!.valid && updateMusicForm.get('myControl_album')!.touched" [matAutocomplete]="auto_album" class="form-control" formControlName="myControl_album" matInput type="text">
+            <input [class.input-invalid]="updateMusicForm.get('myControl_album')!.invalid && updateMusicForm.get('myControl_album')!.touched" [class.input-valid]="updateMusicForm.get('myControl_album')!.valid && updateMusicForm.get('myControl_album')!.touched" [matAutocomplete]="auto_album" class="form-control" formControlName="myControl_album" matInput type="text">
             <mat-autocomplete #auto_album="matAutocomplete" [displayWith]="displayFn_album">
               <mat-option *ngFor="let option of filteredOptionsAlbum | async" [value]="option">
                 {{option.album_name}}
@@ -161,7 +182,7 @@
           <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
                  formControlName="avatarUrl" id="avatar" type="file"/>
           <br>
-          <input [(ngModel)]="songInfo.avatarUrl" formControlName="old_avatar" type="hidden">
+          <input [(ngModel)]="songInfo.avatarUrl" formControlName="oldAvatar" type="hidden">
           <!--          <div *ngIf="firebase.percentage | async as pct">-->
           <!--            <div *ngIf="pct !== 100">-->
           <div *ngIf="firebase.percentage | async as pct">
@@ -198,7 +219,7 @@
                  formControlName="mp3Url" id="mp3Url" type="file"/>
 
           <br>
-          <input [(ngModel)]="songInfo.mp3Url" formControlName="old_mp3" type="hidden">
+          <input [(ngModel)]="songInfo.mp3Url" formControlName="oldMp3" type="hidden">
           <!--          <div *ngIf="firebaseMP3.percentage | async as pct">-->
           <!--            <div *ngIf="pct !== 100">-->
           <div *ngIf="firebaseMP3.percentage | async as pct">

@@ -7,6 +7,7 @@ use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use function PHPSTORM_META\map;
 
 class SongController extends Controller
 {
@@ -70,6 +71,20 @@ class SongController extends Controller
     {
         $songs = DB::table('songs')->join('categories', 'songs.category_id', '=', 'categories.id')->select('songs.*', 'songs.category_id')->get();
         return response()->json($songs);
+    }
+
+    public function singersInfo($id)
+    {
+        $res = Song::with('singers')->get()->toArray();
+        $data = array_filter($res, function ($row) use ($id) {
+            return $row['id'] === (int)$id;
+        });
+        $data = array_values($data)[0]['singers'];
+        $data = array_map(function ($row) {
+            unset($row['pivot']);
+            return $row;
+        }, $data);
+        return response()->json($data, 200);
     }
 
     public function show($user_id, Request $request, UserController $userController)

@@ -85,7 +85,8 @@ export class CreateSongComponent implements OnInit {
   }
 
   filteredOption_singer(): void {
-    this.filteredSingers = this.createMusicForm.get('myControl_singer').valueChanges.pipe(
+    this.filteredSingers = this.createMusicForm.get('myControl_singer').valueChanges
+      .pipe(
       startWith<string | Singers[]>(''),
       map(value => typeof value === 'string' ? value : this.lastFilterSinger),
       map(filter => this.filter_singer(filter))
@@ -110,9 +111,9 @@ export class CreateSongComponent implements OnInit {
     if (Array.isArray(value)) {
       value.forEach((singer, index) => {
         if (index === 0) {
-          displayValue = singer.id + ' ' + singer.singer_name;
+          displayValue = singer.singer_name; // singer.id + ' ' +
         } else {
-          displayValue += ', ' + singer.id + ' ' + singer.singer_name;
+          displayValue += ', ' + singer.singer_name; // + singer.id + ' '
         }
       });
     } else {
@@ -122,13 +123,12 @@ export class CreateSongComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  optionClicked(event: Event, singer: Singers) {
+  optionClicked(event: Event, singer: Singers): void {
     event.stopPropagation();
     this.toggleSelection(singer);
   }
 
-  // tslint:disable-next-line:typedef
-  toggleSelection(singer: Singers) {
+  toggleSelection(singer: Singers): void {
     singer.selected = !singer.selected;
     if (singer.selected) {
       this.selectedSingers.push(singer);

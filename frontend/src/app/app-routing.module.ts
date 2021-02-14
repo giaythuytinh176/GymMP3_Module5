@@ -21,7 +21,7 @@ import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetSongDetailByIdResolver} from './resolver/GetSongDetailByIdResolver';
 import {GetSingerIDbySongIDResolver} from './resolver/GetSingerIDbySongIDResolver';
 import {GetCategoryInfoByIDResolver} from './resolver/GetCategoryInfoByIDResolver';
-import {GetAllMovedSongsResolver} from "./resolver/GetAllMovedSongsResolver";
+import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
 
 const routes: Routes = [
   {

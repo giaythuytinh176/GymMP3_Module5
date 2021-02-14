@@ -1,16 +1,16 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TokenStorageService} from "../../auth/token-storage.service";
-import {AngularFireStorage} from "@angular/fire/storage";
-import {ToastrService} from "ngx-toastr";
-import {UpdateInfo} from "../../model/userManager/updateinfo";
-import {FirebaseComponent} from "../firebase/firebase.component";
-import {Song} from "../../model/song/song";
-import {SongService} from "../../services/song/song.service";
-import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
-import {UserService} from "../../services/userManager/user.service";
-import {Observable} from "rxjs";
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
+import {TokenStorageService} from '../../auth/token-storage.service';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {ToastrService} from 'ngx-toastr';
+import {UpdateInfo} from '../../model/userManager/updateinfo';
+import {FirebaseComponent} from '../firebase/firebase.component';
+import {Song} from '../../model/song/song';
+import {SongService} from '../../services/song/song.service';
+import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material/dialog';
+import {UserService} from '../../services/userManager/user.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
   avatar: string;
   username: string;
   songs: Song[];
-  allsongs$: Observable<Song[]>;
   isLoading = false;
 
   constructor(private userService: UserService,
@@ -46,30 +45,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    console.log(1);
     this.getUserInfo();
-
     this.songs = this.route.snapshot.data.getSongByUserID;
-
-    // this.getSongDetailById(this.userinfo.id);
-
-  }
-
-  getSongDetailById(id: number): void {
-    this.allsongs$ = this.songService.getSongByUserID(id);
-    // this.songService.getSongByUserID(id).subscribe((data: any) => {
-    //   if (data.status) {
-    //     this.token.signOut();
-    //     this.routes.navigate(['/user/login'])
-    //   } else {
-    console.log(3);
-    this.isLoading = false;
-    //     // console.log(data);
-    //     this.songs = data;
-    //   }
-    // }, error => {
-    //   console.log(error);
-    // });
   }
 
   getUserInfo(): void {
@@ -80,9 +57,9 @@ export class ProfileComponent implements OnInit {
     this.phone = this.userinfo.phone;
     this.avatar = this.userinfo.avatar;
     this.username = this.userinfo.username;
-    console.log(2);
   }
 
+  // tslint:disable-next-line:variable-name
   deleteSong(id: number, user_id: number): void {
     this.songService.deleteSong(id, user_id).subscribe(
       data => {
@@ -94,12 +71,12 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  getSongByUserID() {
+  getSongByUserID(): void {
     this.songService.getSongByUserID(this.userinfo.id)
       .subscribe((data: any) => {
         if (data.status) {
           this.token.signOut();
-          this.routes.navigate(['/user/login'])
+          this.routes.navigate(['/user/login']);
         } else {
           // console.log(data);
           this.songs = data;
@@ -109,6 +86,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:variable-name
   openDialog(id: number, nameSong: string, user_id: number): void {
     const dialogRef = this.dialog.open(DialogDeleteMyList, {
       width: '300px',
@@ -128,6 +106,7 @@ export class ProfileComponent implements OnInit {
 }
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'dialog-content-example-dialog',
   template: `
     <div mat-dialog-content class="mat-typography">
@@ -140,6 +119,7 @@ export class ProfileComponent implements OnInit {
   `,
 })
 
+// tslint:disable-next-line:component-class-suffix
 export class DialogDeleteMyList {
   constructor(
     public dialogRef: MatDialogRef<DialogDeleteMyList>,

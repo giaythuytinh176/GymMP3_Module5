@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../../../services/category/caterory.service';
 import {SingerService} from '../../../services/singer/singer.service';
 import {AlbumService} from '../../../services/album/album.service';
@@ -15,10 +15,23 @@ import {transition, trigger, useAnimation} from '@angular/animations';
 import {shake} from 'ng-animate';
 import {Album} from 'src/app/model/album/album';
 import {Category} from '../../../model/category/category';
-import {Singer} from '../../../model/singer/singer';
 import {UserService} from '../../../services/userManager/user.service';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {map, startWith, tap} from 'rxjs/operators';
+
+export class Singers {
+  constructor(
+    public id: number,
+    // tslint:disable-next-line:variable-name
+    public singer_name: string,
+    public image: string,
+    public selected?: boolean,
+  ) {
+    if (selected === undefined) {
+      this.selected = false;
+    }
+  }
+}
 
 @Component({
   selector: 'app-update-song',
@@ -38,17 +51,17 @@ export class UpdateSongComponent implements OnInit {
 
   albums: Album[];
   categories: Category[];
-  singers: Singer[];
+  singers: Singers[];
 
   song: Song;
-  singer_id: any;
+  singer: any;
   album: any;
   category: any;
 
   avatarUrl: any;
   mp3Url: any;
-  old_avatar = '';
-  old_mp3 = '';
+  oldAvatar = '';
+  oldMp3 = '';
 
   id: number;
   nameSong: any;
@@ -59,6 +72,10 @@ export class UpdateSongComponent implements OnInit {
 
   songInfo: Song;
   isLoading = false;
+
+  selectedSingers: Singers[] = new Array<Singers>();
+  filteredSingers: Observable<Singers[]>;
+  lastFilterSinger = '';
 
   constructor(private songService: SongService,
               private router: Router,
@@ -79,16 +96,27 @@ export class UpdateSongComponent implements OnInit {
     this.isLoading = true;
     this.updateForm();
 
+    this.filteredOption_category();
+    this.filteredOption_album();
+    this.filteredOption_singer();
+    this.singer = this.route.snapshot.data.getSingerIDbySongID;
+
     this.id = +this.route.snapshot.paramMap.get('id');
     this.songInfo = this.route.snapshot.data.getSongDetailById;
     this.albums = this.route.snapshot.data.getAlbums.data;
     this.categories = this.route.snapshot.data.getCategories.data;
     this.singers = this.route.snapshot.data.getSingers.data;
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
-    this.singer_id = this.route.snapshot.data.getSingerIDbySongID;
-
-    this.filteredOption_category();
-    this.filteredOption_album();
+    // filter checkbox by TAM LE
+    this.singers = this.singers.filter((sger) => {
+      sger.selected = !!this.singer.find(e => e.id === sger.id);
+      return sger;
+    });
+    for (const sg of this.singers) {
+      if (sg.selected) {
+        this.selectedSingers.push(sg);
+      }
+    }
 
     this.getSongDetailById();
   }
@@ -101,12 +129,68 @@ export class UpdateSongComponent implements OnInit {
       views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       avatarUrl: [''],
       mp3Url: [''],
+      oldAvatar: [this.oldAvatar],
+      oldMp3: [this.oldMp3],
       myControl_category: ['', Validators.required],
       myControl_album: ['', Validators.required],
-      singer_id: ['', [Validators.required]],
-      old_avatar: [this.old_avatar],
-      old_mp3: [this.old_mp3],
+      myControl_singer: ['', [Validators.required]],
     });
+  }
+
+  filteredOption_singer(): void {
+    this.filteredSingers = this.updateMusicForm.get('myControl_singer').valueChanges
+      .pipe(
+        startWith<string | Singers[]>(''),
+        map(value => typeof value === 'string' ? value : this.lastFilterSinger),
+        map(filter => this.filter_singer(filter)),
+        // tap(() => this.updateMusicForm.get('myControl_singer').setValue(this.singer)) // Set Default value- Error for this
+      );
+  }
+
+  filter_singer(filter: string): Singers[] {
+    this.lastFilterSinger = filter;
+    if (filter) {
+      return this.singers.filter(option => {
+        return option.singer_name.toLowerCase().indexOf(filter.toLowerCase()) >= 0
+          // || option.image.toLowerCase().indexOf(filter.toLowerCase()) >= 0
+          ;
+      });
+    } else {
+      return this.singers.slice();
+    }
+  }
+
+  displayFn_singer(value: Singers[] | string): string | undefined {
+    let displayValue: string;
+    if (Array.isArray(value)) {
+      value.forEach((singer, index) => {
+        if (index === 0) {
+          displayValue = singer.singer_name; // singer.id + ' ' +
+        } else {
+          displayValue += ', ' + singer.singer_name; // + singer.id + ' '
+        }
+      });
+    } else {
+      displayValue = value;
+    }
+    return displayValue;
+  }
+
+  optionClicked(event: Event, singer: Singers): void {
+    event.stopPropagation();
+    this.toggleSelection(singer);
+  }
+
+  toggleSelection(singer: Singers): void {
+    singer.selected = !singer.selected;
+    if (singer.selected) {
+      this.selectedSingers.push(singer);
+    } else {
+      // value.id === singer.id &&  && value.image === singer.image
+      const i = this.selectedSingers.findIndex(value => value.id === singer.id);
+      this.selectedSingers.splice(i, 1);
+    }
+    this.updateMusicForm.get('myControl_singer').setValue(this.selectedSingers);
   }
 
   // Category
@@ -115,8 +199,8 @@ export class UpdateSongComponent implements OnInit {
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value?.name),
-        map(name => name ? this._filter_category(name) : this.categories.slice()
-        )
+        map(name => name ? this._filter_category(name) : this.categories.slice()),
+        tap(() => this.updateMusicForm.get('myControl_category').setValue(this.category)) // Set Default value
       );
   }
 
@@ -130,8 +214,8 @@ export class UpdateSongComponent implements OnInit {
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value?.name),
-        map(name => name ? this._filter_album(name) : this.albums.slice()
-        )
+        map(name => name ? this._filter_album(name) : this.albums.slice()),
+        tap(() => this.updateMusicForm.get('myControl_album').setValue(this.album)) // Set Default value
       );
   }
 
@@ -142,7 +226,6 @@ export class UpdateSongComponent implements OnInit {
   getCategoryInfo(id: number): void {
     this.categoryService.getCategoryInfo(id).subscribe((res: any) => {
         this.category = res;
-        console.log(2);
         this.isLoading = false;
       }, (error: any) => console.log(error)
     );
@@ -151,8 +234,6 @@ export class UpdateSongComponent implements OnInit {
   getAlbumInfo(id: number): void {
     this.albumService.getAlbumInfo(id).subscribe((res: any) => {
         this.album = res;
-        console.log(1);
-        // this.isLoading = false;
       }, (error: any) => console.log(error)
     );
   }
@@ -165,8 +246,8 @@ export class UpdateSongComponent implements OnInit {
     this.views = songDetailById.views;
     this.avatarUrl = songDetailById.avatarUrl;
     this.mp3Url = songDetailById.mp3Url;
-    this.old_mp3 = songDetailById.mp3Url;
-    this.old_avatar = songDetailById.avatarUrl;
+    this.oldMp3 = songDetailById.mp3Url;
+    this.oldAvatar = songDetailById.avatarUrl;
 
     this.getAlbumInfo(songDetailById.album_id);
     this.getCategoryInfo(songDetailById.category_id);
@@ -207,12 +288,12 @@ export class UpdateSongComponent implements OnInit {
 
     // get OLD value
     if (!this.updateMusicForm.value.avatarUrl) {
-      this.song.avatarUrl = this.old_avatar;
+      this.song.avatarUrl = this.oldAvatar;
     } else {
       this.song.avatarUrl = this.updateMusicForm.value.avatarUrl;
     }
     if (!this.updateMusicForm.value.mp3Url) {
-      this.song.mp3Url = this.old_mp3;
+      this.song.mp3Url = this.oldMp3;
     } else {
       this.song.mp3Url = this.updateMusicForm.value.mp3Url;
     }
@@ -220,7 +301,7 @@ export class UpdateSongComponent implements OnInit {
     this.song.category_id = this.updateMusicForm.value.myControl_category.id;
     this.song.album_id = this.updateMusicForm.value.myControl_album.id;
     // stringify to JSON
-    this.song.singer_id = JSON.stringify(this.updateMusicForm.value.singer_id);
+    this.song.singer_id = JSON.stringify(this.updateMusicForm.value.myControl_singer.map(data => data.id));
     // console.log(this.song);
 
     this.updateSong(this.song, this.id);

@@ -13,6 +13,7 @@ export class SingerService {
 
   apiGetAllSingers = environment.apiUrl + '/singer/list';
   apiGetSingerIDBySongID = environment.apiUrl + '/singer/id/song-id';
+  apiGetSingerIDBySongIDv2 = environment.apiUrl + '/singer/id/song-id-v2';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -27,6 +28,10 @@ export class SingerService {
 
   getSingerIDBySongID(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiGetSingerIDBySongID}/${id}`, this.httpJson);
+  }
+
+  getSingerIDBySongIDv2(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiGetSingerIDBySongIDv2}/${id}`, this.httpJson);
   }
 
   getAllSingers(): Observable<Singer[]> {

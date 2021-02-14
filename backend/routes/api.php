@@ -74,6 +74,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::prefix('singer')->group(function () {
         Route::get('/list', 'SingerController@index');
         Route::get('/id/song-id/{id}', 'SongController@findSingerIDBySongID');
+        Route::get('/id/song-id-v2/{id}', 'SongController@singersInfo');
         // for test
         Route::get('/name/song-id/{id}', 'SongController@findSingerBySongID');
 
