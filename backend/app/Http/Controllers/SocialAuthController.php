@@ -27,13 +27,19 @@ class SocialAuthController extends Controller
             $socialite = Socialite::driver($social)->stateless()->user();
         }
 
-        $user = SocialAccountService::createOrGetUser($socialite, $social);
-        if ($user['error']) {
-            return redirect()->to('http://localhost:4200/#/user/login-facebook?error=' . ($user['error']));
+        $data = SocialAccountService::createOrGetUser($socialite, $social);
+        if (!empty($data['error'])) {
+            return redirect()->to('http://localhost:4200/#/user/login-facebook?error=' . ($data['error']));
         } else {
-            auth()->login($user);
-            $token = JWTAuth::fromUser($user);
-            return redirect()->to('http://localhost:4200/#/user/login-facebook?token=' . ($token));
+            // auth()->login($data['data']);
+            $token = JWTAuth::fromUser($data['data']);
+            if (!empty($data['status'])) {
+                if ($data['status'] == 'login') {
+                    return redirect()->to('http://localhost:4200/#/user/login-facebook?token=' . ($token) . '&action=login');
+                } else if ($data['status'] == 'register') {
+                    return redirect()->to('http://localhost:4200/#/user/login-facebook?token=' . ($token) . '&action=register');
+                }
+            }
         }
     }
 }

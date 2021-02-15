@@ -13,6 +13,7 @@ import {ToastrService} from "ngx-toastr";
 export class LoginSocialComponent implements OnInit {
   token: string;
   error: string;
+  action: string;
 
   constructor(
     private router: ActivatedRoute,
@@ -23,8 +24,10 @@ export class LoginSocialComponent implements OnInit {
   ) {
     this.token = this.router.snapshot.queryParamMap.get('token');
     this.error = this.router.snapshot.queryParamMap.get('error');
+    this.action = this.router.snapshot.queryParamMap.get('action');
     console.log('token', this.token);
     console.log('error', this.error);
+    console.log('action', this.action);
   }
 
   goToLoginUrlFacebook(): void {
@@ -39,7 +42,11 @@ export class LoginSocialComponent implements OnInit {
         window.location.reload();
       }, 1111);
       this.route.navigate(['/browse']);
-      this.toasrt.success('Login successfully.');
+      if (this.action === 'login') {
+        this.toasrt.success('Login successfully.');
+      } else if (this.action === 'register') {
+        this.toasrt.success('Register successfully.');
+      }
     } else if (this.error) {
       this.toasrt.warning(this.error);
       this.route.navigate(['/user/signup']);

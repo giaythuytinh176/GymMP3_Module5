@@ -17,7 +17,7 @@ class SocialAccountService
             ->first();
 
         if ($account) {
-            return $account->user;
+            return ['status' => 'login', 'data' => $account->user];
         } else {
             $email = $providerUser->getEmail() ?? $providerUser->getNickname();
             $username = substr($email, 0, strrpos($email, '@'));
@@ -35,9 +35,11 @@ class SocialAccountService
                     'email' => $email,
                     'password' => Hash::make('codegym'),
                 ]);
+                return ['status' => 'register', 'data' => $emailToCheck];
+            } else if ($emailToCheck) {
                 $account->user()->associate($emailToCheck);
                 $account->save();
-                return $emailToCheck;
+                return ['status' => 'login', 'data' => $emailToCheck];
             } else {
                 return ['error' => 'Username or Email already exists!'];
             }
