@@ -20,10 +20,12 @@ export class CreatePlaylistComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogPlaylist(user_id: number): void {
     const dialogRef = this.dialog.open(DialogCreatePlaylistComponent, {
-      width: '456px',
+      width: '15%',
+      height: '35%',
       data: {
         user_id,
-      }
+      },
+      // panelClass: 'model-background',
     });
 
     dialogRef.afterClosed().subscribe(result => {

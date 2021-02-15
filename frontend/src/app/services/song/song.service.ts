@@ -16,7 +16,8 @@ export class SongService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token
+      'Authorization': 'Bearer ' + this.token,
+      'Access-Control-Allow-Origin': '*',
     })
   };
   private API_URL_CREATE = environment.apiUrl + '/song/create';
@@ -81,7 +82,8 @@ export class SongService {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.token
+        'Authorization': 'Bearer ' + this.token,
+        'Access-Control-Allow-Origin': '*',
       }),
       body: {
         user_id: user_id,
@@ -94,7 +96,8 @@ export class SongService {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.token
+        'Authorization': 'Bearer ' + this.token,
+        'Access-Control-Allow-Origin': '*',
       }),
       body: {
         user_id: user_id,

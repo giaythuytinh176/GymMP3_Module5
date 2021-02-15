@@ -11,7 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {UserService} from '../../services/userManager/user.service';
 import {CreatePlaylistComponent} from '../playlist/create-playlist/create-playlist.component';
 import {DialogDeleteSongComponent} from '../songManager/delete-song/dialog-delete-song/dialog-delete-song.component';
-import {FirebaseComponent} from "../firebase/firebase/firebase.component";
+import {FirebaseComponent} from '../firebase/firebase/firebase.component';
 
 @Component({
   selector: 'app-profile',

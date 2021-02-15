@@ -263,10 +263,21 @@ export class CreateSongComponent implements OnInit {
     }
   }
 
+  private _filter_category(name: string): Category[] {
+    const filterValue = name.toLowerCase();
+    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
+  }
+
+  private _filter_album(name: string): Album[] {
+    const filterValue = name.toLowerCase();
+    return this.albums.filter(option => option.album_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
+  }
+
   // tslint:disable-next-line:variable-name
   openDialogSinger(singer_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateSingerComponent, {
-      width: '456px',
+      width: '15%',
+      height: '40%',
       data: {
         singer_name,
       }
@@ -289,7 +300,8 @@ export class CreateSongComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogCategory(category_name: string): void {
     const dialogRef = this.dialog.open(CreateCategoryDialogComponent, {
-      width: '456px',
+      width: '15%',
+      height: '30%',
       data: {
         category_name,
       }
@@ -312,7 +324,8 @@ export class CreateSongComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogAlbum(album_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateAlbumComponent, {
-      width: '456px',
+      width: '15%',
+      height: '30%',
       data: {
         album_name,
       }
@@ -330,15 +343,5 @@ export class CreateSongComponent implements OnInit {
         });
       }
     });
-  }
-
-  private _filter_category(name: string): Category[] {
-    const filterValue = name.toLowerCase();
-    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
-  }
-
-  private _filter_album(name: string): Album[] {
-    const filterValue = name.toLowerCase();
-    return this.albums.filter(option => option.album_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
   }
 }

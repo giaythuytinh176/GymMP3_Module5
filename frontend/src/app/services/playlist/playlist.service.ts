@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Playlist} from "../../model/playlist/playlist";
+import {Playlist} from '../../model/playlist/playlist';
 import {Observable} from "rxjs";
 
 const TOKEN_KEY = 'AuthToken';
@@ -18,7 +18,8 @@ export class PlaylistService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token
+      'Authorization': 'Bearer ' + this.token,
+      'Access-Control-Allow-Origin': '*',
     })
   };
 

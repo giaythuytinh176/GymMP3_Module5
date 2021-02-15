@@ -78,8 +78,10 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     // console.log(this.loginForm);
     if (this.loginForm.value.password.length < 6) {
+      this.isLoading = false;
       this.toasrt.warning('Password is too short.');
     } else if (this.loginForm.value.password.length > 8) {
+      this.isLoading = false;
       this.toasrt.warning('Password is too long.');
     } else {
       this.loginInfo = new LoginInfo(

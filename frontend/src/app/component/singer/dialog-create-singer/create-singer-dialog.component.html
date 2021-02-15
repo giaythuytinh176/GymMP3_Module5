@@ -71,8 +71,8 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button (click)="onNoClick()" mat-button mat-dialog-close>Cancel</button>
-  <button (click)="createSingerSubmit()" [disabled]="!createSingerDialogForm.valid" [mat-dialog-close]="createSingerDialogForm" cdkFocusInitial mat-button>
+  <button (click)="onNoClick()" mat-raised-button mat-dialog-close>Cancel</button>
+  <button (click)="createSingerSubmit()" [disabled]="!createSingerDialogForm.valid" [mat-dialog-close]="createSingerDialogForm" cdkFocusInitial mat-raised-button>
     Add
   </button>
 </mat-dialog-actions>

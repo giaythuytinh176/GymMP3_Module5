@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {UpdateInfo} from "../../model/userManager/updateinfo";
+import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {UpdateInfo} from '../../model/userManager/updateinfo';
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -14,7 +14,8 @@ export class UserService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token
+      Authorization: 'Bearer ' + this.token,
+      'Access-Control-Allow-Origin': '*',
     })
   };
   private getUserUrl = environment.apiUrl + '/user/token';
@@ -26,7 +27,7 @@ export class UserService {
   }
 
   removeToken(token: string): Observable<any> {
-    return this.http.post<any>(`${this.apiRemoveToken}`, {token: token});
+    return this.http.post<any>(`${this.apiRemoveToken}`, {token});
   }
 
   updateUser(data: any, id: number): Observable<any> {
@@ -38,6 +39,6 @@ export class UserService {
   }
 
   checkExistUser(username: string): Observable<any> {
-    return this.http.post<UpdateInfo>(this.apiCheckExistUserUrl, {username: username});
+    return this.http.post<UpdateInfo>(this.apiCheckExistUserUrl, {username});
   }
 }

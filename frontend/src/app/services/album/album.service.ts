@@ -21,7 +21,8 @@ export class AlbumService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token
+      'Authorization': 'Bearer ' + this.token,
+      'Access-Control-Allow-Origin': '*',
     })
   }
 

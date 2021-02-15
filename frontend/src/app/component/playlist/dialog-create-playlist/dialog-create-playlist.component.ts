@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ToastrService} from 'ngx-toastr';
@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../auth/token-storage.service';
 import {Playlist} from '../../../model/playlist/playlist';
 import {PlaylistService} from '../../../services/playlist/playlist.service';
-import {transition, trigger, useAnimation} from "@angular/animations";
+import {transition, trigger, useAnimation} from '@angular/animations';
 import {shake} from 'ng-animate';
 
 @Component({
@@ -23,6 +23,7 @@ export class DialogCreatePlaylistComponent implements OnInit {
   shake: any;
   playlist: Playlist;
   user_id: number;
+  // @Input('cdkTextareaAutosize') enabled = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogCreatePlaylistComponent>,

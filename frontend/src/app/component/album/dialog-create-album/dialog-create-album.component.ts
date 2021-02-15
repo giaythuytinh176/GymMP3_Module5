@@ -8,7 +8,7 @@ import {Album} from '../../../model/album/album';
 import {AlbumService} from '../../../services/album/album.service';
 import {transition, trigger, useAnimation} from '@angular/animations';
 import {shake} from 'ng-animate';
-import {FirebaseDialogAlbumComponent} from "../../firebase/firebaseDialogAlbum/firebaseDialogAlbum.component";
+import {FirebaseDialogAlbumComponent} from '../../firebase/firebaseDialogAlbum/firebaseDialogAlbum.component';
 
 @Component({
   selector: 'app-dialog-create-album',
