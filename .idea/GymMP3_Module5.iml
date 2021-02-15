@@ -114,6 +114,8 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/routing" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/translation" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/sebastian/lines-of-code" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/league/oauth1-client" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/laravel/socialite" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

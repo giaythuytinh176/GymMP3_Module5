@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://127.0.0.1:8000/api',
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  apiLoginFacebookSocial: 'http://127.0.0.1:8000/redirect/facebook',
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig: {
     // Tam

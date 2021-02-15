@@ -12,12 +12,13 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from 'src/app/auth/auth.service';
 import {SignupInfo} from 'src/app/auth/signup-info';
-import {ErrorStateMatcher} from "@angular/material/core";
-import {transition, trigger, useAnimation} from "@angular/animations";
-import {shake} from "ng-animate";
-import {UserService} from "../../services/userManager/user.service";
-import {Subject} from "rxjs";
-import {concatMap, debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
+import {ErrorStateMatcher} from '@angular/material/core';
+import {transition, trigger, useAnimation} from '@angular/animations';
+import {shake} from 'ng-animate';
+import {UserService} from '../../services/userManager/user.service';
+import {Subject} from 'rxjs';
+import {concatMap, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {LoginSocialComponent} from "../login-social/login-social.component";
 
 @Component({
   selector: 'app-register',
@@ -43,6 +44,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
               private toastr: ToastrService,
               private fb: FormBuilder,
               private userService: UserService,
+              public loginSocial: LoginSocialComponent,
   ) {
   }
 
@@ -59,7 +61,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
     }, {validators: this.checkPasswords});
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // this.check$.pipe(
     //   //throttleTime(300),
     //   debounceTime(300),
@@ -100,9 +102,10 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     const password = group.get('password').value;
     const password_confirmation = group.get('password_confirmation').value;
-    return password === password_confirmation ? null : {passwordnotmatch: true}
+    return password === password_confirmation ? null : {passwordnotmatch: true};
   }
 
+  // tslint:disable-next-line:typedef
   comparePassword(c: AbstractControl) {
     const v = c.value;
     return (v.password === v.password_confirmation) ? null : {
@@ -115,7 +118,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
       (data: any) => {
         // console.log(data);
         if (data.error || data.status) {
-          this.toastr.warning('Something wrong.')
+          this.toastr.warning('Something wrong.');
           setTimeout(() => {
             window.location.reload();
           }, 1000);
@@ -133,7 +136,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
         } else if ((JSON.parse(err.error)).phone == 'The phone has already been taken.') {
           this.toastr.warning('The phone already exists!');
         } else {
-          this.toastr.warning('Something wrong.')
+          this.toastr.warning('Something wrong.');
         }
       }
     );

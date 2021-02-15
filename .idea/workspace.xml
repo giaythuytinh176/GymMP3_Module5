@@ -2,30 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/GymMP3_Module5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GymMP3_Module5.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/album/dialog-create-album/dialog-create-album.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/album/dialog-create-album/dialog-create-album.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/album/dialog-create-album/dialog-create-album.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/album/dialog-create-album/dialog-create-album.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/category/create-category-dialog/create-category-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/category/create-category-dialog/create-category-dialog.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/login/login.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/playlist/create-playlist/create-playlist.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/create-playlist/create-playlist.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/playlist/create-playlist/create-playlist.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/create-playlist/create-playlist.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/playlist/dialog-create-playlist/dialog-create-playlist.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/dialog-create-playlist/dialog-create-playlist.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/playlist/dialog-create-playlist/dialog-create-playlist.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/dialog-create-playlist/dialog-create-playlist.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/playlist/dialog-create-playlist/dialog-create-playlist.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/dialog-create-playlist/dialog-create-playlist.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/singer/dialog-create-singer/create-singer-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/singer/dialog-create-singer/create-singer-dialog.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/album/album.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/album/album.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/category/caterory.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/category/caterory.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/playlist/playlist.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/playlist/playlist.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/singer/singer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/singer/singer.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/song/song.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/song/song.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/userManager/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/userManager/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/css/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/css/styles/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,6 +162,8 @@
       <path value="$PROJECT_DIR$/backend/vendor/symfony/routing" />
       <path value="$PROJECT_DIR$/backend/vendor/symfony/translation" />
       <path value="$PROJECT_DIR$/backend/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/backend/vendor/league/oauth1-client" />
+      <path value="$PROJECT_DIR$/backend/vendor/laravel/socialite" />
     </include_path>
   </component>
   <component name="ProjectId" id="1oIttfUGti9RRfnFPvMhzgqBOi3" />
@@ -240,7 +234,7 @@
       <workItem from="1613361707446" duration="2401000" />
       <workItem from="1613377315509" duration="477000" />
       <workItem from="1613392893641" duration="4171000" />
-      <workItem from="1613414435233" duration="369000" />
+      <workItem from="1613414435233" duration="6106000" />
     </task>
     <task id="LOCAL-00001" summary="tesing dragdrop6">
       <created>1612986188568</created>

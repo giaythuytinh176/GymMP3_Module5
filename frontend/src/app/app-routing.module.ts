@@ -20,8 +20,8 @@ import {GetUserInfoResolver} from './resolver/GetUserInfoResolver';
 import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetSongDetailByIdResolver} from './resolver/GetSongDetailByIdResolver';
 import {GetSingerIDbySongIDResolver} from './resolver/GetSingerIDbySongIDResolver';
-import {GetCategoryInfoByIDResolver} from './resolver/GetCategoryInfoByIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
+import {LoginSocialComponent} from './component/login-social/login-social.component';
 
 const routes: Routes = [
   {
@@ -34,6 +34,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'login-facebook',
+        component: LoginSocialComponent,
       },
       {
         path: 'change-password',

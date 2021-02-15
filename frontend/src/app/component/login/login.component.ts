@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {transition, trigger, useAnimation} from '@angular/animations';
 import {shake} from 'ng-animate';
 import {TokenStorageService} from '../../auth/token-storage.service';
+import {LoginSocialComponent} from '../login-social/login-social.component';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
               private tokenStorage: TokenStorageService,
               public toasrt: ToastrService,
               private fb: FormBuilder,
+              public loginSocial: LoginSocialComponent,
   ) {
   }
 
