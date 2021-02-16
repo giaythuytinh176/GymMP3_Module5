@@ -9,7 +9,7 @@ import {transition, trigger, useAnimation} from '@angular/animations';
 import {shake} from 'ng-animate';
 import {UserService} from '../../services/userManager/user.service';
 import {Observable} from 'rxjs';
-import {FirebaseComponent} from '../firebase/firebase/firebase.component';
+import {FirebaseEditProfileComponent} from '../firebase/firebaseEditProfile/firebaseEditProfile.component';
 
 @Component({
   selector: 'app-edit-profile',
@@ -41,7 +41,7 @@ export class EditProfileComponent implements OnInit {
               private fb: FormBuilder,
               private token: TokenStorageService,
               private toastr: ToastrService,
-              public firebase: FirebaseComponent,
+              public firebaseEditProfile: FirebaseEditProfileComponent,
   ) {
   }
 
@@ -93,7 +93,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   updateUser() {
-    this.profileForm.value.avatar = this.firebase.fb;
+    this.profileForm.value.avatar = this.firebaseEditProfile.fb;
     this.profileForm.value.username = this.userinfo.username;
     this.profileForm.value.id = this.userinfo.id;
     if ((this.profileForm.value.avatar === '') && (this.profileForm.value.old_avatar === '')) {

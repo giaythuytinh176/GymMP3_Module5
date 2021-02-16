@@ -23,8 +23,8 @@ import {AlbumService} from '../../../services/album/album.service';
 import {CreateCategoryDialogComponent} from '../../category/create-category-dialog/create-category-dialog.component';
 import {DialogCreateAlbumComponent} from '../../album/dialog-create-album/dialog-create-album.component';
 import {DialogCreateSingerComponent} from '../../singer/dialog-create-singer/dialog-create-singer.component';
-import {FirebaseComponent} from '../../firebase/firebase/firebase.component';
 import {FirebaseMP3Component} from '../../firebase/firebaseMP3/firebaseMP3.component';
+import {FirebaseCreateSongComponent} from '../../firebase/firebaseCreateSong/firebaseCreateSong.component';
 
 @Component({
   selector: 'app-create-song',
@@ -65,8 +65,8 @@ export class CreateSongComponent implements OnInit {
               private fb: FormBuilder,
               private token: TokenStorageService,
               private toastr: ToastrService,
-              public firebase: FirebaseComponent,
-              public firebaseMP3: FirebaseMP3Component,
+              public firebaseCreateSong: FirebaseCreateSongComponent,
+              public firebaseMP3CreateSong: FirebaseMP3Component,
               private songService: SongService,
               private singerService: SingerService,
               private categoryService: CategoryService,
@@ -243,8 +243,8 @@ export class CreateSongComponent implements OnInit {
   createSongSubmit(): void {
     if (this.createMusicForm.valid) {
       console.log(this.createMusicForm.value);
-      this.createMusicForm.value.avatarUrl = this.firebase.fb;
-      this.createMusicForm.value.mp3Url = this.firebaseMP3.fb;
+      this.createMusicForm.value.avatarUrl = this.firebaseCreateSong.fb;
+      this.createMusicForm.value.mp3Url = this.firebaseMP3CreateSong.fb;
       this.song = this.createMusicForm.value;
       this.song.category_id = this.createMusicForm.value.myControl_category.id;
       this.song.album_id = this.createMusicForm.value.myControl_album.id;

@@ -199,13 +199,13 @@
         <!--        <div class="col-sm-3 form-control-label text-muted">Image:</div>-->
         <div class="col-sm-6">
           <mat-label>Image:</mat-label>
-          <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
+          <input (change)="firebaseUpdateSong.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
                  formControlName="avatarUrl" id="avatar" type="file"/>
           <br>
           <input [(ngModel)]="songInfo.avatarUrl" formControlName="oldAvatar" type="hidden">
-          <!--          <div *ngIf="firebase.percentage | async as pct">-->
+          <!--          <div *ngIf="firebaseUpdateSong.percentage | async as pct">-->
           <!--            <div *ngIf="pct !== 100">-->
-          <div *ngIf="firebase.percentage | async as pct">
+          <div *ngIf="firebaseUpdateSong.percentage | async as pct">
             <div class="col-12">
               <div class="progress">
                 <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100" aria-valuemin="0"
@@ -223,10 +223,10 @@
             </div>
           </div>
         </div>
-        <div *ngIf="firebase.fb as url" class="col-sm-2">
-          <img [src]="firebase.fb" class="img-thumbnail img-fluid"><br>
+        <div *ngIf="firebaseUpdateSong.fb as url" class="col-sm-2">
+          <img [src]="firebaseUpdateSong.fb" class="img-thumbnail img-fluid"><br>
         </div>
-        <div *ngIf="!firebase.fb && songInfo.avatarUrl" class="col-sm-2">
+        <div *ngIf="!firebaseUpdateSong.fb && songInfo.avatarUrl" class="col-sm-2">
           <img [src]="songInfo.avatarUrl" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
         </div>
       </div>
@@ -235,14 +235,14 @@
         <!--        <div class="col-sm-3 form-control-label text-muted">Mp3:</div>-->
         <div class="col-sm-6">
           <mat-label>Mp3:</mat-label>
-          <input (change)="firebaseMP3.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control"
+          <input (change)="firebaseMP3UpdateSong.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control"
                  formControlName="mp3Url" id="mp3Url" type="file"/>
 
           <br>
           <input [(ngModel)]="songInfo.mp3Url" formControlName="oldMp3" type="hidden">
-          <!--          <div *ngIf="firebaseMP3.percentage | async as pct">-->
+          <!--          <div *ngIf="firebaseMP3UpdateSong.percentage | async as pct">-->
           <!--            <div *ngIf="pct !== 100">-->
-          <div *ngIf="firebaseMP3.percentage | async as pct">
+          <div *ngIf="firebaseMP3UpdateSong.percentage | async as pct">
             <div class="col-12">
               <div class="progress">
                 <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100" aria-valuemin="0"
@@ -260,13 +260,13 @@
           </div>
         </div>
 
-        <div *ngIf="firebaseMP3.fb as urlMp3" class="col-sm-6">
+        <div *ngIf="firebaseMP3UpdateSong.fb as urlMp3" class="col-sm-6">
           <audio class="playlist" controls="controls" id="audio" style="width:100%">
             <source src="{{ urlMp3 }}" type="audio/mpeg">
           </audio>
         </div>
 
-        <div *ngIf="!firebaseMP3.fb && songInfo.mp3Url" class="col-sm-6">
+        <div *ngIf="!firebaseMP3UpdateSong.fb && songInfo.mp3Url" class="col-sm-6">
           <audio class="playlist" controls="controls" id="audio" style="width:100%">
             <source src="{{ songInfo.mp3Url }}" type="audio/mpeg">
           </audio>

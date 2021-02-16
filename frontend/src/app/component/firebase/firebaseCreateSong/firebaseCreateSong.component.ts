@@ -6,11 +6,11 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app--album-dialog',
-  templateUrl: 'firebaseDialogAlbum.component.html',
-  styleUrls: ['firebaseDialogAlbum.component.scss']
+  selector: 'app-firebase',
+  templateUrl: './firebaseCreateSong.component.html',
+  styleUrls: ['./firebaseCreateSong.component.scss']
 })
-export class FirebaseDialogAlbumComponent implements OnInit {
+export class FirebaseCreateSongComponent implements OnInit {
   title = 'cloudsSorage';
   selectedFile: File = null;
   fileToUpload: File = null;
