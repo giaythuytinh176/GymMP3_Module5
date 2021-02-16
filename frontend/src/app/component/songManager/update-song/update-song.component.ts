@@ -23,6 +23,7 @@ import {DialogCreateAlbumComponent} from '../../album/dialog-create-album/dialog
 import {DialogCreateSingerComponent} from '../../singer/dialog-create-singer/dialog-create-singer.component';
 import {FirebaseComponent} from '../../firebase/firebase/firebase.component';
 import {FirebaseMP3Component} from '../../firebase/firebaseMP3/firebaseMP3.component';
+import {FirebaseUpdateSongComponent} from '../../firebase/firebaseUpdateSong/firebaseUpdateSong.component';
 
 @Component({
   selector: 'app-update-song',
@@ -81,8 +82,8 @@ export class UpdateSongComponent implements OnInit {
               private categoryService: CategoryService,
               private singerService: SingerService,
               private albumService: AlbumService,
-              public firebase: FirebaseComponent,
-              public firebaseMP3: FirebaseMP3Component,
+              public firebaseUpdateSong: FirebaseUpdateSongComponent,
+              public firebaseMP3UpdateSong: FirebaseMP3Component,
               private userService: UserService,
               private toastr: ToastrService,
               private fb: FormBuilder,
@@ -316,8 +317,8 @@ export class UpdateSongComponent implements OnInit {
 
   updateSongSubmit(): void {
     // console.log(this.updateMusicForm.value);
-    this.updateMusicForm.value.avatarUrl = this.firebase.fb;
-    this.updateMusicForm.value.mp3Url = this.firebaseMP3.fb;
+    this.updateMusicForm.value.avatarUrl = this.firebaseUpdateSong.fb;
+    this.updateMusicForm.value.mp3Url = this.firebaseMP3UpdateSong.fb;
 
     this.song = this.updateMusicForm.value;
     this.song.user_id = this.userinfo.id;

@@ -18,7 +18,7 @@ import {shake} from 'ng-animate';
 import {UserService} from '../../services/userManager/user.service';
 import {Subject} from 'rxjs';
 import {concatMap, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
-import {LoginSocialComponent} from "../login-social/login-social.component";
+import {LoginSocialComponent} from '../login-social/login-social.component';
 
 @Component({
   selector: 'app-register',
@@ -125,15 +125,15 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
           this.route.navigate(['/user/signup']);
         } else {
           this.toastr.success('Your account has been created successfully!');
-          this.route.navigate(['/browse']);
+          this.route.navigate(['/user/login']);
         }
       },
       err => {
         // console.log(err);
         // console.log(JSON.parse(err.error));
-        if ((JSON.parse(err.error)).username == 'The username has already been taken.') {
+        if ((JSON.parse(err.error)).username === 'The username has already been taken.') {
           this.toastr.warning('The username already exists!');
-        } else if ((JSON.parse(err.error)).phone == 'The phone has already been taken.') {
+        } else if ((JSON.parse(err.error)).phone === 'The phone has already been taken.') {
           this.toastr.warning('The phone already exists!');
         } else {
           this.toastr.warning('Something wrong.');
@@ -142,7 +142,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
     );
   }
 
-  registerFormSubmit() {
+  registerFormSubmit(): void {
     this.register = this.registerForm.value;
     this.signupInfo = new SignupInfo(
       this.register.username,

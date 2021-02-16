@@ -215,10 +215,10 @@
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Image:</div>-->
         <div class="col-sm-6">
           <mat-label>Image:</mat-label>
-          <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
+          <input (change)="firebaseCreateSong.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
                  formControlName="avatarUrl" id="avatar" type="file"/>
           <br>
-          <div *ngIf="firebase.percentage | async as pct">
+          <div *ngIf="firebaseCreateSong.percentage | async as pct">
             <div class="col-12">
               <div class="progress">
                 <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100" aria-valuemin="0"
@@ -235,8 +235,8 @@
             </div>
           </div>
         </div>
-        <div *ngIf="firebase.fb as url" class="col-sm-2">
-          <img [src]="firebase.fb" class="img-thumbnail img-fluid"><br>
+        <div *ngIf="firebaseCreateSong.fb as url" class="col-sm-2">
+          <img [src]="firebaseCreateSong.fb" class="img-thumbnail img-fluid"><br>
         </div>
       </div>
 
@@ -244,10 +244,10 @@
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Mp3:</div>-->
         <div class="col-sm-6">
           <mat-label>Mp3:</mat-label>
-          <input (change)="firebaseMP3.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control"
+          <input (change)="firebaseMP3CreateSong.handleFileInput($event)" accept="audio/*" autocomplete="off" class="form-control"
                  formControlName="mp3Url" id="mp3Url" type="file"/>
           <br>
-          <div *ngIf="firebaseMP3.percentage | async as pct">
+          <div *ngIf="firebaseMP3CreateSong.percentage | async as pct">
             <div class="col-12">
               <div class="progress">
                 <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100" aria-valuemin="0"
@@ -265,7 +265,7 @@
           </div>
         </div>
 
-        <div *ngIf="firebaseMP3.fb as urlMp3" class="col-sm-6">
+        <div *ngIf="firebaseMP3CreateSong.fb as urlMp3" class="col-sm-6">
           <audio class="playlist" controls="controls" id="audio" style="width:100%">
             <source src="{{ urlMp3 }}" type="audio/mpeg">
           </audio>

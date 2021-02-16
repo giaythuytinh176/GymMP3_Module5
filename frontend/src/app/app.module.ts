@@ -91,6 +91,9 @@ import {FirebaseDialogAlbumComponent} from './component/firebase/firebaseDialogA
 import {FirebaseDialogCategoryComponent} from './component/firebase/firebaseDialogCateogry/firebaseDialogCategory.component';
 import {FirebaseDialogSingerComponent} from './component/firebase/firebaseDialogSinger/firebaseDialogSinger.component';
 import { LoginSocialComponent } from './component/login-social/login-social.component';
+import {FirebaseCreateSongComponent} from './component/firebase/firebaseCreateSong/firebaseCreateSong.component';
+import {FirebaseUpdateSongComponent} from "./component/firebase/firebaseUpdateSong/firebaseUpdateSong.component";
+import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditProfile/firebaseEditProfile.component";
 
 @NgModule({
   declarations: [
@@ -121,6 +124,9 @@ import { LoginSocialComponent } from './component/login-social/login-social.comp
     DialogCreatePlaylistComponent,
     DialogDeleteSongComponent,
     LoginSocialComponent,
+    FirebaseCreateSongComponent,
+    FirebaseUpdateSongComponent,
+    FirebaseEditProfileComponent,
 
   ],
   imports: [
@@ -207,6 +213,9 @@ import { LoginSocialComponent } from './component/login-social/login-social.comp
     CreatePlaylistComponent,
     DialogDeleteSongComponent,
     LoginSocialComponent,
+    FirebaseCreateSongComponent,
+    FirebaseUpdateSongComponent,
+    FirebaseEditProfileComponent,
 
   ],
   bootstrap: [

@@ -38,7 +38,6 @@ export class ProfileComponent implements OnInit {
               private fb: FormBuilder,
               private token: TokenStorageService,
               private toastr: ToastrService,
-              public firebase: FirebaseComponent,
               private songService: SongService,
               public dialog: MatDialog,
               public createPlaylist: CreatePlaylistComponent,
