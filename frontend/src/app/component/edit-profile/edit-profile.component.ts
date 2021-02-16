@@ -9,7 +9,7 @@ import {transition, trigger, useAnimation} from '@angular/animations';
 import {shake} from 'ng-animate';
 import {UserService} from '../../services/userManager/user.service';
 import {Observable} from 'rxjs';
-import {FirebaseComponent} from "../firebase/firebase/firebase.component";
+import {FirebaseComponent} from '../firebase/firebase/firebase.component';
 
 @Component({
   selector: 'app-edit-profile',
