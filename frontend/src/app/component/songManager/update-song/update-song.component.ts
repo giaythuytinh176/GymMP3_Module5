@@ -20,9 +20,9 @@ import {SingerV2} from '../../../model/singer/singerV2';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateCategoryDialogComponent} from '../../category/create-category-dialog/create-category-dialog.component';
 import {DialogCreateAlbumComponent} from '../../album/dialog-create-album/dialog-create-album.component';
-import {DialogCreateSingerComponent} from "../../singer/dialog-create-singer/dialog-create-singer.component";
-import {FirebaseComponent} from "../../firebase/firebase/firebase.component";
-import {FirebaseMP3Component} from "../../firebase/firebaseMP3/firebaseMP3.component";
+import {DialogCreateSingerComponent} from '../../singer/dialog-create-singer/dialog-create-singer.component';
+import {FirebaseComponent} from '../../firebase/firebase/firebase.component';
+import {FirebaseMP3Component} from '../../firebase/firebaseMP3/firebaseMP3.component';
 
 @Component({
   selector: 'app-update-song',
