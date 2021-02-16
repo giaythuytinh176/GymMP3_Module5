@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {AuthService} from '../../auth/auth.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {UpdateInfo} from "../../model/userManager/updateinfo";
+import {UpdateInfo} from '../../model/userManager/updateinfo';
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -16,9 +16,10 @@ export class SongService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token
+      'Authorization': 'Bearer ' + this.token,
+      'Access-Control-Allow-Origin': '*',
     })
-  }
+  };
   private API_URL_CREATE = environment.apiUrl + '/song/create';
   private API_URL_CREATE_MOVED = environment.apiUrl + '/song/moved/create';
   private apiListSongUser = environment.apiUrl + '/song/user/list';
@@ -81,7 +82,8 @@ export class SongService {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.token
+        'Authorization': 'Bearer ' + this.token,
+        'Access-Control-Allow-Origin': '*',
       }),
       body: {
         user_id: user_id,
@@ -94,7 +96,8 @@ export class SongService {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.token
+        'Authorization': 'Bearer ' + this.token,
+        'Access-Control-Allow-Origin': '*',
       }),
       body: {
         user_id: user_id,

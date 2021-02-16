@@ -38,12 +38,19 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Singer:</mat-label>
-            <input type="text" matInput [matAutocomplete]="auto_singer" formControlName="myControl_singer">
-            <mat-hint>Enter text to find singers by name</mat-hint>
+            <input [matAutocomplete]="auto_singer" formControlName="myControl_singer" matInput type="text">
+            <mat-hint>
+              <div *ngIf="notFoundSinger" style="color: red;">
+                Not found this singer name. <br>
+                Do you want to create <strong>{{ toCreateSinger }}</strong> singer?
+                <a (click)="openDialogSinger(toCreateSinger)" class="btn btn-xs white">YES</a>
+              </div>
+              Enter text to find singers by name
+            </mat-hint>
             <mat-autocomplete #auto_singer="matAutocomplete" [displayWith]="displayFn_singer">
               <mat-option *ngFor="let singer of filteredSingers | async" [value]="selectedSingers">
                 <div (click)="optionClicked($event, singer)">
-                  <mat-checkbox [checked]="singer.selected" (change)="toggleSelection(singer)" (click)="$event.stopPropagation()">
+                  <mat-checkbox (change)="toggleSelection(singer)" (click)="$event.stopPropagation()" [checked]="singer.selected">
                     {{ singer.singer_name }}
                   </mat-checkbox>
                 </div>
@@ -97,7 +104,14 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select a Category:</mat-label>
-            <mat-hint>Enter text to find Category by name</mat-hint>
+            <mat-hint>
+              <div *ngIf="notFoundCategory" style="color: red;">
+                Not found this category name. <br>
+                Do you want to create <strong>{{ toCreateCategory }}</strong> category?
+                <a (click)="openDialogCategory(toCreateCategory)" class="btn btn-xs white">YES</a>
+              </div>
+              Enter text to find Category by name
+            </mat-hint>
             <input [class.input-invalid]="createMusicForm.get('myControl_category')!.invalid && createMusicForm.get('myControl_category')!.touched" [class.input-valid]="createMusicForm.get('myControl_category')!.valid && createMusicForm.get('myControl_category')!.touched" [matAutocomplete]="auto_category" formControlName="myControl_category" matInput type="text">
             <div *ngIf="createMusicForm.get('myControl_category').invalid && createMusicForm.get('myControl_category').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">
@@ -134,7 +148,14 @@
         <div class="col-sm-4">
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Select an Album:</mat-label>
-            <mat-hint>Enter text to find Album by name</mat-hint>
+            <mat-hint>
+              <div *ngIf="notFoundAlbum" style="color: red;">
+                Not found this album name. <br>
+                Do you want to create <strong>{{ toCreateAlbum }}</strong> album?
+                <a (click)="openDialogAlbum(toCreateAlbum)" class="btn btn-xs white">YES</a>
+              </div>
+              Enter text to find Album by name
+            </mat-hint>
             <input [class.input-invalid]="createMusicForm.get('myControl_album')!.invalid && createMusicForm.get('myControl_album')!.touched" [class.input-valid]="createMusicForm.get('myControl_album')!.valid && createMusicForm.get('myControl_album')!.touched" [matAutocomplete]="auto_album" formControlName="myControl_album" matInput type="text">
             <div *ngIf="createMusicForm.get('myControl_album').invalid && createMusicForm.get('myControl_album').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">
@@ -178,7 +199,7 @@
                       [class.input-invalid]="createMusicForm.get('describes')!.invalid && createMusicForm.get('describes')!.touched"
                       [class.input-valid]="createMusicForm.get('describes')!.valid && createMusicForm.get('describes')!.touched"
                       cdkAutosizeMaxRows="1"
-                      cdkAutosizeMinRows="1" cdkTextareaAutosize class="form-control" formControlName="describes" matInput matInput placeholder="Describes"
+                      cdkAutosizeMinRows="1" cdkTextareaAutosize class="form-control" formControlName="describes" matInput placeholder="Describes"
                       style="height: 100px;"></textarea>
             <div *ngIf="createMusicForm.get('describes').invalid && createMusicForm.get('describes').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">
@@ -191,9 +212,9 @@
       </div>
 
       <div class="form-group row">
-        <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Avatar:</div>-->
+        <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Image:</div>-->
         <div class="col-sm-6">
-          <mat-label>Avatar:</mat-label>
+          <mat-label>Image:</mat-label>
           <input (change)="firebase.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
                  formControlName="avatarUrl" id="avatar" type="file"/>
           <br>

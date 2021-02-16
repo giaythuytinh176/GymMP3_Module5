@@ -27,7 +27,7 @@
 
 .example-full-width {
   width: 100%;
-  /*margin-bottom: 10px;*/
+  margin-bottom: 10px;
   font-size: 14px;
 }
 
@@ -43,9 +43,9 @@
   font-size: 14px;
 }
 
-input {
-  font-size: 18px;
-}
+/*input {*/
+/*  font-size: 18px;*/
+/*}*/
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
   color: rgba(37, 31, 31, 0.87) !important;

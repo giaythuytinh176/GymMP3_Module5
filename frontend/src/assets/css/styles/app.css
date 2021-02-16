@@ -3378,6 +3378,16 @@ body {
   margin-left: -20px;
 }
 
+.item .centerEmpty {
+  position: absolute;
+  padding: 0 !important;
+  top: 50%;
+  left: 40%;
+  margin-top: -20px;
+  margin-left: -20px;
+  font-weight: bold;
+}
+
 .no-gutter .item {
   border-radius: 0;
 }

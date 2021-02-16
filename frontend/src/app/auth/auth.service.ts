@@ -12,7 +12,10 @@ import {TokenStorageService} from "./token-storage.service";
 import {map} from "rxjs/operators";
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  })
 };
 
 const TOKEN_KEY = 'AuthToken';
@@ -26,7 +29,8 @@ export class AuthService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + this.token
+      Authorization: 'Bearer ' + this.token,
+      'Access-Control-Allow-Origin': '*',
     })
   };
   auth = false;
@@ -41,9 +45,9 @@ export class AuthService {
   ) {
   }
 
-  tokenExpired() {
+  tokenExpired(): boolean {
     const expiry = (JSON.parse(atob(this.token.split('.')[1]))).exp;
-    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+    return (Math.floor((new Date()).getTime() / 1000)) >= expiry;
   }
 
   signUp(info: SignupInfo): Observable<string> {

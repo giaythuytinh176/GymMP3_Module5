@@ -62,20 +62,30 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::prefix('album')->group(function () {
         Route::get('/list', 'AlbumController@index');
         Route::get('/{id}', 'AlbumController@findAlbum');
+        Route::post('/create', 'AlbumController@store');
 
     });
 
     Route::prefix('category')->group(function () {
         Route::get('/list', 'CategoryController@index');
         Route::get('/{id}', 'CategoryController@findCategory');
+        Route::post('/create', 'CategoryController@store');
 
     });
 
     Route::prefix('singer')->group(function () {
         Route::get('/list', 'SingerController@index');
+        Route::post('/create', 'SingerController@store');
         Route::get('/id/song-id/{id}', 'SongController@findSingerIDBySongID');
+        Route::get('/id/song-id-v2/{id}', 'SongController@singersInfo');
         // for test
         Route::get('/name/song-id/{id}', 'SongController@findSingerBySongID');
+
+    });
+
+    Route::prefix('playlist')->group(function () {
+        Route::get('/list', 'PlaylistController@index');
+        Route::post('/create', 'PlaylistController@store');
 
     });
 
