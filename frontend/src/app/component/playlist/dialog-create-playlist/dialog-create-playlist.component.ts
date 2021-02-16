@@ -34,7 +34,7 @@ export class DialogCreatePlaylistComponent implements OnInit {
     private token: TokenStorageService,
     private playlistService: PlaylistService,
   ) {
-    console.log(data);
+    // console.log(data);
     this.user_id = data.user_id;
   }
 

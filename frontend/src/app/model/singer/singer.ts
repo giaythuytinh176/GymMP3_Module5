@@ -6,7 +6,6 @@ export class Singer {
   description: string;
 
   constructor(
-    // tslint:disable-next-line:variable-name
     singer_name: string,
     image: string,
     description: string

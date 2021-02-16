@@ -29,17 +29,13 @@ class SocialAuthController extends Controller
 
         $data = SocialAccountService::createOrGetUser($socialite, $social);
         if (!empty($data['error'])) {
-            return redirect()->to('http://localhost:4200/#/user/login-facebook?error=' . ($data['error']));
+            return redirect()->to('http://localhost:4200/#/user/login-facebook?error=' . $data['error']);
         } else {
             // auth()->login($data['data']);
             $token = JWTAuth::fromUser($data['data']);
-            if (!empty($data['status'])) {
-                if ($data['status'] == 'login') {
-                    return redirect()->to('http://localhost:4200/#/user/login-facebook?token=' . ($token) . '&action=login');
-                } else if ($data['status'] == 'register') {
-                    return redirect()->to('http://localhost:4200/#/user/login-facebook?token=' . ($token) . '&action=register');
-                }
-            }
+            $redirectUrl = 'http://localhost:4200/#/user/login-facebook?token=' . $token . '&action=' . $data['status'];
+//            dd($redirectUrl);
+            return redirect()->to($redirectUrl);
         }
     }
 }

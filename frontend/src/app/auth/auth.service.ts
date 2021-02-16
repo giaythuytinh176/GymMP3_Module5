@@ -45,9 +45,9 @@ export class AuthService {
   ) {
   }
 
-  tokenExpired() {
+  tokenExpired(): boolean {
     const expiry = (JSON.parse(atob(this.token.split('.')[1]))).exp;
-    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+    return (Math.floor((new Date()).getTime() / 1000)) >= expiry;
   }
 
   signUp(info: SignupInfo): Observable<string> {

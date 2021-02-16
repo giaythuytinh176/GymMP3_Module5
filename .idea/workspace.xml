@@ -4,8 +4,11 @@
     <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/SocialAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/SocialAuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Services/SocialAccountService.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Services/SocialAccountService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/auth.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/login-social/login-social.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/login-social/login-social.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/playlist/dialog-create-playlist/dialog-create-playlist.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/dialog-create-playlist/dialog-create-playlist.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/singer/singer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/singer/singer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/model/userManager/updateinfo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/model/userManager/updateinfo.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +225,9 @@
       <workItem from="1613361707446" duration="2401000" />
       <workItem from="1613377315509" duration="477000" />
       <workItem from="1613392893641" duration="4171000" />
-      <workItem from="1613414435233" duration="7546000" />
+      <workItem from="1613414435233" duration="7963000" />
+      <workItem from="1613453557928" duration="1960000" />
+      <workItem from="1613479667119" duration="121000" />
     </task>
     <task id="LOCAL-00001" summary="tesing dragdrop6">
       <created>1612986188568</created>
