@@ -7,8 +7,8 @@ import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-firebase',
-  templateUrl: './FirebaseDialogSinger.component.html',
-  styleUrls: ['./FirebaseDialogSinger.component.scss']
+  templateUrl: './firebaseDialogSinger.component.html',
+  styleUrls: ['./firebaseDialogSinger.component.scss']
 })
 export class FirebaseDialogSingerComponent implements OnInit {
   title = 'cloudsSorage';
