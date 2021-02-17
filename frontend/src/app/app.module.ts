@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -94,6 +94,7 @@ import { LoginSocialComponent } from './component/login-social/login-social.comp
 import {FirebaseCreateSongComponent} from './component/firebase/firebaseCreateSong/firebaseCreateSong.component';
 import {FirebaseUpdateSongComponent} from "./component/firebase/firebaseUpdateSong/firebaseUpdateSong.component";
 import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditProfile/firebaseEditProfile.component";
+import { PlaylistDetailComponent } from './component/playlist/playlist-detail/playlist-detail.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,8 @@ import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditPro
     FirebaseCreateSongComponent,
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
+    PlaylistDetailComponent,
+
 
   ],
   imports: [
@@ -220,7 +223,10 @@ import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditPro
   ],
   bootstrap: [
     AppComponent,
-  ]
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule {
 }

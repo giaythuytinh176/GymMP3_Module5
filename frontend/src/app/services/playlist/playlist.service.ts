@@ -13,6 +13,8 @@ export class PlaylistService {
 
   apiCreatePlaylist = environment.apiUrl + '/playlist/create';
   apiListPlaylist = environment.apiUrl + '/playlist/list';
+  apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
+
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -28,6 +30,10 @@ export class PlaylistService {
 
   createPlaylist(pl: Playlist): Observable<Playlist> {
     return this.http.post<Playlist>(this.apiCreatePlaylist, pl, this.httpJson);
+  }
+
+  getPlaylistByUserID(id: number): Observable<Playlist[]> {
+    return this.http.get<Playlist[]>(`${this.apiShowListPlaylist}/${id}`, this.httpJson);
   }
 
 }
