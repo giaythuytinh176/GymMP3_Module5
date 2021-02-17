@@ -267,7 +267,7 @@
 
         <div *ngIf="firebaseMP3CreateSong.fb as urlMp3" class="col-sm-6">
           <audio class="playlist" controls="controls" id="audio" style="width:100%">
-            <source src="{{ urlMp3 }}" type="audio/mpeg">
+            <source [src]="firebaseMP3CreateSong.fb" type="audio/mpeg">
           </audio>
         </div>
 

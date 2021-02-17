@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LastestSongComponent} from './lastest-song.component';
+import {TracksComponent} from './tracks.component';
 
-describe('LastestSongComponent', () => {
-  let component: LastestSongComponent;
-  let fixture: ComponentFixture<LastestSongComponent>;
+describe('TracksComponent', () => {
+  let component: TracksComponent;
+  let fixture: ComponentFixture<TracksComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LastestSongComponent]
+      declarations: [TracksComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LastestSongComponent);
+    fixture = TestBed.createComponent(TracksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

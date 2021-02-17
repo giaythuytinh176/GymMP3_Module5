@@ -44,7 +44,7 @@
   </mat-dialog-content>
   <mat-dialog-actions align="center">
     <button (click)="onNoClick()" mat-button mat-dialog-close>Cancel</button>
-    <button (click)="createPlaylistSubmit()" [disabled]="!createPlaylistDialogForm.valid" [mat-dialog-close]="createPlaylistDialogForm" cdkFocusInitial mat-button color="primary">
+    <button (click)="createPlaylistSubmit()" [disabled]="!createPlaylistDialogForm.valid" [mat-dialog-close]="createPlaylistDialogForm" cdkFocusInitial color="primary" mat-button>
       Add
     </button>
   </mat-dialog-actions>

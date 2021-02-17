@@ -18,7 +18,7 @@ import {Playlist} from '../model/playlist/playlist';
 @Injectable({
   providedIn: 'root',
 })
-export class GetPlaylistByUSerID implements Resolve<any> {
+export class GetPlaylistInfoResolver implements Resolve<any> {
   constructor(
     private playlistService: PlaylistService,
     private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class GetPlaylistByUSerID implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Playlist[]> | Promise<any> | any {
-    return this.playlistService.getPlaylistByUserID(route.params.id).pipe(
+    return this.playlistService.getPlaylistInfo(route.params.id).pipe(
       // delay(2000),
       catchError(error => {
           this.router.navigateByUrl('/404');

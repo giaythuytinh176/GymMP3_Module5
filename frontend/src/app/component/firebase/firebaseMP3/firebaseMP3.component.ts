@@ -77,6 +77,7 @@ export class FirebaseMP3Component implements OnInit {
             if (url) {
               this.toastr.success('Uploaded Mp3 File Successfully!');
               this.fb = url;
+              console.log(url);
             }
             // console.log(this.fb);
             // console.log(1111);

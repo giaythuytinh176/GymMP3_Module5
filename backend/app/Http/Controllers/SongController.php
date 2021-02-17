@@ -144,7 +144,8 @@ class SongController extends Controller
 
     public function allSongs()
     {
-        $data = Song::with('singers')->get();
+        // limit 10 bai hat va random khi tra ve
+        $data = Song::with('singers')->inRandomOrder()->limit(10)->get();
         return response()->json(compact('data'), 200);
     }
 
@@ -213,12 +214,6 @@ class SongController extends Controller
         return $data->user_id;
     }
 
-    public function getUserIDbyMovedSongID($song_id)
-    {
-        $data = DB::table('moved_songs')->where('id', '=', $song_id)->first();
-        return $data->user_id;
-    }
-
     public function destroy(Request $request, UserController $userController)
     {
         $token = $userController->getAuthenticatedUser();
@@ -259,6 +254,12 @@ class SongController extends Controller
         return response()->json($movedSong);
     }
 
+    public function getUserIDbyMovedSongID($song_id)
+    {
+        $data = DB::table('moved_songs')->where('id', '=', $song_id)->first();
+        return $data->user_id;
+    }
+
     public function search(Request $request)
     {
         if ($request->search == '' || !$request->search) {
@@ -284,18 +285,15 @@ class SongController extends Controller
         return response()->json($last, 200);
     }
 
-    public function getLastestSong(){
-        $songs=DB::table('songs')->get();
-//     $lastest=DB::table('songs')->orderBy('id','desc')->first();
-//        $lastRecordData = DB::select('select * from songs order by created_at desc limit 5');
-        $lastRecordData = Song::latest()->paginate(10)->toArray();
-        $lastRecordData = $lastRecordData['data'];
-//        dd($lastRecordData);
+    public function getLastestSong()
+    {
+        $data = Song::latest()->paginate(10)->toArray();
+        $lastRecordData = $data['data'];
         return response()->json(compact('lastRecordData'));
     }
 
-    public function showmoreSong(){
-        $songs=DB::table('songs')->get();
+    public function showMoreSong()
+    {
         $lastRecordData = Song::limit(10)->offset(10)->latest('id')->get();;
         return response()->json(compact('lastRecordData'));
     }

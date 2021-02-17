@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {AlbumService} from '../services/album/album.service';
 import {catchError, delay} from 'rxjs/operators';
-import {SongService} from "../services/song/song.service";
+import {SongService} from '../services/song/song.service';
 
 @Injectable({
   providedIn: 'root'

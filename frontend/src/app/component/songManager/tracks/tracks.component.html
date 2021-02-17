@@ -1,0 +1,46 @@
+<div class="row item-list item-list-by m-b">
+  <div *ngFor="let song of songs; let i = index;" class="col-xs-12">
+    <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+      <div class="item-media ">
+        <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
+        <div class="item-overlay center">
+          <button class="btn-playpause">Play</button>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-overlay bottom text-right">
+          <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+          <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
+          <div class="dropdown-menu pull-right black lt"></div>
+        </div>
+        <div class="item-title text-ellipsis">
+          <a href="track.detail.html">{{ song.nameSong }}</a>
+        </div>
+        <div class="item-author text-sm text-ellipsis ">
+          <a class="text-muted" href="artist.detail.html">{{ song.singer_list_name }},</a>
+        </div>
+        <div class="item-author text-sm text-ellipsis hide">
+          <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+            {{ singer.singer_name }},
+          </a>
+        </div>
+        <div class="item-meta text-sm text-muted">
+          <span class="item-meta-category"><a class="label" href="browse.html">Soul</a></span>
+          <span class="item-meta-date text-xs">02.04.2016</span>
+        </div>
+
+        <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
+          {{ song.describes.substring(0, 100) }} ...
+        </div>
+
+        <div class="item-action visible-list m-t-sm">
+          <a [routerLink]="['/user/edit-song', song.id]" class="btn btn-xs white" href="#">Edit</a>
+          <button (click)="openDialogDeleteSong(song.id, song.nameSong, userinfo.id)" class="btn btn-xs white">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-sm white rounded" href="#">Show More</a>

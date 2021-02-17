@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
-import {Album} from "../../model/album/album";
-import {Category} from "../../model/category/category";
-import {Song} from "../../model/song/song";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {Album} from '../../model/album/album';
+import {Song} from '../../model/song/song';
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -21,10 +20,10 @@ export class AlbumService {
   httpJson = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.token,
+      Authorization: 'Bearer ' + this.token,
       'Access-Control-Allow-Origin': '*',
     })
-  }
+  };
 
   constructor(private http: HttpClient) {
   }

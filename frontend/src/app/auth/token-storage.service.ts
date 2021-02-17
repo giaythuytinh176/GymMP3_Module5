@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Router} from "@angular/router";
-import {UserService} from "../services/userManager/user.service";
-import {ToastrService} from "ngx-toastr";
+import {Router} from '@angular/router';
+import {UserService} from '../services/userManager/user.service';
+import {ToastrService} from 'ngx-toastr';
 
 const TOKEN_KEY = 'AuthToken';
 const Login_KEY = 'AuthLogin';

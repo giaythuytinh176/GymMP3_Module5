@@ -24,14 +24,14 @@
   background-color: #BBBBBB;
 }
 
-::ng-deep .custom-dialog > mat-dialog-container {
-  background-color: #BBBBBB;
-}
+/*::ng-deep .custom-dialog > mat-dialog-container {*/
+/*  background-color: #BBBBBB;*/
+/*}*/
 
-:root {
-  --main-bg-color: #BBBBBB;
-}
+/*:root {*/
+/*  --main-bg-color: #BBBBBB;*/
+/*}*/
 
-.custom-dialog > mat-dialog-container {
-  background: var(--main-bg-color);
-}
+/*.custom-dialog > mat-dialog-container {*/
+/*  background: var(--main-bg-color);*/
+/*}*/

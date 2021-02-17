@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {CategoryService} from '../services/category/caterory.service';
-import {catchError} from "rxjs/operators";
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

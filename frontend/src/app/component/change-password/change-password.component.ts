@@ -47,16 +47,6 @@ export class ChangePasswordComponent implements OnInit, OnChanges, AfterContentC
     }, {validator: this.checkPasswords}); // , validators: this.checkPasswords2
 
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
-    // this.userService.getInfoUserToken().subscribe((data: any) => {
-    //   // console.log(data);
-    //   if (data.status) {
-    //     this.token.signOut();
-    //     this.toastr.warning('You must login to change password.');
-    //     this.router.navigate(['/user/login']);
-    //   } else {
-    //     this.userinfo = data.user;
-    //   }
-    // }, error => console.log(error));
   }
 
   ngAfterContentChecked(): void {

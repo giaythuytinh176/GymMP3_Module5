@@ -1,8 +1,10 @@
 export class Playlist {
+  id: number;
   name_playlist: string;
   description: string;
   user_id: number;
   view: number;
+  status: string;
 
   constructor(
     name_playlist: string,

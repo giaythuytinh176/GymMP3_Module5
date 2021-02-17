@@ -55,14 +55,7 @@ export class EditProfileComponent implements OnInit {
 
   getUserInfo(): void {
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
-    // console.log(this.userinfo);
-    // this.userService.getInfoUserToken().subscribe((data: any) => {
-    //   // console.log(data);
-    //   if (data.status) {
-    //     this.token.signOut();
-    //     this.toastr.warning('You must login to create Song.');
-    //     this.routes.navigate(['/user/login']);
-    //   } else {
+
     this.profileForm.value.name = this.userinfo.name;
     this.profileForm.value.address = this.userinfo.address;
     this.profileForm.value.email = this.userinfo.email;
