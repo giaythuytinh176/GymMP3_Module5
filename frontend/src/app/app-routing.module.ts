@@ -22,6 +22,8 @@ import {GetSongDetailByIdResolver} from './resolver/GetSongDetailByIdResolver';
 import {GetSingerIDbySongIDResolver} from './resolver/GetSingerIDbySongIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
 import {LoginSocialComponent} from './component/login-social/login-social.component';
+import { GetPlaylistByUSerID } from './resolver/GetPlaylistByIDResolver';
+import { PlaylistDetailComponent } from './component/playlist/playlist-detail/playlist-detail.component';
 import {LastestSongComponent} from "./component/songManager/lastest-song/lastest-song.component";
 import {ShowmoreSongLastestComponent} from "./component/songManager/showmore-song-lastest/showmore-song-lastest.component";
 
@@ -56,6 +58,7 @@ const routes: Routes = [
         resolve: {
           getUserInfo: GetUserInfoResolver,
           getSongByUserID: GetSongByUserIDResolver,
+          getPlaylistByUSerID: GetPlaylistByUSerID,
         },
       },
       {
@@ -91,6 +94,14 @@ const routes: Routes = [
           // getCategoryInfoByID: GetCategoryInfoByIDResolver,
         },
       },
+      {
+        path: 'playlist-detail/:id',
+        component: PlaylistDetailComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+          getAllSongs: GetAllSongsResolver
+        }
+      }
     ]
   },
   {
