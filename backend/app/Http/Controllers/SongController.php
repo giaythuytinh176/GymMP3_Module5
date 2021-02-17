@@ -7,6 +7,7 @@ use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Table;
 use function PHPSTORM_META\map;
 
 class SongController extends Controller
@@ -281,5 +282,21 @@ class SongController extends Controller
         }
         $last = array_replace_recursive($songs, $data);
         return response()->json($last, 200);
+    }
+
+    public function getLastestSong(){
+        $songs=DB::table('songs')->get();
+//     $lastest=DB::table('songs')->orderBy('id','desc')->first();
+//        $lastRecordData = DB::select('select * from songs order by created_at desc limit 5');
+        $lastRecordData = Song::latest()->paginate(10)->toArray();
+        $lastRecordData = $lastRecordData['data'];
+//        dd($lastRecordData);
+        return response()->json(compact('lastRecordData'));
+    }
+
+    public function showmoreSong(){
+        $songs=DB::table('songs')->get();
+        $lastRecordData = Song::limit(10)->offset(10)->latest('id')->get();;
+        return response()->json(compact('lastRecordData'));
     }
 }
