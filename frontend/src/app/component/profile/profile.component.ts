@@ -92,7 +92,7 @@ export class ProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogDeleteSongComponent, {
       width: '300px',
       data: {id, nameSong, user_id},
-      panelClass: 'custom-dialog',
+      // panelClass: 'custom-dialog',
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -3,17 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseDialogAlbum/firebaseDialogAlbum.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseDialogAlbum/firebaseDialogAlbum.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseCreateSong/firebaseCreateSong.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseCreateSong/firebaseCreateSong.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseMP3/firebaseMP3.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseMP3/firebaseMP3.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +228,11 @@
       <workItem from="1613392893641" duration="4171000" />
       <workItem from="1613414435233" duration="7963000" />
       <workItem from="1613453557928" duration="1960000" />
-      <workItem from="1613479667119" duration="3373000" />
+      <workItem from="1613479667119" duration="7558000" />
+      <workItem from="1613492986814" duration="144000" />
+      <workItem from="1613493265507" duration="1585000" />
+      <workItem from="1613498443284" duration="1275000" />
+      <workItem from="1613523678076" duration="752000" />
     </task>
     <task id="LOCAL-00001" summary="tesing dragdrop6">
       <created>1612986188568</created>
@@ -307,6 +306,11 @@
           <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html</url>
           <line>15</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html</url>
+          <line>254</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
