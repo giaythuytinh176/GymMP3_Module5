@@ -94,6 +94,11 @@ import { LoginSocialComponent } from './component/login-social/login-social.comp
 import { LastestSongComponent } from './component/songManager/lastest-song/lastest-song.component';
 import { ShowmoreSongLastestComponent } from './component/songManager/showmore-song-lastest/showmore-song-lastest.component';
 
+import {FirebaseCreateSongComponent} from './component/firebase/firebaseCreateSong/firebaseCreateSong.component';
+import {FirebaseUpdateSongComponent} from "./component/firebase/firebaseUpdateSong/firebaseUpdateSong.component";
+import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditProfile/firebaseEditProfile.component";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -125,6 +130,9 @@ import { ShowmoreSongLastestComponent } from './component/songManager/showmore-s
     LoginSocialComponent,
     LastestSongComponent,
     ShowmoreSongLastestComponent,
+    FirebaseCreateSongComponent,
+    FirebaseUpdateSongComponent,
+    FirebaseEditProfileComponent,
 
   ],
   imports: [
@@ -211,6 +219,9 @@ import { ShowmoreSongLastestComponent } from './component/songManager/showmore-s
     CreatePlaylistComponent,
     DialogDeleteSongComponent,
     LoginSocialComponent,
+    FirebaseCreateSongComponent,
+    FirebaseUpdateSongComponent,
+    FirebaseEditProfileComponent,
 
   ],
   bootstrap: [

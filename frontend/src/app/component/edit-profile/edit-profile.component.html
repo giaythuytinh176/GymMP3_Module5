@@ -76,10 +76,10 @@
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Avatar:</div>-->
         <div class="col-sm-4">
           <mat-label>Avatar:</mat-label>
-          <!--          <div *ngIf="firebase.fileToUpload">-->
-          <!--            Filename: {{ firebase.fileToUpload.name }}-->
+          <!--          <div *ngIf="firebaseEditProfile.fileToUpload">-->
+          <!--            Filename: {{ firebaseEditProfile.fileToUpload.name }}-->
           <!--          </div>-->
-          <input (change)="firebase.handleFileInput($event)" [class.input-invalid]="profileForm.get('avatar')!.invalid &&
+          <input (change)="firebaseEditProfile.handleFileInput($event)" [class.input-invalid]="profileForm.get('avatar')!.invalid &&
             profileForm.get('avatar')!.touched"
                  [class.input-valid]="profileForm.get('avatar')!.valid &&
             profileForm.get('avatar')!.touched" accept="image/*"
@@ -99,7 +99,7 @@
           <!--            </div>-->
         </div>
         <div class="col-sm-4">
-          <div *ngIf="firebase.percentage | async as pct">
+          <div *ngIf="firebaseEditProfile.percentage | async as pct">
             <div class="col-12">
               <div class="progress">
                 <div [ngStyle]="{ width: pct + '%' }" aria-valuemax="100"
@@ -108,10 +108,10 @@
                 </div>
               </div>
             </div>
-            <img [src]="firebase.fb" alt="Image Error" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
+            <img [src]="firebaseEditProfile.fb" alt="Image Error" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
           </div>
 
-          <div *ngIf="!firebase.fb && userinfo.avatar">
+          <div *ngIf="!firebaseEditProfile.fb && userinfo.avatar">
             <img [src]="userinfo.avatar" alt="Image Error" class="thumbnail img-responsive img-thumbnail img-fluid"><br>
           </div>
         </div>
