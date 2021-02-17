@@ -94,6 +94,7 @@ import { LoginSocialComponent } from './component/login-social/login-social.comp
 import {FirebaseCreateSongComponent} from './component/firebase/firebaseCreateSong/firebaseCreateSong.component';
 import {FirebaseUpdateSongComponent} from "./component/firebase/firebaseUpdateSong/firebaseUpdateSong.component";
 import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditProfile/firebaseEditProfile.component";
+import { TracksComponent } from './component/song/tracks/tracks.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditPro
     FirebaseCreateSongComponent,
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
+    TracksComponent,
 
   ],
   imports: [

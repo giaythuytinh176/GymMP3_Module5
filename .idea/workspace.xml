@@ -3,12 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseCreateSong/firebaseCreateSong.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseCreateSong/firebaseCreateSong.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseMP3/firebaseMP3.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/firebase/firebaseMP3/firebaseMP3.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/change-password/change-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/change-password/change-password.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/edit-profile/edit-profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/register/register.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +176,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/app/component/firebase" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/app/resolver" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -185,10 +188,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/app/resolver" />
       <recent name="$PROJECT_DIR$/frontend/src/app/component/firebase" />
       <recent name="$PROJECT_DIR$/frontend/src/app/component" />
       <recent name="$PROJECT_DIR$/frontend/src/app/model/singer" />
-      <recent name="$PROJECT_DIR$/frontend/src/app/resolver" />
       <recent name="$PROJECT_DIR$/backend/app/Models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -232,7 +235,9 @@
       <workItem from="1613492986814" duration="144000" />
       <workItem from="1613493265507" duration="1585000" />
       <workItem from="1613498443284" duration="1275000" />
-      <workItem from="1613523678076" duration="752000" />
+      <workItem from="1613523678076" duration="6590000" />
+      <workItem from="1613542568254" duration="2076000" />
+      <workItem from="1613569315888" duration="765000" />
     </task>
     <task id="LOCAL-00001" summary="tesing dragdrop6">
       <created>1612986188568</created>
@@ -297,11 +302,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts</url>
-          <line>23</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html</url>
           <line>15</line>

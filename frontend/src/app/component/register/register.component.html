@@ -21,7 +21,7 @@
       <form [formGroup]="registerForm">
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <div class="example-full-width">
             <mat-label>Username:</mat-label>
             <!--          #checkUsername (input)="check$.next(checkUsername.value)" -->
             <input #register (input)="onInput(register.value)" [class.input-invalid]="registerForm.get('username')!.invalid && registerForm.get('username')!.touched" [class.input-valid]="registerForm.get('username')!.valid && registerForm.get('username')!.touched" class="form-control" formControlName="username" matInput placeholder="Username" type="text">
@@ -35,11 +35,11 @@
               <div [@shake]="shake">The username already <strong>exists!.</strong>
               </div>
             </div>
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <div class="example-full-width">
             <mat-label>Phone:</mat-label>
             <input [class.input-invalid]="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched" [class.input-valid]="registerForm.get('phone')!.valid && registerForm.get('phone')!.touched" class="form-control" formControlName="phone" matInput placeholder="Phone" type="text">
             <div *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
@@ -52,11 +52,11 @@
                 </div>
               </div>
             </div>
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <div class="example-full-width">
             <mat-label>Password:</mat-label>
             <input [class.input-invalid]="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" [class.input-valid]="registerForm.get('password')!.valid && registerForm.get('password')!.touched" [errorStateMatcher]="matcher" class="form-control" formControlName="password" matInput placeholder="Password" type="password">
             <div *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
@@ -73,11 +73,11 @@
                 </div>
               </div>
             </div>
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <div class="example-full-width">
             <mat-label>Password confirmation:</mat-label>
             <input [class.input-invalid]="(registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched) || registerForm.hasError('passwordnotmatch')" [class.input-valid]="registerForm.get('password_confirmation')!.valid && registerForm.get('password_confirmation')!.touched && !registerForm.hasError('passwordnotmatch')" [errorStateMatcher]="matcher" class="form-control" formControlName="password_confirmation" matInput placeholder="Password Confirmation" type="password">
             <div style="margin-top: 10px;color: red; text-align: left !important;">
@@ -100,7 +100,7 @@
                 </div>
               </div>
             </div>
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="m-b-md text-sm">

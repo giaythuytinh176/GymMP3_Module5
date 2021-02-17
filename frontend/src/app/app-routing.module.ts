@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
 import {RegisterComponent} from './component/register/register.component';
 import {ProfileComponent} from './component/profile/profile.component';
@@ -26,70 +26,7 @@ import {LoginSocialComponent} from './component/login-social/login-social.compon
 const routes: Routes = [
   {
     path: 'user',
-    children: [
-      {
-        path: 'signup',
-        component: RegisterComponent,
-      },
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'login-facebook',
-        component: LoginSocialComponent,
-      },
-      {
-        path: 'change-password',
-        component: ChangePasswordComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getUserInfo: GetUserInfoResolver,
-        },
-      },
-      {
-        path: 'profile/:id',
-        component: ProfileComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getUserInfo: GetUserInfoResolver,
-          getSongByUserID: GetSongByUserIDResolver,
-        },
-      },
-      {
-        path: 'edit-profile',
-        component: EditProfileComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getUserInfo: GetUserInfoResolver,
-        },
-      },
-      {
-        path: 'create-song',
-        component: CreateSongComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getAlbums: GetAlbumsResolver,
-          getCategories: GetCategoriesResolver,
-          getSingers: GetSingersResolver,
-          getUserInfo: GetUserInfoResolver,
-        },
-      },
-      {
-        path: 'edit-song/:id',
-        component: UpdateSongComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getAlbums: GetAlbumsResolver,
-          getCategories: GetCategoriesResolver,
-          getSingers: GetSingersResolver,
-          getUserInfo: GetUserInfoResolver,
-          getSongDetailById: GetSongDetailByIdResolver,
-          getSingerIDbySongID: GetSingerIDbySongIDResolver,
-          // getCategoryInfoByID: GetCategoryInfoByIDResolver,
-        },
-      },
-    ]
+    loadChildren: () => import('./lazyloading/users/users.module').then(m => m.UsersModule),
   },
   {
     path: 'browse',
@@ -131,7 +68,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {useHash: true}),
+    RouterModule.forRoot(routes,
+      {
+        useHash: true,
+        preloadingStrategy: PreloadAllModules,
+      }
+    ),
   ],
   exports: [
     RouterModule,

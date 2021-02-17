@@ -21,7 +21,7 @@
       <form [formGroup]="loginForm" name="form">
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <div class="example-full-width">
             <mat-label>Username:</mat-label>
             <input [class.input-invalid]="loginForm.get('username')!.invalid && loginForm.get('username')!.touched" [class.input-valid]="loginForm.get('username')!.valid && loginForm.get('username')!.touched" class="form-control" formControlName="username" matInput placeholder="Username" type="text">
             <div *ngIf="loginForm.get('username')!.invalid && loginForm.get('username')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
@@ -30,11 +30,11 @@
                 </div>
               </div>
             </div>
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="form-group">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <div class="example-full-width">
             <mat-label>Password:</mat-label>
             <input [class.input-valid]="loginForm.get('password')!.valid && loginForm.get('password')!.touched" [ngClass]="{'input-invalid': loginForm.get('password')!.invalid && loginForm.get('password')!.touched}" class="form-control" formControlName="password" matInput placeholder="Password" type="password">
             <div *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
@@ -51,7 +51,7 @@
                 </div>
               </div>
             </div>
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="m-b-md" style="margin-top: 25px">
