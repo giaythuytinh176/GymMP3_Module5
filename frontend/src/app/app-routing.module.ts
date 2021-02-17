@@ -22,6 +22,8 @@ import {GetSongDetailByIdResolver} from './resolver/GetSongDetailByIdResolver';
 import {GetSingerIDbySongIDResolver} from './resolver/GetSingerIDbySongIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
 import {LoginSocialComponent} from './component/login-social/login-social.component';
+import {LastestSongComponent} from "./component/songManager/lastest-song/lastest-song.component";
+import {ShowmoreSongLastestComponent} from "./component/songManager/showmore-song-lastest/showmore-song-lastest.component";
 
 const routes: Routes = [
   {
@@ -98,6 +100,17 @@ const routes: Routes = [
       getAllSongs: GetAllSongsResolver
     }
   },
+  {
+    path: 'lastest-song',
+    component: LastestSongComponent,
+  },
+
+  {
+    path: 'showmore-lastest-song',
+    component: ShowmoreSongLastestComponent,
+  },
+
+
   {
     path: 'search',
     component: SearchSongComponent,

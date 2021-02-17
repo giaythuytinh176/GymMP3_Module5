@@ -31,6 +31,8 @@ export class SongService {
   private search = environment.apiUrl + '/search';
   private deleteSongsUrl = environment.apiUrl + '/song';
   private deleteMovedSongsUrl = environment.apiUrl + '/song/moved';
+  private API_getLastestSongs=environment.apiUrl + '/song/lastest';
+  private API_getShowmoreSongsLastest=environment.apiUrl + '/song/showmore';
 
   constructor(
     private http: HttpClient,
@@ -104,5 +106,13 @@ export class SongService {
       },
     };
     return this.http.delete(`${this.deleteMovedSongsUrl}/${id}`, httpHeader);
+  }
+
+  getLastestSongs(): Observable<Song[]> {
+    return this.http.get<Song[]>(this.API_getLastestSongs);
+  }
+
+  getShowmoreSongLastest(): Observable<Song[]>{
+    return this.http.get<Song[]>(this.API_getShowmoreSongsLastest);
   }
 }

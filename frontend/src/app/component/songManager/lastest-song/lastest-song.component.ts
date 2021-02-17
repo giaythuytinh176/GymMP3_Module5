@@ -1,0 +1,72 @@
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {SongService} from '../../../services/song/song.service';
+import {Song} from '../../../model/song/song';
+import {Observable, Subject} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
+
+@Component({
+  selector: 'app-lastest-song',
+  templateUrl: './lastest-song.component.html',
+  styleUrls: ['./lastest-song.component.css']
+})
+export class LastestSongComponent implements OnInit, OnDestroy {
+  showmore:boolean=false;
+  show:boolean=true;
+  lastestSong: Observable<Song[]> | boolean=true;
+  allsongs$: Observable<Song[]>;
+  allsongs: Song[];
+  isLoading = false;
+  private onDestroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(
+    private songService: SongService,
+    private readonly route: ActivatedRoute,
+  ) {
+  }
+
+  // ngOnInit(): void {
+  //   this.allsongs$ = this.songService.getAllSongs();
+  // }
+
+  // ngOnInit(): void {
+  //   console.log(1);
+  //   // this.isLoading = true;
+  //   // this.songService.getAllSongs().subscribe((res: any) => {
+  //   //   this.allsongs = res.data;
+  //   //   this.isLoading = false;
+  //   //   console.log(2);
+  //   //   // console.log(this.allsongs);
+  //   // }, (error) => console.log(error));
+  // }
+
+  ngOnInit(): void {
+    console.log('Go here');
+    this.getLastestSongs();
+    // this.allsongs = this.route.snapshot.data.getAllSongs.data;
+    // this.route.params.pipe(
+    //   takeUntil(this.onDestroy$),
+    //   distinctUntilChanged()
+    // ).subscribe((params: any) => {
+    //   console.log(this.route.snapshot.data.getAllSongs);
+    //   this.allsongs = this.route.snapshot.data.getAllSongs.data;
+    // }, (error: any) => console.log(error));
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
+  }
+
+  getLastestSongs(){
+    this.songService.getLastestSongs().subscribe((data:any)=>{
+      this.lastestSong=data.lastRecordData;
+      this.isLoading=false;
+    })
+  }
+
+  Showmore(){
+    this.showmore=true
+    this.show=false
+  }
+}
