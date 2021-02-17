@@ -8,7 +8,7 @@ import {TokenStorageService} from '../../../auth/token-storage.service';
 import {shake} from 'ng-animate';
 import {Category} from '../../../model/category/category';
 import {CategoryService} from '../../../services/category/caterory.service';
-import {FirebaseDialogCategoryComponent} from "../../firebase/firebaseDialogCateogry/firebaseDialogCategory.component";
+import {FirebaseDialogCategoryComponent} from '../../firebase/firebaseDialogCateogry/firebaseDialogCategory.component';
 
 @Component({
   selector: 'app-create-category-dialog',

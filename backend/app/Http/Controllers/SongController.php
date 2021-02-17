@@ -7,6 +7,7 @@ use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Table;
 use function PHPSTORM_META\map;
 
 class SongController extends Controller
@@ -143,7 +144,8 @@ class SongController extends Controller
 
     public function allSongs()
     {
-        $data = Song::with('singers')->get();
+        // limit 10 bai hat va random khi tra ve
+        $data = Song::with('singers')->inRandomOrder()->limit(10)->get();
         return response()->json(compact('data'), 200);
     }
 
@@ -212,12 +214,6 @@ class SongController extends Controller
         return $data->user_id;
     }
 
-    public function getUserIDbyMovedSongID($song_id)
-    {
-        $data = DB::table('moved_songs')->where('id', '=', $song_id)->first();
-        return $data->user_id;
-    }
-
     public function destroy(Request $request, UserController $userController)
     {
         $token = $userController->getAuthenticatedUser();
@@ -258,6 +254,12 @@ class SongController extends Controller
         return response()->json($movedSong);
     }
 
+    public function getUserIDbyMovedSongID($song_id)
+    {
+        $data = DB::table('moved_songs')->where('id', '=', $song_id)->first();
+        return $data->user_id;
+    }
+
     public function search(Request $request)
     {
         if ($request->search == '' || !$request->search) {
@@ -281,5 +283,18 @@ class SongController extends Controller
         }
         $last = array_replace_recursive($songs, $data);
         return response()->json($last, 200);
+    }
+
+    public function getLastestSong()
+    {
+        $data = Song::latest()->paginate(10)->toArray();
+        $lastRecordData = $data['data'];
+        return response()->json(compact('lastRecordData'));
+    }
+
+    public function showMoreSong()
+    {
+        $lastRecordData = Song::limit(10)->offset(10)->latest('id')->get();;
+        return response()->json(compact('lastRecordData'));
     }
 }

@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LoginSocialComponent} from './login-social.component';
+import {PlaylistDetailComponent} from './playlist-detail.component';
 
-describe('LoginSocialComponent', () => {
-  let component: LoginSocialComponent;
-  let fixture: ComponentFixture<LoginSocialComponent>;
+describe('PlaylistDetailComponent', () => {
+  let component: PlaylistDetailComponent;
+  let fixture: ComponentFixture<PlaylistDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginSocialComponent]
+      declarations: [PlaylistDetailComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginSocialComponent);
+    fixture = TestBed.createComponent(PlaylistDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

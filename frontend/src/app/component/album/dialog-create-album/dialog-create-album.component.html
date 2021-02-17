@@ -51,7 +51,7 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button (click)="onNoClick()" mat-raised-button mat-dialog-close>Cancel</button>
+  <button (click)="onNoClick()" mat-dialog-close mat-raised-button>Cancel</button>
   <button (click)="createAlbumSubmit()" [disabled]="!createAlbumDialogForm.valid" [mat-dialog-close]="createAlbumDialogForm" cdkFocusInitial mat-raised-button>
     Add
   </button>

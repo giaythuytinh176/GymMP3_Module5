@@ -16,7 +16,11 @@ import {GetSingersResolver} from '../../resolver/GetSingersResolver';
 import {UpdateSongComponent} from '../../component/songManager/update-song/update-song.component';
 import {GetSongDetailByIdResolver} from '../../resolver/GetSongDetailByIdResolver';
 import {GetSingerIDbySongIDResolver} from '../../resolver/GetSingerIDbySongIDResolver';
-import {TracksComponent} from '../../component/song/tracks/tracks.component';
+import {GetPlaylistByUSerID} from '../../resolver/GetPlaylistByIDResolver';
+import {PlaylistDetailComponent} from '../../component/playlist/playlist-detail/playlist-detail.component';
+import {GetAllSongsResolver} from '../../resolver/GetAllSongsResolver';
+import {TracksComponent} from '../../component/songManager/tracks/tracks.component';
+import {GetPlaylistInfoResolver} from "../../resolver/GetPlaylistInfoResolver";
 
 const routes: Routes = [
   {
@@ -46,6 +50,7 @@ const routes: Routes = [
     resolve: {
       getUserInfo: GetUserInfoResolver,
       getSongByUserID: GetSongByUserIDResolver,
+      getPlaylistByUSerID: GetPlaylistByUSerID,
     },
   },
   {
@@ -89,6 +94,16 @@ const routes: Routes = [
       getSingerIDbySongID: GetSingerIDbySongIDResolver,
       // getCategoryInfoByID: GetCategoryInfoByIDResolver,
     },
+  },
+  {
+    path: 'playlist/:id',
+    component: PlaylistDetailComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      getAllSongs: GetAllSongsResolver,
+      getPlaylistInfo: GetPlaylistInfoResolver,
+      getUserInfo: GetUserInfoResolver,
+    }
   },
 ];
 

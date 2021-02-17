@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Song} from '../../../model/song/song';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogDeleteSongComponent} from '../../songManager/delete-song/dialog-delete-song/dialog-delete-song.component';
@@ -41,8 +41,8 @@ export class TracksComponent implements OnInit {
     private songService: SongService,
     public dialog: MatDialog,
     public createPlaylist: CreatePlaylistComponent,
-
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.isLoading = true;

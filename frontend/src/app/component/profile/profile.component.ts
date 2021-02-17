@@ -10,8 +10,9 @@ import {SongService} from '../../services/song/song.service';
 import {MatDialog} from '@angular/material/dialog';
 import {UserService} from '../../services/userManager/user.service';
 import {CreatePlaylistComponent} from '../playlist/create-playlist/create-playlist.component';
-import {DialogDeleteSongComponent} from '../songManager/delete-song/dialog-delete-song/dialog-delete-song.component';
-import {FirebaseComponent} from '../firebase/firebase/firebase.component';
+import {PlaylistService} from 'src/app/services/playlist/playlist.service';
+import {Playlist} from 'src/app/model/playlist/playlist';
+import {DialogCreatePlaylistComponent} from '../playlist/dialog-create-playlist/dialog-create-playlist.component';
 
 @Component({
   selector: 'app-profile',
@@ -21,16 +22,68 @@ import {FirebaseComponent} from '../firebase/firebase/firebase.component';
 export class ProfileComponent implements OnInit {
 
   userinfo!: UpdateInfo;
-  isLoading = false;
+  songs: Song[];
+  playlists: Playlist[];
 
-  constructor(
-    private userService: UserService,
-    private route: ActivatedRoute,
-    public createPlaylist: CreatePlaylistComponent,
+  constructor(private userService: UserService,
+              private storage: AngularFireStorage,
+              private route: ActivatedRoute,
+              private routes: Router,
+              private fb: FormBuilder,
+              private token: TokenStorageService,
+              private toastr: ToastrService,
+              private songService: SongService,
+              private playlistService: PlaylistService,
+              public dialog: MatDialog,
+              public createPlaylist: CreatePlaylistComponent,
   ) {
   }
 
   ngOnInit(): void {
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    this.songs = this.route.snapshot.data.getSongByUserID;
+    this.playlists = this.route.snapshot.data.getPlaylistByUSerID;
+  }
+
+  getPlaylistByUSerId(): void {
+    // console.log(this.playlists);
+    this.playlistService.getPlaylistByUserID(this.userinfo.id)
+      .subscribe((data: any) => {
+        if (data.status) {
+          this.token.signOut();
+          this.routes.navigate(['/user/login']);
+        } else {
+          console.log(data);
+          this.playlists = data;
+        }
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  openDialogPlaylist(user_id: number): void {
+    const dialogRef = this.dialog.open(DialogCreatePlaylistComponent, {
+      width: '15%',
+      height: '35%',
+      data: {
+        user_id,
+      },
+      // panelClass: 'model-background',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('result', result);
+      if (result === undefined) {
+      } else if (result.valid) {
+        console.log(result);
+        this.getPlaylistByUSerId();
+        // this.notFoundCategory = false;
+        // this.createMusicForm.get('myControl_category').reset();
+        // this.categoryService.getAllCategories().subscribe((res: any) => {
+        //   this.categories = res.data;
+        // });
+      }
+    });
   }
 }

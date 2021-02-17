@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/search', 'SongController@search');
 
 Route::prefix('user')->group(function () {
     Route::post('/signup', 'UserController@register');
@@ -30,10 +31,10 @@ Route::prefix('user')->group(function () {
 Route::prefix('song')->group(function () {
     Route::get('/list', 'SongController@allSongs');
     Route::get('/moved/list', 'SongController@allMovedSongs');
+    Route::get('/lastest', 'SongController@getLastestSong');
+    Route::get('/showmore', 'SongController@showMoreSong');
 
 });
-
-Route::post('/search', 'SongController@search');
 
 Route::group(['middleware' => ['jwt.verify']], function () {
 
@@ -86,6 +87,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::prefix('playlist')->group(function () {
         Route::get('/list', 'PlaylistController@index');
         Route::post('/create', 'PlaylistController@store');
+        Route::get('/showlist/{id}', 'PlaylistController@show');
+        Route::get('/{id}', 'PlaylistController@getInfo');
 
     });
 
