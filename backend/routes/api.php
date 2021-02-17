@@ -30,6 +30,8 @@ Route::prefix('user')->group(function () {
 Route::prefix('song')->group(function () {
     Route::get('/list', 'SongController@allSongs');
     Route::get('/moved/list', 'SongController@allMovedSongs');
+    Route::get('/lastest','SongController@getLastestSong');
+    Route::get('/showmore','SongController@showmoreSong');
 
 });
 

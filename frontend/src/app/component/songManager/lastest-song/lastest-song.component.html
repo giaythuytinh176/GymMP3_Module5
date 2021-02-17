@@ -3,7 +3,7 @@
     <div class="col-lg-9 b-r no-border-md">
       <div class="padding">
         <div class="page-title m-b">
-          <h1 class="inline m-a-0">Browse</h1>
+          <h1 class="inline m-a-0">LastestSong</h1>
           <div class="dropdown inline">
             <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">
               All
@@ -89,7 +89,7 @@
           }">
           <div class="row">
             <div>
-              <div *ngFor="let song of allsongs" class="col-xs-2 col-sm-2 col-md-2">
+              <div *ngFor="let song of lastestSong" class="col-xs-2 col-sm-2 col-md-2">
                 <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
                   <div class="item-media ">
                     <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
@@ -118,12 +118,18 @@
                   </div>
                 </div>
               </div>
+              <div *ngIf="showmore">
+                <app-showmore-song-lastest></app-showmore-song-lastest>
+              </div>
             </div>
           </div>
 
-          <div class="text-center">
-            <a class="btn btn-sm white rounded jscroll-next" href="scroll.item.html">Show More</a>
-          </div>
+
+
+          <div class="text-center" *ngIf="show">
+            <a class="btn btn-sm white rounded jscroll-next"  (click)="Showmore()" >Show More</a>
+          </div >
+
         </div>
         <ng-template #loadingTEMP>
           <div class="centered">

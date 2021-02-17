@@ -91,10 +91,14 @@ import {FirebaseDialogAlbumComponent} from './component/firebase/firebaseDialogA
 import {FirebaseDialogCategoryComponent} from './component/firebase/firebaseDialogCateogry/firebaseDialogCategory.component';
 import {FirebaseDialogSingerComponent} from './component/firebase/firebaseDialogSinger/firebaseDialogSinger.component';
 import { LoginSocialComponent } from './component/login-social/login-social.component';
+import { LastestSongComponent } from './component/songManager/lastest-song/lastest-song.component';
+import { ShowmoreSongLastestComponent } from './component/songManager/showmore-song-lastest/showmore-song-lastest.component';
+
 import {FirebaseCreateSongComponent} from './component/firebase/firebaseCreateSong/firebaseCreateSong.component';
 import {FirebaseUpdateSongComponent} from "./component/firebase/firebaseUpdateSong/firebaseUpdateSong.component";
 import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditProfile/firebaseEditProfile.component";
 import { PlaylistDetailComponent } from './component/playlist/playlist-detail/playlist-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -125,6 +129,8 @@ import { PlaylistDetailComponent } from './component/playlist/playlist-detail/pl
     DialogCreatePlaylistComponent,
     DialogDeleteSongComponent,
     LoginSocialComponent,
+    LastestSongComponent,
+    ShowmoreSongLastestComponent,
     FirebaseCreateSongComponent,
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
