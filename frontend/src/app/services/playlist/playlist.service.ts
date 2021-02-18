@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Playlist} from '../../model/playlist/playlist';
 import {Observable} from 'rxjs';
+import { Song } from 'src/app/model/song/song';
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -15,6 +16,7 @@ export class PlaylistService {
   apiListPlaylist = environment.apiUrl + '/playlist/list';
   apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
   apiPlaylistInfo = environment.apiUrl + '/playlist';
+  apiAddSongToPlaylist =  environment.apiUrl + '/playlist/add-song'
 
 
   token = window.localStorage.getItem(TOKEN_KEY);
@@ -41,4 +43,10 @@ export class PlaylistService {
     return this.http.get<Playlist>(`${this.apiPlaylistInfo}/${id}`, this.httpJson);
   }
 
+  addSong(song_id: number, playlist_id: number ): Observable<Playlist> {
+    return this.http.get<Playlist>(`${this.apiAddSongToPlaylist}/${song_id}/${playlist_id}`, this.httpJson);
+  }
+
+  
+  
 }

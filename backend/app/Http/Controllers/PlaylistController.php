@@ -82,8 +82,16 @@ class PlaylistController extends Controller
         //
     }
 
-    public function createSong($id)
+    public function createSong($song_id, $playlist_id)
     {
+       $playlist =  DB::table('song_playlist')
+        ->insert(['song_id'=> $song_id, 'playlist_id'=>$playlist_id]);    
+        return response()->json($playlist, 200);
+    }
 
+    public function showSongPlaylist($playlist_id)
+    {
+        $playlist = Playlist::with('songs')->where('playlists.id','like','%'.$playlist_id.'%')->get()->toArray();
+        return response()->json($playlist, 200);
     }
 }
