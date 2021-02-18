@@ -15,7 +15,7 @@ export class PlaylistService {
   apiListPlaylist = environment.apiUrl + '/playlist/list';
   apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
   apiPlaylistInfo = environment.apiUrl + '/playlist';
-
+  apiDeletePlaylist = environment.apiUrl + '/playlist';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -25,8 +25,23 @@ export class PlaylistService {
       'Access-Control-Allow-Origin': '*',
     })
   };
+  private searchPlaylist = environment.apiUrl + '/search-playlist/';
 
   constructor(private http: HttpClient) {
+  }
+
+  deletePlaylist(id: number, user_id: number) {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token,
+        'Access-Control-Allow-Origin': '*',
+      }),
+      body: {
+        user_id: user_id,
+      },
+    };
+    return this.http.delete(`${this.apiDeletePlaylist}/${id}`, httpHeader);
   }
 
   createPlaylist(pl: Playlist): Observable<Playlist> {
@@ -41,4 +56,7 @@ export class PlaylistService {
     return this.http.get<Playlist>(`${this.apiPlaylistInfo}/${id}`, this.httpJson);
   }
 
+  searchPlaylist1(key: any): Observable<any> {
+    return this.http.post(`${this.searchPlaylist}`, {search: key});
+  }
 }

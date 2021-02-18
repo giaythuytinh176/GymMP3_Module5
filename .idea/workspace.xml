@@ -2,9 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/search-playlist/search-playlist.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/search-playlist/search-playlist.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/search-playlist/search-playlist.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/search-playlist/search-playlist.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/PlaylistController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/PlaylistController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/SongController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/SongController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Models/Playlist.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/Playlist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Models/Song.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/Song.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/playlist/playlist-detail/playlist-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/playlist/playlist-detail/playlist-detail.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/search-song/search-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/search-song/search-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/lazyloading/users/users-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/lazyloading/users/users-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/playlist/playlist.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/playlist/playlist.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,6 +251,9 @@
       <workItem from="1613582351935" duration="49000" />
       <workItem from="1613582517326" duration="6346000" />
       <workItem from="1613609710112" duration="2581000" />
+      <workItem from="1613632451692" duration="2764000" />
+      <workItem from="1613651338437" duration="1134000" />
+      <workItem from="1613677197108" duration="6007000" />
     </task>
     <task id="LOCAL-00001" summary="tesing dragdrop6">
       <created>1612986188568</created>

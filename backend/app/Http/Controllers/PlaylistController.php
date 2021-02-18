@@ -77,13 +77,47 @@ class PlaylistController extends Controller
         //
     }
 
-    public function destroy(Playlist $playlist)
+    public function destroy(Request $request, UserController $userController)
     {
-        //
+        $token = $userController->getAuthenticatedUser();
+        if (!$request->user_id || ($request->user_id !== $token->getData()->user->id)) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'User ID invalid or not found.'], 400);
+        }
+
+        $pl = Playlist::findOrFail($request->id);
+        $pl->songs()->detach();
+        $pl->delete();
+        return response()->json($pl);
     }
 
     public function createSong($id)
     {
 
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->search == '' || !$request->search) {
+            return response()->json(['keyword' => 'You haven\'t enter Keywords.'], 200);
+        }
+        $playlists = DB::table('categories')
+            ->select('playlists.*')
+            ->join('songs', 'categories.id', '=', 'songs.category_id')
+            ->join('song_playlist', 'songs.id', '=', 'song_playlist.song_id')
+            ->join('playlists', 'song_playlist.playlist_id', '=', 'playlists.id')
+            ->join('users', 'songs.user_id', '=', 'users.id')
+            ->where('playlists.name_playlist', 'like', '%' . $request->search . '%')
+            ->orWhere('categories.category_name', 'like', '%' . $request->search . '%')
+            ->orWhere('songs.author', 'like', '%' . $request->search . '%')
+            ->orWhere('users.username', 'like', '%' . $request->search . '%')
+            ->get()
+            ->toArray();
+        $result = array();
+        foreach ($playlists as $key => $value) {
+            if (in_array($value, $result)) continue;
+            $result[$key] = $value;
+        }
+        return response()->json($result, 200);
     }
 }
