@@ -86,4 +86,50 @@ class PlaylistController extends Controller
     {
 
     }
+
+    public function search(Request $request){
+        if ($request->search == '' || !$request->search) {
+            return response()->json(['keyword' => 'You haven\'t enter Keywords.'], 200);
+        }
+        $playlists = DB::table('categories')
+            ->select('playlists.*')
+            ->join('songs','categories.id','=','songs.category_id')
+            ->join('song_playlist','songs.id','=','song_playlist.song_id')
+            ->join('playlists','song_playlist.playlist_id','=','playlists.id')
+            ->join('users','songs.user_id','=','users.id')
+            ->where('playlists.name_playlist', 'like', '%' . $request->search . '%')
+            ->orWhere('categories.category_name','like', '%' . $request->search . '%')
+            ->orWhere('songs.author','like', '%' . $request->search . '%')
+            ->orWhere('users.name','like','%' . $request->search . '%')
+            ->get()
+            ->toArray();
+
+//        SELECT * FROM categories join songs s on categories.id = s.category_id join song_playlist sp
+//        on s.id = sp.song_id join playlists p on sp.playlist_id = p.id
+
+//        $data = [];
+//        $playlists = json_decode(json_encode($playlists), true);
+//        foreach ($playlists as $playlist) {
+//            $data[]['playlist_list_name'] = $this->findSongByPlaylistId($playlist['id']);
+//        }
+//        $last = array_replace_recursive($playlists, $data);
+//        return response()->json($last, 200);
+        return response()->json(compact(['playlists']), 200);
+    }
+
+    public function findSongByPlaylistId($id)
+    {
+        $list_song_id=[];
+        $data = DB::table('song_playlist')->where('song_playlist.song_id', '=', $id)->get();
+        foreach ($data as $dt) {
+            $list_song_id[] = $this->findSongNameBySongID($dt->song_id);
+        }
+        return $list_song_id;
+    }
+
+    public function findSongNameBySongID($id)
+    {
+        $data = DB::table('songs')->where('songs.id', '=', $id)->first();
+        return $data->song_name;
+    }
 }

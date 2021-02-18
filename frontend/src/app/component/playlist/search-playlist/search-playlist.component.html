@@ -1,0 +1,64 @@
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Search Playlist</h1>
+</div>
+
+<div class="padding" style="margin-left: 50px; margin-right: 50px;">
+  <form action="#" class="m-b-md">
+    <div class="input-group input-group-lg">
+      <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
+        <mat-label>Enter keyword here:</mat-label>
+        <input #searchBox (input)="search$.next(searchBox.value)" class="form-control" matInput placeholder="Enter keyword to search ..." type="text">
+      </mat-form-field>
+    </div>
+
+  </form>
+
+  <div *ngIf="isSearch && !keywordEnter && (count > 0)" class="m-y">
+    <div class="row item-list item-list-lg item-list-by m-b">
+      <p class="m-b-md">Results found for: <strong>{{ count }} Keyword</strong></p>
+      <div *ngFor="let val of playlist" class="col-xs-12">
+        <div [attr.data-id]="val.id" [attr.data-src]="val.mp3Url" class="item r">
+          <div class="item-media ">
+            <a [ngStyle]="{'background-image': 'url(' + val.avatarUrl + ')'}" class="item-media-content"
+               href="track.detail.html"></a>
+            <div class="item-overlay center">
+              <button class="btn-playpause">Play</button>
+            </div>
+          </div>
+          <div class="item-info">
+            <div class="item-overlay bottom text-right">
+              <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+              <a [attr.data-song-id]="val.id" class="btn-more" data-toggle="dropdown" href="#"><i
+                class="fa fa-ellipsis-h"></i></a>
+              <div class="dropdown-menu pull-right black lt"></div>
+            </div>
+            <div class="item-title text-ellipsis">
+              <a href="track.detail.html">{{ val.name_playlist}}</a>
+            </div>
+            <div class="item-author text-sm text-ellipsis ">
+              <a class="text-muted" href="artist.detail.html">{{ val.description }},</a>
+            </div>
+            <div class="item-meta text-sm text-muted">
+              <span class="item-meta-tag visible-list"><a href="browse.html"></a></span>
+            </div>
+            <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
+              {{val.describes}} ...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isSearch && (count == 0)" class="m-y">
+    <div class="row item-list item-list-lg item-list-by m-b">
+      <p class="m-b-md">Results found for: <strong>Not found keyword.</strong></p>
+    </div>
+  </div>
+
+  <div *ngIf="keywordEnter">
+    <strong>You haven't enter Keywords.</strong>
+  </div>
+</div>
+
+
