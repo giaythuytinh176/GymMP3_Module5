@@ -98,6 +98,8 @@ import {FirebaseUpdateSongComponent} from './component/firebase/firebaseUpdateSo
 import {FirebaseEditProfileComponent} from './component/firebase/firebaseEditProfile/firebaseEditProfile.component';
 import {PlaylistDetailComponent} from './component/playlist/playlist-detail/playlist-detail.component';
 import {TracksComponent} from './component/songManager/tracks/tracks.component';
+import { SearchPlaylistComponent } from './component/playlist/search-playlist/search-playlist.component';
+
 
 @NgModule({
   declarations: [
@@ -135,6 +137,8 @@ import {TracksComponent} from './component/songManager/tracks/tracks.component';
     FirebaseEditProfileComponent,
     TracksComponent,
     PlaylistDetailComponent,
+    SearchPlaylistComponent,
+
 
   ],
   imports: [

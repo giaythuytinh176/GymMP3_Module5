@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/search', 'SongController@search');
+Route::post('/search-playlist','PlaylistController@search');
 
 Route::prefix('user')->group(function () {
     Route::post('/signup', 'UserController@register');

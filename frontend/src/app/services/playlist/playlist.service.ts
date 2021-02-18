@@ -15,6 +15,7 @@ export class PlaylistService {
   apiListPlaylist = environment.apiUrl + '/playlist/list';
   apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
   apiPlaylistInfo = environment.apiUrl + '/playlist';
+  private searchPlaylist=environment.apiUrl + '/search-playlist/';
 
 
   token = window.localStorage.getItem(TOKEN_KEY);
@@ -41,4 +42,7 @@ export class PlaylistService {
     return this.http.get<Playlist>(`${this.apiPlaylistInfo}/${id}`, this.httpJson);
   }
 
+  searchPlaylist1(key: any): Observable<any> {
+    return this.http.post(`${this.searchPlaylist}`, {search: key});
+  }
 }
