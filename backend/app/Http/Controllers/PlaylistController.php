@@ -15,6 +15,26 @@ class PlaylistController extends Controller
         return response()->json(compact('data'));
     }
 
+    public function getInfo($id, Request $request, UserController $userController)
+    {
+        $token = $userController->getAuthenticatedUser();
+        if (!$this->getUserIDbyPlaylistID($request->id) ||
+            ($token->getData()->user->id !== $this->getUserIDbyPlaylistID($request->id))
+        ) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'invalid_access'], 400);
+        }
+
+        $data = Playlist::find($id);
+        return response()->json($data, 200);
+    }
+
+    public function getUserIDbyPlaylistID($id)
+    {
+        $data = DB::table('playlists')->where('id', $id)->first();
+        return !empty($data->user_id) ? (int)$data->user_id : 0;
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -33,7 +53,7 @@ class PlaylistController extends Controller
         return response()->json(compact(['playlist']), 200);
     }
 
-    public function show($user_id, Request $request,UserController $userController)
+    public function show($user_id, Request $request, UserController $userController)
     {
         if (!$user_id) {
             return response()->json(['error' => 'User ID not found.'], 400);

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Playlist} from '../../model/playlist/playlist';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 const TOKEN_KEY = 'AuthToken';
 
@@ -14,6 +14,7 @@ export class PlaylistService {
   apiCreatePlaylist = environment.apiUrl + '/playlist/create';
   apiListPlaylist = environment.apiUrl + '/playlist/list';
   apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
+  apiPlaylistInfo = environment.apiUrl + '/playlist';
 
 
   token = window.localStorage.getItem(TOKEN_KEY);
@@ -34,6 +35,10 @@ export class PlaylistService {
 
   getPlaylistByUserID(id: number): Observable<Playlist[]> {
     return this.http.get<Playlist[]>(`${this.apiShowListPlaylist}/${id}`, this.httpJson);
+  }
+
+  getPlaylistInfo(id: number): Observable<Playlist> {
+    return this.http.get<Playlist>(`${this.apiPlaylistInfo}/${id}`, this.httpJson);
   }
 
 }

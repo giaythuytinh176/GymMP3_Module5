@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShowmoreSongLastestComponent } from './showmore-song-lastest.component';
+import {ShowmoreSongLastestComponent} from './showmore-song-lastest.component';
 
 describe('ShowmoreSongLastestComponent', () => {
   let component: ShowmoreSongLastestComponent;
@@ -8,9 +8,9 @@ describe('ShowmoreSongLastestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShowmoreSongLastestComponent ]
+      declarations: [ShowmoreSongLastestComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

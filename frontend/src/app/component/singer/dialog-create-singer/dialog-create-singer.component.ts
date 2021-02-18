@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../auth/token-storage.service';
 import {SingerService} from '../../../services/singer/singer.service';
 import {shake} from 'ng-animate';
-import {FirebaseDialogSingerComponent} from "../../firebase/firebaseDialogSinger/firebaseDialogSinger.component";
+import {FirebaseDialogSingerComponent} from '../../firebase/firebaseDialogSinger/firebaseDialogSinger.component';
 
 @Component({
   selector: 'app-dialog-create-singer',

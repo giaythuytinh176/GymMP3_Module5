@@ -44,21 +44,21 @@
     <div class="app-body" id="view">
 
       <!-- ############ PAGE START-->
-      <div [ngStyle]="{'background-image': 'url(' + avatar + ')'}" class="page-bg" data-stellar-ratio="2"></div>
+      <div [ngStyle]="{'background-image': 'url(' + userinfo.avatar + ')'}" class="page-bg" data-stellar-ratio="2"></div>
       <div class="page-content">
         <div class="padding b-b">
           <div class="row-col">
             <div class="col-sm w w-auto-xs m-b">
               <div class="item w rounded">
                 <div class="item-media avatar-user">
-                  <div [ngStyle]="{'background-image': 'url(' + avatar + ')'}" class="item-media-content"></div>
+                  <div [ngStyle]="{'background-image': 'url(' + userinfo.avatar + ')'}" class="item-media-content"></div>
                 </div>
               </div>
             </div>
             <div class="col-sm">
               <div class="p-l-md no-padding-xs">
                 <h1 class="page-title">
-                  <span class="h1 _800">{{ username }}</span>
+                  <span class="h1 _800">{{ userinfo.username }}</span>
                 </h1>
                 <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">
                   ...
@@ -99,52 +99,7 @@
               </div>
               <div class="tab-content">
                 <div class="tab-pane active" id="track">
-                  <div class="row item-list item-list-by m-b">
-                    <div *ngFor="let song of songs; let i = index;" class="col-xs-12">
-                      <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
-                        <div class="item-media ">
-                          <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content" href="track.detail.html"></a>
-                          <div class="item-overlay center">
-                            <button class="btn-playpause">Play</button>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="item-overlay bottom text-right">
-                            <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                            <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
-                          </div>
-                          <div class="item-title text-ellipsis">
-                            <a href="track.detail.html">{{ song.nameSong }}</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis ">
-                            <a class="text-muted" href="artist.detail.html">{{ song.singer_list_name }},</a>
-                          </div>
-                          <div class="item-author text-sm text-ellipsis hide">
-                            <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
-                              {{ singer.singer_name }},
-                            </a>
-                          </div>
-                          <div class="item-meta text-sm text-muted">
-                            <span class="item-meta-category"><a class="label" href="browse.html">Soul</a></span>
-                            <span class="item-meta-date text-xs">02.04.2016</span>
-                          </div>
-
-                          <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-                            {{ song.describes.substring(0, 100) }} ...
-                          </div>
-
-                          <div class="item-action visible-list m-t-sm">
-                            <a [routerLink]="['/user/edit-song', song.id]" class="btn btn-xs white" href="#">Edit</a>
-                            <button (click)="openDialogDeleteSong(song.id, song.nameSong, userinfo.id)" class="btn btn-xs white">
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <a class="btn btn-sm white rounded" href="#">Show More</a>
+                  <app-tracks></app-tracks>
                 </div>
                 <!--                Empty Playlist, click to add new play list-->
                 <div class="tab-pane" id="playlist">
@@ -162,13 +117,10 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-3"  *ngFor="let playlist of playlists; let i = index;">
-                      <div class="item r" data-id="item-2" data-src="http://api.soundcloud.com/tracks/259445397/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                    <div *ngFor="let playlist of playlists; let i = index;" class="col-xs-4 col-sm-4 col-md-3">
+                      <div class="item r">
                         <div class="item-media ">
-                          <a class="item-media-content" href="track.detail.html" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
-                          <div class="item-overlay center">
-                            <button class="btn-playpause">Play</button>
-                          </div>
+                          <a [routerLink]="['/user/playlist', playlist.id]" class="item-media-content" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
                         </div>
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
@@ -177,7 +129,7 @@
                             <div class="dropdown-menu pull-right black lt"></div>
                           </div>
                           <div class="item-title text-ellipsis">
-                            <a [routerLink]="['/user/playlist-detail', playlist.id]" >{{playlist.name_playlist}}</a>
+                            <a [routerLink]="['/user/playlist', playlist.id]">{{playlist.name_playlist}}</a>
                           </div>
                           <div class="item-author text-sm text-ellipsis hide">
                             <a class="text-muted" href="artist.detail.html">Kygo</a>
@@ -185,7 +137,7 @@
                           <div class="item-meta text-sm text-muted">
               		          <span class="item-meta-stats text-xs ">
               		          	<i class="fa fa-play text-muted"></i> {{ playlist.view}}
-              		          	<i class="fa fa-heart m-l-sm text-muted"></i> 10
+                              <i class="fa fa-heart m-l-sm text-muted"></i> 10
               		          </span>
                           </div>
 
@@ -233,34 +185,34 @@
                     <div class="form-group row">
                       <div class="col-sm-3 form-control-label text-muted">Name</div>
                       <div class="col-sm-9">
-                        <input [value]="name" class="form-control" placeholder="Name">
+                        <input [value]="userinfo.name" class="form-control" placeholder="Name">
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-3 form-control-label text-muted">Address</div>
                       <div class="col-sm-9">
-                        <input [value]="address" class="form-control" placeholder="Address">
+                        <input [value]="userinfo.address" class="form-control" placeholder="Address">
                       </div>
                     </div>
 
                     <div class="form-group row">
                       <div class="col-sm-3 form-control-label text-muted">Email</div>
                       <div class="col-sm-9">
-                        <input [value]="email" class="form-control" placeholder="Email">
+                        <input [value]="userinfo.email" class="form-control" placeholder="Email">
                       </div>
                     </div>
 
                     <div class="form-group row">
                       <div class="col-sm-3 form-control-label text-muted">Phone</div>
                       <div class="col-sm-9">
-                        <input [value]="phone" class="form-control" placeholder="Phone">
+                        <input [value]="userinfo.phone" class="form-control" placeholder="Phone">
                       </div>
                     </div>
 
                     <div class="form-group row">
                       <div class="col-sm-3 form-control-label text-muted">Avatar</div>
                       <div class="col-sm-3">
-                        <img [src]="avatar" class="thumbnail img-responsive img-thumbnail img-fluid">
+                        <img [src]="userinfo.avatar" class="thumbnail img-responsive img-thumbnail img-fluid">
                       </div>
                     </div>
                   </form>

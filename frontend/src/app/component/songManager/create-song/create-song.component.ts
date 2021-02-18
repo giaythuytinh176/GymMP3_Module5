@@ -263,16 +263,6 @@ export class CreateSongComponent implements OnInit {
     }
   }
 
-  private _filter_category(name: string): Category[] {
-    const filterValue = name.toLowerCase();
-    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
-  }
-
-  private _filter_album(name: string): Album[] {
-    const filterValue = name.toLowerCase();
-    return this.albums.filter(option => option.album_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
-  }
-
   // tslint:disable-next-line:variable-name
   openDialogSinger(singer_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateSingerComponent, {
@@ -343,5 +333,15 @@ export class CreateSongComponent implements OnInit {
         });
       }
     });
+  }
+
+  private _filter_category(name: string): Category[] {
+    const filterValue = name.toLowerCase();
+    return this.categories.filter(option => option.category_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
+  }
+
+  private _filter_album(name: string): Album[] {
+    const filterValue = name.toLowerCase();
+    return this.albums.filter(option => option.album_name.toLowerCase().indexOf(filterValue.toLowerCase()) >= 0);
   }
 }

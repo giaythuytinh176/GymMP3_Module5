@@ -77,6 +77,7 @@ export class FirebaseCreateSongComponent implements OnInit {
             if (url) {
               this.toastr.success('Uploaded Image Successfully!');
               this.fb = url;
+              console.log(url);
             }
             // console.log(this.fb);
             // console.log(1111);

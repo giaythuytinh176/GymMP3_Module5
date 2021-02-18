@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginComponent} from '../login/login.component';
-import {ToastrService} from "ngx-toastr";
-import {Router} from "@angular/router";
-import {Users} from "../../model/users/users";
+import {Users} from '../../model/users/users';
 import {TokenStorageService} from '../../auth/token-storage.service';
 import {UserService} from '../../services/userManager/user.service';
 

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env.example" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +168,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/app/component/firebase" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/app/resolver" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -179,18 +180,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/app/resolver" />
+      <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$/frontend/src/app/component/firebase" />
       <recent name="$PROJECT_DIR$/frontend/src/app/component" />
       <recent name="$PROJECT_DIR$/frontend/src/app/model/singer" />
-      <recent name="$PROJECT_DIR$/frontend/src/app/resolver" />
-      <recent name="$PROJECT_DIR$/backend/app/Models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/app/component/songManager" />
       <recent name="$PROJECT_DIR$/frontend/src/app/component/firebase" />
       <recent name="$PROJECT_DIR$/frontend/src/app/component/firebase/firebase" />
       <recent name="$PROJECT_DIR$/frontend/src/app/component/singer" />
       <recent name="$PROJECT_DIR$/frontend/src/app/component/album" />
-      <recent name="$PROJECT_DIR$/frontend/src/app/component/category" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -222,8 +223,21 @@
       <workItem from="1613392893641" duration="4171000" />
       <workItem from="1613414435233" duration="7963000" />
       <workItem from="1613453557928" duration="1960000" />
+<<<<<<< HEAD
       <workItem from="1613479667119" duration="3373000" />
       <workItem from="1613577765672" duration="870000" />
+=======
+      <workItem from="1613479667119" duration="7558000" />
+      <workItem from="1613492986814" duration="144000" />
+      <workItem from="1613493265507" duration="1585000" />
+      <workItem from="1613498443284" duration="1275000" />
+      <workItem from="1613523678076" duration="6590000" />
+      <workItem from="1613542568254" duration="2076000" />
+      <workItem from="1613569315888" duration="1109000" />
+      <workItem from="1613582351935" duration="49000" />
+      <workItem from="1613582517326" duration="6346000" />
+      <workItem from="1613609710112" duration="93000" />
+>>>>>>> e0409660e9476cf0adef1118c699cadf4443c655
     </task>
     <task id="LOCAL-00001" summary="tesing dragdrop6">
       <created>1612986188568</created>
@@ -289,14 +303,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontend/src/app/component/profile/profile.component.ts</url>
-          <line>23</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html</url>
           <line>15</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html</url>
+          <line>254</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

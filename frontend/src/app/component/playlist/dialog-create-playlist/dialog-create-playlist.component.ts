@@ -23,6 +23,7 @@ export class DialogCreatePlaylistComponent implements OnInit {
   shake: any;
   playlist: Playlist;
   user_id: number;
+
   // @Input('cdkTextareaAutosize') enabled = false;
 
   constructor(

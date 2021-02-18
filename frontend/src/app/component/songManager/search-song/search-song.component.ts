@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SongService} from 'src/app/services/song/song.service';
-import {Song} from "../../../model/song/song";
-import {Observable, Subject} from "rxjs";
-import {concatMap, debounceTime, distinctUntilChanged, switchMap, throttleTime} from "rxjs/operators";
+import {Song} from '../../../model/song/song';
+import {Observable, Subject} from 'rxjs';
+import {concatMap, debounceTime, distinctUntilChanged, switchMap, throttleTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-song',

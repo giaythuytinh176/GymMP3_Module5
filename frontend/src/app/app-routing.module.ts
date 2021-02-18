@@ -1,15 +1,8 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {ChangePasswordComponent} from './component/change-password/change-password.component';
-import {RegisterComponent} from './component/register/register.component';
-import {ProfileComponent} from './component/profile/profile.component';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './services/userManager/auth.guard';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
-import {LoginComponent} from './component/login/login.component';
-import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
 import {SearchSongComponent} from './component/songManager/search-song/search-song.component';
-import {EditProfileComponent} from './component/edit-profile/edit-profile.component';
-import {CreateSongComponent} from './component/songManager/create-song/create-song.component';
 import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song.component';
 import {GetAllSongsResolver} from './resolver/GetAllSongsResolver';
 import {CdkDragDropConnectedSortingGroupExample} from './component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example';
@@ -18,91 +11,13 @@ import {GetCategoriesResolver} from './resolver/GetCategoriesResolver';
 import {GetSingersResolver} from './resolver/GetSingersResolver';
 import {GetUserInfoResolver} from './resolver/GetUserInfoResolver';
 import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
-import {GetSongDetailByIdResolver} from './resolver/GetSongDetailByIdResolver';
-import {GetSingerIDbySongIDResolver} from './resolver/GetSingerIDbySongIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
-import {LoginSocialComponent} from './component/login-social/login-social.component';
-import { GetPlaylistByUSerID } from './resolver/GetPlaylistByIDResolver';
-import { PlaylistDetailComponent } from './component/playlist/playlist-detail/playlist-detail.component';
-import {LastestSongComponent} from "./component/songManager/lastest-song/lastest-song.component";
-import {ShowmoreSongLastestComponent} from "./component/songManager/showmore-song-lastest/showmore-song-lastest.component";
+import {LastestSongComponent} from './component/songManager/lastest-song/lastest-song.component';
 
 const routes: Routes = [
   {
     path: 'user',
-    children: [
-      {
-        path: 'signup',
-        component: RegisterComponent,
-      },
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'login-facebook',
-        component: LoginSocialComponent,
-      },
-      {
-        path: 'change-password',
-        component: ChangePasswordComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getUserInfo: GetUserInfoResolver,
-        },
-      },
-      {
-        path: 'profile/:id',
-        component: ProfileComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getUserInfo: GetUserInfoResolver,
-          getSongByUserID: GetSongByUserIDResolver,
-          getPlaylistByUSerID: GetPlaylistByUSerID,
-        },
-      },
-      {
-        path: 'edit-profile',
-        component: EditProfileComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getUserInfo: GetUserInfoResolver,
-        },
-      },
-      {
-        path: 'create-song',
-        component: CreateSongComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getAlbums: GetAlbumsResolver,
-          getCategories: GetCategoriesResolver,
-          getSingers: GetSingersResolver,
-          getUserInfo: GetUserInfoResolver,
-        },
-      },
-      {
-        path: 'edit-song/:id',
-        component: UpdateSongComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getAlbums: GetAlbumsResolver,
-          getCategories: GetCategoriesResolver,
-          getSingers: GetSingersResolver,
-          getUserInfo: GetUserInfoResolver,
-          getSongDetailById: GetSongDetailByIdResolver,
-          getSingerIDbySongID: GetSingerIDbySongIDResolver,
-          // getCategoryInfoByID: GetCategoryInfoByIDResolver,
-        },
-      },
-      {
-        path: 'playlist-detail/:id',
-        component: PlaylistDetailComponent,
-        canActivate: [AuthGuard],
-        resolve: {
-          getAllSongs: GetAllSongsResolver
-        }
-      }
-    ]
+    loadChildren: () => import('./lazyloading/users/users.module').then(m => m.UsersModule),
   },
   {
     path: 'browse',
@@ -112,16 +27,9 @@ const routes: Routes = [
     }
   },
   {
-    path: 'lastest-song',
+    path: 'lastest-songs',
     component: LastestSongComponent,
   },
-
-  {
-    path: 'showmore-lastest-song',
-    component: ShowmoreSongLastestComponent,
-  },
-
-
   {
     path: 'search',
     component: SearchSongComponent,
@@ -155,7 +63,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {useHash: true}),
+    RouterModule.forRoot(routes,
+      {
+        useHash: true,
+        preloadingStrategy: PreloadAllModules,
+      }
+    ),
   ],
   exports: [
     RouterModule,

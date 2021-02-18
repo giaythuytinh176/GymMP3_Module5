@@ -5,11 +5,11 @@ import {Observable} from 'rxjs';
 import {ChangePassword} from './change-password';
 import {JwtResponse} from './jwt-response';
 import {SignupInfo} from './signup-info';
-import {ToastrService} from "ngx-toastr";
-import {LoginInfo} from "./login-info";
-import {environment} from "../../environments/environment";
-import {TokenStorageService} from "./token-storage.service";
-import {map} from "rxjs/operators";
+import {ToastrService} from 'ngx-toastr';
+import {LoginInfo} from './login-info';
+import {environment} from '../../environments/environment';
+import {TokenStorageService} from './token-storage.service';
+import {map} from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({

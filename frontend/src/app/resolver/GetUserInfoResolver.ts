@@ -3,7 +3,7 @@ import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@ang
 import {Observable, of} from 'rxjs';
 import {UserService} from '../services/userManager/user.service';
 import {UpdateInfo} from '../model/userManager/updateinfo';
-import {catchError} from "rxjs/operators";
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

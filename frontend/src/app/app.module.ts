@@ -1,4 +1,4 @@
-import {NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -90,15 +90,14 @@ import {FirebaseMP3Component} from './component/firebase/firebaseMP3/firebaseMP3
 import {FirebaseDialogAlbumComponent} from './component/firebase/firebaseDialogAlbum/firebaseDialogAlbum.component';
 import {FirebaseDialogCategoryComponent} from './component/firebase/firebaseDialogCateogry/firebaseDialogCategory.component';
 import {FirebaseDialogSingerComponent} from './component/firebase/firebaseDialogSinger/firebaseDialogSinger.component';
-import { LoginSocialComponent } from './component/login-social/login-social.component';
-import { LastestSongComponent } from './component/songManager/lastest-song/lastest-song.component';
-import { ShowmoreSongLastestComponent } from './component/songManager/showmore-song-lastest/showmore-song-lastest.component';
-
+import {LoginSocialComponent} from './component/login-social/login-social.component';
+import {LastestSongComponent} from './component/songManager/lastest-song/lastest-song.component';
+import {ShowmoreSongLastestComponent} from './component/songManager/showmore-song-lastest/showmore-song-lastest.component';
 import {FirebaseCreateSongComponent} from './component/firebase/firebaseCreateSong/firebaseCreateSong.component';
-import {FirebaseUpdateSongComponent} from "./component/firebase/firebaseUpdateSong/firebaseUpdateSong.component";
-import {FirebaseEditProfileComponent} from "./component/firebase/firebaseEditProfile/firebaseEditProfile.component";
-import { PlaylistDetailComponent } from './component/playlist/playlist-detail/playlist-detail.component';
-
+import {FirebaseUpdateSongComponent} from './component/firebase/firebaseUpdateSong/firebaseUpdateSong.component';
+import {FirebaseEditProfileComponent} from './component/firebase/firebaseEditProfile/firebaseEditProfile.component';
+import {PlaylistDetailComponent} from './component/playlist/playlist-detail/playlist-detail.component';
+import {TracksComponent} from './component/songManager/tracks/tracks.component';
 
 @NgModule({
   declarations: [
@@ -134,8 +133,8 @@ import { PlaylistDetailComponent } from './component/playlist/playlist-detail/pl
     FirebaseCreateSongComponent,
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
+    TracksComponent,
     PlaylistDetailComponent,
-
 
   ],
   imports: [
