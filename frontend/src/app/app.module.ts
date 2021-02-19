@@ -100,6 +100,7 @@ import {PlaylistDetailComponent} from './component/playlist/playlist-detail/play
 import {TracksComponent} from './component/songManager/tracks/tracks.component';
 import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
 import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
+import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
 
 
 @NgModule({
@@ -140,6 +141,7 @@ import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delet
     PlaylistDetailComponent,
     SearchPlaylistComponent,
     DialogDeletePlaylistComponent,
+    SingerDetailComponent,
 
 
   ],

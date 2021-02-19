@@ -14,6 +14,7 @@ import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
 import {LastestSongComponent} from './component/songManager/lastest-song/lastest-song.component';
 import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
+import {SingerDetailComponent} from "./component/singer/singer-detail/singer-detail.component";
 
 const routes: Routes = [
   {
@@ -39,7 +40,10 @@ const routes: Routes = [
     path: 'search-playlist',
     component: SearchPlaylistComponent,
   },
-
+  {
+    path: 'singers/:id',
+    component: SingerDetailComponent,
+  },
   {
     path: 'dragdrop',
     component: CdkDragDropConnectedSortingGroupExample,
