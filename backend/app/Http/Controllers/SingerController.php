@@ -31,9 +31,15 @@ class SingerController extends Controller
         return response()->json(compact(['singer']), 200);
     }
 
-    public function show(Singer $singer)
+    public function allSingers(){
+        $data=Singer::with('songs')->get();
+        return response()->json(compact('data'),200);
+    }
+
+    public function show($id)
     {
-        //
+        $singer=Singer::find($id);
+        return response()->json($singer);
     }
 
     public function update(Request $request, Singer $singer)
