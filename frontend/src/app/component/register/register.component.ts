@@ -38,6 +38,8 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
   username: any;
   existUserMess = false;
   check$ = new Subject<string>();
+  hidePassword = true;
+  hideConfirmPassword = true;
 
   constructor(private authService: AuthService,
               private route: Router,

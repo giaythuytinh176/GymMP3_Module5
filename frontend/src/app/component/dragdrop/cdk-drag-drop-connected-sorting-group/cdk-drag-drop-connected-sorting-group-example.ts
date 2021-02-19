@@ -202,7 +202,7 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
         this.songService.deleteSong(this.dataToMove.id, this.userinfo.id).subscribe(
           (data: any) => {
             // console.log(data);
-            // this.toastr.success('Deleted song sucessfully!');
+            // this.toastr.success('Deleted song successfully!');
             console.log(2);
 
             const singerIdList = [];
@@ -224,7 +224,7 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
         this.songService.deleteMovedSong(this.dataToMove.id, this.userinfo.id).subscribe(
           (data: any) => {
             // console.log(data);
-            // this.toastr.success('Deleted song sucessfully!');
+            // this.toastr.success('Deleted song successfully!');
 
             const singerIdList = [];
             for (const singerId of this.dataToMove.singers) {

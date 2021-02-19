@@ -106,6 +106,7 @@ class SongController extends Controller
             ->join('albums', 'albums.id', '=', 'songs.album_id')
             ->join('categories', 'categories.id', '=', 'songs.category_id')
             ->where('users.id', '=', (int)$user_id)
+            ->orderBy('songs.id', 'DESC')
             ->get()
             ->toArray();
         $data = [];
@@ -146,7 +147,8 @@ class SongController extends Controller
     public function allSongs()
     {
         // limit 10 bai hat va random khi tra ve
-        $data = Song::with('singers')->inRandomOrder()->limit(10)->get();
+        $data = Song::with('singers')->inRandomOrder()->limit(10)->get()->toArray();
+//        dd($data);
         return response()->json(compact('data'), 200);
     }
 

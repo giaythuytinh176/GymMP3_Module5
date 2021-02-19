@@ -93,6 +93,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::delete('/{id}', 'PlaylistController@destroy');
         Route::get('/add-song/{song_id}/{playlist_id}', 'PlaylistController@createSong');
         Route::get('/showSong/{playlist_id}', 'PlaylistController@showSongPlaylist');
+        Route::delete('/song/{id}', 'PlaylistController@deleteSongOfPlaylist');
+        Route::post('/all-songs-except', 'PlaylistController@getSongExcept');
 
     });
 });

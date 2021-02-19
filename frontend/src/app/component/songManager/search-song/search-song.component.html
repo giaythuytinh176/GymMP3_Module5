@@ -5,7 +5,7 @@
 <div class="padding" style="margin-left: 50px; margin-right: 50px;">
   <form action="#" class="m-b-md">
     <div class="input-group input-group-lg">
-      <mat-form-field [style.height.px]=80 appearance="fill" class="example-full-width">
+      <mat-form-field [style.height.px]=80 appearance="outline" class="example-full-width">
         <mat-label>Enter keyword here:</mat-label>
         <input #searchBox (input)="search$.next(searchBox.value)" class="form-control" matInput placeholder="Enter keyword to search ..." type="text">
       </mat-form-field>

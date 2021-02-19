@@ -8,7 +8,7 @@
       <div class="form-group row">
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Name song:</div>-->
         <div class="col-sm-4">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Name song:</mat-label>
             <input [class.input-invalid]="createMusicForm.get('nameSong')!.invalid && createMusicForm.get('nameSong')!.touched" [class.input-valid]="createMusicForm.get('nameSong')!.valid && createMusicForm.get('nameSong')!.touched" class="form-control" formControlName="nameSong" matInput placeholder="Name song" type="text">
             <div *ngIf="createMusicForm.get('nameSong').invalid && createMusicForm.get('nameSong').touched"
@@ -22,7 +22,7 @@
 
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Author:</div>-->
         <div class="col-sm-4">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Author:</mat-label>
             <input [class.input-invalid]="createMusicForm.get('author')!.invalid && createMusicForm.get('author')!.touched" [class.input-valid]="createMusicForm.get('author')!.valid && createMusicForm.get('author')!.touched" class="form-control" formControlName="author" matInput placeholder="Author" type="text">
             <div *ngIf="createMusicForm.get('author').invalid && createMusicForm.get('author').touched"
@@ -36,7 +36,7 @@
 
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Singer:</div>-->
         <div class="col-sm-4">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Select a Singer:</mat-label>
             <input [matAutocomplete]="auto_singer" formControlName="myControl_singer" matInput type="text">
             <mat-hint>
@@ -64,7 +64,7 @@
             </div>
           </mat-form-field>
 
-          <!--          <mat-form-field appearance="fill" class="example-full-width">-->
+          <!--          <mat-form-field appearance="outline" class="example-full-width">-->
           <!--            <mat-label>Select a Singer:</mat-label>-->
           <!--            <mat-select [class.input-invalid]="createMusicForm.get('singer_id')!.invalid && createMusicForm.get('singer_id')!.touched" [class.input-valid]="createMusicForm.get('singer_id')!.valid && createMusicForm.get('singer_id')!.touched" class="form-control" formControlName="singer_id" multiple>-->
           <!--              &lt;!&ndash;            <mat-option disabled selected value>&#45;&#45; Select a Singer &#45;&#45;</mat-option>&ndash;&gt;-->
@@ -85,7 +85,7 @@
       <div class="form-group row">
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Category:</div>-->
         <!--        <div class="col-sm-4">-->
-        <!--          <mat-form-field appearance="fill" class="example-full-width">-->
+        <!--          <mat-form-field appearance="outline" class="example-full-width">-->
         <!--            <mat-label>Select a Category:</mat-label>-->
         <!--            <mat-select [class.input-invalid]="createMusicForm.get('category_id')!.invalid && createMusicForm.get('category_id')!.touched" [class.input-valid]="createMusicForm.get('category_id')!.valid && createMusicForm.get('category_id')!.touched" [placeholder]="'&#45;&#45; Select a Category &#45;&#45;'" class="form-control" formControlName="category_id">-->
         <!--              &lt;!&ndash;            <mat-option disabled selected value>&#45;&#45; Select a Category &#45;&#45;</mat-option>&ndash;&gt;-->
@@ -102,7 +102,7 @@
         <!--          </mat-form-field>-->
         <!--        </div>-->
         <div class="col-sm-4">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Select a Category:</mat-label>
             <mat-hint>
               <div *ngIf="notFoundCategory" style="color: red;">
@@ -129,7 +129,7 @@
 
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Album:</div>-->
         <!--        <div class="col-sm-4">-->
-        <!--          <mat-form-field appearance="fill" class="example-full-width">-->
+        <!--          <mat-form-field appearance="outline" class="example-full-width">-->
         <!--            <mat-label>Select an Album:</mat-label>-->
         <!--            <mat-select [class.input-invalid]="createMusicForm.get('album_id')!.invalid && createMusicForm.get('album_id')!.touched" [class.input-valid]="createMusicForm.get('album_id')!.valid && createMusicForm.get('album_id')!.touched" class="form-control" formControlName="album_id">-->
         <!--              &lt;!&ndash;            <mat-option disabled selected value>&#45;&#45; Select an Album &#45;&#45;</mat-option>&ndash;&gt;-->
@@ -146,7 +146,7 @@
         <!--          </mat-form-field>-->
         <!--        </div>-->
         <div class="col-sm-4">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Select an Album:</mat-label>
             <mat-hint>
               <div *ngIf="notFoundAlbum" style="color: red;">
@@ -173,7 +173,7 @@
 
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">View:</div>-->
         <div class="col-sm-4">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>View:</mat-label>
             <input [class.input-invalid]="createMusicForm.get('views')!.invalid && createMusicForm.get('views')!.touched" [class.input-valid]="createMusicForm.get('views')!.valid && createMusicForm.get('views')!.touched" class="form-control" formControlName="views" matInput placeholder="View" type="text">
             <div *ngIf="createMusicForm.get('views')!.invalid && createMusicForm.get('views')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
@@ -193,7 +193,7 @@
       <div class="form-group row">
         <!--        <div class="font-weight-bold col-sm-3 form-control-label text-muted">Describes:</div>-->
         <div class="col-sm-12">
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Describes:</mat-label>
             <textarea #autosize="cdkTextareaAutosize"
                       [class.input-invalid]="createMusicForm.get('describes')!.invalid && createMusicForm.get('describes')!.touched"

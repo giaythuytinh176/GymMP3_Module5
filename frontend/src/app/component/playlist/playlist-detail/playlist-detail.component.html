@@ -46,32 +46,35 @@
 
         <h6 class="m-b">
           <span class="text-muted">by</span>
-          <a class="item-author _600" data-pjax href="artist.detail.html"> {{ getUserInfo.username }}</a>
+          <a class="item-author _600" data-pjax href="artist.detail.html"> {{ auth ? getUserInfo.username : 'CodeGym' }}</a>
           <span class="text-muted text-sm">- 10 song, 50 min 32 sec</span>
         </h6>
         <div class="row item-list item-list-xs item-list-li m-b" id="tracks">
-          <div class="col-xs-12">
-            <div class="item r" data-id="item-7"
-                 data-src="http://api.soundcloud.com/tracks/245566366/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+          <div *ngFor="let song of songOfPlaylist" class="col-xs-12">
+            <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
               <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('images/b6.jpg');"></a>
+                <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content"
+                   href="track.detail.html"></a>
                 <div class="item-overlay center">
                   <button class="btn-playpause">Play</button>
                 </div>
               </div>
               <div class="item-info">
                 <div class="item-overlay bottom text-right">
+                  <a (click)="openDialogDeleteSongOfPlaylist(song.id, song.nameSong, getUserInfo.id)" class="btn-favorite"><i class="small material-icons">
+                    {{ auth ? 'delete_forever' : '' }} </i></a>
                   <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
                   <a class="btn-more" data-toggle="dropdown" href="#"><i
                     class="fa fa-ellipsis-h"></i></a>
                   <div class="dropdown-menu pull-right black lt"></div>
                 </div>
                 <div class="item-title text-ellipsis">
-                  <a href="track.detail.html">Reflection (Deluxe)</a>
+                  <a href="track.detail.html">{{ song.nameSong }}</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis hide">
-                  <a class="text-muted" href="artist.detail.html">Fifth Harmony</a>
+                  <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                    {{ singer.singer_name }},
+                  </a>
                 </div>
                 <div class="item-meta text-sm text-muted">
                   <span class="item-meta-right">5:05</span>

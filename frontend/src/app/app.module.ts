@@ -99,7 +99,8 @@ import {FirebaseEditProfileComponent} from './component/firebase/firebaseEditPro
 import {PlaylistDetailComponent} from './component/playlist/playlist-detail/playlist-detail.component';
 import {TracksComponent} from './component/songManager/tracks/tracks.component';
 import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
-import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
+import {DialogDeletePlaylistComponent} from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
+import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-delete-song-of-playlist/dialog-delete-song-of-playlist.component';
 
 
 @NgModule({
@@ -140,6 +141,7 @@ import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delet
     PlaylistDetailComponent,
     SearchPlaylistComponent,
     DialogDeletePlaylistComponent,
+    DialogDeleteSongOfPlaylistComponent,
 
 
   ],
