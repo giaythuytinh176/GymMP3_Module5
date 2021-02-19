@@ -27,7 +27,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -98,6 +98,11 @@ import {FirebaseUpdateSongComponent} from './component/firebase/firebaseUpdateSo
 import {FirebaseEditProfileComponent} from './component/firebase/firebaseEditProfile/firebaseEditProfile.component';
 import {PlaylistDetailComponent} from './component/playlist/playlist-detail/playlist-detail.component';
 import {TracksComponent} from './component/songManager/tracks/tracks.component';
+import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
+import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
+import { ListSingerComponent } from './component/singer/list-singer/list-singer.component';
+import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -135,6 +140,11 @@ import {TracksComponent} from './component/songManager/tracks/tracks.component';
     FirebaseEditProfileComponent,
     TracksComponent,
     PlaylistDetailComponent,
+    SearchPlaylistComponent,
+    DialogDeletePlaylistComponent,
+    ListSingerComponent,
+    SingerDetailComponent,
+
 
   ],
   imports: [
@@ -224,6 +234,7 @@ import {TracksComponent} from './component/songManager/tracks/tracks.component';
     FirebaseCreateSongComponent,
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
+    DialogDeletePlaylistComponent,
 
   ],
   bootstrap: [

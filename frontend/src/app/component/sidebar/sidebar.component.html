@@ -11,7 +11,7 @@
                       sort
                     </i>
                   </span>
-        <span class="nav-text">Browse</span>
+        <span class="nav-text">Browse Song</span>
       </a>
     </li>
     <li>
@@ -31,7 +31,27 @@
                       search
                     </i>
                   </span>
-        <span class="nav-text">Search</span>
+        <span class="nav-text">Search Song</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/search-playlist']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      search
+                    </i>
+                  </span>
+        <span class="nav-text">Search PLaylist</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/singer/list']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      list
+                    </i>
+                  </span>
+        <span class="nav-text">Singers</span>
       </a>
     </li>
     <li *ngIf="isLoggedIn">

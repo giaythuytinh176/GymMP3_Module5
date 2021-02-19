@@ -13,6 +13,8 @@ import {CreatePlaylistComponent} from '../playlist/create-playlist/create-playli
 import {PlaylistService} from 'src/app/services/playlist/playlist.service';
 import {Playlist} from 'src/app/model/playlist/playlist';
 import {DialogCreatePlaylistComponent} from '../playlist/dialog-create-playlist/dialog-create-playlist.component';
+import {DialogDeleteSongComponent} from "../songManager/delete-song/dialog-delete-song/dialog-delete-song.component";
+import {DialogDeletePlaylistComponent} from "../playlist/dialog-delete-playlist/dialog-delete-playlist.component";
 
 @Component({
   selector: 'app-profile',
@@ -59,6 +61,35 @@ export class ProfileComponent implements OnInit {
       }, error => {
         console.log(error);
       });
+  }
+
+  deletePlaylist(id: number, user_id: number): void {
+    this.playlistService.deletePlaylist(id, user_id).subscribe(
+      data => {
+        // console.log(data);
+        this.getPlaylistByUSerId();
+        this.toastr.success('Deleted playlist sucessfully!');
+        this.routes.navigate(['/user/profile', this.userinfo.id]);
+      }, error => console.log(error)
+    );
+  }
+
+  // tslint:disable-next-line:variable-name
+  openDialogDeletePlaylist(id: number, name_playlist: string, user_id: number): void {
+    const dialogRef = this.dialog.open(DialogDeletePlaylistComponent, {
+      width: '300px',
+      data: {id, name_playlist, user_id},
+      // panelClass: 'custom-dialog',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.title = result;
+      if (result) {
+        this.deletePlaylist(id, user_id);
+      }
+      console.log(result);
+    });
   }
 
   openDialogPlaylist(user_id: number): void {

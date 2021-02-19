@@ -1,5 +1,5 @@
 <div class="page-title m-b">
-  <h1 class="inline m-a-0" style="padding-left: 50px">Search Song</h1>
+  <h1 class="inline m-a-0" style="padding-left: 50px">Search Playlist</h1>
 </div>
 
 <div class="padding" style="margin-left: 50px; margin-right: 50px;">
@@ -16,33 +16,20 @@
   <div *ngIf="isSearch && !keywordEnter && (count > 0)" class="m-y">
     <div class="row item-list item-list-lg item-list-by m-b">
       <p class="m-b-md">Results found for: <strong>{{ count }} Keyword</strong></p>
-      <div *ngFor="let val of song" class="col-xs-12">
-        <div [attr.data-id]="val.id" [attr.data-src]="val.mp3Url" class="item r">
+      <div *ngFor="let playlist of playlists" class="col-xs-12">
+        <div class="item r">
           <div class="item-media ">
-            <a [ngStyle]="{'background-image': 'url(' + val.avatarUrl + ')'}" class="item-media-content"
-               href="track.detail.html"></a>
-            <div class="item-overlay center">
-              <button class="btn-playpause">Play</button>
-            </div>
+            <a [routerLink]="['/user/playlist', playlist.id]" class="item-media-content" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
           </div>
           <div class="item-info">
-            <div class="item-overlay bottom text-right">
-              <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-              <a [attr.data-song-id]="val.id" class="btn-more" data-toggle="dropdown" href="#"><i
-                class="fa fa-ellipsis-h"></i></a>
-              <div class="dropdown-menu pull-right black lt"></div>
-            </div>
             <div class="item-title text-ellipsis">
-              <a href="track.detail.html">{{ val.nameSong}}</a>
-            </div>
-            <div class="item-author text-sm text-ellipsis ">
-              <a class="text-muted" href="artist.detail.html">{{ val.singer_list_name }},</a>
+              <a [routerLink]="['/user/playlist', playlist.id]">{{playlist.name_playlist}}</a>
             </div>
             <div class="item-meta text-sm text-muted">
-              <span class="item-meta-tag visible-list"><a href="browse.html"></a></span>
-            </div>
-            <div class="item-except visible-list text-sm text-muted h-2x m-t-sm">
-              {{val.describes.substring(0, 100)}} ...
+              		          <span class="item-meta-stats text-xs ">
+              		          	<i class="fa fa-play text-muted"></i> {{ playlist.view}}
+                              <i class="fa fa-heart m-l-sm text-muted"></i> 10
+              		          </span>
             </div>
           </div>
         </div>

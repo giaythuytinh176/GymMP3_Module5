@@ -13,6 +13,12 @@ import {GetUserInfoResolver} from './resolver/GetUserInfoResolver';
 import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
 import {LastestSongComponent} from './component/songManager/lastest-song/lastest-song.component';
+import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
+import { ListSingerComponent } from './component/singer/list-singer/list-singer.component';
+import { GetAllSingersResolver } from './resolver/GetAllSingersResolver';
+import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
+import { GetSongOfSingerResolver } from './resolver/GetSongOfSingerResolver';
+import { GetSingerInfoResolver } from './resolver/GetSingerInforResolver';
 
 const routes: Routes = [
   {
@@ -33,6 +39,30 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchSongComponent,
+  },
+  {
+    path: 'search-playlist',
+    component: SearchPlaylistComponent,
+  },
+  {
+    path: 'singer',
+    children: [
+      {
+        path: 'list',
+        component: ListSingerComponent,
+        resolve: {
+          getAllSingers: GetAllSingersResolver
+        }
+      },
+      {
+        path: 'song/:id',
+        component: SingerDetailComponent,
+        resolve: {
+          getSingerInfor: GetSingerInfoResolver,
+          getShowSongSinger: GetSongOfSingerResolver
+        }
+      }
+    ]
   },
   {
     path: 'dragdrop',
