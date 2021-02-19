@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Playlist} from "../../../model/playlist/playlist";
-import {Subject} from "rxjs";
-import {PlaylistService} from "../../../services/playlist/playlist.service";
-import {Router} from "@angular/router";
-import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
+import {Component, OnInit} from '@angular/core';
+import {Playlist} from '../../../model/playlist/playlist';
+import {Subject} from 'rxjs';
+import {PlaylistService} from '../../../services/playlist/playlist.service';
+import {Router} from '@angular/router';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-playlist',
@@ -11,7 +11,7 @@ import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
   styleUrls: ['./search-playlist.component.css']
 })
 export class SearchPlaylistComponent implements OnInit {
-  playlist!: Playlist[];
+  playlists!: Playlist[];
 
   search!: any;
   count!: any;
@@ -20,7 +20,7 @@ export class SearchPlaylistComponent implements OnInit {
   keywordEnter = false;
 
   constructor(
-    private playlistService:PlaylistService,
+    private playlistService: PlaylistService,
     private router: Router,
   ) {
   }
@@ -36,8 +36,8 @@ export class SearchPlaylistComponent implements OnInit {
       )
     ).subscribe(
       (next) => {
-        this.playlist = next.playlists || [];
-        console.log(this.playlist);
+        this.playlists = next || [];
+        console.log(this.playlists);
         if (next.keyword) {
           this.keywordEnter = true;
           this.isSearch = false;
@@ -45,21 +45,10 @@ export class SearchPlaylistComponent implements OnInit {
           this.isSearch = true;
           this.keywordEnter = false;
         }
-        this.count = next.length;
+        this.count = next?.length;
         // console.log(this.song);
 
       });
-    // this.songService.searchSong(this.search).subscribe(
-    //   data => {
-    //     this.song = data;
-    //     this.count = (JSON.parse((JSON.stringify(this.song)))).length;
-    //     console.log(this.count);
-    //     this.isSearch = false;
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
   }
 
 }

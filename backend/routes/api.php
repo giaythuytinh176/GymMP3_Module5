@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/search', 'SongController@search');
-Route::post('/search-playlist','PlaylistController@search');
+Route::post('/search-playlist', 'PlaylistController@search');
 
 Route::prefix('user')->group(function () {
     Route::post('/signup', 'UserController@register');
@@ -90,8 +90,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::post('/create', 'PlaylistController@store');
         Route::get('/showlist/{id}', 'PlaylistController@show');
         Route::get('/{id}', 'PlaylistController@getInfo');
+        Route::delete('/{id}', 'PlaylistController@destroy');
+        Route::get('/add-song/{song_id}/{playlist_id}', 'PlaylistController@createSong');
+        Route::get('/showSong/{playlist_id}', 'PlaylistController@showSongPlaylist');
 
     });
-
 });
 

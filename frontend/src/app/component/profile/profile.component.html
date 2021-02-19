@@ -125,8 +125,8 @@
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
                             <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                            <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
-                            <div class="dropdown-menu pull-right black lt"></div>
+                            <a (click)="openDialogDeletePlaylist(playlist.id, playlist.name_playlist, userinfo.id)">
+                              <i class="material-icons"> delete </i> </a>
                           </div>
                           <div class="item-title text-ellipsis">
                             <a [routerLink]="['/user/playlist', playlist.id]">{{playlist.name_playlist}}</a>
@@ -338,7 +338,7 @@
                 <a class="nav-link text-muted m-r-xs" href="#">Legal</a>
                 <a class="nav-link text-muted m-r-xs" href="#">Policy</a>
               </div>
-              <p class="text-muted text-xs p-b-lg">&copy; Copyright 2016</p>
+              <p class="text-muted text-xs p-b-lg">&copy; Copyright 2021</p>
             </div>
           </div>
         </div>

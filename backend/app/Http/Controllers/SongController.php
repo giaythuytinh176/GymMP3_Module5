@@ -7,8 +7,6 @@ use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Table;
-use function PHPSTORM_META\map;
 
 class SongController extends Controller
 {
@@ -77,9 +75,12 @@ class SongController extends Controller
     public function singersInfo($id)
     {
         $res = Song::with('singers')->get()->toArray();
-        $data = array_filter($res, function ($row) use ($id) {
-            return $row['id'] === (int)$id;
-        });
+        // cach 1
+//        $data = array_filter($res, function ($row) use ($id) {
+//            return $row['id'] === (int)$id;
+//        });
+        // cach 2
+        $data = array_filter($res, fn($row) => $row['id'] === (int)$id);
         $data = array_values($data)[0]['singers'];
         $data = array_map(function ($row) {
             unset($row['pivot']);
@@ -272,10 +273,13 @@ class SongController extends Controller
             ->join('categories', 'categories.id', '=', 'songs.category_id')
             ->join('albums', 'albums.id', '=', 'songs.album_id')
             ->where('songs.nameSong', 'like', '%' . $request->search . '%')
-            ->orWhere('categories.category_name', 'like', '%' . $request->search . '%')
-            ->orWhere('albums.album_name', 'like', '%' . $request->search . '%')
+//            ->orWhere('categories.category_name', 'like', '%' . $request->search . '%')
+//            ->orWhere('albums.album_name', 'like', '%' . $request->search . '%')
+            ->orWhere('users.username', 'like', '%' . $request->search . '%')
+            ->orWhere('songs.author', 'like', '%' . $request->search . '%')
             ->get()
             ->toArray();
+//        dd($songs);
         $data = [];
         $songs = json_decode(json_encode($songs), true);
         foreach ($songs as $song) {

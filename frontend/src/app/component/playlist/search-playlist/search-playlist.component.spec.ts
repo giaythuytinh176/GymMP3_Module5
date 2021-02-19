@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SearchPlaylistComponent } from './search-playlist.component';
+import {SearchPlaylistComponent} from './search-playlist.component';
 
 describe('SearchPlaylistComponent', () => {
   let component: SearchPlaylistComponent;
@@ -8,9 +8,9 @@ describe('SearchPlaylistComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchPlaylistComponent ]
+      declarations: [SearchPlaylistComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -20,7 +20,7 @@ import {GetPlaylistByUSerID} from '../../resolver/GetPlaylistByIDResolver';
 import {PlaylistDetailComponent} from '../../component/playlist/playlist-detail/playlist-detail.component';
 import {GetAllSongsResolver} from '../../resolver/GetAllSongsResolver';
 import {TracksComponent} from '../../component/songManager/tracks/tracks.component';
-import {GetPlaylistInfoResolver} from "../../resolver/GetPlaylistInfoResolver";
+import {GetPlaylistInfoResolver} from '../../resolver/GetPlaylistInfoResolver';
 
 const routes: Routes = [
   {

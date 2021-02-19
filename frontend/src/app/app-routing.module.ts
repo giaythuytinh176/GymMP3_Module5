@@ -13,7 +13,7 @@ import {GetUserInfoResolver} from './resolver/GetUserInfoResolver';
 import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
 import {LastestSongComponent} from './component/songManager/lastest-song/lastest-song.component';
-import {SearchPlaylistComponent} from "./component/playlist/search-playlist/search-playlist.component";
+import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
 
 const routes: Routes = [
   {
