@@ -91,8 +91,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::get('/showlist/{id}', 'PlaylistController@show');
         Route::get('/{id}', 'PlaylistController@getInfo');
         Route::delete('/{id}', 'PlaylistController@destroy');
+        Route::get('/add-song/{song_id}/{playlist_id}', 'PlaylistController@createSong');
+        Route::get('/showSong/{playlist_id}', 'PlaylistController@showSongPlaylist');
 
     });
-
 });
 
