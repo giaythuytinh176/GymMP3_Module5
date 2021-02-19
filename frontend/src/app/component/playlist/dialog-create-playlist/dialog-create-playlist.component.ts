@@ -23,6 +23,7 @@ export class DialogCreatePlaylistComponent implements OnInit {
   shake: any;
   playlist: Playlist;
   user_id: number;
+  status: string;
 
   // @Input('cdkTextareaAutosize') enabled = false;
 
@@ -51,6 +52,7 @@ export class DialogCreatePlaylistComponent implements OnInit {
         this.createPlaylistDialogForm.value.description,
         this.user_id,
         1,
+        this.createPlaylistDialogForm.value.status,
       );
       // console.log(this.playlist);
       this.createPlaylist(this.playlist);
@@ -93,6 +95,7 @@ export class DialogCreatePlaylistComponent implements OnInit {
     this.createPlaylistDialogForm = this.fb.group({
       name_playlist: ['', [Validators.required]],
       description: ['', [Validators.required]],
+      status: ['', [Validators.required]],
     });
   }
 
@@ -107,4 +110,5 @@ export interface DialogDataCreatePlaylist {
   description: string;
   user_id: number;
   view: number;
+  status: string;
 }

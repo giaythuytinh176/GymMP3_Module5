@@ -61,7 +61,7 @@
               </div>
               <div class="item-info">
                 <div class="item-overlay bottom text-right">
-                  <a (click)="openDialogDeleteSongOfPlaylist(song.id, song.nameSong, getUserInfo.id)" class="btn-favorite"><i class="small material-icons">
+                  <a title="Remove this song from playlist" (click)="openDialogDeleteSongOfPlaylist(song.id, song.nameSong, getUserInfo.id)" class="btn-favorite"><i class="small material-icons">
                     {{ auth ? 'delete_forever' : '' }} </i></a>
                   <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
                   <a class="btn-more" data-toggle="dropdown" href="#"><i

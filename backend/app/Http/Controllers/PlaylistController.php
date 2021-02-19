@@ -41,9 +41,9 @@ class PlaylistController extends Controller
     {
         // limit 10 bai hat va random khi tra ve
         $listSongInPlaylist = json_decode($request->listSong, true);
-        $countSongPlaylist = count($listSongInPlaylist);
-        // dd($listSongInPlaylist);
-        $data = Song::with('singers')->inRandomOrder()->limit(10 + $countSongPlaylist)->get()->toArray();
+        $countSongPlaylist = is_numeric($listSongInPlaylist) ? count($listSongInPlaylist) : 0;
+        // dd($listSongInPlaylist);     // ->inRandomOrder() remove random song except
+        $data = Song::with('singers')->limit(10 + $countSongPlaylist)->get()->toArray();
         //  $result = array_diff($listSongInPlaylist, $data);
         $list1 = [];
         $list2 = [];
@@ -75,6 +75,7 @@ class PlaylistController extends Controller
             'description' => 'required|string',
             'user_id' => 'required|integer',
             'view' => 'required|integer',
+            'status' => 'required|string',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);

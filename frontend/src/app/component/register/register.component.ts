@@ -132,10 +132,10 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
       },
       err => {
         // console.log(err);
-        // console.log(JSON.parse(err.error));
-        if ((JSON.parse(err.error)).username === 'The username has already been taken.') {
+        console.log((JSON.parse(err.error)));
+        if ((JSON.parse(err.error)).username && (JSON.parse(err.error)).username[0] === 'The username has already been taken.') {
           this.toastr.warning('The username already exists!');
-        } else if ((JSON.parse(err.error)).phone === 'The phone has already been taken.') {
+        } else if ((JSON.parse(err.error)).phone && (JSON.parse(err.error)).phone[0] === 'The phone has already been taken.') {
           this.toastr.warning('The phone already exists!');
         } else {
           this.toastr.warning('Something wrong.');
