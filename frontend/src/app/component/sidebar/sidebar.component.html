@@ -44,6 +44,16 @@
         <span class="nav-text">Search PLaylist</span>
       </a>
     </li>
+    <li>
+      <a [routerLink]="['/singer/list']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      list
+                    </i>
+                  </span>
+        <span class="nav-text">Singers</span>
+      </a>
+    </li>
     <li *ngIf="isLoggedIn">
       <a [routerLink]="['/user/profile', user?.id]">
                   <span class="nav-icon">
