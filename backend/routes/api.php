@@ -20,10 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/search', 'SongController@search');
 Route::post('/search-playlist', 'PlaylistController@search');
+
 Route::get('singer/list', 'SingerController@index');
 Route::get('singer/show-song/{id}', 'SingerController@showSongSinger');
 Route::get('singer/show-singer/{id}','SingerController@getInfor');
-
 
 Route::prefix('user')->group(function () {
     Route::post('/signup', 'UserController@register');

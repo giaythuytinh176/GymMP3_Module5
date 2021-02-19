@@ -58,7 +58,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
 import {ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
-import {AngularFireStorageModule,} from '@angular/fire/storage';
+import {AngularFireStorageModule} from '@angular/fire/storage';
 import {LoginComponent} from './component/login/login.component';
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
@@ -104,6 +104,7 @@ import { ListSingerComponent } from './component/singer/list-singer/list-singer.
 import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -144,8 +145,6 @@ import { SingerDetailComponent } from './component/singer/singer-detail/singer-d
     DialogDeletePlaylistComponent,
     ListSingerComponent,
     SingerDetailComponent,
-
-
   ],
   imports: [
     BrowserModule,
