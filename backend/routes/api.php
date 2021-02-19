@@ -21,6 +21,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/search', 'SongController@search');
 Route::post('/search-playlist', 'PlaylistController@search');
 
+Route::prefix('singer')->group(function () {
+    Route::get('/list', 'SingerController@index');
+    Route::get('/show-song/{id}', 'SingerController@showSongSinger');
+    Route::get('/show-singer/{id}', 'SingerController@getInfo');
+});
+
 Route::prefix('user')->group(function () {
     Route::post('/signup', 'UserController@register');
     Route::post('/login', 'UserController@authenticate');
@@ -76,7 +82,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     });
 
     Route::prefix('singer')->group(function () {
-        Route::get('/list', 'SingerController@index');
+        // Route::get('/list', 'SingerController@index');
         Route::post('/create', 'SingerController@store');
         Route::get('/id/song-id/{id}', 'SongController@findSingerIDBySongID');
         Route::get('/id/song-id-v2/{id}', 'SongController@singersInfo');
@@ -93,6 +99,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::delete('/{id}', 'PlaylistController@destroy');
         Route::get('/add-song/{song_id}/{playlist_id}', 'PlaylistController@createSong');
         Route::get('/showSong/{playlist_id}', 'PlaylistController@showSongPlaylist');
+        Route::get('/image-song-random/{playlist_id}', 'PlaylistController@getImageSongRandomPlaylist');
         Route::delete('/song/{id}', 'PlaylistController@deleteSongOfPlaylist');
         Route::post('/all-songs-except', 'PlaylistController@getSongExcept');
 

@@ -58,7 +58,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {ChangePasswordComponent} from './component/change-password/change-password.component';
 import {ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
-import {AngularFireStorageModule,} from '@angular/fire/storage';
+import {AngularFireStorageModule} from '@angular/fire/storage';
 import {LoginComponent} from './component/login/login.component';
 import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
@@ -101,7 +101,10 @@ import {TracksComponent} from './component/songManager/tracks/tracks.component';
 import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
 import {DialogDeletePlaylistComponent} from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
 import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-delete-song-of-playlist/dialog-delete-song-of-playlist.component';
-
+import {ListSingerComponent} from './component/singer/list-singer/list-singer.component';
+import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
+import {NgxAudioPlayerModule} from "ngx-audio-player";
+import {TrackDetailComponent} from './component/songManager/track-detail/track-detail.component';
 
 @NgModule({
   declarations: [
@@ -142,7 +145,9 @@ import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-d
     SearchPlaylistComponent,
     DialogDeletePlaylistComponent,
     DialogDeleteSongOfPlaylistComponent,
-
+    ListSingerComponent,
+    SingerDetailComponent,
+    TrackDetailComponent,
 
   ],
   imports: [
@@ -211,6 +216,7 @@ import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-d
     MatSelectModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
+    NgxAudioPlayerModule,
 
   ],
   providers: [
@@ -233,6 +239,7 @@ import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-d
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
     DialogDeletePlaylistComponent,
+    NgxAudioPlayerModule,
 
   ],
   bootstrap: [

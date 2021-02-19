@@ -44,6 +44,7 @@ export class ProfileComponent implements OnInit {
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
     this.songs = this.route.snapshot.data.getSongByUserID;
     this.playlists = this.route.snapshot.data.getPlaylistByUSerID;
+
   }
 
   getPlaylistByUSerId(): void {
@@ -68,7 +69,6 @@ export class ProfileComponent implements OnInit {
         // console.log(data);
         this.getPlaylistByUSerId();
         this.toastr.success('Deleted playlist successfully!');
-        this.routes.navigate(['/user/profile', this.userinfo.id]);
       }, error => console.log(error)
     );
   }

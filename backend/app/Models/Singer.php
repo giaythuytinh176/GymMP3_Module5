@@ -12,6 +12,11 @@ class Singer extends Model
     protected $fillable = [
         'singer_name',
         'image',
+        'gender',
+        'date_of_birth',
+        'music_genre',
+        'story',
+        'band',
         'description',
     ];
 

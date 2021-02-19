@@ -9,7 +9,7 @@
         <div class="item w r">
           <div class="item-media">
             <div class="item-media-content"
-                 style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></div>
+                 style="background-image: url({{ getRandomImagePlaylist.image || 'https://photo-zmp3.zadn.vn/album_default.png' }});"></div>
           </div>
         </div>
       </div>
@@ -53,15 +53,15 @@
           <div *ngFor="let song of songOfPlaylist" class="col-xs-12">
             <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
               <div class="item-media ">
-                <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content"
-                   href="track.detail.html"></a>
+                <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]"
+                   class="item-media-content"></a>
                 <div class="item-overlay center">
                   <button class="btn-playpause">Play</button>
                 </div>
               </div>
               <div class="item-info">
                 <div class="item-overlay bottom text-right">
-                  <a title="Remove this song from playlist" (click)="openDialogDeleteSongOfPlaylist(song.id, song.nameSong, getUserInfo.id)" class="btn-favorite"><i class="small material-icons">
+                  <a (click)="openDialogDeleteSongOfPlaylist(song.id, song.nameSong, getUserInfo.id)" class="btn-favorite" title="Remove this song from playlist"><i class="small material-icons">
                     {{ auth ? 'delete_forever' : '' }} </i></a>
                   <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
                   <a class="btn-more" data-toggle="dropdown" href="#"><i
@@ -69,7 +69,7 @@
                   <div class="dropdown-menu pull-right black lt"></div>
                 </div>
                 <div class="item-title text-ellipsis">
-                  <a href="track.detail.html">{{ song.nameSong }}</a>
+                  <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis hide">
                   <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
@@ -83,6 +83,18 @@
 
               </div>
             </div>
+          </div>
+
+          <!--          <div class="col-xs-12">-->
+          <!--            <mat-advanced-audio-player [playlist]="listTracks" (trackEnded)="triggerOnEnded($event)" [autoPlay]="false" allow="autoplay"></mat-advanced-audio-player>-->
+          <!--          </div>-->
+
+          <div class="col-xs-12">
+            <ngx-audio-player (trackEnded)="onEnded($event)" [autoPlay]="false" [disablePositionSlider]="msaapDisablePositionSlider"
+                              [displayArtist]="msaapDisplayArtist" [displayDuration]="msaapDisplayDuration" [displayPlaylist]="msaapDisplayPlayList" [displayRepeatControls]="msaapDisplayRepeatControls"
+                              [displayTitle]="msaapDisplayTitle" [displayVolumeControls]="msaapDisplayVolumeControls"
+                              [expanded]="true" [pageSizeOptions]="msaapPageSizeOptions"
+                              [playlist]="listTracks" muted="muted"></ngx-audio-player>
           </div>
 
         </div>
@@ -346,7 +358,7 @@
             <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
               <div class="item-media ">
                 <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}"
-                   class="item-media-content" href="track.detail.html"></a>
+                   [routerLink]="['/track', song.id]" class="item-media-content"></a>
                 <div class="item-overlay center">
                   <button class="btn-playpause">Play</button>
                 </div>
@@ -359,7 +371,7 @@
                     <div class="dropdown-menu pull-right black lt"></div>
                 </div> -->
                 <div class="item-title text-ellipsis">
-                  <a href="track.detail.html">{{ song.nameSong}}</a>
+                  <a [routerLink]="['/track', song.id]">{{ song.nameSong}}</a>
                   <a (click)="addToPlaylist(song.id)" title="Add to playlist">
                     <svg class="bi bi-plus" fill="currentColor" height="16" style="float: right;" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>

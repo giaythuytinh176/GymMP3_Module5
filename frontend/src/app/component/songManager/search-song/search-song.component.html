@@ -19,8 +19,8 @@
       <div *ngFor="let val of song" class="col-xs-12">
         <div [attr.data-id]="val.id" [attr.data-src]="val.mp3Url" class="item r">
           <div class="item-media ">
-            <a [ngStyle]="{'background-image': 'url(' + val.avatarUrl + ')'}" class="item-media-content"
-               href="track.detail.html"></a>
+            <a [ngStyle]="{'background-image': 'url(' + val.avatarUrl + ')'}" [routerLink]="['/track', val.id]"
+               class="item-media-content"></a>
             <div class="item-overlay center">
               <button class="btn-playpause">Play</button>
             </div>
@@ -33,7 +33,7 @@
               <div class="dropdown-menu pull-right black lt"></div>
             </div>
             <div class="item-title text-ellipsis">
-              <a href="track.detail.html">{{ val.nameSong}}</a>
+              <a [routerLink]="['/track', val.id]">{{ val.nameSong}}</a>
             </div>
             <div class="item-author text-sm text-ellipsis ">
               <a class="text-muted" href="artist.detail.html">{{ val.singer_list_name }},</a>

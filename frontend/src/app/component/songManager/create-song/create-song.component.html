@@ -258,10 +258,10 @@
           <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Describes:</mat-label>
             <textarea
-              rows="5" cdkAutosizeMaxRows="3" cdkAutosizeMinRows="1"
-              [class.input-invalid]="createMusicForm.get('describes')!.invalid && createMusicForm.get('describes')!.touched"
-              [class.input-valid]="createMusicForm.get('describes')!.valid && createMusicForm.get('describes')!.touched"
-              cdkTextareaAutosize class="form-control" formControlName="describes" matInput placeholder="Describes"></textarea>
+              [class.input-invalid]="createMusicForm.get('describes')!.invalid && createMusicForm.get('describes')!.touched" [class.input-valid]="createMusicForm.get('describes')!.valid && createMusicForm.get('describes')!.touched" cdkAutosizeMaxRows="3"
+              cdkAutosizeMinRows="1"
+              cdkTextareaAutosize
+              class="form-control" formControlName="describes" matInput placeholder="Describes" rows="5"></textarea>
             <div *ngIf="createMusicForm.get('describes').invalid && createMusicForm.get('describes').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">
               <div [@shake]="shake">

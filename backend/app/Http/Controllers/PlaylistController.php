@@ -41,7 +41,7 @@ class PlaylistController extends Controller
     {
         // limit 10 bai hat va random khi tra ve
         $listSongInPlaylist = json_decode($request->listSong, true);
-        $countSongPlaylist = is_numeric($listSongInPlaylist) ? count($listSongInPlaylist) : 0;
+        $countSongPlaylist = count($listSongInPlaylist);
         // dd($listSongInPlaylist);     // ->inRandomOrder() remove random song except
         $data = Song::with('singers')->limit(10 + $countSongPlaylist)->get()->toArray();
         //  $result = array_diff($listSongInPlaylist, $data);
@@ -71,7 +71,7 @@ class PlaylistController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name_playlist' => 'required|string|unique:playlists',
+            'name_playlist' => 'required|string',
             'description' => 'required|string',
             'user_id' => 'required|integer',
             'view' => 'required|integer',
@@ -155,6 +155,17 @@ class PlaylistController extends Controller
     {
         $playlist = Playlist::with('songs')->where('playlists.id', '=', $playlist_id)->first();
         return response()->json($playlist['songs'], 200);
+    }
+
+    public function getImageSongRandomPlaylist($playlist_id)
+    {
+        $pl = Playlist::with('songs')->where('playlists.id', '=', $playlist_id)->first();
+        if ($pl == null) return response()->json(['error' => $pl], 200);
+        elseif (empty(Playlist::with('songs')->where('playlists.id', '=', $playlist_id)->first()->toArray()['songs'])) {
+            return response()->json(['error' => 'empty playlist.'], 200);
+        } else {
+            return response()->json(['image' => $pl->toArray()['songs'][array_rand($pl->toArray()['songs'])]['avatarUrl']], 200);
+        }
     }
 
     public function search(Request $request)

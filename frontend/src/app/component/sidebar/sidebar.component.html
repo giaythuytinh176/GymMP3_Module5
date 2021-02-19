@@ -24,16 +24,16 @@
         <span class="nav-text">Lastest Songs</span>
       </a>
     </li>
-    <li>
-      <a [routerLink]="['/search']">
-                  <span class="nav-icon">
-                    <i class="material-icons">
-                      search
-                    </i>
-                  </span>
-        <span class="nav-text">Search Song</span>
-      </a>
-    </li>
+    <!--    <li>-->
+    <!--      <a [routerLink]="['/search']">-->
+    <!--                  <span class="nav-icon">-->
+    <!--                    <i class="material-icons">-->
+    <!--                      search-->
+    <!--                    </i>-->
+    <!--                  </span>-->
+    <!--        <span class="nav-text">Search Song</span>-->
+    <!--      </a>-->
+    <!--    </li>-->
     <li>
       <a [routerLink]="['/search-playlist']">
                   <span class="nav-icon">
@@ -42,6 +42,16 @@
                     </i>
                   </span>
         <span class="nav-text">Search Playlist</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/singer/list']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      list
+                    </i>
+                  </span>
+        <span class="nav-text">Singers</span>
       </a>
     </li>
     <li *ngIf="isLoggedIn">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Singer;
+use App\Models\Category;
+use App\Models\Album;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -10,8 +12,14 @@ class SingerController extends Controller
 {
     public function index()
     {
-        $data = Singer::all();
+        $data = Singer::with('songs')->get()->toArray();
         return response()->json(compact('data'));
+    }
+
+    public function getInfo($id)
+    {
+        $singer = Singer::where('id', $id)->first();
+        return response()->json($singer);
     }
 
     public function store(Request $request)
@@ -45,4 +53,22 @@ class SingerController extends Controller
     {
         //
     }
+
+    public function showSongSinger($singer_id)
+    {
+        $singer = Singer::with('songs')
+            ->where('singers.id', $singer_id)->first()->toArray();
+        $data = [];
+        $listSong = [];
+        foreach ($singer['songs'] as $val) {
+            $data = $val;
+            $category = Category::find($val['category_id'])->first()->toArray();
+            $album = Album::find($val['album_id'])->first()->toArray();
+            $data['category'] = $category['category_name'];
+            $data['album'] = $album['album_name'];
+            $listSong[] = $data;
+        }
+        return response()->json($listSong, 200);
+    }
+
 }

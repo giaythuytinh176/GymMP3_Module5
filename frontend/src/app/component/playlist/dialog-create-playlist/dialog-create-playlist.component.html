@@ -24,7 +24,7 @@
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Status:</mat-label>
               <select [class.input-invalid]="createPlaylistDialogForm.get('status')!.invalid && createPlaylistDialogForm.get('status')!.touched"
-                      [class.input-valid]="createPlaylistDialogForm.get('status')!.valid && createPlaylistDialogForm.get('status')!.touched" class="form-control" formControlName="status" matInput placeholder="Status" matNativeControl required>
+                      [class.input-valid]="createPlaylistDialogForm.get('status')!.valid && createPlaylistDialogForm.get('status')!.touched" class="form-control" formControlName="status" matInput matNativeControl placeholder="Status" required>
                 <option label="--select Status --"></option>
                 <option value="on">On</option>
                 <option value="off">Off</option>
