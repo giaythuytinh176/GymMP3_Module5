@@ -14,8 +14,8 @@ import {GetUserInfoResolver} from './GetUserInfoResolver';
 import {TestBed} from '@angular/core/testing';
 import {PlaylistService} from '../services/playlist/playlist.service';
 import {Playlist} from '../model/playlist/playlist';
-import { SingerService } from '../services/singer/singer.service';
-import { Singer } from '../model/singer/singer';
+import {SingerService} from '../services/singer/singer.service';
+import {Singer} from '../model/singer/singer';
 
 @Injectable({
   providedIn: 'root',

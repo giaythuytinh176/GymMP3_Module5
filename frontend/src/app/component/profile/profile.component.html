@@ -66,6 +66,7 @@
                 <div class="item-action m-b">
                   <!--                  <a href="#" class="btn btn-sm rounded primary">Upload</a>-->
                   <a [routerLink]="['/user/edit-profile']" class="btn btn-sm rounded primary" href="#">Edit Profile</a>
+                  &nbsp;
                   <a [routerLink]="['/user/change-password']" class="btn btn-sm rounded white" href="#">Change
                     Password</a>
                 </div>
@@ -126,7 +127,7 @@
                           <div class="item-overlay bottom text-right">
                             <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
                             <a (click)="openDialogDeletePlaylist(playlist.id, playlist.name_playlist, userinfo.id)">
-                              <i class="material-icons"> delete </i> </a>
+                              <i class="small material-icons"> delete </i> </a>
                           </div>
                           <div class="item-title text-ellipsis">
                             <a [routerLink]="['/user/playlist', playlist.id]">{{playlist.name_playlist}}</a>

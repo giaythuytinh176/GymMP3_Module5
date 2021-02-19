@@ -16,9 +16,9 @@ class SingerController extends Controller
         return response()->json(compact('data'));
     }
 
-    public function getInfor($id)
+    public function getInfo($id)
     {
-       $singer = Singer::where('id', $id)->first();
+        $singer = Singer::where('id', $id)->first();
         return response()->json($singer);
     }
 
@@ -57,11 +57,10 @@ class SingerController extends Controller
     public function showSongSinger($singer_id)
     {
         $singer = Singer::with('songs')
-                    ->where('singers.id',  $singer_id )->first()->toArray();
+            ->where('singers.id', $singer_id)->first()->toArray();
         $data = [];
         $listSong = [];
-        foreach($singer['songs'] as $val)
-        {
+        foreach ($singer['songs'] as $val) {
             $data = $val;
             $category = Category::find($val['category_id'])->first()->toArray();
             $album = Album::find($val['album_id'])->first()->toArray();
@@ -69,7 +68,6 @@ class SingerController extends Controller
             $data['album'] = $album['album_name'];
             $listSong[] = $data;
         }
-    
         return response()->json($listSong, 200);
     }
 

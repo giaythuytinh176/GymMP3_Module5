@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router, ActivatedRoute} from '@angular/router';
 import {delay, catchError} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
-import { SingerService } from '../services/singer/singer.service';
+import {SingerService} from '../services/singer/singer.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,202 +1,104 @@
 <div class="pos-rlt">
-    <div class="page-bg" data-stellar-ratio="2" style="background-image: url('images/b5.jpg');"></div>
+  <div class="page-bg" data-stellar-ratio="2" style="background-image: url('images/b5.jpg');"></div>
 </div>
 <div class="page-content">
-    <div class="padding b-b">
-        <div class="row-col" *ngIf="singer">
-            <div class="col-sm w w-auto-xs m-b">
-                <div class="item w rounded">
-                    <div class="item-media">
-                        <div class="item-media-content" [ngStyle]="{'background-image': 'url(' + singer.image + ')'}"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm">
-                <div class="p-l-md no-padding-xs">
-                    <div class="page-title">
-                        <h1 class="inline">{{singer.singer_name}}</h1>
-                        <label class="fa fa-star text-primary text-lg m-b v-m m-l-xs" title="Pro"></label>
-                    </div>
-                    <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis" >Gender: {{singer.gender}}</p>
-                    <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Date of birth: {{singer.date_of_birth}}</p>
-                    <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Music genre: {{singer.music_genre}}</p>
-                    <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Band: {{singer.band}}</p>
-                    <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Description: {{singer.description}}</p>
-                    <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Story: {{singer.story}}</p>
-
-                    <div class="item-action m-b">
-                        <a class="btn btn-icon white rounded btn-share pull-right" data-toggle="modal"
-                            data-target="#share-modal"><i class="fa fa-share-alt"></i></a>
-                        <button class="btn-playpause text-primary m-r-sm"></button>
-                        <span>9 Albums, 105 Tracks</span>
-                    </div>
-                    <div class="block clearfix m-b">
-                        <a class="btn btn-xs rounded white">Soul</a> <a class="btn btn-xs rounded white">Electro</a>
-                    </div>
-                </div>
-            </div>
+  <div class="padding b-b">
+    <div *ngIf="singer" class="row-col">
+      <div class="col-sm w w-auto-xs m-b">
+        <div class="item w rounded">
+          <div class="item-media">
+            <div [ngStyle]="{'background-image': 'url(' + singer.image + ')'}" class="item-media-content"></div>
+          </div>
         </div>
-    </div>
+      </div>
+      <div class="col-sm">
+        <div class="p-l-md no-padding-xs">
+          <div class="page-title">
+            <h1 class="inline">{{singer.singer_name}}</h1>
+            <label class="fa fa-star text-primary text-lg m-b v-m m-l-xs" title="Pro"></label>
+          </div>
+          <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">
+            Gender: {{singer.gender}}</p>
+          <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Date of
+            birth: {{singer.date_of_birth}}</p>
+          <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Music
+            genre: {{singer.music_genre}}</p>
+          <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Band: {{singer.band}}</p>
+          <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Story: {{singer.story}}</p>
+          <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">
+            Description: {{singer.description}}</p>
 
-    <div class="row-col">
-        <div class="col-lg-9 b-r no-border-md">
-            <div class="padding">
-                <!-- <div class="nav-active-border b-primary bottom m-b-md">
-                    <ul class="nav l-h-2x">
-                        <li class="nav-item m-r inline">
-                            <a class="nav-link active" href="#" data-toggle="tab" data-target="#tab_1">Overview</a>
-                        </li>
-                    </ul>
-                </div> -->
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
-                        <h5 class="m-b">Popular</h5>
-                        <div class="row item-list item-list-md item-list-li m-b" id="tracks">
-                            <div class="col-md-12 col-lg-6" *ngFor="let song of songOfSinger">
-                                <div class="item r" [attr.data-id]="song.id" [attr.data-src]="song.mp3Url">
-                                    <div class="item-media ">
-                                        <a href="track.detail.html" class="item-media-content"
-                                        [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}"></a>
-                                        <div class="item-overlay center">
-                                            <button class="btn-playpause">Play</button>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="item-overlay bottom text-right">
-                                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#" class="btn-more" data-toggle="dropdown"><i
-                                                    class="fa fa-ellipsis-h"></i></a>
-                                            <div class="dropdown-menu pull-right black lt"></div>
-                                        </div>
-                                        <div class="item-title text-ellipsis">
-                                            <a href="track.detail.html"> {{song.nameSong}}</a>
-                                        </div>
-                                        <div class="item-author text-sm text-ellipsis">
-                                            <a href="artist.detail.html" class="text-muted">Category: {{song.category}}</a>
-                                        </div>
-                                        <div class="item-author text-sm text-ellipsis">
-                                            <a href="artist.detail.html" class="text-muted">Album: {{song.album}}</a>
-                                        </div>
-                                        <div class="item-author text-sm text-ellipsis">
-                                            <a href="artist.detail.html" class="text-muted">Author: {{song.author}}</a>
-                                        </div>
-                                        <div class="item-meta text-sm text-muted">
+          <div class="item-action m-b">
+            <a class="btn btn-icon white rounded btn-share pull-right" data-target="#share-modal"
+               data-toggle="modal"><i class="fa fa-share-alt"></i></a>
+            <button class="btn-playpause text-primary m-r-sm"></button>
+            <span>9 Albums, 105 Tracks</span>
+          </div>
+          <div class="block clearfix m-b">
+            <a class="btn btn-xs rounded white">Soul</a> <a class="btn btn-xs rounded white">Electro</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="padding">
+        <!-- <div class="nav-active-border b-primary bottom m-b-md">
+            <ul class="nav l-h-2x">
+                <li class="nav-item m-r inline">
+                    <a class="nav-link active" href="#" data-toggle="tab" data-target="#tab_1">Overview</a>
+                </li>
+            </ul>
+        </div> -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab_1">
+            <h5 class="m-b">Popular</h5>
+            <div class="row item-list item-list-md item-list-li m-b" id="tracks">
+              <div *ngFor="let song of songOfSinger" class="col-md-12 col-lg-3">
+                <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+                  <div class="item-media ">
+                    <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]"
+                       class="item-media-content"></a>
+                    <div class="item-overlay center">
+                      <button class="btn-playpause">Play</button>
+                    </div>
+                  </div>
+                  <div class="item-info">
+                    <div class="item-overlay bottom text-right">
+                      <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+                      <a class="btn-more" data-toggle="dropdown" href="#"><i
+                        class="fa fa-ellipsis-h"></i></a>
+                      <div class="dropdown-menu pull-right black lt"></div>
+                    </div>
+                    <div class="item-title text-ellipsis">
+                      <a [routerLink]="['/track', song.id]"> {{song.nameSong}}</a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis">
+                      <a class="text-muted" href="artist.detail.html">Category: {{song.category}}</a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis">
+                      <a class="text-muted" href="artist.detail.html">Album: {{song.album}}</a>
+                    </div>
+                    <div class="item-author text-sm text-ellipsis">
+                      <a class="text-muted" href="artist.detail.html">Author: {{song.author}}</a>
+                    </div>
+                    <div class="item-meta text-sm text-muted">
                                             <span class="item-meta-stats text-xs ">
                                                 <i class="fa fa-play text-muted"></i> {{song.views}}
-                                                <i class="fa fa-heart m-l-sm text-muted"></i> 10
+                                              <i class="fa fa-heart m-l-sm text-muted"></i> 10
                                             </span>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="col-md-12 col-lg-6">
-                                <div class="item r" data-id="item-11"
-                                    data-src="http://api.soundcloud.com/tracks/218060449/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                                    <div class="item-media ">
-                                        <a href="track.detail.html" class="item-media-content"
-                                            style="background-image: url('images/b10.jpg');"></a>
-                                        <div class="item-overlay center">
-                                            <button class="btn-playpause">Play</button>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="item-overlay bottom text-right">
-                                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#" class="btn-more" data-toggle="dropdown"><i
-                                                    class="fa fa-ellipsis-h"></i></a>
-                                            <div class="dropdown-menu pull-right black lt"></div>
-                                        </div>
-                                        <div class="item-title text-ellipsis">
-                                            <a href="track.detail.html">Spring</a>
-                                        </div>
-                                        <div class="item-author text-sm text-ellipsis hide">
-                                            <a href="artist.detail.html" class="text-muted">Pablo Nouvelle</a>
-                                        </div>
-                                        <div class="item-meta text-sm text-muted">
-                                            <span class="item-meta-stats text-xs ">
-                                                <i class="fa fa-play text-muted"></i> 4500
-                                                <i class="fa fa-heart m-l-sm text-muted"></i> 2310
-                                            </span>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6">
-                                <div class="item r" data-id="item-1"
-                                    data-src="http://api.soundcloud.com/tracks/269944843/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                                    <div class="item-media ">
-                                        <a href="track.detail.html" class="item-media-content"
-                                            style="background-image: url('images/b0.jpg');"></a>
-                                        <div class="item-overlay center">
-                                            <button class="btn-playpause">Play</button>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="item-overlay bottom text-right">
-                                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#" class="btn-more" data-toggle="dropdown"><i
-                                                    class="fa fa-ellipsis-h"></i></a>
-                                            <div class="dropdown-menu pull-right black lt"></div>
-                                        </div>
-                                        <div class="item-title text-ellipsis">
-                                            <a href="track.detail.html">Pull Up</a>
-                                        </div>
-                                        <div class="item-author text-sm text-ellipsis hide">
-                                            <a href="artist.detail.html" class="text-muted">Summerella</a>
-                                        </div>
-                                        <div class="item-meta text-sm text-muted">
-                                            <span class="item-meta-stats text-xs ">
-                                                <i class="fa fa-play text-muted"></i> 3200
-                                                <i class="fa fa-heart m-l-sm text-muted"></i> 210
-                                            </span>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6">
-                                <div class="item r" data-id="item-6"
-                                    data-src="http://api.soundcloud.com/tracks/236107824/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                                    <div class="item-media ">
-                                        <a href="track.detail.html" class="item-media-content"
-                                            style="background-image: url('images/b5.jpg');"></a>
-                                        <div class="item-overlay center">
-                                            <button class="btn-playpause">Play</button>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="item-overlay bottom text-right">
-                                            <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
-                                            <a href="#" class="btn-more" data-toggle="dropdown"><i
-                                                    class="fa fa-ellipsis-h"></i></a>
-                                            <div class="dropdown-menu pull-right black lt"></div>
-                                        </div>
-                                        <div class="item-title text-ellipsis">
-                                            <a href="track.detail.html">Body on me</a>
-                                        </div>
-                                        <div class="item-author text-sm text-ellipsis hide">
-                                            <a href="artist.detail.html" class="text-muted">Rita Ora</a>
-                                        </div>
-                                        <div class="item-meta text-sm text-muted">
-                                            <span class="item-meta-stats text-xs ">
-                                                <i class="fa fa-play text-muted"></i> 330
-                                                <i class="fa fa-heart m-l-sm text-muted"></i> 220
-                                            </span>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div> -->
-                        </div>
                     </div>
+
+
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

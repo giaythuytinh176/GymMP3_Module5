@@ -17,7 +17,11 @@ export class PlaylistService {
   apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
   apiPlaylistInfo = environment.apiUrl + '/playlist';
   apiDeletePlaylist = environment.apiUrl + '/playlist';
-  apiAddSongToPlaylist = environment.apiUrl + '/playlist/add-song'
+  apiSongOfDeletePlaylist = environment.apiUrl + '/playlist/song';
+  apiAddSongToPlaylist = environment.apiUrl + '/playlist/add-song';
+  apiGetListSongOfPlaylist = environment.apiUrl + '/playlist/showSong';
+  apiGetRandomImagePlaylist = environment.apiUrl + '/playlist/image-song-random';
+  apiGetAllSongsExceptInPlaylist = environment.apiUrl + '/playlist/all-songs-except';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -32,7 +36,7 @@ export class PlaylistService {
   constructor(private http: HttpClient) {
   }
 
-  deletePlaylist(id: number, user_id: number) {
+  deletePlaylist(id: number, user_id: number): any {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -44,6 +48,33 @@ export class PlaylistService {
       },
     };
     return this.http.delete(`${this.apiDeletePlaylist}/${id}`, httpHeader);
+  }
+
+  deleteSongOfPlaylist(song_id: number, user_id: number, playlist_id: number): any {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.token,
+        'Access-Control-Allow-Origin': '*',
+      }),
+      body: {
+        user_id: user_id,
+        song_id: song_id,
+      },
+    };
+    return this.http.delete(`${this.apiSongOfDeletePlaylist}/${playlist_id}`, httpHeader);
+  }
+
+  getAllSongsExceptInPlaylist(listSong: Song[],): Observable<Song[]> {
+    return this.http.post<Song[]>(`${this.apiGetAllSongsExceptInPlaylist}`, {listSong: JSON.stringify(listSong)}, this.httpJson);
+  }
+
+  getListSongOfPlaylist(playlistId: number): Observable<Song[]> {
+    return this.http.get<Song[]>(`${this.apiGetListSongOfPlaylist}/${playlistId}`, this.httpJson);
+  }
+
+  getRandomImagePlaylist(playlistId: number): Observable<Song[]> {
+    return this.http.get<Song[]>(`${this.apiGetRandomImagePlaylist}/${playlistId}`, this.httpJson);
   }
 
   createPlaylist(pl: Playlist): Observable<Playlist> {

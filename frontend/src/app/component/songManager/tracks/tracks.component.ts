@@ -56,7 +56,7 @@ export class TracksComponent implements OnInit {
       data => {
         // console.log(data);
         this.getSongByUserID();
-        this.toastr.success('Deleted song sucessfully!');
+        this.toastr.success('Deleted song successfully!');
         this.routes.navigate(['/user/profile', this.userinfo.id]);
       }, error => console.log(error)
     );

@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   shake: any;
   isLoading = false;
+  hide = true;
   private loginInfo: LoginInfo;
 
   constructor(private authService: AuthService,

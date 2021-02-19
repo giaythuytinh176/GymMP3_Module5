@@ -106,7 +106,6 @@ export class EditProfileComponent implements OnInit {
               this.toastr.warning('You must login to update profile.');
               this.routes.navigate(['/user/login']);
             } else {
-              // this.routes.navigate(['list']);
               this.toastr.success('Updated Profile Successfully!');
               this.routes.navigate(['/user/profile', this.userinfo.id]);
             }

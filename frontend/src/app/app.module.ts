@@ -99,11 +99,12 @@ import {FirebaseEditProfileComponent} from './component/firebase/firebaseEditPro
 import {PlaylistDetailComponent} from './component/playlist/playlist-detail/playlist-detail.component';
 import {TracksComponent} from './component/songManager/tracks/tracks.component';
 import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
-import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
-import { ListSingerComponent } from './component/singer/list-singer/list-singer.component';
-import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
-
-
+import {DialogDeletePlaylistComponent} from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
+import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-delete-song-of-playlist/dialog-delete-song-of-playlist.component';
+import {ListSingerComponent} from './component/singer/list-singer/list-singer.component';
+import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
+import {NgxAudioPlayerModule} from "ngx-audio-player";
+import {TrackDetailComponent} from './component/songManager/track-detail/track-detail.component';
 
 @NgModule({
   declarations: [
@@ -143,8 +144,11 @@ import { SingerDetailComponent } from './component/singer/singer-detail/singer-d
     PlaylistDetailComponent,
     SearchPlaylistComponent,
     DialogDeletePlaylistComponent,
+    DialogDeleteSongOfPlaylistComponent,
     ListSingerComponent,
     SingerDetailComponent,
+    TrackDetailComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -212,6 +216,7 @@ import { SingerDetailComponent } from './component/singer/singer-detail/singer-d
     MatSelectModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
+    NgxAudioPlayerModule,
 
   ],
   providers: [
@@ -234,6 +239,7 @@ import { SingerDetailComponent } from './component/singer/singer-detail/singer-d
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
     DialogDeletePlaylistComponent,
+    NgxAudioPlayerModule,
 
   ],
   bootstrap: [

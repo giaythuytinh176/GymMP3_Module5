@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DialogDeletePlaylistComponent } from './dialog-delete-playlist.component';
+import {DialogDeletePlaylistComponent} from './dialog-delete-playlist.component';
 
 describe('DialogDeletePlaylistComponent', () => {
   let component: DialogDeletePlaylistComponent;
@@ -8,9 +8,9 @@ describe('DialogDeletePlaylistComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogDeletePlaylistComponent ]
+      declarations: [DialogDeletePlaylistComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
