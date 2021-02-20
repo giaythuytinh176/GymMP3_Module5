@@ -37,7 +37,6 @@ export class SearchPlaylistComponent implements OnInit {
     ).subscribe(
       (next) => {
         this.playlists = next || [];
-        console.log(this.playlists);
         if (next.keyword) {
           this.keywordEnter = true;
           this.isSearch = false;

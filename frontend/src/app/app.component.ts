@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(1);
     const $ = document.querySelector.bind(document);
 
     // Xử lý CD quay / dừng

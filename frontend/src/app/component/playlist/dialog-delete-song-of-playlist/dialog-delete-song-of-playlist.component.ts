@@ -14,7 +14,6 @@ export class DialogDeleteSongOfPlaylistComponent {
     @Inject(MAT_DIALOG_DATA) public data: { song_id: number, nameSong: string, user_id: string },
     public dialog: MatDialog,
   ) {
-    console.log('data', data);
   }
 
   onNoClick(): void {

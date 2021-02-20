@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
   attemptLogin(loginInfo: LoginInfo): void {
     this.authService.attemptAuth(loginInfo).subscribe(
       (data: any) => {
-        // console.log(data);
         if (data.error || data.status) {
           this.toasrt.warning('Login Failed!!! Please login again!.');
         } else {
@@ -66,7 +65,6 @@ export class LoginComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1000);
-        // console.log(err.error.error);
         if (err.error.error === 'invalid_credentials') {
           this.toasrt.error('Username or Password is incorrect!');
         } else {
@@ -79,7 +77,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.isLoading = true;
-    // console.log(this.loginForm);
     if (this.loginForm.value.password.length < 6) {
       this.isLoading = false;
       this.toasrt.warning('Password is too short.');

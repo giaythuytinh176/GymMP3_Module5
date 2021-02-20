@@ -224,7 +224,6 @@ export class CreateSongComponent implements OnInit {
 
   createSong(song: Song): void {
     this.songService.createSong(song).subscribe((data: any) => {
-        // console.log(data);
         if (data.error || data.status) {
           this.token.signOut();
           this.toastr.warning('You must login to create song.');
@@ -234,7 +233,6 @@ export class CreateSongComponent implements OnInit {
           this.routes.navigate(['/user/profile', this.userinfo.id]);
         }
       }, error => {
-        // console.log(error);
         this.toastr.warning('Something wrong.');
       }
     );
@@ -242,13 +240,11 @@ export class CreateSongComponent implements OnInit {
 
   createSongSubmit(): void {
     if (this.createMusicForm.valid) {
-      console.log(this.createMusicForm.value);
       this.createMusicForm.value.avatarUrl = this.firebaseCreateSong.fb;
       this.createMusicForm.value.mp3Url = this.firebaseMP3CreateSong.fb;
       this.song = this.createMusicForm.value;
       this.song.category_id = this.createMusicForm.value.myControl_category.id;
       this.song.album_id = this.createMusicForm.value.myControl_album.id;
-      // console.log(this.song);
       this.song.user_id = this.userinfo.id;
 
       if (this.createMusicForm.value.myControl_singer instanceof Array) {
@@ -275,7 +271,6 @@ export class CreateSongComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log('result', result);
       if (result === undefined) {
       } else if (result.valid) {
         this.notFoundSinger = false;
@@ -299,7 +294,6 @@ export class CreateSongComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log('result', result);
       if (result === undefined) {
       } else if (result.valid) {
         this.notFoundCategory = false;
@@ -323,7 +317,6 @@ export class CreateSongComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log('result', result);
       if (result === undefined) {
       } else if (result.valid) {
         this.notFoundAlbum = false;

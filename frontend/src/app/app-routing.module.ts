@@ -23,6 +23,10 @@ import {ShowSongsLastPlaylistComponent} from './component/playlist/show-songs-la
 import {TrackDetailComponent} from "./component/songManager/track-detail/track-detail.component";
 import {GetSongOfPlaylistByIDResolver} from "./resolver/GetSongOfPlaylistByIDResolver";
 import {GetSongOfPlaylistByIDResolverGuest} from "./resolver/GetSongOfPlaylistByIDResolverGuest";
+import {GetSongDetailByIdResolver} from "./resolver/GetSongDetailByIdResolver";
+import {GetSingerIDbySongIDResolver} from "./resolver/GetSingerIDbySongIDResolver";
+import {GetSongDetailByIdGuestResolver} from "./resolver/GetSongDetailByIdGuestResolver";
+import {GetSongSameSingerBySongIdResolver} from "./resolver/GetSongSameSingerBySongIdResolver";
 
 const routes: Routes = [
   {
@@ -58,6 +62,10 @@ const routes: Routes = [
   {
     path: 'track/:id',
     component: TrackDetailComponent,
+    resolve: {
+      getSongDetailByIdGuest: GetSongDetailByIdGuestResolver,
+      getSongSameSingerBySongId: GetSongSameSingerBySongIdResolver,
+    },
   },
   {
     path: 'singer',

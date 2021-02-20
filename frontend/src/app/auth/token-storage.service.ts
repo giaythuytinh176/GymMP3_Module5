@@ -19,7 +19,6 @@ export class TokenStorageService {
 
   signOut(): void {
     this.userService.removeToken(this.getToken()).subscribe((res: any) => {
-      // console.log(res);
       // window.localStorage.clear();
       window.localStorage.removeItem(TOKEN_KEY);
       window.localStorage.removeItem(Login_KEY);
@@ -29,10 +28,6 @@ export class TokenStorageService {
       }, 1111);
       // this.router.navigate(['/browse'])
     }, (error: any) => {
-      console.log(error);
-      // if (error.error.message) {
-      //   this.toastr.warning('You must log in to perform this action.');
-      // }
       window.localStorage.removeItem(TOKEN_KEY);
       window.localStorage.removeItem(Login_KEY);
       this.saveLogin('false');

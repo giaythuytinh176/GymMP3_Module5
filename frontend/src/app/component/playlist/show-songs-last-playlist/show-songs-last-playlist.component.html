@@ -52,7 +52,7 @@
           <div *ngFor="let song of songOfLastPlaylist" class="col-xs-12">
             <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
               <div class="item-media ">
-                <a class="item-media-content" [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]"></a>
+                <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]" class="item-media-content"></a>
                 <div class="item-overlay center">
                   <button class="btn-playpause">Play</button>
                 </div>

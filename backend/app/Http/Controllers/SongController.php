@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MovedSong;
+use App\Models\Singer;
 use App\Models\Song;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -172,6 +174,45 @@ class SongController extends Controller
     {
         $song = Song::find($id);
         return response()->json($song);
+    }
+
+    public function getSongSameSinger($id)
+    {
+        $listSingersId = $this->findSingerIDBySongID($id);
+        $listSongs = [];
+        foreach ($listSingersId as $SingerId) {
+            $listSongs[] = ($this->findSongBySingerId($SingerId));
+        }
+        $listSongsMerge = [];
+        foreach ($listSongs as $listSong) {
+            foreach ($listSong as $item) {
+                $listSongsMerge[] = $item;
+            }
+        }
+        $lastListSongs = array_map(function ($row) {
+            return $row['id'];
+        }, $listSongsMerge);
+        $lastListSongs = array_unique($lastListSongs);
+        $lastListSongs = array_values($lastListSongs);
+        sort($lastListSongs);
+        $lastInfoListSongs = [];
+        foreach ($lastListSongs as $it) {
+            $lastInfoListSongs[] = $this->findSongInfo($it);
+        }
+        return response()->json($lastInfoListSongs, 200);
+    }
+
+    public function findSongInfo($id)
+    {
+        return DB::table('songs')->where('id', $id)->first();
+    }
+
+    public function findSongBySingerId($id)
+    {
+        $songs = Song::whereHas('singers', function (Builder $query) use ($id) {
+            $query->where('singers.id', $id);
+        })->get()->toArray();
+        return $songs;
     }
 
     public function update(Request $request, $id, UserController $userController)

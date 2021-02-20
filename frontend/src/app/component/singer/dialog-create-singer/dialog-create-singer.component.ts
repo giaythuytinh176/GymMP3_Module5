@@ -34,7 +34,6 @@ export class DialogCreateSingerComponent implements OnInit {
     private singerService: SingerService,
     public firebaseDialogSinger: FirebaseDialogSingerComponent,
   ) {
-    // console.log(data);
   }
 
   ngOnInit(): void {

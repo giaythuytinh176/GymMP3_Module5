@@ -37,7 +37,6 @@ export class FirebaseDialogSingerComponent implements OnInit {
 
   handleFileInput($event: any) {
     this.fileToUpload = $event.target.files[0];
-    // console.log(this.fileToUpload);
     if (this.fileToUpload.type.split('/')[0] !== 'image') {
       console.error('unsupported file type');
     }

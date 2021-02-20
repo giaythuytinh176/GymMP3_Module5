@@ -51,7 +51,6 @@ export class AuthService {
   }
 
   signUp(info: SignupInfo): Observable<string> {
-    // console.log(info);
     return this.http.post<string>(this.signupUrl, info, httpOptions);
   }
 
@@ -64,7 +63,6 @@ export class AuthService {
   }
 
   authToken(): Promise<any> {
-    // console.log(token);
     return this.http.get<any>(this.authUrl, this.httpJson).toPromise().then(r => {
       if (r.user?.username) {
         this.tokenStorage.saveLogin('true');
@@ -85,7 +83,6 @@ export class AuthService {
       .get<any>(this.authUrl, this.httpJson)
       .pipe(
         map((res) => {
-          console.log(res);
           return res;
         })
       );
@@ -94,13 +91,11 @@ export class AuthService {
   checkAuthToken(): void {
     this.http.get<any>(this.authUrl, this.httpJson).subscribe((res: any) => {
       if (res.user?.username) {
-        console.log(res);
         this.tokenStorage.saveLogin('true');
       } else {
         this.tokenStorage.signOut();
       }
     }, (error: any) => {
-      console.log(error);
       // this.tokenStorage.signOut();
     });
   }

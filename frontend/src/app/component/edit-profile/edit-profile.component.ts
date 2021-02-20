@@ -47,10 +47,8 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileFormSubmit();
-    console.log(1);
     // this.loadUserInfo$ = this.userService.getInfoUserToken();
     this.getUserInfo();
-    console.log(3);
   }
 
   getUserInfo(): void {
@@ -67,11 +65,7 @@ export class EditProfileComponent implements OnInit {
     this.avatar = this.userinfo.avatar;
     this.old_avatar = this.userinfo.avatar;
     this.username = this.userinfo.username;
-    console.log(2);
-    //     this.userinfo = data.user;
-    // this.isLoading = false;
-    //   }
-    // }, error => console.log(error));
+
   }
 
   profileFormSubmit(): void {
@@ -97,10 +91,9 @@ export class EditProfileComponent implements OnInit {
         this.profileForm.value.avatar = this.old_avatar;
       }
       if (this.profileForm.valid) {
-        const data = this.profileForm.value;
-        this.userService.updateUser(data, data.id)
+        const dt = this.profileForm.value;
+        this.userService.updateUser(dt, dt.id)
           .subscribe((data: any) => {
-            // console.log(data);
             if (data.status) {
               this.token.signOut();
               this.toastr.warning('You must login to update profile.');
@@ -110,8 +103,6 @@ export class EditProfileComponent implements OnInit {
               this.routes.navigate(['/user/profile', this.userinfo.id]);
             }
           }, error => {
-            // console.log(JSON.parse(error.error));
-            // console.log(error.error.email);
             if (error.error.email) {
               this.toastr.warning(error.error.email);
             } else {

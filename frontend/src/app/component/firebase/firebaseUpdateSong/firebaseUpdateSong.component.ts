@@ -37,7 +37,6 @@ export class FirebaseUpdateSongComponent implements OnInit {
 
   handleFileInput($event: any) {
     this.fileToUpload = $event.target.files[0];
-    // console.log(this.fileToUpload);
     if (this.fileToUpload.type.split('/')[0] !== 'image') {
       console.error('unsupported file type');
     }
@@ -60,7 +59,6 @@ export class FirebaseUpdateSongComponent implements OnInit {
     // Totally optional metadata
     const customMetadata = {app: 'My AngularFire-powered PWA!'};
     this.task = this.storage.upload(filePath, this.fileToUpload, {customMetadata});
-    // console.log(this.task);
 
     // observe percentage changes
     this.uploadPercent = this.task.percentageChanges();
@@ -78,12 +76,9 @@ export class FirebaseUpdateSongComponent implements OnInit {
               this.toastr.success('Uploaded Image Successfully!');
               this.fb = url;
             }
-            // console.log(this.fb);
-            // console.log(1111);
           });
         }),
         tap(snap => {
-          // console.log(snap)
           if (snap.bytesTransferred === snap.totalBytes) {
             // Update firestore on completion
             this.db.collection('photos').add({filePath, size: snap.totalBytes});
@@ -92,7 +87,6 @@ export class FirebaseUpdateSongComponent implements OnInit {
       )
       .subscribe(url => {
         if (url) {
-          // console.log(url);
         }
       });
   }
@@ -124,7 +118,6 @@ export class FirebaseUpdateSongComponent implements OnInit {
       // The file's download URL
       finalize(() => this.downloadURL = fileRef.getDownloadURL()),
       tap(snap => {
-        // console.log(snap)
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update firestore on completion
           this.db.collection('photos').add({path, size: snap.totalBytes});

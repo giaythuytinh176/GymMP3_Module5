@@ -64,24 +64,6 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit(): void {
-    // this.check$.pipe(
-    //   //throttleTime(300),
-    //   debounceTime(300),
-    //   distinctUntilChanged(),
-    //   //concatMap(value =>
-    //   switchMap(value =>
-    //     this.userService.checkExistUser(value)
-    //   )
-    // ).subscribe(
-    //   (next) => {
-    //     this.existUserMess = false;
-    //     console.log(next);
-    //   }, error => {
-    //     console.log(error);
-    //     if (JSON.parse(error.error).username[0] == 'The username has already been taken.') {
-    //       this.existUserMess = true;
-    //     }
-    //   });
     this.registerFbForm();
   }
 
@@ -90,11 +72,10 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
     this.userService.checkExistUser(this.username).subscribe(
       (data: any) => {
         this.existUserMess = false;
-        // console.log(data);
       },
       error => {
         // console.log(error);
-        if (JSON.parse(error.error).username[0] == 'The username has already been taken.') {
+        if (JSON.parse(error.error).username[0] === 'The username has already been taken.') {
           this.existUserMess = true;
         }
       }
@@ -118,7 +99,6 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
   registerSubmit(signupInfo: { username: string, phone: string, password: string, password_confirmation: string }): void {
     this.authService.signUp(signupInfo).subscribe(
       (data: any) => {
-        // console.log(data);
         if (data.error || data.status) {
           this.toastr.warning('Something wrong.');
           setTimeout(() => {
@@ -131,8 +111,6 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
         }
       },
       err => {
-        // console.log(err);
-        console.log((JSON.parse(err.error)));
         if ((JSON.parse(err.error)).username && (JSON.parse(err.error)).username[0] === 'The username has already been taken.') {
           this.toastr.warning('The username already exists!');
         } else if ((JSON.parse(err.error)).phone && (JSON.parse(err.error)).phone[0] === 'The phone has already been taken.') {
@@ -152,7 +130,6 @@ export class RegisterComponent implements OnInit, AfterViewChecked {
       this.register.password,
       this.register.password_confirmation
     );
-    // console.log(this.signupInfo);
 
     this.registerSubmit(this.signupInfo);
   }

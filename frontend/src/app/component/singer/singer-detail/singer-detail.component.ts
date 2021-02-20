@@ -44,7 +44,6 @@ export class SingerDetailComponent implements OnInit {
         artist: data.author,
       };
     });
-    console.log(this.tracks1);
   }
 
 }

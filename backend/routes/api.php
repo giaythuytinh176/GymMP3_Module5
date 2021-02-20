@@ -45,6 +45,8 @@ Route::prefix('song')->group(function () {
     Route::get('/moved/list', 'SongController@allMovedSongs');
     Route::get('/lastest', 'SongController@getLastestSong');
     Route::get('/showmore', 'SongController@showMoreSong');
+    Route::get('/guest/{id}', 'SongController@showidsong');
+    Route::get('/guest/list/{id}', 'SongController@getSongSameSinger');
 
 });
 

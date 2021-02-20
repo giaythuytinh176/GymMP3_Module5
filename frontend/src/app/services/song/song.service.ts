@@ -25,6 +25,7 @@ export class SongService {
   private apiListSongUser = environment.apiUrl + '/song/user/list';
   private apiListSongV2User = environment.apiUrl + '/song/user/listv2';
   private updateSongUrl = environment.apiUrl + '/song';
+  private getSongDetail = environment.apiUrl + '/song/guest';
   private getUserUrl = environment.apiUrl + '/user/token';
   private apiGetAllSongs = environment.apiUrl + '/song/list';
   private apiGetMovedSongs = environment.apiUrl + '/song/moved/list';
@@ -33,6 +34,7 @@ export class SongService {
   private deleteMovedSongsUrl = environment.apiUrl + '/song/moved';
   private apiGetLastestSongs = environment.apiUrl + '/song/lastest';
   private apiGetShowmoreSongsLastest = environment.apiUrl + '/song/showmore';
+  private getSongSameSingerbySongId = environment.apiUrl + '/song/guest/list';
 
   constructor(
     private http: HttpClient,
@@ -66,6 +68,14 @@ export class SongService {
 
   getSongDetailById(id: number): Observable<Song> {
     return this.http.get<Song>(`${this.updateSongUrl}/${id}`, this.httpJson);
+  }
+
+  getSongDetailByIdGuest(id: number): Observable<Song> {
+    return this.http.get<Song>(`${this.getSongDetail}/${id}`);
+  }
+
+  getSongSameSingerBySongId(id: number): Observable<Song[]> {
+    return this.http.get<Song[]>(`${this.getSongSameSingerbySongId}/${id}`);
   }
 
   updateSong(song: Song, id: number): Observable<Song> {

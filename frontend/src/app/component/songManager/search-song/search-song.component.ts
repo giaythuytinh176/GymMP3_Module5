@@ -44,20 +44,8 @@ export class SearchSongComponent implements OnInit {
           this.keywordEnter = false;
         }
         this.count = next.length;
-        // console.log(this.song);
 
       });
-    // this.songService.searchSong(this.search).subscribe(
-    //   data => {
-    //     this.song = data;
-    //     this.count = (JSON.parse((JSON.stringify(this.song)))).length;
-    //     console.log(this.count);
-    //     this.isSearch = false;
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
   }
 
   onInput(event): any {

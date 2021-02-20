@@ -30,7 +30,6 @@ export class DialogEditPlaylistComponent implements OnInit {
     private token: TokenStorageService,
     private playlistService: PlaylistService,
   ) {
-    console.log(data);
     this.playlist = data.playlist;
     this.user_id = data.user_id;
   }
@@ -62,7 +61,6 @@ export class DialogEditPlaylistComponent implements OnInit {
           this.toastr.success('Edit Playlist successfully!');
         }
       }, error => {
-        console.log(error);
         if (error.error) {
           const obj = JSON.parse(error.error);
           if (obj.name_playlist) {

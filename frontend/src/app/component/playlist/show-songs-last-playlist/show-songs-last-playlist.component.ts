@@ -34,7 +34,6 @@ export class ShowSongsLastPlaylistComponent implements OnInit {
     this.loadTrackPlaylist();
     this.getDetailPlaylist();
     this.getSongOfLastPlaylist();
-    console.log(this.id);
   }
 
   loadTrackPlaylist(): void {
@@ -50,11 +49,8 @@ export class ShowSongsLastPlaylistComponent implements OnInit {
   getDetailPlaylist(): void {
     this.playlistService.getDetailPlaylist(this.id)
       .subscribe((data: any) => {
-
         this.lastPlaylist = data;
-        console.log(data);
       }, error => {
-        console.log(error);
       });
   }
 
@@ -63,7 +59,6 @@ export class ShowSongsLastPlaylistComponent implements OnInit {
       .subscribe((data: any) => {
 
         this.songOfLastPlaylist = data;
-        console.log(data);
       }, error => {
         console.log(error);
       });
