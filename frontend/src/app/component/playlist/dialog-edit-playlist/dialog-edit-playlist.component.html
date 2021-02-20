@@ -1,15 +1,15 @@
-<div class="model-background"><h2 mat-dialog-title>Create a Playlist</h2>
+<div class="model-background"><h2 mat-dialog-title>Edit a Playlist</h2>
   <mat-dialog-content class="mat-typography">
     <div class="container">
-      <form [formGroup]="createPlaylistDialogForm" name="form">
+      <form [formGroup]="editPlaylistDialogForm" name="form">
 
         <div class="form-group row">
           <div class="col-sm-12">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Playlist Name:</mat-label>
-              <input [class.input-invalid]="createPlaylistDialogForm.get('name_playlist')!.invalid && createPlaylistDialogForm.get('name_playlist')!.touched"
-                     [class.input-valid]="createPlaylistDialogForm.get('name_playlist')!.valid && createPlaylistDialogForm.get('name_playlist')!.touched" class="form-control" formControlName="name_playlist" matInput placeholder="Playlist Name" type="text">
-              <div *ngIf="createPlaylistDialogForm.get('name_playlist').invalid && createPlaylistDialogForm.get('name_playlist').touched"
+              <input [(ngModel)]="playlist.name_playlist" [class.input-invalid]="editPlaylistDialogForm.get('name_playlist')!.invalid && editPlaylistDialogForm.get('name_playlist')!.touched"
+                     [class.input-valid]="editPlaylistDialogForm.get('name_playlist')!.valid && editPlaylistDialogForm.get('name_playlist')!.touched" class="form-control" formControlName="name_playlist" matInput placeholder="Playlist Name" type="text">
+              <div *ngIf="editPlaylistDialogForm.get('name_playlist').invalid && editPlaylistDialogForm.get('name_playlist').touched"
                    style="margin-top: 10px;color: red; text-align: left !important;">
                 <div [@shake]="shake">
                   Playlist Name is <strong>required.</strong>
@@ -23,13 +23,13 @@
           <div class="col-sm-12">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Status:</mat-label>
-              <select [class.input-invalid]="createPlaylistDialogForm.get('status')!.invalid && createPlaylistDialogForm.get('status')!.touched"
-                      [class.input-valid]="createPlaylistDialogForm.get('status')!.valid && createPlaylistDialogForm.get('status')!.touched" class="form-control" formControlName="status" matInput matNativeControl placeholder="Status" required>
+              <select [(ngModel)]="playlist.status" [class.input-invalid]="editPlaylistDialogForm.get('status')!.invalid && editPlaylistDialogForm.get('status')!.touched"
+                      [class.input-valid]="editPlaylistDialogForm.get('status')!.valid && editPlaylistDialogForm.get('status')!.touched" class="form-control" formControlName="status" matInput matNativeControl placeholder="Status" required>
                 <option label="--select Status --"></option>
                 <option value="on">On</option>
                 <option value="off">Off</option>
               </select>
-              <div *ngIf="createPlaylistDialogForm.get('status').invalid && createPlaylistDialogForm.get('status').touched"
+              <div *ngIf="editPlaylistDialogForm.get('status').invalid && editPlaylistDialogForm.get('status').touched"
                    style="margin-top: 10px;color: red; text-align: left !important;">
                 <div [@shake]="shake">
                   Status is <strong>required.</strong>
@@ -44,13 +44,14 @@
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Description:</mat-label>
               <textarea rows="5"
-                        [class.input-invalid]="createPlaylistDialogForm.get('description')!.invalid && createPlaylistDialogForm.get('description')!.touched"
-                        [class.input-valid]="createPlaylistDialogForm.get('description')!.valid && createPlaylistDialogForm.get('description')!.touched"
+                        [(ngModel)]="playlist.description"
+                        [class.input-invalid]="editPlaylistDialogForm.get('description')!.invalid && editPlaylistDialogForm.get('description')!.touched"
+                        [class.input-valid]="editPlaylistDialogForm.get('description')!.valid && editPlaylistDialogForm.get('description')!.touched"
                         cdkAutosizeMinRows="1"
                         cdkTextareaAutosize
                         class="form-control" formControlName="description" matInput placeholder="Description"
                         style="height: 100px;"></textarea>
-              <div *ngIf="createPlaylistDialogForm.get('description').invalid && createPlaylistDialogForm.get('description').touched"
+              <div *ngIf="editPlaylistDialogForm.get('description').invalid && editPlaylistDialogForm.get('description').touched"
                    style="margin-top: 10px;color: red; text-align: left !important;">
                 <div [@shake]="shake">
                   Description is <strong>required.</strong>
@@ -65,7 +66,7 @@
   </mat-dialog-content>
   <mat-dialog-actions align="center">
     <button (click)="onNoClick()" mat-button mat-dialog-close>Cancel</button>
-    <button (click)="createPlaylistSubmit()" [disabled]="!createPlaylistDialogForm.valid" [mat-dialog-close]="createPlaylistDialogForm" cdkFocusInitial color="primary" mat-button>
+    <button (click)="editPlaylistSubmit()" [disabled]="!editPlaylistDialogForm.valid" [mat-dialog-close]="editPlaylistDialogForm" cdkFocusInitial color="primary" mat-button>
       Add
     </button>
   </mat-dialog-actions>

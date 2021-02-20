@@ -28,6 +28,11 @@ class SingerController extends Controller
             'singer_name' => 'required|string|unique:singers',
             'image' => 'required|url',
             'description' => 'required|string',
+            'date_of_birth' => 'string',
+            'gender' => 'string',
+            'music_genre' => 'string',
+            'story' => 'string',
+            'band' => 'string',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);

@@ -105,6 +105,8 @@ import {ListSingerComponent} from './component/singer/list-singer/list-singer.co
 import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
 import {NgxAudioPlayerModule} from "ngx-audio-player";
 import {TrackDetailComponent} from './component/songManager/track-detail/track-detail.component';
+import { DialogEditPlaylistComponent } from './component/playlist/dialog-edit-playlist/dialog-edit-playlist.component';
+import { NgxAudioComponent } from './component/player/ngx-audio/ngx-audio.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +150,8 @@ import {TrackDetailComponent} from './component/songManager/track-detail/track-d
     ListSingerComponent,
     SingerDetailComponent,
     TrackDetailComponent,
+    DialogEditPlaylistComponent,
+    NgxAudioComponent,
 
   ],
   imports: [
@@ -240,6 +244,7 @@ import {TrackDetailComponent} from './component/songManager/track-detail/track-d
     FirebaseEditProfileComponent,
     DialogDeletePlaylistComponent,
     NgxAudioPlayerModule,
+    PlaylistDetailComponent,
 
   ],
   bootstrap: [

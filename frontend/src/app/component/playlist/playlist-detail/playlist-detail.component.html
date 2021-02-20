@@ -47,7 +47,7 @@
         <h6 class="m-b">
           <span class="text-muted">by</span>
           <a class="item-author _600" data-pjax href="artist.detail.html"> {{ auth ? getUserInfo.username : 'CodeGym' }}</a>
-          <span class="text-muted text-sm">- 10 song, 50 min 32 sec</span>
+          <span class="text-muted text-sm">- {{ songOfPlaylist.length || 0 }} song, 50 min 32 sec</span>
         </h6>
         <div class="row item-list item-list-xs item-list-li m-b" id="tracks">
           <div *ngFor="let song of songOfPlaylist" class="col-xs-12">
@@ -85,16 +85,8 @@
             </div>
           </div>
 
-          <!--          <div class="col-xs-12">-->
-          <!--            <mat-advanced-audio-player [playlist]="listTracks" (trackEnded)="triggerOnEnded($event)" [autoPlay]="false" allow="autoplay"></mat-advanced-audio-player>-->
-          <!--          </div>-->
-
           <div class="col-xs-12">
-            <ngx-audio-player (trackEnded)="onEnded($event)" [autoPlay]="false" [disablePositionSlider]="msaapDisablePositionSlider"
-                              [displayArtist]="msaapDisplayArtist" [displayDuration]="msaapDisplayDuration" [displayPlaylist]="msaapDisplayPlayList" [displayRepeatControls]="msaapDisplayRepeatControls"
-                              [displayTitle]="msaapDisplayTitle" [displayVolumeControls]="msaapDisplayVolumeControls"
-                              [expanded]="true" [pageSizeOptions]="msaapPageSizeOptions"
-                              [playlist]="listTracks" muted="muted"></ngx-audio-player>
+            <app-ngx-audio [listTracks]="tracks"></app-ngx-audio>
           </div>
 
         </div>

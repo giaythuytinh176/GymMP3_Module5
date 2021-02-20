@@ -94,6 +94,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::prefix('playlist')->group(function () {
         Route::get('/list', 'PlaylistController@index');
         Route::post('/create', 'PlaylistController@store');
+        Route::post('/update/{id}', 'PlaylistController@update');
         Route::get('/showlist/{id}', 'PlaylistController@show');
         Route::get('/{id}', 'PlaylistController@getInfo');
         Route::delete('/{id}', 'PlaylistController@destroy');

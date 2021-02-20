@@ -108,7 +108,27 @@ class PlaylistController extends Controller
 
     public function update(Request $request, Playlist $playlist)
     {
-        //
+        $obj = json_decode($request->playlist, true);
+        $validator = Validator::make($obj, [
+            'name_playlist' => 'required|string',
+            'description' => 'required|string',
+            'user_id' => 'required|integer',
+            'view' => 'required|integer',
+            'status' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $playlist = Playlist::find($request->id);
+        $playlist->fill($obj);
+//        $playlist->name_playlist = $obj['name_playlist'];
+//        $playlist->description = $obj['description'];
+//        $playlist->user_id = $obj['user_id'];
+//        $playlist->view = $obj['user_id'];
+//        $playlist->status = $obj['status'];
+        $playlist->save();
+        return response()->json(compact(['playlist']), 200);
     }
 
     public function destroy(Request $request, UserController $userController)

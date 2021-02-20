@@ -21,6 +21,64 @@
 
       <div class="form-group row">
         <div class="col-sm-12">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Date of birth:</mat-label>
+            <input [(ngModel)]="data.date_of_birth" [class.input-invalid]="createSingerDialogForm.get('date_of_birth')!.invalid && createSingerDialogForm.get('date_of_birth')!.touched"
+                   [class.input-valid]="createSingerDialogForm.get('date_of_birth')!.valid && createSingerDialogForm.get('date_of_birth')!.touched" class="form-control" formControlName="date_of_birth" matInput placeholder="Date of birthday" type="date">
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Gender:</mat-label>
+            <select [(ngModel)]="data.gender" [class.input-invalid]="createSingerDialogForm.get('gender')!.invalid && createSingerDialogForm.get('gender')!.touched"
+                    [class.input-valid]="createSingerDialogForm.get('gender')!.valid && createSingerDialogForm.get('gender')!.touched" class="form-control" formControlName="gender" matInput matNativeControl placeholder="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Music genre:</mat-label>
+            <input [(ngModel)]="data.music_genre" [class.input-invalid]="createSingerDialogForm.get('music_genre')!.invalid && createSingerDialogForm.get('music_genre')!.touched"
+                   [class.input-valid]="createSingerDialogForm.get('music_genre')!.valid && createSingerDialogForm.get('music_genre')!.touched" class="form-control" formControlName="music_genre" matInput placeholder="Music genre" type="text">
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Story:</mat-label>
+            <input [(ngModel)]="data.story" [class.input-invalid]="createSingerDialogForm.get('story')!.invalid && createSingerDialogForm.get('story')!.touched"
+                   [class.input-valid]="createSingerDialogForm.get('story')!.valid && createSingerDialogForm.get('story')!.touched" class="form-control" formControlName="story" matInput placeholder="Story" type="text">
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Band:</mat-label>
+            <input [(ngModel)]="data.band" [class.input-invalid]="createSingerDialogForm.get('band')!.invalid && createSingerDialogForm.get('band')!.touched"
+                   [class.input-valid]="createSingerDialogForm.get('band')!.valid && createSingerDialogForm.get('band')!.touched" class="form-control" formControlName="band" matInput placeholder="Band" type="text">
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
           <mat-label>Image:</mat-label>
           <input (change)="firebaseDialogSinger.handleFileInput($event)" accept="image/*" autocomplete="off" class="form-control"
                  formControlName="image" id="avatar" type="file"/>
@@ -51,11 +109,12 @@
         <div class="col-sm-12">
           <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Description:</mat-label>
-            <textarea #autosize="cdkTextareaAutosize"
+            <textarea rows="5"
                       [class.input-invalid]="createSingerDialogForm.get('description')!.invalid && createSingerDialogForm.get('description')!.touched"
                       [class.input-valid]="createSingerDialogForm.get('description')!.valid && createSingerDialogForm.get('description')!.touched"
-                      cdkAutosizeMaxRows="5"
-                      cdkAutosizeMinRows="1" cdkTextareaAutosize class="form-control" formControlName="description" matInput placeholder="Description"
+                      cdkAutosizeMinRows="1"
+                      cdkTextareaAutosize
+                      class="form-control" formControlName="description" matInput placeholder="Description"
                       style="height: 100px;"></textarea>
             <div *ngIf="createSingerDialogForm.get('description').invalid && createSingerDialogForm.get('description').touched"
                  style="margin-top: 10px;color: red; text-align: left !important;">

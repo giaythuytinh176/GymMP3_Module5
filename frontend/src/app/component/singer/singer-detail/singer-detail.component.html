@@ -32,7 +32,7 @@
             <a class="btn btn-icon white rounded btn-share pull-right" data-target="#share-modal"
                data-toggle="modal"><i class="fa fa-share-alt"></i></a>
             <button class="btn-playpause text-primary m-r-sm"></button>
-            <span>9 Albums, 105 Tracks</span>
+            <span>9 Albums, {{ songOfSinger.length || 0 }} Tracks</span>
           </div>
           <div class="block clearfix m-b">
             <a class="btn btn-xs rounded white">Soul</a> <a class="btn btn-xs rounded white">Electro</a>
@@ -94,6 +94,10 @@
 
                   </div>
                 </div>
+              </div>
+
+              <div class="col-xs-12">
+                <app-ngx-audio [listTracks]="tracks1"></app-ngx-audio>
               </div>
             </div>
           </div>
