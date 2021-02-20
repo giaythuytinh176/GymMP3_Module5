@@ -3,6 +3,7 @@ export class Playlist {
   name_playlist: string;
   description: string;
   user_id: number;
+  username: string;
   view: number;
   status: string;
 

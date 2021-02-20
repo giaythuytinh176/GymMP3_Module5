@@ -17,7 +17,8 @@ export class PlaylistService {
   apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
   apiPlaylistInfo = environment.apiUrl + '/playlist';
   apiDeletePlaylist = environment.apiUrl + '/playlist';
-  apiAddSongToPlaylist = environment.apiUrl + '/playlist/add-song'
+  apiAddSongToPlaylist = environment.apiUrl + '/playlist/add-song';
+  apiGetPlaylistLast = environment.apiUrl + '/playlist/lastest';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -64,5 +65,9 @@ export class PlaylistService {
 
   addSong(song_id: number, playlist_id: number): Observable<Playlist> {
     return this.http.get<Playlist>(`${this.apiAddSongToPlaylist}/${song_id}/${playlist_id}`, this.httpJson);
+  }
+
+  getLastestPlaylists(): Observable<Playlist[]> {
+    return this.http.get<Playlist[]>(this.apiGetPlaylistLast);
   }
 }

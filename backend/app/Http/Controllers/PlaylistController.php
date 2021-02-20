@@ -128,4 +128,14 @@ class PlaylistController extends Controller
         }
         return response()->json($result, 200);
     }
+
+    public function getLastestPlaylist()
+    {
+        // $data = Playlist::latest()->paginate(4)->toArray();
+        $data = DB::table('playlists')->select('playlists.*', 'users.username')
+        ->join('users','playlists.user_id', '=','users.id')
+        ->latest()->paginate(4)->toArray();
+        $lastRecordData = $data['data'];
+        return response()->json(compact('lastRecordData'));
+    }
 }

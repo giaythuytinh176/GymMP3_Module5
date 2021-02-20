@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/search', 'SongController@search');
 Route::post('/search-playlist', 'PlaylistController@search');
+Route::get('playlist/lastest','PlaylistController@getLastestPlaylist');
 
 Route::get('singer/list', 'SingerController@index');
 Route::get('singer/show-song/{id}', 'SingerController@showSongSinger');
