@@ -99,12 +99,12 @@ import {FirebaseEditProfileComponent} from './component/firebase/firebaseEditPro
 import {PlaylistDetailComponent} from './component/playlist/playlist-detail/playlist-detail.component';
 import {TracksComponent} from './component/songManager/tracks/tracks.component';
 import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
-import {DialogDeletePlaylistComponent} from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
-import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-delete-song-of-playlist/dialog-delete-song-of-playlist.component';
-import {ListSingerComponent} from './component/singer/list-singer/list-singer.component';
-import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
-import {NgxAudioPlayerModule} from "ngx-audio-player";
-import {TrackDetailComponent} from './component/songManager/track-detail/track-detail.component';
+import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
+import { ListSingerComponent } from './component/singer/list-singer/list-singer.component';
+import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
+import { ShowSongsLastPlaylistComponent } from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
+
+
 
 @NgModule({
   declarations: [
@@ -144,11 +144,9 @@ import {TrackDetailComponent} from './component/songManager/track-detail/track-d
     PlaylistDetailComponent,
     SearchPlaylistComponent,
     DialogDeletePlaylistComponent,
-    DialogDeleteSongOfPlaylistComponent,
     ListSingerComponent,
     SingerDetailComponent,
-    TrackDetailComponent,
-
+    ShowSongsLastPlaylistComponent,
   ],
   imports: [
     BrowserModule,
@@ -216,7 +214,6 @@ import {TrackDetailComponent} from './component/songManager/track-detail/track-d
     MatSelectModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
-    NgxAudioPlayerModule,
 
   ],
   providers: [
@@ -239,7 +236,6 @@ import {TrackDetailComponent} from './component/songManager/track-detail/track-d
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
     DialogDeletePlaylistComponent,
-    NgxAudioPlayerModule,
 
   ],
   bootstrap: [

@@ -194,4 +194,43 @@ class PlaylistController extends Controller
         $result = array_values($result);
         return response()->json($result, 200);
     }
+
+    public function getLastestPlaylist()
+    {
+        // $data = Playlist::latest()->paginate(4)->toArray();
+        $data = DB::table('playlists')->select('playlists.*', 'users.username')
+        ->join('users','playlists.user_id', '=','users.id')
+        ->where('playlists.status', '=', 'on')
+        ->latest()->paginate(4)->toArray();
+        $lastRecordData = $data['data'];
+        return response()->json(compact('lastRecordData'));
+    }
+
+    public function getSongToLastPlaylist($id)
+    {
+        $playlist = Playlist::with('songs')
+        ->select('playlists.*','users.username')
+        ->join('users','users.id','=','playlists.user_id')
+        ->where([
+            ['playlists.status', '=', 'on'],
+            ['playlists.id', '=', $id],
+        ])
+        ->first()->toArray();
+        return response()->json($playlist['songs']);
+    }
+
+    public function getDetailLastestPlaylist($id)
+    {
+        // $data = Playlist::latest()->paginate(4)->toArray();
+        $data = DB::table('playlists')->select('playlists.*', 'users.username')
+        ->join('users','playlists.user_id', '=','users.id')
+        ->where([
+            ['playlists.status', '=', 'on'],
+            ['playlists.id', '=', $id],
+        ])
+        ->first();
+        return response()->json($data);
+    }
+
+    
 }
