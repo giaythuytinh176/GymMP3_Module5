@@ -21,6 +21,8 @@ import {PlaylistDetailComponent} from '../../component/playlist/playlist-detail/
 import {GetAllSongsResolver} from '../../resolver/GetAllSongsResolver';
 import {TracksComponent} from '../../component/songManager/tracks/tracks.component';
 import {GetPlaylistInfoResolver} from '../../resolver/GetPlaylistInfoResolver';
+import {GetSongOfPlaylistByIDResolver} from "../../resolver/GetSongOfPlaylistByIDResolver";
+import {GetRandomImagePlaylistResolver} from "../../resolver/GetRandomImagePlaylistResolver";
 
 const routes: Routes = [
   {
@@ -103,6 +105,8 @@ const routes: Routes = [
       getAllSongs: GetAllSongsResolver,
       getPlaylistInfo: GetPlaylistInfoResolver,
       getUserInfo: GetUserInfoResolver,
+      getSongOfPlaylist: GetSongOfPlaylistByIDResolver,
+      getRandomImagePlaylist: GetRandomImagePlaylistResolver,
     }
   },
 ];

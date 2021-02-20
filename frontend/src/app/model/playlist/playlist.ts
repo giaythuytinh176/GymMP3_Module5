@@ -14,10 +14,12 @@ export class Playlist {
     description: string,
     user_id: number,
     view: number,
+    status: string,
   ) {
     this.name_playlist = name_playlist;
     this.description = description;
     this.user_id = user_id;
     this.view = view;
+    this.status = status;
   }
 }

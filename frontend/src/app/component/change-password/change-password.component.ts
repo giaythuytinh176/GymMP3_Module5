@@ -27,6 +27,9 @@ export class ChangePasswordComponent implements OnInit, OnChanges, AfterContentC
   ChangePassForm: FormGroup;
   shake: any;
   isSamePass = false;
+  hide1 = true;
+  hide2 = true;
+  hide3 = true;
 
   constructor(
     private authService: AuthService,

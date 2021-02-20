@@ -20,6 +20,7 @@ import { SingerDetailComponent } from './component/singer/singer-detail/singer-d
 import { GetSongOfSingerResolver } from './resolver/GetSongOfSingerResolver';
 import { GetSingerInfoResolver } from './resolver/GetSingerInforResolver';
 import { ShowSongsLastPlaylistComponent } from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
+import {TrackDetailComponent} from "./component/songManager/track-detail/track-detail.component";
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
     component: SearchPlaylistComponent,
   },
   {
+    path: 'track/:id',
+    component: TrackDetailComponent,
+  },
+  {
     path: 'singer',
     children: [
       {
@@ -66,7 +71,7 @@ const routes: Routes = [
           getSingerInfor: GetSingerInfoResolver,
           getShowSongSinger: GetSongOfSingerResolver
         }
-      }
+      },
     ]
   },
   {

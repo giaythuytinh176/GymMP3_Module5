@@ -13,8 +13,7 @@ import {CreatePlaylistComponent} from '../playlist/create-playlist/create-playli
 import {PlaylistService} from 'src/app/services/playlist/playlist.service';
 import {Playlist} from 'src/app/model/playlist/playlist';
 import {DialogCreatePlaylistComponent} from '../playlist/dialog-create-playlist/dialog-create-playlist.component';
-import {DialogDeleteSongComponent} from "../songManager/delete-song/dialog-delete-song/dialog-delete-song.component";
-import {DialogDeletePlaylistComponent} from "../playlist/dialog-delete-playlist/dialog-delete-playlist.component";
+import {DialogDeletePlaylistComponent} from '../playlist/dialog-delete-playlist/dialog-delete-playlist.component';
 
 @Component({
   selector: 'app-profile',
@@ -45,6 +44,7 @@ export class ProfileComponent implements OnInit {
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
     this.songs = this.route.snapshot.data.getSongByUserID;
     this.playlists = this.route.snapshot.data.getPlaylistByUSerID;
+
   }
 
   getPlaylistByUSerId(): void {
@@ -68,8 +68,7 @@ export class ProfileComponent implements OnInit {
       data => {
         // console.log(data);
         this.getPlaylistByUSerId();
-        this.toastr.success('Deleted playlist sucessfully!');
-        this.routes.navigate(['/user/profile', this.userinfo.id]);
+        this.toastr.success('Deleted playlist successfully!');
       }, error => console.log(error)
     );
   }

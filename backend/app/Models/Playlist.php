@@ -14,6 +14,7 @@ class Playlist extends Model
         'description',
         'user_id',
         'view',
+        'status',
     ];
 
     public function users()
