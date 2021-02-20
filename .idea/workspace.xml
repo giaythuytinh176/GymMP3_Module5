@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/PlaylistController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/PlaylistController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
+=======
     <list default="true" id="a5291532-c06a-458d-b6d5-4a7231b0d09b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/PlaylistController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/PlaylistController.php" afterDir="false" />
@@ -24,7 +30,12 @@
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/services/playlist/playlist.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/playlist/playlist.service.ts" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/frontend/src/assets/scripts/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/scripts/app.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/singer/singer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/singer/singer.service.ts" afterDir="false" />
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
+>>>>>>> 429f61bab753219b43fe89e2e6965fd6d0bdbebb
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +46,18 @@
     <pharConfigPath>$PROJECT_DIR$/backend/composer.json</pharConfigPath>
     <execution />
   </component>
+<<<<<<< HEAD
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+=======
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -46,7 +69,11 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+<<<<<<< HEAD
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+=======
   <component name="PhpWorkspaceProjectConfiguration">
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
     <include_path>
       <path value="$PROJECT_DIR$/backend/vendor/composer" />
       <path value="$PROJECT_DIR$/backend/vendor/psr/event-dispatcher" />
@@ -164,31 +191,149 @@
       <path value="$PROJECT_DIR$/backend/vendor/graham-campbell/result-type" />
     </include_path>
   </component>
+<<<<<<< HEAD
+  <component name="ProjectId" id="1oIttfUGti9RRfnFPvMhzgqBOi3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+=======
   <component name="ProjectId" id="1ogBokSOC5ncisLvP8PuHM1uPcn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/app/resolver" />
+<<<<<<< HEAD
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+=======
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+<<<<<<< HEAD
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+=======
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/frontend/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/frontend/src/app/resolver" />
+<<<<<<< HEAD
+      <recent name="$PROJECT_DIR$/backend" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/component/firebase" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/component" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/model/singer" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/app/component/songManager" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/component/firebase" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/component/firebase/firebase" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/component/singer" />
+      <recent name="$PROJECT_DIR$/frontend/src/app/component/album" />
+=======
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
+      <changelist id="2a2af444-af6c-4185-865f-df6d770e4450" name="Default Changelist" comment="" />
+      <created>1612986149536</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1612986149536</updated>
+      <workItem from="1612986152478" duration="173000" />
+      <workItem from="1612986401168" duration="459000" />
+      <workItem from="1612988004277" duration="9302000" />
+      <workItem from="1613036208461" duration="18757000" />
+      <workItem from="1613096084822" duration="1575000" />
+      <workItem from="1613098393401" duration="14406000" />
+      <workItem from="1613143458666" duration="13097000" />
+      <workItem from="1613186913869" duration="1175000" />
+      <workItem from="1613196925545" duration="16000" />
+      <workItem from="1613196967043" duration="669000" />
+      <workItem from="1613198015690" duration="3212000" />
+      <workItem from="1613215957369" duration="16616000" />
+      <workItem from="1613249844894" duration="3987000" />
+      <workItem from="1613253993574" duration="1417000" />
+      <workItem from="1613278469489" duration="10907000" />
+      <workItem from="1613293680618" duration="31897000" />
+      <workItem from="1613361707446" duration="2401000" />
+      <workItem from="1613377315509" duration="477000" />
+      <workItem from="1613392893641" duration="4171000" />
+      <workItem from="1613414435233" duration="7963000" />
+      <workItem from="1613453557928" duration="1960000" />
+      <workItem from="1613479667119" duration="3373000" />
+      <workItem from="1613577765672" duration="870000" />
+      <workItem from="1613479667119" duration="7558000" />
+      <workItem from="1613492986814" duration="144000" />
+      <workItem from="1613493265507" duration="1585000" />
+      <workItem from="1613498443284" duration="1275000" />
+      <workItem from="1613523678076" duration="6590000" />
+      <workItem from="1613542568254" duration="2076000" />
+      <workItem from="1613569315888" duration="1109000" />
+      <workItem from="1613582351935" duration="49000" />
+      <workItem from="1613582517326" duration="6346000" />
+      <workItem from="1613609710112" duration="93000" />
+      <workItem from="1613751053534" duration="956000" />
+      <workItem from="1613809822348" duration="967000" />
+      <workItem from="1613811249703" duration="6000" />
+    </task>
+    <task id="LOCAL-00001" summary="tesing dragdrop6">
+      <created>1612986188568</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1612986188568</updated>
+    </task>
+    <task id="LOCAL-00002" summary="tesing dragdrop6">
+      <created>1612986223238</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612986223238</updated>
+    </task>
+    <task id="LOCAL-00003" summary="tesing dragdrop , change layout profile, song">
+      <created>1613022052464</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1613022052464</updated>
+    </task>
+    <task id="LOCAL-00004" summary="testing dragdrop 2 tables">
+      <created>1613054252380</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1613054252381</updated>
+    </task>
+    <task id="LOCAL-00005" summary="testing dragdrop 2 tables 2">
+      <created>1613068723062</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1613068723063</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+=======
       <changelist id="a5291532-c06a-458d-b6d5-4a7231b0d09b" name="Default Changelist" comment="" />
       <created>1613698531022</created>
       <option name="number" value="Default" />
@@ -200,9 +345,52 @@
       <workItem from="1613752261613" duration="11525000" />
       <workItem from="1613782606227" duration="16650000" />
     </task>
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="tesing dragdrop6" />
+    <MESSAGE value="tesing dragdrop , change layout profile, song" />
+    <MESSAGE value="testing dragdrop 2 tables" />
+    <MESSAGE value="testing dragdrop 2 tables 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing dragdrop 2 tables 2" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/update-song/update-song.component.html</url>
+          <line>15</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/component/songManager/create-song/create-song.component.html</url>
+          <line>254</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+=======
+>>>>>>> 20bb13bc7d81513b24bde293990f98bdb77a7651
 </project>

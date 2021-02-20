@@ -125,9 +125,10 @@
                         </div>
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
-                            <a title="Edit playlist" (click)="openDialogEditPlaylist(playlist, userinfo.id)"><i class="small material-icons"> edit </i></a>
+                            <a (click)="openDialogEditPlaylist(playlist, userinfo.id)" title="Edit playlist"><i class="small material-icons">
+                              edit </i></a>
                             <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                            <a title="Delete playlist" (click)="openDialogDeletePlaylist(playlist.id, playlist.name_playlist, userinfo.id)">
+                            <a (click)="openDialogDeletePlaylist(playlist.id, playlist.name_playlist, userinfo.id)" title="Delete playlist">
                               <i class="small material-icons"> delete </i> </a>
                           </div>
                           <div class="item-title text-ellipsis">

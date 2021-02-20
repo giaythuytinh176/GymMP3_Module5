@@ -103,10 +103,11 @@ import {DialogDeletePlaylistComponent} from './component/playlist/dialog-delete-
 import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-delete-song-of-playlist/dialog-delete-song-of-playlist.component';
 import {ListSingerComponent} from './component/singer/list-singer/list-singer.component';
 import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
-import {NgxAudioPlayerModule} from "ngx-audio-player";
+import {NgxAudioPlayerModule} from 'ngx-audio-player';
 import {TrackDetailComponent} from './component/songManager/track-detail/track-detail.component';
-import { DialogEditPlaylistComponent } from './component/playlist/dialog-edit-playlist/dialog-edit-playlist.component';
-import { NgxAudioComponent } from './component/player/ngx-audio/ngx-audio.component';
+import {DialogEditPlaylistComponent} from './component/playlist/dialog-edit-playlist/dialog-edit-playlist.component';
+import {NgxAudioComponent} from './component/player/ngx-audio/ngx-audio.component';
+import {ShowSongsLastPlaylistComponent} from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
 
 @NgModule({
   declarations: [
@@ -146,12 +147,13 @@ import { NgxAudioComponent } from './component/player/ngx-audio/ngx-audio.compon
     PlaylistDetailComponent,
     SearchPlaylistComponent,
     DialogDeletePlaylistComponent,
-    DialogDeleteSongOfPlaylistComponent,
     ListSingerComponent,
     SingerDetailComponent,
     TrackDetailComponent,
     DialogEditPlaylistComponent,
     NgxAudioComponent,
+    ShowSongsLastPlaylistComponent,
+    DialogDeleteSongOfPlaylistComponent,
 
   ],
   imports: [
@@ -245,6 +247,7 @@ import { NgxAudioComponent } from './component/player/ngx-audio/ngx-audio.compon
     DialogDeletePlaylistComponent,
     NgxAudioPlayerModule,
     PlaylistDetailComponent,
+    DialogDeleteSongOfPlaylistComponent,
 
   ],
   bootstrap: [

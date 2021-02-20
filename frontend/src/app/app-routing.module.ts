@@ -19,7 +19,10 @@ import {GetAllSingersResolver} from './resolver/GetAllSingersResolver';
 import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
 import {GetSongOfSingerResolver} from './resolver/GetSongOfSingerResolver';
 import {GetSingerInfoResolver} from './resolver/GetSingerInforResolver';
+import {ShowSongsLastPlaylistComponent} from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
 import {TrackDetailComponent} from "./component/songManager/track-detail/track-detail.component";
+import {GetSongOfPlaylistByIDResolver} from "./resolver/GetSongOfPlaylistByIDResolver";
+import {GetSongOfPlaylistByIDResolverGuest} from "./resolver/GetSongOfPlaylistByIDResolverGuest";
 
 const routes: Routes = [
   {
@@ -40,6 +43,13 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchSongComponent,
+  },
+  {
+    path: 'playlist/:id',
+    component: ShowSongsLastPlaylistComponent,
+    resolve: {
+      getSongOfPlaylistGuest: GetSongOfPlaylistByIDResolverGuest,
+    }
   },
   {
     path: 'search-playlist',

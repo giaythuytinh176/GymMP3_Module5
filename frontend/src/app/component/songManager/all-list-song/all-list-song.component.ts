@@ -4,6 +4,8 @@ import {Song} from '../../../model/song/song';
 import {Observable, Subject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
+import {Playlist} from 'src/app/model/playlist/playlist';
+import {PlaylistService} from 'src/app/services/playlist/playlist.service';
 
 @Component({
   selector: 'app-all-list-song',
@@ -14,11 +16,14 @@ export class AllListSongComponent implements OnInit, OnDestroy {
 
   allsongs$: Observable<Song[]>;
   allsongs: Song[];
+  lastestPlaylist: Playlist[];
+  allplaylist: Playlist[];
   isLoading = false;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private songService: SongService,
+    private playlistService: PlaylistService,
     private readonly route: ActivatedRoute,
   ) {
   }
@@ -41,6 +46,7 @@ export class AllListSongComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('Go here');
     this.allsongs = this.route.snapshot.data.getAllSongs.data;
+    this.getLastestPlaylists();
     // this.route.params.pipe(
     //   takeUntil(this.onDestroy$),
     //   distinctUntilChanged()
@@ -53,5 +59,12 @@ export class AllListSongComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  getLastestPlaylists(): void {
+    this.playlistService.getLastestPlaylists().subscribe((data: any) => {
+      this.lastestPlaylist = data?.lastRecordData;
+      console.log(data);
+    });
   }
 }

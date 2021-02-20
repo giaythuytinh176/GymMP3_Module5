@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NgxAudioComponent } from './ngx-audio.component';
+import {NgxAudioComponent} from './ngx-audio.component';
 
 describe('NgxAudioComponent', () => {
   let component: NgxAudioComponent;
@@ -8,9 +8,9 @@ describe('NgxAudioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NgxAudioComponent ]
+      declarations: [NgxAudioComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

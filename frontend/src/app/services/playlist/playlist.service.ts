@@ -18,6 +18,9 @@ export class PlaylistService {
   apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
   apiPlaylistInfo = environment.apiUrl + '/playlist';
   apiDeletePlaylist = environment.apiUrl + '/playlist';
+  apiGetPlaylistLast = environment.apiUrl + '/playlist/lastest';
+  apiGetShowSongsToLastPlaylist = environment.apiUrl + '/playlist/song-to-last-playlist';
+  apiGetDetialPlaylist = environment.apiUrl + '/playlist/detail-playlist'
   apiSongOfDeletePlaylist = environment.apiUrl + '/playlist/song';
   apiAddSongToPlaylist = environment.apiUrl + '/playlist/add-song';
   apiGetListSongOfPlaylist = environment.apiUrl + '/playlist/showSong';
@@ -102,5 +105,17 @@ export class PlaylistService {
 
   addSong(song_id: number, playlist_id: number): Observable<Playlist> {
     return this.http.get<Playlist>(`${this.apiAddSongToPlaylist}/${song_id}/${playlist_id}`, this.httpJson);
+  }
+
+  getLastestPlaylists(): Observable<Playlist[]> {
+    return this.http.get<Playlist[]>(this.apiGetPlaylistLast);
+  }
+
+  getShowSongsToLastPlaylist(playlist_id: number): Observable<Song[]> {
+    return this.http.get<Song[]>(`${this.apiGetShowSongsToLastPlaylist}/${playlist_id}`);
+  };
+
+  getDetailPlaylist(id: number): Observable<Playlist> {
+    return this.http.get<Playlist>(`${this.apiGetDetialPlaylist}/${id}`);
   }
 }

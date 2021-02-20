@@ -19,7 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/search', 'SongController@search');
+
 Route::post('/search-playlist', 'PlaylistController@search');
+Route::get('playlist/lastest', 'PlaylistController@getLastestPlaylist');
+Route::get('playlist/song-to-last-playlist/{id}', 'PlaylistController@getSongToLastPlaylist');
+Route::get('playlist/detail-playlist/{id}', 'PlaylistController@getDetailLastestPlaylist');
+
 
 Route::prefix('singer')->group(function () {
     Route::get('/list', 'SingerController@index');

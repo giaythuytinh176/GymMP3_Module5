@@ -1,4 +1,32 @@
 <div class="page-content">
+  <div class="padding p-b-0">
+    <div class="page-title m-b">
+      <h1 class="inline m-a-0">New Playlist</h1>
+    </div>
+    <!-- <div class="row row-sm item-masonry item-info-overlay"> -->
+
+    <div *ngFor="let playlist of lastestPlaylist" class="col-sm-3 col-xs-6">
+      <div class="item r">
+        <div class="item-media ">
+          <a [routerLink]="['/playlist', playlist.id]" class="item-media-content" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
+        </div>
+        <div class="item-info">
+          <div class="item-overlay bottom text-right">
+            <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+            <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
+            <div class="dropdown-menu pull-right black lt"></div>
+          </div>
+          <div class="item-title text-ellipsis">
+            <a [routerLink]="['/playlist', playlist.id]" style="color: black;">{{playlist.name_playlist}}</a>
+          </div>
+          <div class="item-author text-sm text-ellipsis ">
+            <a [routerLink]="['/playlist', playlist.id]" class="text-muted" style="color: black!important">{{playlist.username}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
   <div class="row-col">
     <div class="col-lg-9 b-r no-border-md">
       <div class="padding">
@@ -92,6 +120,10 @@
               <div *ngFor="let song of allsongs" class="col-xs-2 col-sm-2 col-md-2">
                 <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
                   <div class="item-media ">
+                    <!--<<<<<<< HEAD-->
+                    <!--                    <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content"-->
+                    <!--                      href="track.detail.html"></a>-->
+                    <!--=======-->
                     <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]" class="item-media-content"></a>
                     <div class="item-overlay center">
                       <button class="btn-playpause">Play</button>
@@ -139,9 +171,11 @@
         <h6 class="text text-muted">5 Likes</h6>
         <div class="row item-list item-list-sm m-b">
           <div class="col-xs-12">
-            <div class="item r" data-id="item-6" data-src="http://api.soundcloud.com/tracks/236107824/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+            <div class="item r" data-id="item-6"
+                 data-src="http://api.soundcloud.com/tracks/236107824/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b5.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html"
+                   style="background-image: url('assets/images/b5.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
@@ -154,9 +188,11 @@
             </div>
           </div>
           <div class="col-xs-12">
-            <div class="item r" data-id="item-8" data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+            <div class="item r" data-id="item-8"
+                 data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b7.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html"
+                   style="background-image: url('assets/images/b7.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
@@ -171,7 +207,8 @@
           <div class="col-xs-12">
             <div class="item r" data-id="item-5" data-src="http://streaming.radionomy.com/JamendoLounge">
               <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b4.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html"
+                   style="background-image: url('assets/images/b4.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
@@ -184,9 +221,11 @@
             </div>
           </div>
           <div class="col-xs-12">
-            <div class="item r" data-id="item-11" data-src="http://api.soundcloud.com/tracks/218060449/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+            <div class="item r" data-id="item-11"
+                 data-src="http://api.soundcloud.com/tracks/218060449/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b10.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html"
+                   style="background-image: url('assets/images/b10.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
@@ -199,9 +238,11 @@
             </div>
           </div>
           <div class="col-xs-12">
-            <div class="item r" data-id="item-10" data-ng-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+            <div class="item r" data-id="item-10"
+                 data-ng-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b9.jpg');"></a>
+                <a class="item-media-content" href="track.detail.html"
+                   style="background-image: url('assets/images/b9.jpg');"></a>
               </div>
               <div class="item-info">
                 <div class="item-title text-ellipsis">
@@ -217,22 +258,22 @@
         <h6 class="text text-muted">Go mobile</h6>
         <div class="btn-groups">
           <a class="btn btn-sm dark lt m-r-xs" href="" style="width: 135px">
-                <span class="pull-left m-r-sm">
-                  <i class="fa fa-apple fa-2x"></i>
-                </span>
+            <span class="pull-left m-r-sm">
+              <i class="fa fa-apple fa-2x"></i>
+            </span>
             <span class="clear text-left l-h-1x">
-                  <span class="text-muted text-xxs">Download on the</span>
-                  <b class="block m-b-xs">App Store</b>
-                </span>
+              <span class="text-muted text-xxs">Download on the</span>
+              <b class="block m-b-xs">App Store</b>
+            </span>
           </a>
           <a class="btn btn-sm dark lt" href="" style="width: 133px">
-                <span class="pull-left m-r-sm">
-                  <i class="fa fa-play fa-2x"></i>
-                </span>
+            <span class="pull-left m-r-sm">
+              <i class="fa fa-play fa-2x"></i>
+            </span>
             <span class="clear text-left l-h-1x">
-                  <span class="text-muted text-xxs">Get it on</span>
-                  <b class="block m-b-xs m-r-xs">Google Play</b>
-                </span>
+              <span class="text-muted text-xxs">Get it on</span>
+              <b class="block m-b-xs m-r-xs">Google Play</b>
+            </span>
           </a>
         </div>
         <div class="b-b m-y"></div>
