@@ -6,6 +6,8 @@ export class Playlist {
   username: string;
   view: number;
   status: string;
+  songs?: [{ id: number, nameSong: string, avatarUrl: any, mp3Url: any, describes: any, author: string, view: number}];
+
 
   constructor(
     name_playlist: string,

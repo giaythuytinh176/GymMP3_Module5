@@ -102,6 +102,7 @@ import {SearchPlaylistComponent} from './component/playlist/search-playlist/sear
 import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
 import { ListSingerComponent } from './component/singer/list-singer/list-singer.component';
 import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
+import { ShowSongsLastPlaylistComponent } from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
 
 
 
@@ -145,6 +146,7 @@ import { SingerDetailComponent } from './component/singer/singer-detail/singer-d
     DialogDeletePlaylistComponent,
     ListSingerComponent,
     SingerDetailComponent,
+    ShowSongsLastPlaylistComponent,
   ],
   imports: [
     BrowserModule,

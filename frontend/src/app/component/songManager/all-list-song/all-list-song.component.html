@@ -8,7 +8,7 @@
       <div class="col-sm-3 col-xs-6" *ngFor="let playlist of lastestPlaylist">
         <div class="item r">
           <div class="item-media ">
-            <a [routerLink]="['/user/playlist', playlist.id]" class="item-media-content" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
+            <a [routerLink]="['/show-detail-playlist', playlist.id]" class="item-media-content" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
           </div>
           <div class="item-info">
             <div class="item-overlay bottom text-right">
@@ -17,10 +17,10 @@
               <div class="dropdown-menu pull-right black lt"></div>
             </div>
             <div class="item-title text-ellipsis">
-              <a [routerLink]="['/user/playlist', playlist.id]" style="color: black;">{{playlist.name_playlist}}</a>
+              <a [routerLink]="['/show-detail-playlist', playlist.id]" style="color: black;">{{playlist.name_playlist}}</a>
             </div>
             <div class="item-author text-sm text-ellipsis ">
-              <a [routerLink]="['/user/playlist', playlist.id]" class="text-muted" style="color: black!important">{{playlist.username}}</a>
+              <a [routerLink]="['/show-detail-playlist', playlist.id]" class="text-muted" style="color: black!important">{{playlist.username}}</a>
             </div>
           </div>
         </div>
