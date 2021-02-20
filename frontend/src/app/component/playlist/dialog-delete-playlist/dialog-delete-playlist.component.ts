@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Playlist} from '../../../model/playlist/playlist';
-import {DialogDeleteSongComponent} from '../../songManager/delete-song/dialog-delete-song/dialog-delete-song.component';
+import {DialogDeleteSongComponent} from '../../song/delete-song/dialog-delete-song/dialog-delete-song.component';
 
 @Component({
   selector: 'app-dialog-delete-playlist',

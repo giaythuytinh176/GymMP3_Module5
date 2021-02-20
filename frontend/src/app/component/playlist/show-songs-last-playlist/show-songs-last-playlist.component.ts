@@ -19,6 +19,7 @@ export class ShowSongsLastPlaylistComponent implements OnInit {
   auth: boolean;
   tracks: Track[];
   songOfPlaylist: Song[];
+  getRandomImagePlaylist: { error: string, image: string };
 
   constructor(
     private songService: SongService,
@@ -30,6 +31,7 @@ export class ShowSongsLastPlaylistComponent implements OnInit {
 
   ngOnInit(): void {
     this.songOfPlaylist = this.route.snapshot.data.getSongOfPlaylistGuest;
+    this.getRandomImagePlaylist = this.route.snapshot.data.getRandomImagePlaylist;
     this.id = +this.route.snapshot.paramMap.get('id');
     this.loadTrackPlaylist();
     this.getDetailPlaylist();
