@@ -19,11 +19,11 @@
       <div *ngFor="let playlist of playlists" class="col-xs-12">
         <div class="item r">
           <div class="item-media ">
-            <a [routerLink]="['/user/playlist', playlist.id]" class="item-media-content" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
+            <a [routerLink]="['/playlist', playlist.id]" class="item-media-content" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
           </div>
           <div class="item-info">
             <div class="item-title text-ellipsis">
-              <a [routerLink]="['/user/playlist', playlist.id]">{{playlist.name_playlist}}</a>
+              <a [routerLink]="['/playlist', playlist.id]">{{playlist.name_playlist}}</a>
             </div>
             <div class="item-meta text-sm text-muted">
               		          <span class="item-meta-stats text-xs ">

@@ -8,25 +8,40 @@
     <div *ngFor="let playlist of lastestPlaylist" class="col-sm-3 col-xs-6">
       <div class="item r">
         <div class="item-media ">
-          <a [routerLink]="['/playlist', playlist.id]" class="item-media-content" style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
+          <a [routerLink]="['/playlist', playlist.id]" class="item-media-content"
+            style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
         </div>
         <div class="item-info">
           <div class="item-overlay bottom text-right">
-            <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-            <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
+            <!-- <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a> -->
+            <!-- <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a> -->
             <div class="dropdown-menu pull-right black lt"></div>
           </div>
           <div class="item-title text-ellipsis">
             <a [routerLink]="['/playlist', playlist.id]" style="color: black;">{{playlist.name_playlist}}</a>
           </div>
           <div class="item-author text-sm text-ellipsis ">
-            <a [routerLink]="['/playlist', playlist.id]" class="text-muted" style="color: black!important">{{playlist.username}}</a>
+            <a [routerLink]="['/playlist', playlist.id]" class="text-muted"
+              style="color: black!important">{{playlist.username}}</a>
           </div>
         </div>
       </div>
     </div>
   </div>
   <!-- </div> -->
+  <div class="padding p-b-0">
+    <div class="page-title m-b">
+      <h1 class="inline m-a-0">New Songs</h1>
+    </div>
+    <app-lastest-song></app-lastest-song>
+
+    <ng-template #loadingTEMP>
+      <div class="centered">
+        <h1>Loading ...</h1>
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
   <div class="row-col">
     <div class="col-lg-9 b-r no-border-md">
       <div class="padding">
@@ -115,28 +130,21 @@
             padding: 50,
             nextSelector: 'a.jscroll-next:last'
           }">
-          <div class="row">
-            <div>
-              <div *ngFor="let song of allsongs" class="col-xs-2 col-sm-2 col-md-2">
-                <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+          <div class="padding">
+            <div class="row item-list item-list-md m-b">
+              <div class="col-sm-6" *ngFor="let song of allsongs">
+                <div class="item r" [attr.data-id]="song.id" [attr.data-src]="song.mp3Url">
                   <div class="item-media ">
-                    <!--<<<<<<< HEAD-->
-                    <!--                    <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" class="item-media-content"-->
-                    <!--                      href="track.detail.html"></a>-->
-                    <!--=======-->
-                    <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]" class="item-media-content"></a>
+                    <a class="item-media-content" [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}"
+                      [routerLink]="['/track', song.id]"></a>
                     <div class="item-overlay center">
                       <button class="btn-playpause">Play</button>
                     </div>
                   </div>
                   <div class="item-info">
                     <div class="item-overlay bottom text-right">
-                      <a class="btn-favorite" href="#">
-                        <i class="fa fa-heart-o"></i>
-                      </a>
-                      <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </a>
+                      <!-- <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a> -->
                       <div class="dropdown-menu pull-right black lt"></div>
                     </div>
                     <div class="item-title text-ellipsis">
@@ -147,32 +155,18 @@
                         {{ singer.singer_name }},
                       </a>
                     </div>
+
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-          <!--          <div class="text-center">-->
-          <!--            <a class="btn btn-sm white rounded jscroll-next" href="scroll.item.html">Show More</a>-->
-          <!--          </div>-->
         </div>
-        <div class="page-title m-b">
-          <h1 class="inline m-a-0">Latest Songs</h1>
-        </div>
-        <app-lastest-song></app-lastest-song>
-
-        <ng-template #loadingTEMP>
-          <div class="centered">
-            <h1>Loading ...</h1>
-            <mat-spinner></mat-spinner>
-          </div>
-        </ng-template>
 
       </div>
     </div>
-    <div *ngIf="!isLoading" class="col-lg-3 w-xxl w-auto-md">
+    <!-- <div *ngIf="!isLoading" class="col-lg-3 w-xxl w-auto-md"> 
       <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
         <h6 class="text text-muted">5 Likes</h6>
         <div class="row item-list item-list-sm m-b">
@@ -291,6 +285,6 @@
         </div>
         <p class="text-muted text-xs p-b-lg">&copy; Copyright CodeGym 2021</p>
       </div>
-    </div>
+    </div>  -->
   </div>
 </div>
