@@ -50,6 +50,12 @@ Route::prefix('song')->group(function () {
 
 });
 
+Route::prefix('comment')->group(function () {
+    Route::post('/song/{id}', 'SongCommentController@store');
+    Route::get('/song/{id}', 'SongCommentController@show');
+
+});
+
 Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::prefix('song')->group(function () {

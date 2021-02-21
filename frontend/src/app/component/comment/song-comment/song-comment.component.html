@@ -1,0 +1,145 @@
+<h5 class="m-b">Comments</h5>
+<div class="streamline m-b m-l">
+  <!--  <div *ngFor="let comment of commentSong" class="sl-item">-->
+  <!--    <div class="sl-left">-->
+  <!--      <img alt="." class="img-circle" src="assets/images/a2.jpg">-->
+  <!--    </div>-->
+  <!--    <div class="sl-content">-->
+  <!--      <div class="sl-author m-b-0">-->
+  <!--        <a href="#">{{ comment.name }}</a>-->
+  <!--        <span class="sl-date text-muted">8:30</span>-->
+  <!--      </div>-->
+  <!--      <div>-->
+  <!--        <p>{{ comment.content }}.</p>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <div *ngFor="let comment of commentSong" class="sl-item">
+    <div class="sl-left">
+      <img alt="." class="img-circle" src="assets/images/a0.jpg">
+    </div>
+    <div class="sl-content">
+
+      <div class="sl-author m-b-0">
+        <a href="#">{{ comment.name }}</a>
+        <span class="sl-date text-muted">2 minutes ago</span>
+      </div>
+      <div>
+        <p> {{ comment.content }}</p>
+      </div>
+      <div class="sl-footer">
+        <a data-target="#reply-1" data-toggle="collapse" href="#">
+          <i class="fa fa-fw fa-mail-reply text-muted"></i> Reply
+        </a>
+      </div>
+      <div class="box collapse m-a-0 b-a" id="reply-1">
+        <form>
+          <textarea class="form-control no-border" placeholder="Type something..." rows="3"></textarea>
+        </form>
+        <div class="box-footer clearfix">
+          <button class="btn btn-info pull-right btn-sm">Post</button>
+          <ul class="nav nav-pills nav-sm">
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-camera text-muted"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-video-camera text-muted"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--          <div class="sl-item">-->
+  <!--            <div class="sl-left">-->
+  <!--              <img alt="." class="img-circle" src="assets/images/a3.jpg">-->
+  <!--            </div>-->
+  <!--            <div class="sl-content">-->
+  <!--              <div class="sl-author m-b-0">-->
+  <!--                <a href="#">Moke</a>-->
+  <!--                <span class="sl-date text-muted">Sat, 5 Mar</span>-->
+  <!--              </div>-->
+  <!--              <blockquote>-->
+  <!--                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante soe aiea-->
+  <!--                  ose dos soois.</p>-->
+  <!--                <small>Someone famous in <cite title="Source Title">Source Title</cite></small>-->
+  <!--              </blockquote>-->
+
+  <!--              <div class="sl-item">-->
+  <!--                <div class="sl-left">-->
+  <!--                  <img alt="." class="img-circle" src="assets/images/a2.jpg">-->
+  <!--                </div>-->
+  <!--                <div class="sl-content">-->
+  <!--                  <div class="sl-date text-muted">Sun, 11 Feb</div>-->
+  <!--                  <p><a class="text-primary" href="#">Jessi</a> assign you a task-->
+  <!--                    <a class="text-primary" href="#">Mockup Design</a>.</p>-->
+  <!--                </div>-->
+  <!--              </div>-->
+  <!--              <div class="sl-item">-->
+  <!--                <div class="sl-left">-->
+  <!--                  <img alt="." class="img-circle" src="assets/images/a5.jpg">-->
+  <!--                </div>-->
+  <!--                <div class="sl-content">-->
+  <!--                  <div class="sl-date text-muted">Thu, 17 Jan</div>-->
+  <!--                  <p>Follow up to close deal</p>-->
+  <!--                </div>-->
+  <!--              </div>-->
+
+  <!--            </div>-->
+  <!--          </div>-->
+</div>
+<h5 class="m-t-lg m-b">Leave a comment</h5>
+<form [formGroup]="createCommentForm">
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Name:</mat-label>
+        <input [class.input-invalid]="createCommentForm.get('name')!.invalid && createCommentForm.get('name')!.touched" [class.input-valid]="createCommentForm.get('name')!.valid && createCommentForm.get('name')!.touched"
+               class="form-control" formControlName="name" matInput placeholder="Name" type="text">
+        <div *ngIf="createCommentForm.get('name').invalid && createCommentForm.get('name').touched"
+             style="color: red; text-align: left !important;">
+          <div [@shake]="shake">
+            Name is <strong>required.</strong>
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Email:</mat-label>
+        <input [class.input-invalid]="createCommentForm.get('email')!.invalid && createCommentForm.get('email')!.touched" [class.input-valid]="createCommentForm.get('email')!.valid && createCommentForm.get('name')!.touched"
+               class="form-control" formControlName="email" matInput placeholder="Enter email" type="email">
+        <div *ngIf="createCommentForm.get('email')!.invalid && createCommentForm.get('email')!.touched" style="color: red; text-align: left !important;">
+          <div *ngIf="createCommentForm.get('email').hasError('required')">
+            <div [@shake]="shake">Email is <strong>required.</strong>
+            </div>
+          </div>
+          <div *ngIf="createCommentForm.get('email').hasError('email')">
+            <div [@shake]="shake">Please enter a <strong>valid email.</strong>
+            </div>
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="form-group">
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Comment:</mat-label>
+      <textarea
+        [class.input-invalid]="createCommentForm.get('content')!.invalid && createCommentForm.get('content')!.touched" [class.input-valid]="createCommentForm.get('content')!.valid && createCommentForm.get('content')!.touched"
+        cdkAutosizeMaxRows="3"
+        cdkAutosizeMinRows="1"
+        cdkTextareaAutosize
+        class="form-control" formControlName="content" matInput placeholder="Type your comment" rows="5"></textarea>
+      <div *ngIf="createCommentForm.get('content').invalid && createCommentForm.get('content').touched"
+           style="color: red; text-align: left !important;">
+        <div [@shake]="shake">
+          Comment is <strong>required.</strong>
+        </div>
+      </div>
+    </mat-form-field>
+  </div>
+  <div class="form-group text-center">
+    <button (click)="createCommentSubmit()" [disabled]="!createCommentForm.valid" class="btn btn-sm white rounded" type="submit">
+      Submit comment
+    </button>
+  </div>
+</form>
