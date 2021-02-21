@@ -1,4 +1,4 @@
-import { SongLike } from './song-like';
+import {SongLike} from './song-like';
 
 describe('SongLike', () => {
   it('should create an instance', () => {

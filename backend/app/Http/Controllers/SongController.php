@@ -136,16 +136,6 @@ class SongController extends Controller
         return $data->singer_name;
     }
 
-    public function findSingerIDBySongID($id)
-    {
-        $list_singer_id = [];
-        $data = DB::table('song_singer')->where('song_singer.song_id', '=', $id)->get();
-        foreach ($data as $dt) {
-            $list_singer_id[] = $dt->singer_id;
-        }
-        return $list_singer_id;
-    }
-
     public function allSongs()
     {
         // limit 10 bai hat va random khi tra ve
@@ -161,7 +151,7 @@ class SongController extends Controller
             return $row['user_id'] === (int)$id;
         });
         $data = array_values($data);
-        return response()->json(compact('data'), 200);
+        return response()->json($data, 200);
     }
 
     public function allMovedSongs()
@@ -180,6 +170,12 @@ class SongController extends Controller
 
         $song = Song::with('singers')->where('songs.id', $id)->first()->toArray();
         return response()->json($song, 200);
+    }
+
+    public function getUserIDbySongID($song_id)
+    {
+        $data = DB::table('songs')->where('id', '=', $song_id)->first();
+        return $data->user_id;
     }
 
     public function showSongGuest($id)
@@ -214,9 +210,14 @@ class SongController extends Controller
         return response()->json($lastInfoListSongs, 200);
     }
 
-    public function findSongInfo($id)
+    public function findSingerIDBySongID($id)
     {
-        return DB::table('songs')->where('id', $id)->first();
+        $list_singer_id = [];
+        $data = DB::table('song_singer')->where('song_singer.song_id', '=', $id)->get();
+        foreach ($data as $dt) {
+            $list_singer_id[] = $dt->singer_id;
+        }
+        return $list_singer_id;
     }
 
     public function findSongBySingerId($id)
@@ -225,6 +226,11 @@ class SongController extends Controller
             $query->where('singers.id', $id);
         })->get()->toArray();
         return $songs;
+    }
+
+    public function findSongInfo($id)
+    {
+        return DB::table('songs')->where('id', $id)->first();
     }
 
     public function update(Request $request, $id, UserController $userController)
@@ -262,12 +268,6 @@ class SongController extends Controller
             $data->singers()->attach($s_id);
         }
         return response()->json(compact('data'));
-    }
-
-    public function getUserIDbySongID($song_id)
-    {
-        $data = DB::table('songs')->where('id', '=', $song_id)->first();
-        return $data->user_id;
     }
 
     public function destroy(Request $request, UserController $userController)

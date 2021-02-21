@@ -56,6 +56,12 @@ Route::prefix('comment')->group(function () {
 
 });
 
+Route::prefix('likedislike')->group(function () {
+    Route::get('/song/{id}', 'SongLikeController@getLikeDisLike');
+    Route::get('/song/top/10', 'SongLikeController@getTopLikes');
+
+});
+
 Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::prefix('song')->group(function () {
@@ -122,7 +128,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     });
 
     Route::prefix('likedislike')->group(function () {
-        Route::post('/song', 'SongLikeController@storeLike');
+        Route::post('/song', 'SongLikeController@storeLikeDislike');
+
     });
 });
 

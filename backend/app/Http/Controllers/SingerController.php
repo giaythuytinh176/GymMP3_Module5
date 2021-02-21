@@ -38,6 +38,12 @@ class SingerController extends Controller
         }
     }
 
+    public function getInfoByName($singerName)
+    {
+        $singer = Singer::where('singers.singer_name', $singerName)->first()->toArray();
+        return $singer;
+    }
+
     public function deleteSingerFromSong(Request $request, UserController $userController, SongController $songController)
     {
         $token = $userController->getAuthenticatedUser();
@@ -67,12 +73,6 @@ class SingerController extends Controller
     {
         $singer = Singer::where('id', $id)->first();
         return response()->json($singer, 200);
-    }
-
-    public function getInfoByName($singerName)
-    {
-        $singer = Singer::where('singers.singer_name', $singerName)->first()->toArray();
-        return $singer;
     }
 
     public function store(Request $request)

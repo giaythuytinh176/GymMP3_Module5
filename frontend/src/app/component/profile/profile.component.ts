@@ -14,7 +14,7 @@ import {PlaylistService} from 'src/app/services/playlist/playlist.service';
 import {Playlist} from 'src/app/model/playlist/playlist';
 import {DialogCreatePlaylistComponent} from '../playlist/dialog-create-playlist/dialog-create-playlist.component';
 import {DialogDeletePlaylistComponent} from '../playlist/dialog-delete-playlist/dialog-delete-playlist.component';
-import {DialogEditPlaylistComponent} from "../playlist/dialog-edit-playlist/dialog-edit-playlist.component";
+import {DialogEditPlaylistComponent} from '../playlist/dialog-edit-playlist/dialog-edit-playlist.component';
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
 
   userinfo!: UpdateInfo;
   songs: Song[];
+  getLikesTop10: Song[];
   playlists: Playlist[];
 
   constructor(private userService: UserService,
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit {
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
     this.songs = this.route.snapshot.data.getSongByUserID;
     this.playlists = this.route.snapshot.data.getPlaylistByUSerID;
+    this.getLikesTop10 = this.route.snapshot.data.getLikesTop10;
 
   }
 

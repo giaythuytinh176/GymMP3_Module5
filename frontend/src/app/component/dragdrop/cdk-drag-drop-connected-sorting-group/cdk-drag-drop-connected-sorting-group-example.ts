@@ -59,7 +59,7 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
 
   getListSongsByID(id: number): void {
     this.songService.getSongDetailV2(id).subscribe((data: any) => {
-        this.listSongs = data.data;
+        this.listSongs = data;
         console.log(3);
         this.isLoadingFirst = false;
         // console.log(this.listSongs);
@@ -70,7 +70,7 @@ export class CdkDragDropConnectedSortingGroupExample implements OnInit {
 
   getListSongsByID2(id: number): void {
     this.songService.getSongDetailV2(id).subscribe((data: any) => {
-        this.listSongs = data.data;
+        this.listSongs = data;
         console.log(5);
         this.isLoading = false;
         this.toastr.success('Move song successfully!');

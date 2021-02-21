@@ -27,6 +27,7 @@
           </div>
           <div class="item-info">
             <div class="item-overlay bottom text-right">
+              <app-song-like [songIdInput]="val.id"></app-song-like>
               <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
               <a [attr.data-song-id]="val.id" class="btn-more" data-toggle="dropdown" href="#"><i
                 class="fa fa-ellipsis-h"></i></a>

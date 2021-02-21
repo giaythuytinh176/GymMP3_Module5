@@ -47,98 +47,29 @@
 
       </div>
     </div>
-    <!-- <div class="col-lg-3 w-xxl w-auto-md">
+    <div class="col-lg-3 w-xxl w-auto-md">
       <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
-        <h6 class="text text-muted">5 Likes</h6>
+        <h6 class="text text-muted">Top 10 Likes</h6>
         <div class="row item-list item-list-sm m-b">
-          <div class="col-xs-12">
-            <div class="item r" data-id="item-7"
-                 data-src="http://api.soundcloud.com/tracks/245566366/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+          <div *ngFor="let song of getLikesTop10" class="col-xs-12">
+            <div class="item r" [attr.data-id]="song.id" [attr.data-src]="song.mp3Url">
               <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('assets/images/b6.jpg');"></a>
+                <a class="item-media-content" [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]"></a>
               </div>
               <div class="item-info">
+                <div class="item-overlay bottom text-right">
+                  <app-song-like [songIdInput]="song.id"></app-song-like>
+                  <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                  <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                  <div class="dropdown-menu pull-right black lt"></div>
+                </div>
                 <div class="item-title text-ellipsis">
-                  <a href="track.detail.html">Reflection (Deluxe)</a>
+                  <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
                 </div>
-                <div class="item-author text-sm text-ellipsis ">
-                  <a class="text-muted" href="artist.detail.html">Fifth Harmony</a>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="item r" data-id="item-9"
-                 data-src="http://api.soundcloud.com/tracks/264094434/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-              <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('assets/images/b8.jpg');"></a>
-              </div>
-              <div class="item-info">
-                <div class="item-title text-ellipsis">
-                  <a href="track.detail.html">All I Need</a>
-                </div>
-                <div class="item-author text-sm text-ellipsis ">
-                  <a class="text-muted" href="artist.detail.html">Pablo Nouvelle</a>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="item r" data-id="item-10"
-                 data-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-              <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('assets/images/b9.jpg');"></a>
-              </div>
-              <div class="item-info">
-                <div class="item-title text-ellipsis">
-                  <a href="track.detail.html">The Open Road</a>
-                </div>
-                <div class="item-author text-sm text-ellipsis ">
-                  <a class="text-muted" href="artist.detail.html">Postiljonen</a>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="item r" data-id="item-1"
-                 data-src="http://api.soundcloud.com/tracks/269944843/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-              <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('assets/images/b0.jpg');"></a>
-              </div>
-              <div class="item-info">
-                <div class="item-title text-ellipsis">
-                  <a href="track.detail.html">Pull Up</a>
-                </div>
-                <div class="item-author text-sm text-ellipsis ">
-                  <a class="text-muted" href="artist.detail.html">Summerella</a>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="item r" data-id="item-5" data-src="http://streaming.radionomy.com/JamendoLounge">
-              <div class="item-media ">
-                <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('assets/images/b4.jpg');"></a>
-              </div>
-              <div class="item-info">
-                <div class="item-title text-ellipsis">
-                  <a href="track.detail.html">Live Radio</a>
-                </div>
-                <div class="item-author text-sm text-ellipsis ">
-                  <a class="text-muted" href="artist.detail.html">Radionomy</a>
+                <div class="item-author text-sm text-ellipsis">
+                  <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
+                    {{ singer.singer_name }},
+                  </a>
                 </div>
 
 
@@ -149,22 +80,22 @@
         <h6 class="text text-muted">Go mobile</h6>
         <div class="btn-groups">
           <a class="btn btn-sm dark lt m-r-xs" href="" style="width: 135px">
-              <span class="pull-left m-r-sm">
-                <i class="fa fa-apple fa-2x"></i>
-              </span>
+                <span class="pull-left m-r-sm">
+                  <i class="fa fa-apple fa-2x"></i>
+                </span>
             <span class="clear text-left l-h-1x">
-                <span class="text-muted text-xxs">Download on the</span>
-                <b class="block m-b-xs">App Store</b>
-              </span>
+                  <span class="text-muted text-xxs">Download on the</span>
+                  <b class="block m-b-xs">App Store</b>
+                </span>
           </a>
           <a class="btn btn-sm dark lt" href="" style="width: 133px">
-              <span class="pull-left m-r-sm">
-                <i class="fa fa-play fa-2x"></i>
-              </span>
+                <span class="pull-left m-r-sm">
+                  <i class="fa fa-play fa-2x"></i>
+                </span>
             <span class="clear text-left l-h-1x">
-                <span class="text-muted text-xxs">Get it on</span>
-                <b class="block m-b-xs m-r-xs">Google Play</b>
-              </span>
+                  <span class="text-muted text-xxs">Get it on</span>
+                  <b class="block m-b-xs m-r-xs">Google Play</b>
+                </span>
           </a>
         </div>
         <div class="b-b m-y"></div>
@@ -176,6 +107,6 @@
         </div>
         <p class="text-muted text-xs p-b-lg">&copy; Copyright 2021</p>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

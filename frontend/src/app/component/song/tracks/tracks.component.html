@@ -9,6 +9,7 @@
       </div>
       <div class="item-info">
         <div class="item-overlay bottom text-right">
+          <app-song-like [songIdInput]="song.id"></app-song-like>
           <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
           <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
           <div class="dropdown-menu pull-right black lt"></div>
@@ -16,11 +17,13 @@
         <div class="item-title text-ellipsis">
           <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
         </div>
-        <div class="item-author text-sm text-ellipsis ">
-          <a class="text-muted" href="artist.detail.html">{{ song.singer_list_name }},</a>
+        <div class="item-author text-sm text-ellipsis">
+          <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
+            {{ singer.singer_name }},
+          </a>
         </div>
         <div class="item-author text-sm text-ellipsis hide">
-          <a *ngFor="let singer of song.singers" [routerLink]="['/singer/song', singer.id]" class="text-muted">
+          <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
             {{ singer.singer_name }},
           </a>
         </div>

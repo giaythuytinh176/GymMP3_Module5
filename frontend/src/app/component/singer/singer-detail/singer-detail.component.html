@@ -67,6 +67,7 @@
                   </div>
                   <div class="item-info">
                     <div class="item-overlay bottom text-right">
+                      <app-song-like [songIdInput]="song.id"></app-song-like>
                       <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
                       <a class="btn-more" data-toggle="dropdown" href="#"><i
                         class="fa fa-ellipsis-h"></i></a>
@@ -102,6 +103,67 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col-lg-3 w-xxl w-auto-md">
+      <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
+        <h6 class="text text-muted">Top 10 Likes</h6>
+        <div class="row item-list item-list-sm m-b">
+          <div *ngFor="let song of getLikesTop10" class="col-xs-12">
+            <div class="item r" [attr.data-id]="song.id" [attr.data-src]="song.mp3Url">
+              <div class="item-media ">
+                <a class="item-media-content" [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]"></a>
+              </div>
+              <div class="item-info">
+                <div class="item-overlay bottom text-right">
+                  <app-song-like [songIdInput]="song.id"></app-song-like>
+                  <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                  <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                  <div class="dropdown-menu pull-right black lt"></div>
+                </div>
+                <div class="item-title text-ellipsis">
+                  <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
+                </div>
+                <div class="item-author text-sm text-ellipsis">
+                  <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
+                    {{ singer.singer_name }},
+                  </a>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <h6 class="text text-muted">Go mobile</h6>
+        <div class="btn-groups">
+          <a class="btn btn-sm dark lt m-r-xs" href="" style="width: 135px">
+                <span class="pull-left m-r-sm">
+                  <i class="fa fa-apple fa-2x"></i>
+                </span>
+            <span class="clear text-left l-h-1x">
+                  <span class="text-muted text-xxs">Download on the</span>
+                  <b class="block m-b-xs">App Store</b>
+                </span>
+          </a>
+          <a class="btn btn-sm dark lt" href="" style="width: 133px">
+                <span class="pull-left m-r-sm">
+                  <i class="fa fa-play fa-2x"></i>
+                </span>
+            <span class="clear text-left l-h-1x">
+                  <span class="text-muted text-xxs">Get it on</span>
+                  <b class="block m-b-xs m-r-xs">Google Play</b>
+                </span>
+          </a>
+        </div>
+        <div class="b-b m-y"></div>
+        <div class="nav text-sm _600">
+          <a class="nav-link text-muted m-r-xs" href="#">About</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Contact</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Legal</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Policy</a>
+        </div>
+        <p class="text-muted text-xs p-b-lg">&copy; Copyright 2021</p>
       </div>
     </div>
   </div>
