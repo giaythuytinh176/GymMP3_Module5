@@ -23,8 +23,6 @@ class PlaylistController extends Controller
         if (!$this->getUserIDbyPlaylistID($request->id) ||
             ($token->getData()->user->id !== $this->getUserIDbyPlaylistID($request->id))
         ) {
-//            $userController->removeToken($request, $request->bearerToken());
-//            return response()->json(['error' => 'invalid_access'], 400);
             $auth = false;
         }
         $data = Playlist::find($id);
@@ -122,11 +120,6 @@ class PlaylistController extends Controller
 
         $playlist = Playlist::find($request->id);
         $playlist->fill($obj);
-//        $playlist->name_playlist = $obj['name_playlist'];
-//        $playlist->description = $obj['description'];
-//        $playlist->user_id = $obj['user_id'];
-//        $playlist->view = $obj['user_id'];
-//        $playlist->status = $obj['status'];
         $playlist->save();
         return response()->json(compact(['playlist']), 200);
     }

@@ -45,7 +45,7 @@ Route::prefix('song')->group(function () {
     Route::get('/moved/list', 'SongController@allMovedSongs');
     Route::get('/lastest', 'SongController@getLastestSong');
     Route::get('/showmore', 'SongController@showMoreSong');
-    Route::get('/guest/{id}', 'SongController@showidsong');
+    Route::get('/guest/{id}', 'SongController@showSongGuest');
     Route::get('/guest/list/{id}', 'SongController@getSongSameSinger');
 
 });
@@ -61,7 +61,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::prefix('song')->group(function () {
         Route::get('/user/list/{id}', 'SongController@show');
         Route::get('/user/listv2/{id}', 'SongController@allSongsByID');
-        Route::get('/{id}', 'SongController@showidsong');
+        Route::get('/{id}', 'SongController@showSongById');
         Route::get('/', 'SongController@index');
 
         Route::post('/create', 'SongController@store');
@@ -119,6 +119,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::delete('/song/{id}', 'PlaylistController@deleteSongOfPlaylist');
         Route::post('/all-songs-except', 'PlaylistController@getSongExcept');
 
+    });
+
+    Route::prefix('likedislike')->group(function () {
+        Route::post('/song', 'SongLikeController@storeLike');
     });
 });
 

@@ -8,32 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class SongCommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -53,47 +33,17 @@ class SongCommentController extends Controller
         return response()->json($songComment, 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\SongComment $songComment
-     * @return \Illuminate\Http\Response
-     */
     public function show(SongComment $songComment, $id)
     {
         $data = $songComment::query()->select()->where('song_id', $id)->get()->toArray();
         return response()->json($data, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\SongComment $songComment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SongComment $songComment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\SongComment $songComment
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, SongComment $songComment)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\SongComment $songComment
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(SongComment $songComment)
     {
         //

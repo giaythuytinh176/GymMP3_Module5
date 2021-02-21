@@ -110,13 +110,11 @@ export class UpdateSongComponent implements OnInit {
     // filter checkbox by TAM LE
     this.singers = this.singers.filter((sger) => {
       sger.selected = !!this.singer.find(e => e.id === sger.id);
+      if (sger.selected) {
+        this.selectedSingers.push(sger);
+      }
       return sger;
     });
-    for (const sg of this.singers) {
-      if (sg.selected) {
-        this.selectedSingers.push(sg);
-      }
-    }
 
     this.getSongDetailById();
   }
