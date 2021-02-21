@@ -10,10 +10,10 @@ import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/a
 import {map, startWith} from 'rxjs/operators';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Singer} from '../../../model/singer/singer';
-import {SingerService} from "../../../services/singer/singer.service";
-import {ToastrService} from "ngx-toastr";
-import {TokenStorageService} from "../../../auth/token-storage.service";
-import {UpdateInfo} from "../../../model/userManager/updateinfo";
+import {SingerService} from '../../../services/singer/singer.service';
+import {ToastrService} from 'ngx-toastr';
+import {TokenStorageService} from '../../../auth/token-storage.service';
+import {UpdateInfo} from '../../../model/userManager/updateinfo';
 
 @Component({
   selector: 'app-track-detail',
@@ -127,7 +127,7 @@ export class TrackDetailComponent implements OnInit {
       }, error => {
         console.log(error);
         if (error.error) {
-          this.toastr.warning((error.error)['error']);
+          this.toastr.warning((error.error).error);
         } else {
           this.toastr.warning('Something wrong.');
         }
@@ -157,7 +157,7 @@ export class TrackDetailComponent implements OnInit {
         this.sinterInput.nativeElement.value = '';
         this.singerCtrl.setValue(null);
         if (error.error) {
-          this.toastr.warning((error.error)['error']);
+          this.toastr.warning((error.error).error);
         } else {
           this.toastr.warning('Something wrong.');
         }

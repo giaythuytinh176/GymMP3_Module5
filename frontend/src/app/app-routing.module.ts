@@ -25,6 +25,7 @@ import {GetSongOfPlaylistByIDResolverGuest} from './resolver/GetSongOfPlaylistBy
 import {GetSongDetailByIdGuestResolver} from './resolver/GetSongDetailByIdGuestResolver';
 import {GetSongSameSingerBySongIdResolver} from './resolver/GetSongSameSingerBySongIdResolver';
 import {GetRandomImagePlaylistResolver} from './resolver/GetRandomImagePlaylistResolver';
+import {GetSongCommentResolver} from "./resolver/GetSongCommentResolver";
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
       getSongDetailByIdGuest: GetSongDetailByIdGuestResolver,
       getSongSameSingerBySongId: GetSongSameSingerBySongIdResolver,
       getAllSingers: GetAllSingersResolver,
+      getCommentSong: GetSongCommentResolver,
       // getUserInfo: GetUserInfoResolver,
     },
   },
