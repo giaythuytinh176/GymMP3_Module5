@@ -65,13 +65,13 @@ class SongController extends Controller
         foreach (json_decode($request->singer_id, true) as $s_id) {
             $data->singers()->attach($s_id);
         }
-        return response()->json(compact('data'));
+        return response()->json(compact('data'), 200);
     }
 
     public function index()
     {
         $songs = DB::table('songs')->join('categories', 'songs.category_id', '=', 'categories.id')->select('songs.*', 'songs.category_id')->get();
-        return response()->json($songs);
+        return response()->json($songs, 200);
     }
 
     public function singersInfo($id)
@@ -170,7 +170,19 @@ class SongController extends Controller
         return response()->json(compact('data'), 200);
     }
 
-    public function showidsong($id)
+    public function showSongById($id, Request $request, UserController $userController)
+    {
+        $token = $userController->getAuthenticatedUser();
+        if (!$this->getUserIDbySongID($request->id) || ($token->getData()->user->id !== $this->getUserIDbySongID($request->id))) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'invalid_access'], 400);
+        }
+
+        $song = Song::with('singers')->where('songs.id', $id)->first()->toArray();
+        return response()->json($song, 200);
+    }
+
+    public function showSongGuest($id)
     {
         $song = Song::with('singers')->where('songs.id', $id)->first()->toArray();
         return response()->json($song, 200);

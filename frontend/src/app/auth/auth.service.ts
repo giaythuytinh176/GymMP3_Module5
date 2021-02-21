@@ -100,21 +100,23 @@ export class AuthService {
     });
   }
 
-  checkToken(): boolean {
-    if (this.token) {
-      return true;
+  checkToken(): true | false {
+    let token: boolean;
+    if (this.token !== null) {
+      token = true;
     } else {
-      return false;
+      token = false;
     }
+    return token;
   }
 
   loggined(): boolean {
-    if (this.token) {
+    if (this.token !== null) {
       this.checkAuthToken();
       // if (this.tokenExpired()) {
       //   return false;
       // } else {
-      if (this.token) {
+      if (this.token !== null) {
         return true;
       } else {
         return false;

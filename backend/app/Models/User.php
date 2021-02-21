@@ -55,6 +55,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Song::class, 'user_id');
     }
 
+    public function songlikes()
+    {
+        return $this->hasMany(SongLike::class, 'user_id');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

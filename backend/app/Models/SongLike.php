@@ -5,21 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SongComment extends Model
+class SongLike extends Model
 {
     use HasFactory;
 
-    protected $table = 'song_comments';
-
     protected $fillable = [
-        'name',
-        'email',
-        'content',
+        'user_id',
         'song_id',
+        'like',
     ];
+
+    protected $table = 'song_likes';
+
+    public function users()
+    {
+        $this->belongsTo(User::class, 'user_id');
+    }
 
     public function songs()
     {
-        return $this->belongsTo(Song::class, 'song_id');
+        $this->belongsTo(Song::class, 'song_id');
     }
 }

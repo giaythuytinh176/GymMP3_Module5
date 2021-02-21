@@ -50,4 +50,9 @@ class Song extends Model
     {
         return $this->hasMany(SongComment::class, 'song_id');
     }
+
+    public function songlikes()
+    {
+        return $this->hasMany(SongLike::class, 'song_id');
+    }
 }

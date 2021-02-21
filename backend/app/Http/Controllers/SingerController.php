@@ -50,6 +50,10 @@ class SingerController extends Controller
         $singerName = $request->singerName;
         $singerId = $this->getInfoByName($singerName)['id'];
         $song = Song::find($songId);
+        $countSingerOnSong = $song->singers()->count();
+        if ($countSingerOnSong === 1) {
+            return response()->json(['error' => 'The song must have to one singer!'], 400);
+        }
         $existSingerInSong = $song->singers()->where('id', $singerId)->exists();
         if ($existSingerInSong) {
             $song->singers()->detach($singerId);
