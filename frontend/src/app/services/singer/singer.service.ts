@@ -16,8 +16,10 @@ export class SingerService {
   apiGetSingerIDBySongID = environment.apiUrl + '/singer/id/song-id';
   apiGetSingerIDBySongIDv2 = environment.apiUrl + '/singer/id/song-id-v2';
   apiCreateSinger = environment.apiUrl + '/singer/create';
-  apiGetShowSongSinger = environment.apiUrl + '/singer/show-song'
-  apiGetSingerByID = environment.apiUrl + '/singer/show-singer'
+  apiGetShowSongSinger = environment.apiUrl + '/singer/show-song';
+  apiGetSingerByID = environment.apiUrl + '/singer/show-singer';
+  apiAddSingerToSong = environment.apiUrl + '/singer/add/song';
+  apiDeleteSingerFromSong = environment.apiUrl + '/singer/delete/song';
 
   token = window.localStorage.getItem(TOKEN_KEY);
   httpJson = {
@@ -26,9 +28,17 @@ export class SingerService {
       'Authorization': 'Bearer ' + this.token,
       'Access-Control-Allow-Origin': '*',
     })
-  }
+  };
 
   constructor(private http: HttpClient) {
+  }
+
+  addSingerToSong(singerName: string, songId: number): any {
+    return this.http.post<any>(this.apiAddSingerToSong, {singerName: singerName, songId: songId}, this.httpJson);
+  }
+
+  deleteSingerfromSong(singerName: string, songId: number): any {
+    return this.http.post<any>(this.apiDeleteSingerFromSong, {singerName: singerName, songId: songId}, this.httpJson);
   }
 
   createSinger(singer: Singer): Observable<Song> {

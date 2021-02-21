@@ -20,14 +20,11 @@ import {SingerDetailComponent} from './component/singer/singer-detail/singer-det
 import {GetSongOfSingerResolver} from './resolver/GetSongOfSingerResolver';
 import {GetSingerInfoResolver} from './resolver/GetSingerInforResolver';
 import {ShowSongsLastPlaylistComponent} from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
-import {TrackDetailComponent} from "./component/song/track-detail/track-detail.component";
-import {GetSongOfPlaylistByIDResolver} from "./resolver/GetSongOfPlaylistByIDResolver";
-import {GetSongOfPlaylistByIDResolverGuest} from "./resolver/GetSongOfPlaylistByIDResolverGuest";
-import {GetSongDetailByIdResolver} from "./resolver/GetSongDetailByIdResolver";
-import {GetSingerIDbySongIDResolver} from "./resolver/GetSingerIDbySongIDResolver";
-import {GetSongDetailByIdGuestResolver} from "./resolver/GetSongDetailByIdGuestResolver";
-import {GetSongSameSingerBySongIdResolver} from "./resolver/GetSongSameSingerBySongIdResolver";
-import {GetRandomImagePlaylistResolver} from "./resolver/GetRandomImagePlaylistResolver";
+import {TrackDetailComponent} from './component/song/track-detail/track-detail.component';
+import {GetSongOfPlaylistByIDResolverGuest} from './resolver/GetSongOfPlaylistByIDResolverGuest';
+import {GetSongDetailByIdGuestResolver} from './resolver/GetSongDetailByIdGuestResolver';
+import {GetSongSameSingerBySongIdResolver} from './resolver/GetSongSameSingerBySongIdResolver';
+import {GetRandomImagePlaylistResolver} from './resolver/GetRandomImagePlaylistResolver';
 
 const routes: Routes = [
   {
@@ -59,6 +56,8 @@ const routes: Routes = [
     resolve: {
       getSongDetailByIdGuest: GetSongDetailByIdGuestResolver,
       getSongSameSingerBySongId: GetSongSameSingerBySongIdResolver,
+      getAllSingers: GetAllSingersResolver,
+      // getUserInfo: GetUserInfoResolver,
     },
   },
   {

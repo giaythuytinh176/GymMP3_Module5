@@ -74,7 +74,7 @@ export class FirebaseMP3Component implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.toastr.success('Uploaded Mp3 File Successfully!');
-              this.fb = url;
+              this.fb = url + '?t=' + new Date().getTime();
             }
           });
         }),

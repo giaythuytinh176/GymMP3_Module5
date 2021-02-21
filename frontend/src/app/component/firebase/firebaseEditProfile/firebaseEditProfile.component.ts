@@ -74,7 +74,7 @@ export class FirebaseEditProfileComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.toastr.success('Uploaded Image Successfully!');
-              this.fb = url;
+              this.fb = url + '?t=' + new Date().getTime();
             }
           });
         }),

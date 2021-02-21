@@ -156,22 +156,22 @@
         </div>
 
         <!--        <div class="col-sm-3 form-control-label text-muted">View:</div>-->
-        <div class="col-sm-4">
-          <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>View:</mat-label>
-            <input [(ngModel)]="songInfo.views" [class.input-invalid]="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" [class.input-valid]="updateMusicForm.get('views')!.valid && updateMusicForm.get('views')!.touched" class="form-control" formControlName="views" matInput placeholder="View" type="text">
-            <div *ngIf="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
-              <div *ngIf="updateMusicForm.get('views').hasError('required')">
-                <div [@shake]="shake">View is <strong>required.</strong>
-                </div>
-              </div>
-              <div *ngIf="updateMusicForm.get('views').hasError('pattern')">
-                <div [@shake]="shake">View must be <strong>numberic.</strong>
-                </div>
-              </div>
-            </div>
-          </mat-form-field>
-        </div>
+<!--        <div class="col-sm-4">-->
+        <!--          <mat-form-field appearance="outline" class="example-full-width">-->
+        <!--            <mat-label>View:</mat-label>-->
+        <!--            <input [(ngModel)]="songInfo.views" [class.input-invalid]="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" [class.input-valid]="updateMusicForm.get('views')!.valid && updateMusicForm.get('views')!.touched" class="form-control" formControlName="views" matInput placeholder="View" type="text">-->
+        <!--            <div *ngIf="updateMusicForm.get('views')!.invalid && updateMusicForm.get('views')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">-->
+        <!--              <div *ngIf="updateMusicForm.get('views').hasError('required')">-->
+        <!--                <div [@shake]="shake">View is <strong>required.</strong>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--              <div *ngIf="updateMusicForm.get('views').hasError('pattern')">-->
+        <!--                <div [@shake]="shake">View must be <strong>numberic.</strong>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </mat-form-field>-->
+        <!--        </div>-->
       </div>
 
       <div class="form-group row">

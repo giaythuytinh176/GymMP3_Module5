@@ -126,7 +126,7 @@ export class UpdateSongComponent implements OnInit {
       nameSong: ['', [Validators.required]],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      // views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       avatarUrl: [''],
       mp3Url: [''],
       oldAvatar: [this.oldAvatar],
@@ -337,6 +337,7 @@ export class UpdateSongComponent implements OnInit {
 
     this.song.category_id = this.updateMusicForm.value.myControl_category.id;
     this.song.album_id = this.updateMusicForm.value.myControl_album.id;
+    this.song.views = this.views;
     // console.log(this.song);
     // Check if array
     if (this.updateMusicForm.value.myControl_singer instanceof Array) {

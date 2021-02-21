@@ -75,7 +75,7 @@ export class FirebaseDialogSingerComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.toastr.success('Uploaded Image Successfully!');
-              this.fb = url;
+              this.fb = url + '?t=' + new Date().getTime();
             }
             // console.log(this.fb);
             // console.log(1111);

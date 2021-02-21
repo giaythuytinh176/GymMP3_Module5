@@ -95,6 +95,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::get('/id/song-id-v2/{id}', 'SongController@singersInfo');
         // for test
         Route::get('/name/song-id/{id}', 'SongController@findSingerBySongID');
+        Route::post('/add/song', 'SingerController@addSingerToSong');
+        Route::post('/delete/song', 'SingerController@deleteSingerFromSong');
 
     });
 

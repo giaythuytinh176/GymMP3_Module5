@@ -172,8 +172,8 @@ class SongController extends Controller
 
     public function showidsong($id)
     {
-        $song = Song::find($id);
-        return response()->json($song);
+        $song = Song::with('singers')->where('songs.id', $id)->first()->toArray();
+        return response()->json($song, 200);
     }
 
     public function getSongSameSinger($id)

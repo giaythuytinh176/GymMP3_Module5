@@ -215,7 +215,7 @@ export class CreateSongComponent implements OnInit {
       mp3Url: ['', [Validators.required]],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      // views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       myControl_singer: ['', [Validators.required]],
       myControl_category: ['', Validators.required],
       myControl_album: ['', Validators.required],
@@ -246,6 +246,7 @@ export class CreateSongComponent implements OnInit {
       this.song.category_id = this.createMusicForm.value.myControl_category.id;
       this.song.album_id = this.createMusicForm.value.myControl_album.id;
       this.song.user_id = this.userinfo.id;
+      this.song.views = 1;
 
       if (this.createMusicForm.value.myControl_singer instanceof Array) {
         // Stringify to JSon

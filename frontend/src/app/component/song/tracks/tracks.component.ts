@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Song} from '../../../model/song/song';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DialogDeleteSongComponent} from '../../song/delete-song/dialog-delete-song/dialog-delete-song.component';
+import {DialogDeleteSongComponent} from '../delete-song/dialog-delete-song/dialog-delete-song.component';
 import {MatDialog} from '@angular/material/dialog';
 import {TokenStorageService} from '../../../auth/token-storage.service';
 import {UpdateInfo} from '../../../model/userManager/updateinfo';
