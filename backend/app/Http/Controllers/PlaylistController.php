@@ -221,7 +221,9 @@ class PlaylistController extends Controller
         $data = DB::table('playlists')->select('playlists.*', 'users.username')
             ->join('users', 'playlists.user_id', '=', 'users.id')
             ->where('playlists.status', '=', 'on')
-            ->latest()->paginate(4)->toArray();
+            ->latest()
+            ->paginate(4)
+            ->toArray();
         $lastRecordData = $data['data'];
         return response()->json(compact('lastRecordData'));
     }
