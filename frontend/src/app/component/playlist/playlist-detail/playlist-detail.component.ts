@@ -7,7 +7,6 @@ import {PlaylistService} from 'src/app/services/playlist/playlist.service';
 import {SongService} from 'src/app/services/song/song.service';
 import {Playlist} from '../../../model/playlist/playlist';
 import {UpdateInfo} from '../../../model/userManager/updateinfo';
-import {DialogDeletePlaylistComponent} from '../dialog-delete-playlist/dialog-delete-playlist.component';
 import {UserService} from '../../../services/userManager/user.service';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {FormBuilder} from '@angular/forms';
@@ -29,6 +28,7 @@ export class PlaylistDetailComponent implements OnInit {
   playlistInfo: Playlist;
   getUserInfo: UpdateInfo;
   songOfPlaylist: Song[];
+  getLikesTop10: Song[];
   auth: boolean;
   getRandomImagePlaylist: { error: string, image: string };
   tracks: Track[];
@@ -56,6 +56,7 @@ export class PlaylistDetailComponent implements OnInit {
     this.allsongs = this.route.snapshot.data.getAllSongs.data;
     this.songOfPlaylist = this.route.snapshot.data.getSongOfPlaylist;
     this.getRandomImagePlaylist = this.route.snapshot.data.getRandomImagePlaylist;
+    this.getLikesTop10 = this.route.snapshot.data.getLikesTop10;
 
     this.loadTrackPlaylist();
     this.getAllSongsExceptInPlaylist();
@@ -82,6 +83,7 @@ export class PlaylistDetailComponent implements OnInit {
   deleteSongOfPlaylist(song_id: number, user_id: number, id: number): void {
     this.playlistService.deleteSongOfPlaylist(song_id, user_id, id).subscribe(
       (data: any) => {
+        console.log('data', data);
         this.getSongOfPlaylist();
         this.toastr.success('Deleted song successfully!');
       }, error => console.log(error)

@@ -79,7 +79,7 @@
         </div>
 
         <div class="row-col">
-          <div class="col-lg-9 b-r no-border-md">
+          <div class="col-lg-7 b-r no-border-md">
             <div class="padding p-y-0 m-b-md">
               <div class="nav-active-border b-primary bottom m-b-md m-t">
                 <ul class="nav l-h-2x" data-ui-jp="taburl">
@@ -222,89 +222,29 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-lg-3 w-xxl w-auto-md">
+          <div class="col-lg-5 w-xxl w-auto-md">
             <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
-              <h6 class="text text-muted">5 Likes</h6>
+              <h6 class="text text-muted">Top 10 Likes</h6>
               <div class="row item-list item-list-sm m-b">
-                <div class="col-xs-12">
-                  <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                <div *ngFor="let song of getLikesTop10" class="col-xs-12">
+                  <div class="item r" [attr.data-id]="song.id" [attr.data-src]="song.mp3Url">
                     <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b2.jpg');"></a>
+                      <a class="item-media-content" [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]"></a>
                     </div>
                     <div class="item-info">
+                      <div class="item-overlay bottom text-right">
+                        <app-song-like [songIdInput]="song.id"></app-song-like>
+                        <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                        <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu pull-right black lt"></div>
+                      </div>
                       <div class="item-title text-ellipsis">
-                        <a href="track.detail.html">I Wanna Be In the Cavalry</a>
+                        <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
                       </div>
-                      <div class="item-author text-sm text-ellipsis ">
-                        <a class="text-muted" href="artist.detail.html">Jeremy Scott</a>
-                      </div>
-
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-12">
-                  <div class="item r" data-id="item-1" data-src="http://api.soundcloud.com/tracks/269944843/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                    <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b0.jpg');"></a>
-                    </div>
-                    <div class="item-info">
-                      <div class="item-title text-ellipsis">
-                        <a href="track.detail.html">Pull Up</a>
-                      </div>
-                      <div class="item-author text-sm text-ellipsis ">
-                        <a class="text-muted" href="artist.detail.html">Summerella</a>
-                      </div>
-
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-12">
-                  <div class="item r" data-id="item-12" data-src="http://api.soundcloud.com/tracks/174495152/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                    <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b11.jpg');"></a>
-                    </div>
-                    <div class="item-info">
-                      <div class="item-title text-ellipsis">
-                        <a href="track.detail.html">Happy ending</a>
-                      </div>
-                      <div class="item-author text-sm text-ellipsis ">
-                        <a class="text-muted" href="artist.detail.html">Postiljonen</a>
-                      </div>
-
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-12">
-                  <div class="item r" data-id="item-11" data-src="http://api.soundcloud.com/tracks/218060449/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                    <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b10.jpg');"></a>
-                    </div>
-                    <div class="item-info">
-                      <div class="item-title text-ellipsis">
-                        <a href="track.detail.html">Spring</a>
-                      </div>
-                      <div class="item-author text-sm text-ellipsis ">
-                        <a class="text-muted" href="artist.detail.html">Pablo Nouvelle</a>
-                      </div>
-
-
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-12">
-                  <div class="item r" data-id="item-6" data-src="http://api.soundcloud.com/tracks/236107824/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
-                    <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b5.jpg');"></a>
-                    </div>
-                    <div class="item-info">
-                      <div class="item-title text-ellipsis">
-                        <a href="track.detail.html">Body on me</a>
-                      </div>
-                      <div class="item-author text-sm text-ellipsis ">
-                        <a class="text-muted" href="artist.detail.html">Rita Ora</a>
+                      <div class="item-author text-sm text-ellipsis">
+                        <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
+                          {{ singer.singer_name }},
+                        </a>
                       </div>
 
 
@@ -342,7 +282,7 @@
               </div>
               <p class="text-muted text-xs p-b-lg">&copy; Copyright 2021</p>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
 

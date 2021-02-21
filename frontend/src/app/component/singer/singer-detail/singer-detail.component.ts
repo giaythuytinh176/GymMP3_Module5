@@ -15,6 +15,7 @@ export class SingerDetailComponent implements OnInit {
   id: number;
   singer: Singer;
   songOfSinger: Song[];
+  getLikesTop10: Song[];
   auth: boolean;
   tracks1: Track[];
 
@@ -29,7 +30,7 @@ export class SingerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.singer = this.route.snapshot.data.getSingerInfor;
     this.songOfSinger = this.route.snapshot.data.getShowSongSinger;
-    console.log(this.songOfSinger);
+    this.getLikesTop10 = this.route.snapshot.data.getLikesTop10;
 
     this.id = +this.route.snapshot.paramMap.get('id');
     this.loadTrackPlaylist();

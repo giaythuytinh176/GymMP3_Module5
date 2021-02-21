@@ -15,7 +15,48 @@ class SongLikeController extends Controller
         //
     }
 
-    public function storeLike(Request $request)
+    public function getTopLikes()
+    {
+        $data = DB::table('song_likes')
+            ->select(DB::raw('count(*) as like_count, song_id'))
+            ->where('like', 1)
+            ->groupBy('song_id')
+            ->orderByDesc('like_count')
+            ->limit(5)
+            ->get()
+            ->toArray();
+        $data = json_decode(json_encode($data), true);
+
+        $listSongs = [];
+        foreach ($data as $datum) {
+            $listSongs[] = $this->getSongInfo($datum['song_id']);
+
+        }
+        return response()->json($listSongs, 200);
+    }
+
+    public function getSongInfo($id)
+    {
+        $data = Song::with('singers')->where('id', $id)->first()->toArray();
+        return $data;
+    }
+
+    public function getLikeDisLike(Request $request, $id)
+    {
+        $validator = Validator::make(['song_id' => (int)$id], [
+            'song_id' => 'required|integer|exists:songs,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $countLike = DB::table('song_likes')->where(['song_likes.song_id' => $id, 'like' => 1])->count() ?? 0;
+        $countDislike = DB::table('song_likes')->where(['song_likes.song_id' => $id, 'like' => 0])->count() ?? 0;
+        return response()->json(['song_id' => (int)$id, 'like' => $countLike, 'dislike' => $countDislike], 200);
+    }
+
+    public function storeLikeDislike(Request $request, UserController $userController)
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
@@ -25,6 +66,12 @@ class SongLikeController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $token = $userController->getAuthenticatedUser();
+        if (!$request->user_id || ($request->user_id !== $token->getData()->user->id)) {
+            $userController->removeToken($request, $request->bearerToken());
+            return response()->json(['error' => 'User ID invalid or not found.'], 400);
         }
 
         $likedislike = $request->likedislike;

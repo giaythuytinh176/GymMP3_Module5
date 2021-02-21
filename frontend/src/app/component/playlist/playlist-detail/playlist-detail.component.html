@@ -62,6 +62,7 @@
                 <div class="item-overlay bottom text-right">
                   <a (click)="openDialogDeleteSongOfPlaylist(song.id, song.nameSong, getUserInfo.id)" class="btn-favorite" title="Remove this song from playlist"><i class="small material-icons">
                     {{ auth ? 'delete_forever' : '' }} </i></a>
+                  <app-song-like [songIdInput]="song.id"></app-song-like>
                   <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
                   <a class="btn-more" data-toggle="dropdown" href="#"><i
                     class="fa fa-ellipsis-h"></i></a>
@@ -341,7 +342,7 @@
 
       </div>
     </div>
-    <div class="col-lg-8 w-xxl w-auto-md">
+    <div class="col-lg-4 w-xxl w-auto-md">
       <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
         <h6 class="text text-muted">Song Suggestion</h6>
         <div class="row item-list item-list-sm m-b">
@@ -355,12 +356,111 @@
                 </div>
               </div>
               <div>
-                <!-- <div class="item-overlay bottom text-right">
-                    <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                    <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#"><i
-                            class="fa fa-ellipsis-h"></i></a>
-                    <div class="dropdown-menu pull-right black lt"></div>
-                </div> -->
+                <div class="item-overlay bottom text-right">
+                  <app-song-like [songIdInput]="song.id"></app-song-like>
+                  <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+                  <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#"><i
+                    class="fa fa-ellipsis-h"></i></a>
+                  <div class="dropdown-menu pull-right black lt"></div>
+                </div>
+                <div class="item-title text-ellipsis">
+                  <a [routerLink]="['/track', song.id]">{{ song.nameSong}}</a>
+                  <a (click)="addToPlaylist(song.id)" title="Add to playlist">
+                    <svg class="bi bi-plus" fill="currentColor" height="16" style="float: right;" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                  </a>
+                </div>
+                <div class="item-author text-sm text-ellipsis">
+                  <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                    {{ singer.singer_name }},
+                  </a>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-xs-12" *ngFor="let song of allsongs">
+              <div class="item r" data-id="item-12"
+                  data-src="http://api.soundcloud.com/tracks/174495152/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
+                  <div class="item-media ">
+                      <a href="track.detail.html" class="item-media-content"
+                          [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}"></a>
+                  </div>
+                  <div class="item-info">
+                      <div class="item-title text-ellipsis">
+                          <a href="track.detail.html">{{song.nameSong}}</a>
+                      </div>
+                      <div class="item-author text-sm text-ellipsis">
+                          <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                              {{ singer.singer_name }},
+                          </a>
+                      </div>
+                      <div class="item-title text-ellipsis">
+                          <a href="track.detail.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg></a>
+                      </div>
+
+                  </div>
+
+              </div>
+          </div> -->
+
+        </div>
+        <h6 class="text text-muted">Go mobile</h6>
+        <div class="btn-groups">
+          <a class="btn btn-sm dark lt m-r-xs" href="" style="width: 135px">
+                        <span class="pull-left m-r-sm">
+                            <i class="fa fa-apple fa-2x"></i>
+                        </span>
+            <span class="clear text-left l-h-1x">
+                            <span class="text-muted text-xxs">Download on the</span>
+                            <b class="block m-b-xs">App Store</b>
+                        </span>
+          </a>
+          <a class="btn btn-sm dark lt" href="" style="width: 133px">
+                        <span class="pull-left m-r-sm">
+                            <i class="fa fa-play fa-2x"></i>
+                        </span>
+            <span class="clear text-left l-h-1x">
+                            <span class="text-muted text-xxs">Get it on</span>
+                            <b class="block m-b-xs m-r-xs">Google Play</b>
+                        </span>
+          </a>
+        </div>
+        <div class="b-b m-y"></div>
+        <div class="nav text-sm _600">
+          <a class="nav-link text-muted m-r-xs" href="#">About</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Contact</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Legal</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Policy</a>
+        </div>
+        <p class="text-muted text-xs p-b-lg">&copy; Copyright 2021</p>
+      </div>
+    </div>
+    <div class="col-lg-4 w-xxl w-auto-md">
+      <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
+        <h6 class="text text-muted">Top 10 Likes</h6>
+        <div class="row item-list item-list-sm m-b">
+          <div *ngFor="let song of getLikesTop10" class="col-xs-12">
+            <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+              <div class="item-media ">
+                <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}"
+                   [routerLink]="['/track', song.id]" class="item-media-content"></a>
+                <div class="item-overlay center">
+                  <button class="btn-playpause">Play</button>
+                </div>
+              </div>
+              <div>
+                <div class="item-overlay bottom text-right">
+                  <app-song-like [songIdInput]="song.id"></app-song-like>
+                  <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+                  <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#"><i
+                    class="fa fa-ellipsis-h"></i></a>
+                  <div class="dropdown-menu pull-right black lt"></div>
+                </div>
                 <div class="item-title text-ellipsis">
                   <a [routerLink]="['/track', song.id]">{{ song.nameSong}}</a>
                   <a (click)="addToPlaylist(song.id)" title="Add to playlist">

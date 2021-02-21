@@ -12,8 +12,6 @@ import {GetSingersResolver} from './resolver/GetSingersResolver';
 import {GetUserInfoResolver} from './resolver/GetUserInfoResolver';
 import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
-import {LastestSongComponent} from './component/song/lastest-song/lastest-song.component';
-import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
 import {ListSingerComponent} from './component/singer/list-singer/list-singer.component';
 import {GetAllSingersResolver} from './resolver/GetAllSingersResolver';
 import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
@@ -25,7 +23,8 @@ import {GetSongOfPlaylistByIDResolverGuest} from './resolver/GetSongOfPlaylistBy
 import {GetSongDetailByIdGuestResolver} from './resolver/GetSongDetailByIdGuestResolver';
 import {GetSongSameSingerBySongIdResolver} from './resolver/GetSongSameSingerBySongIdResolver';
 import {GetRandomImagePlaylistResolver} from './resolver/GetRandomImagePlaylistResolver';
-import {GetSongCommentResolver} from "./resolver/GetSongCommentResolver";
+import {GetSongCommentResolver} from './resolver/GetSongCommentResolver';
+import {GetLikesTop10Resolver} from './resolver/GetLikesTop10Resolver';
 
 const routes: Routes = [
   {
@@ -36,7 +35,8 @@ const routes: Routes = [
     path: 'browse',
     component: AllListSongComponent,
     resolve: {
-      getAllSongs: GetAllSongsResolver
+      getAllSongs: GetAllSongsResolver,
+      getLikesTop10: GetLikesTop10Resolver,
     }
   },
   {
@@ -59,6 +59,7 @@ const routes: Routes = [
       getSongSameSingerBySongId: GetSongSameSingerBySongIdResolver,
       getAllSingers: GetAllSingersResolver,
       getCommentSong: GetSongCommentResolver,
+      getLikesTop10: GetLikesTop10Resolver,
       // getUserInfo: GetUserInfoResolver,
     },
   },
@@ -69,7 +70,7 @@ const routes: Routes = [
         path: 'list',
         component: ListSingerComponent,
         resolve: {
-          getAllSingers: GetAllSingersResolver
+          getAllSingers: GetAllSingersResolver,
         }
       },
       {
@@ -77,10 +78,13 @@ const routes: Routes = [
         component: SingerDetailComponent,
         resolve: {
           getSingerInfor: GetSingerInfoResolver,
-          getShowSongSinger: GetSongOfSingerResolver
+          getShowSongSinger: GetSongOfSingerResolver,
         }
       },
-    ]
+    ],
+    resolve: {
+      getLikesTop10: GetLikesTop10Resolver,
+    }
   },
   {
     path: 'dragdrop',

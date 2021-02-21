@@ -16,6 +16,7 @@ export class AllListSongComponent implements OnInit, OnDestroy {
 
   allsongs$: Observable<Song[]>;
   allsongs: Song[];
+  getLikesTop10: Song[];
   lastestPlaylist: Playlist[];
   allplaylist: Playlist[];
   isLoading = false;
@@ -30,6 +31,8 @@ export class AllListSongComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.allsongs = this.route.snapshot.data.getAllSongs.data;
+    this.getLikesTop10 = this.route.snapshot.data.getLikesTop10;
+
     this.getLastestPlaylists();
   }
 

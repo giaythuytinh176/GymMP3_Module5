@@ -108,8 +108,8 @@ import {TrackDetailComponent} from './component/song/track-detail/track-detail.c
 import {DialogEditPlaylistComponent} from './component/playlist/dialog-edit-playlist/dialog-edit-playlist.component';
 import {NgxAudioComponent} from './component/player/ngx-audio/ngx-audio.component';
 import {ShowSongsLastPlaylistComponent} from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
-import { SongCommentComponent } from './component/comment/song-comment/song-comment.component';
-import { SongLikeComponent } from './component/like/song-like/song-like.component';
+import {SongCommentComponent} from './component/comment/song-comment/song-comment.component';
+import {SongLikeComponent} from './component/like/song-like/song-like.component';
 
 @NgModule({
   declarations: [

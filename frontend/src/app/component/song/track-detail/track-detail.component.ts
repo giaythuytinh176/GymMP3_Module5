@@ -14,6 +14,7 @@ import {SingerService} from '../../../services/singer/singer.service';
 import {ToastrService} from 'ngx-toastr';
 import {TokenStorageService} from '../../../auth/token-storage.service';
 import {UpdateInfo} from '../../../model/userManager/updateinfo';
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-track-detail',
@@ -23,6 +24,7 @@ import {UpdateInfo} from '../../../model/userManager/updateinfo';
 export class TrackDetailComponent implements OnInit {
   songInfo: Song;
   songSameSinger: Song[];
+  getLikesTop10: Song[];
   tracks1: Track[];
   singers: Singer[];
 
@@ -46,6 +48,7 @@ export class TrackDetailComponent implements OnInit {
               private singerService: SingerService,
               private toastr: ToastrService,
               private token: TokenStorageService,
+              private authService: AuthService,
   ) {
   }
 
@@ -55,6 +58,7 @@ export class TrackDetailComponent implements OnInit {
     this.songSameSinger = this.route.snapshot.data.getSongSameSingerBySongId;
     this.singers = this.route.snapshot.data.getAllSingers.data;
     // this.userinfo = this.route.snapshot.data.getUserInfo.user;
+    this.getLikesTop10 = this.route.snapshot.data.getLikesTop10;
 
     this.loadTrackPlaylist();
 
@@ -109,8 +113,10 @@ export class TrackDetailComponent implements OnInit {
   deleteSingerFromSongsingerName(singerName: string, songId: number): void {
     this.singerService.deleteSingerfromSong(singerName, songId)
       .subscribe((data: any) => {
-        if (data.status) {
-          this.toastr.warning('Your must login to add Singer to this Song!');
+        if (!this.authService.checkToken()) {
+          this.toastr.warning('You cannot delete Singer to this Song!');
+        } else if (data.status) {
+          this.toastr.warning('Your must login to delete Singer to this Song!');
           this.token.signOut();
           this.router.navigate(['/user/login']);
         } else {
@@ -143,7 +149,9 @@ export class TrackDetailComponent implements OnInit {
       .subscribe((data: any) => {
         this.sinterInput.nativeElement.value = '';
         this.singerCtrl.setValue(null);
-        if (data.status) {
+        if (!this.authService.checkToken()) {
+          this.toastr.warning('You cannot add Singer to this Song!');
+        } else if (data.status) {
           this.toastr.warning('Your must login to add Singer to this Song!');
           this.token.signOut();
           this.router.navigate(['/user/login']);
@@ -164,12 +172,6 @@ export class TrackDetailComponent implements OnInit {
       });
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allSingers.filter(singer => singer.toLowerCase().indexOf(filterValue) === 0);
-  }
-
   loadTrackPlaylist(): void {
     this.tracks1 = this.songSameSinger.map((data) => {
       return {
@@ -178,5 +180,11 @@ export class TrackDetailComponent implements OnInit {
         artist: data.author,
       };
     });
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allSingers.filter(singer => singer.toLowerCase().indexOf(filterValue) === 0);
   }
 }

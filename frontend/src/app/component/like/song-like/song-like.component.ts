@@ -1,8 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../../services/userManager/user.service';
-import {AngularFireStorage} from '@angular/fire/storage';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder} from '@angular/forms';
 import {TokenStorageService} from '../../../auth/token-storage.service';
 import {ToastrService} from 'ngx-toastr';
 import {SongLikeService} from '../../../services/like/song-like.service';
@@ -17,6 +15,8 @@ export class SongLikeComponent implements OnInit {
 
   songId: number;
   userId: number;
+  getLikeDislike: ILikeDislike;
+  @Input() songIdInput: number;
 
   constructor(private route: ActivatedRoute,
               private routes: Router,
@@ -29,7 +29,15 @@ export class SongLikeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.songId = +this.route.snapshot.paramMap.get('id');
+    // this.songId = +this.route.snapshot.paramMap.get('id');
+    // this.getLikeDislike = this.route.snapshot.data.getLikeDislike;
+    this.reloadLikeDislike();
+  }
+
+  reloadLikeDislike(): void {
+    this.songLikeService.getLikeDisLike(this.songIdInput).subscribe((data: ILikeDislike) => {
+      this.getLikeDislike = data;
+    }, error => console.log(error));
   }
 
   likedislike(likedislike: 'like' | 'dislike'): void {
@@ -38,10 +46,10 @@ export class SongLikeComponent implements OnInit {
         if (data.status) {
           this.showWarning();
         } else {
-          const userId = data.user.id;
-          this.songLikeService.addLikeToSong(userId, this.songId, likedislike).subscribe((data2: any) => {
-            console.log('data2', data2);
+          this.songLikeService.addLikeToSong(data.user.id, this.songIdInput, likedislike).subscribe((dt: any) => {
+            this.reloadLikeDislike();
           }, error => {
+            this.toastr.warning('Something wrong.');
             console.log(error);
           });
         }
@@ -58,4 +66,10 @@ export class SongLikeComponent implements OnInit {
     this.toastr.warning('You must login to like/dislike to this song.');
   }
 
+}
+
+export interface ILikeDislike {
+  song_id: number;
+  like: number;
+  dislike: number;
 }
