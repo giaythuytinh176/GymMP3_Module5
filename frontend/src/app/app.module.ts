@@ -60,16 +60,16 @@ import {ProfileComponent} from './component/profile/profile.component';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {LoginComponent} from './component/login/login.component';
-import {UpdateSongComponent} from './component/songManager/update-song/update-song.component';
+import {UpdateSongComponent} from './component/song/update-song/update-song.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
-import {SearchSongComponent} from './component/songManager/search-song/search-song.component';
+import {SearchSongComponent} from './component/song/search-song/search-song.component';
 import {EditProfileComponent} from './component/edit-profile/edit-profile.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {
   CreateSongComponent,
-} from './component/songManager/create-song/create-song.component';
-import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song.component';
+} from './component/song/create-song/create-song.component';
+import {AllListSongComponent} from './component/song/all-list-song/all-list-song.component';
 import {CdkDragDropOverviewExampleComponent} from './component/dragdrop/cdk-drag-drop-overview-example/cdk-drag-drop-overview-example.component';
 import {environment} from '../environments/environment';
 import {GetAllSongsResolver} from './resolver/GetAllSongsResolver';
@@ -81,7 +81,7 @@ import {GetCategoriesResolver} from './resolver/GetCategoriesResolver';
 import {GetSingersResolver} from './resolver/GetSingersResolver';
 import {CreatePlaylistComponent} from './component/playlist/create-playlist/create-playlist.component';
 import {DialogCreatePlaylistComponent} from './component/playlist/dialog-create-playlist/dialog-create-playlist.component';
-import {DialogDeleteSongComponent} from './component/songManager/delete-song/dialog-delete-song/dialog-delete-song.component';
+import {DialogDeleteSongComponent} from './component/song/delete-song/dialog-delete-song/dialog-delete-song.component';
 import {CreateCategoryDialogComponent} from './component/category/create-category-dialog/create-category-dialog.component';
 import {DialogCreateAlbumComponent} from './component/album/dialog-create-album/dialog-create-album.component';
 import {DialogCreateSingerComponent} from './component/singer/dialog-create-singer/dialog-create-singer.component';
@@ -91,20 +91,23 @@ import {FirebaseDialogAlbumComponent} from './component/firebase/firebaseDialogA
 import {FirebaseDialogCategoryComponent} from './component/firebase/firebaseDialogCateogry/firebaseDialogCategory.component';
 import {FirebaseDialogSingerComponent} from './component/firebase/firebaseDialogSinger/firebaseDialogSinger.component';
 import {LoginSocialComponent} from './component/login-social/login-social.component';
-import {LastestSongComponent} from './component/songManager/lastest-song/lastest-song.component';
-import {ShowmoreSongLastestComponent} from './component/songManager/showmore-song-lastest/showmore-song-lastest.component';
+import {LastestSongComponent} from './component/song/lastest-song/lastest-song.component';
+import {ShowmoreSongLastestComponent} from './component/song/showmore-song-lastest/showmore-song-lastest.component';
 import {FirebaseCreateSongComponent} from './component/firebase/firebaseCreateSong/firebaseCreateSong.component';
 import {FirebaseUpdateSongComponent} from './component/firebase/firebaseUpdateSong/firebaseUpdateSong.component';
 import {FirebaseEditProfileComponent} from './component/firebase/firebaseEditProfile/firebaseEditProfile.component';
 import {PlaylistDetailComponent} from './component/playlist/playlist-detail/playlist-detail.component';
-import {TracksComponent} from './component/songManager/tracks/tracks.component';
+import {TracksComponent} from './component/song/tracks/tracks.component';
 import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
-import { DialogDeletePlaylistComponent } from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
-import { ListSingerComponent } from './component/singer/list-singer/list-singer.component';
-import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
-import { ShowSongsLastPlaylistComponent } from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
-
-
+import {DialogDeletePlaylistComponent} from './component/playlist/dialog-delete-playlist/dialog-delete-playlist.component';
+import {DialogDeleteSongOfPlaylistComponent} from './component/playlist/dialog-delete-song-of-playlist/dialog-delete-song-of-playlist.component';
+import {ListSingerComponent} from './component/singer/list-singer/list-singer.component';
+import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
+import {NgxAudioPlayerModule} from 'ngx-audio-player';
+import {TrackDetailComponent} from './component/song/track-detail/track-detail.component';
+import {DialogEditPlaylistComponent} from './component/playlist/dialog-edit-playlist/dialog-edit-playlist.component';
+import {NgxAudioComponent} from './component/player/ngx-audio/ngx-audio.component';
+import {ShowSongsLastPlaylistComponent} from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
 
 @NgModule({
   declarations: [
@@ -146,7 +149,12 @@ import { ShowSongsLastPlaylistComponent } from './component/playlist/show-songs-
     DialogDeletePlaylistComponent,
     ListSingerComponent,
     SingerDetailComponent,
+    TrackDetailComponent,
+    DialogEditPlaylistComponent,
+    NgxAudioComponent,
     ShowSongsLastPlaylistComponent,
+    DialogDeleteSongOfPlaylistComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -214,6 +222,7 @@ import { ShowSongsLastPlaylistComponent } from './component/playlist/show-songs-
     MatSelectModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
+    NgxAudioPlayerModule,
 
   ],
   providers: [
@@ -236,6 +245,9 @@ import { ShowSongsLastPlaylistComponent } from './component/playlist/show-songs-
     FirebaseUpdateSongComponent,
     FirebaseEditProfileComponent,
     DialogDeletePlaylistComponent,
+    NgxAudioPlayerModule,
+    PlaylistDetailComponent,
+    DialogDeleteSongOfPlaylistComponent,
 
   ],
   bootstrap: [

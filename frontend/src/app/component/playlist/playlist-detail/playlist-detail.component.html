@@ -18,10 +18,9 @@
           <div class="page-title">
             <h1 class="inline">{{ playlistInfo.name_playlist }}</h1>
           </div>
-          <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Quamquam tu hanc copiosiorem etiam soles dicere. Nihil
-            illinc huc pervenit. Verum hoc idem saepe faciamus. Quid ad utilitatem tantae pecuniae? Utram
-            tandem linguam nescio? Sed hoc sane concedamus.</p>
+          <p class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">
+            {{ playlistInfo.description }}
+          </p>
           <div class="item-action m-b">
             <a class="btn btn-icon white rounded btn-share pull-right" data-target="#share-modal"
                data-toggle="modal"><i class="fa fa-share-alt"></i></a>
@@ -47,7 +46,7 @@
         <h6 class="m-b">
           <span class="text-muted">by</span>
           <a class="item-author _600" data-pjax href="artist.detail.html"> {{ auth ? getUserInfo.username : 'CodeGym' }}</a>
-          <span class="text-muted text-sm">- 10 song, 50 min 32 sec</span>
+          <span class="text-muted text-sm">- {{ songOfPlaylist.length || 0 }} song, 50 min 32 sec</span>
         </h6>
         <div class="row item-list item-list-xs item-list-li m-b" id="tracks">
           <div *ngFor="let song of songOfPlaylist" class="col-xs-12">
@@ -72,7 +71,7 @@
                   <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
                 </div>
                 <div class="item-author text-sm text-ellipsis hide">
-                  <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                  <a *ngFor="let singer of song.singers" [routerLink]="['/singer/song', singer.id]" class="text-muted">
                     {{ singer.singer_name }},
                   </a>
                 </div>
@@ -85,16 +84,8 @@
             </div>
           </div>
 
-          <!--          <div class="col-xs-12">-->
-          <!--            <mat-advanced-audio-player [playlist]="listTracks" (trackEnded)="triggerOnEnded($event)" [autoPlay]="false" allow="autoplay"></mat-advanced-audio-player>-->
-          <!--          </div>-->
-
           <div class="col-xs-12">
-            <ngx-audio-player (trackEnded)="onEnded($event)" [autoPlay]="false" [disablePositionSlider]="msaapDisablePositionSlider"
-                              [displayArtist]="msaapDisplayArtist" [displayDuration]="msaapDisplayDuration" [displayPlaylist]="msaapDisplayPlayList" [displayRepeatControls]="msaapDisplayRepeatControls"
-                              [displayTitle]="msaapDisplayTitle" [displayVolumeControls]="msaapDisplayVolumeControls"
-                              [expanded]="true" [pageSizeOptions]="msaapPageSizeOptions"
-                              [playlist]="listTracks" muted="muted"></ngx-audio-player>
+            <app-ngx-audio [listTracks]="tracks"></app-ngx-audio>
           </div>
 
         </div>
@@ -105,7 +96,7 @@
                  data-src="http://api.soundcloud.com/tracks/174495152/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
                 <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('images/b11.jpg');"></a>
+                   style="background-image: url('assets/images/b11.jpg');"></a>
                 <div class="item-overlay center">
                   <button class="btn-playpause">Play</button>
                 </div>
@@ -138,7 +129,7 @@
             <div class="item r" data-id="item-5" data-src="http://streaming.radionomy.com/JamendoLounge">
               <div class="item-media ">
                 <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('images/b4.jpg');"></a>
+                   style="background-image: url('assets/images/b4.jpg');"></a>
                 <div class="item-overlay center">
                   <button class="btn-playpause">Play</button>
                 </div>
@@ -172,7 +163,7 @@
                  data-src="http://api.soundcloud.com/tracks/269944843/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
                 <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('images/b0.jpg');"></a>
+                   style="background-image: url('assets/images/b0.jpg');"></a>
                 <div class="item-overlay center">
                   <button class="btn-playpause">Play</button>
                 </div>
@@ -206,7 +197,7 @@
                  data-src="http://api.soundcloud.com/tracks/236288744/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
               <div class="item-media ">
                 <a class="item-media-content" href="track.detail.html"
-                   style="background-image: url('images/b7.jpg');"></a>
+                   style="background-image: url('assets/images/b7.jpg');"></a>
                 <div class="item-overlay center">
                   <button class="btn-playpause">Play</button>
                 </div>
@@ -240,7 +231,7 @@
         <div class="streamline m-b m-l">
           <div class="sl-item">
             <div class="sl-left">
-              <img alt="." class="img-circle" src="images/a0.jpg">
+              <img alt="." class="img-circle" src="assets/images/a0.jpg">
             </div>
             <div class="sl-content">
 
@@ -275,7 +266,7 @@
           </div>
           <div class="sl-item">
             <div class="sl-left">
-              <img alt="." class="img-circle" src="images/a2.jpg">
+              <img alt="." class="img-circle" src="assets/images/a0.jpg">
             </div>
             <div class="sl-content">
               <div class="sl-author m-b-0">
@@ -290,7 +281,7 @@
           </div>
           <div class="sl-item">
             <div class="sl-left">
-              <img alt="." class="img-circle" src="images/a3.jpg">
+              <img alt="." class="img-circle" src="assets/images/a0.jpg">
             </div>
             <div class="sl-content">
               <div class="sl-author m-b-0">
@@ -305,7 +296,7 @@
 
               <div class="sl-item">
                 <div class="sl-left">
-                  <img alt="." class="img-circle" src="images/a2.jpg">
+                  <img alt="." class="img-circle" src="assets/images/a0.jpg">
                 </div>
                 <div class="sl-content">
                   <div class="sl-date text-muted">Sun, 11 Feb</div>
@@ -316,7 +307,7 @@
               </div>
               <div class="sl-item">
                 <div class="sl-left">
-                  <img alt="." class="img-circle" src="images/a5.jpg">
+                  <img alt="." class="img-circle" src="assets/images/a5.jpg">
                 </div>
                 <div class="sl-content">
                   <div class="sl-date text-muted">Thu, 17 Jan</div>

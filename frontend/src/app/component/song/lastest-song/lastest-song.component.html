@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
+            autoTrigger: true,
+            loadingHtml: '<i class=\'fa fa-refresh fa-spin text-md text-muted\'></i>',
+            padding: 50,
+            nextSelector: 'a.jscroll-next:last'
+          }">
+    <div *ngFor="let song of lastestSong" class="col-xs-2 col-sm-2 col-md-2">
+      <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+        <div class="item-media ">
+          <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]" class="item-media-content"></a>
+          <div class="item-overlay center">
+            <button class="btn-playpause">Play</button>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-overlay bottom text-right">
+            <a class="btn-favorite" href="#">
+              <i class="fa fa-heart-o"></i>
+            </a>
+            <a [attr.data-song-id]="song.id" class="btn-more" data-toggle="dropdown" href="#">
+              <i class="fa fa-ellipsis-h"></i>
+            </a>
+            <div class="dropdown-menu pull-right black lt"></div>
+          </div>
+          <div class="item-title text-ellipsis">
+            <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
+          </div>
+          <div class="item-author text-sm text-ellipsis">
+            <a *ngFor="let singer of song.singers" [routerLink]="['/singer/song', singer.id]" class="text-muted">
+              {{ singer.singer_name }},
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showmore">
+      <app-showmore-song-lastest></app-showmore-song-lastest>
+    </div>
+    <div *ngIf="show" class="text-center">
+      <a (click)="showMoreSongs()" class="btn btn-sm white rounded jscroll-next">Show More</a>
+    </div>
+  </div>
+
+
+</div>

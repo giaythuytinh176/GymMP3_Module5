@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './services/userManager/auth.guard';
 import {NotGuardComponent} from './component/layout/not-guard/not-guard/not-guard.component';
-import {SearchSongComponent} from './component/songManager/search-song/search-song.component';
-import {AllListSongComponent} from './component/songManager/all-list-song/all-list-song.component';
+import {SearchSongComponent} from './component/song/search-song/search-song.component';
+import {AllListSongComponent} from './component/song/all-list-song/all-list-song.component';
 import {GetAllSongsResolver} from './resolver/GetAllSongsResolver';
 import {CdkDragDropConnectedSortingGroupExample} from './component/dragdrop/cdk-drag-drop-connected-sorting-group/cdk-drag-drop-connected-sorting-group-example';
 import {GetAlbumsResolver} from './resolver/GetAlbumsResolver';
@@ -12,15 +12,19 @@ import {GetSingersResolver} from './resolver/GetSingersResolver';
 import {GetUserInfoResolver} from './resolver/GetUserInfoResolver';
 import {GetSongByUserIDResolver} from './resolver/GetSongByUserIDResolver';
 import {GetAllMovedSongsResolver} from './resolver/GetAllMovedSongsResolver';
-import {LastestSongComponent} from './component/songManager/lastest-song/lastest-song.component';
+import {LastestSongComponent} from './component/song/lastest-song/lastest-song.component';
 import {SearchPlaylistComponent} from './component/playlist/search-playlist/search-playlist.component';
-import { ListSingerComponent } from './component/singer/list-singer/list-singer.component';
-import { GetAllSingersResolver } from './resolver/GetAllSingersResolver';
-import { SingerDetailComponent } from './component/singer/singer-detail/singer-detail.component';
-import { GetSongOfSingerResolver } from './resolver/GetSongOfSingerResolver';
-import { GetSingerInfoResolver } from './resolver/GetSingerInforResolver';
-import { ShowSongsLastPlaylistComponent } from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
-import {TrackDetailComponent} from "./component/songManager/track-detail/track-detail.component";
+import {ListSingerComponent} from './component/singer/list-singer/list-singer.component';
+import {GetAllSingersResolver} from './resolver/GetAllSingersResolver';
+import {SingerDetailComponent} from './component/singer/singer-detail/singer-detail.component';
+import {GetSongOfSingerResolver} from './resolver/GetSongOfSingerResolver';
+import {GetSingerInfoResolver} from './resolver/GetSingerInforResolver';
+import {ShowSongsLastPlaylistComponent} from './component/playlist/show-songs-last-playlist/show-songs-last-playlist.component';
+import {TrackDetailComponent} from './component/song/track-detail/track-detail.component';
+import {GetSongOfPlaylistByIDResolverGuest} from './resolver/GetSongOfPlaylistByIDResolverGuest';
+import {GetSongDetailByIdGuestResolver} from './resolver/GetSongDetailByIdGuestResolver';
+import {GetSongSameSingerBySongIdResolver} from './resolver/GetSongSameSingerBySongIdResolver';
+import {GetRandomImagePlaylistResolver} from './resolver/GetRandomImagePlaylistResolver';
 
 const routes: Routes = [
   {
@@ -35,24 +39,26 @@ const routes: Routes = [
     }
   },
   {
-    path: 'lastest-songs',
-    component: LastestSongComponent,
-  },
-  {
     path: 'search',
     component: SearchSongComponent,
   },
   {
-    path: 'show-detail-playlist/:id',
-    component: ShowSongsLastPlaylistComponent
-  },
-  {
-    path: 'search-playlist',
-    component: SearchPlaylistComponent,
+    path: 'playlist/:id',
+    component: ShowSongsLastPlaylistComponent,
+    resolve: {
+      getSongOfPlaylistGuest: GetSongOfPlaylistByIDResolverGuest,
+      getRandomImagePlaylist: GetRandomImagePlaylistResolver,
+    }
   },
   {
     path: 'track/:id',
     component: TrackDetailComponent,
+    resolve: {
+      getSongDetailByIdGuest: GetSongDetailByIdGuestResolver,
+      getSongSameSingerBySongId: GetSongSameSingerBySongIdResolver,
+      getAllSingers: GetAllSingersResolver,
+      // getUserInfo: GetUserInfoResolver,
+    },
   },
   {
     path: 'singer',

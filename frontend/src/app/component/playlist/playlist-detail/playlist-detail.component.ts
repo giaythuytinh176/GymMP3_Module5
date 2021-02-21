@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Observable} from 'rxjs';
@@ -31,16 +31,7 @@ export class PlaylistDetailComponent implements OnInit {
   songOfPlaylist: Song[];
   auth: boolean;
   getRandomImagePlaylist: { error: string, image: string };
-  listTracks: Track[];
-
-  msaapDisplayTitle = true;
-  msaapDisplayPlayList = true;
-  msaapPageSizeOptions = [5, 10, 15];
-  msaapDisplayVolumeControls = true;
-  msaapDisplayRepeatControls = true;
-  msaapDisplayArtist = true;
-  msaapDisplayDuration = false;
-  msaapDisablePositionSlider = false;
+  tracks: Track[];
 
   constructor(
     private songService: SongService,
@@ -68,41 +59,29 @@ export class PlaylistDetailComponent implements OnInit {
 
     this.loadTrackPlaylist();
     this.getAllSongsExceptInPlaylist();
-    console.log('songOfPlaylist', this.songOfPlaylist);
     this.id = +this.route.snapshot.paramMap.get('id');
   }
 
   loadTrackPlaylist(): void {
-    this.listTracks = this.songOfPlaylist.map((data) => {
+    this.tracks = this.songOfPlaylist.map((data) => {
       return {
         title: data.nameSong,
         link: data.mp3Url,
         artist: data.author,
       };
     });
-    console.log('listTracks', this.listTracks);
-  }
-
-  triggerOnEnded(event): void {
-    console.log('ended');
-  }
-
-  onEnded(event): void {
-    console.log('ended');
   }
 
   getAllSongsExceptInPlaylist(): any {
     this.playlistService.getAllSongsExceptInPlaylist(this.songOfPlaylist).subscribe((data: any) => {
       this.allsongs = data;
       this.loadTrackPlaylist();
-      console.log('data', data);
     }, error => console.log(error));
   }
 
   deleteSongOfPlaylist(song_id: number, user_id: number, id: number): void {
     this.playlistService.deleteSongOfPlaylist(song_id, user_id, id).subscribe(
       (data: any) => {
-        console.log(data);
         this.getSongOfPlaylist();
         this.toastr.success('Deleted song successfully!');
       }, error => console.log(error)
@@ -120,7 +99,6 @@ export class PlaylistDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // this.title = result;
-      console.log('result', result);
       if (result === undefined) {
       } else if (result) {
         this.deleteSongOfPlaylist(song_id, user_id, this.id);
@@ -136,7 +114,6 @@ export class PlaylistDetailComponent implements OnInit {
           this.token.signOut();
           this.routes.navigate(['/user/login']);
         } else {
-          console.log(data);
           this.songOfPlaylist = data;
           this.getAllSongsExceptInPlaylist();
         }
@@ -149,17 +126,21 @@ export class PlaylistDetailComponent implements OnInit {
     console.log('abc', id);
     this.playlistService.addSong(id, this.id).subscribe(
       (data: any) => {
-        console.log('data', data);
-        if (data.exist) {
-          this.toastr.warning('Song existed in your playlist!');
-        } else if (data.pl && !data.exist) {
-          this.getSongOfPlaylist();
-          this.getAllSongsExceptInPlaylist();
-          this.toastr.success('Add song to playlist successfully!');
+        if (data.status) {
+          this.token.signOut();
+          this.routes.navigate(['/user/login']);
         } else {
-          this.toastr.success('Something wrong. Please contact to admin!');
+          if (data.exist) {
+            this.toastr.warning('Song existed in your playlist!');
+          } else if (data.pl && !data.exist) {
+            this.getSongOfPlaylist();
+            this.getAllSongsExceptInPlaylist();
+            this.toastr.success('Add song to playlist successfully!');
+          } else {
+            this.toastr.success('Something wrong. Please contact to admin!');
+          }
+          // this.router.navigate(['/user/playlist/this.id']);
         }
-        // this.router.navigate(['/user/playlist/this.id']);
       }, error => {
         // console.log(error);
         this.toastr.warning('Something wrong.');

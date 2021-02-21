@@ -20,7 +20,7 @@
           <a class="text-muted" href="artist.detail.html">{{ song.singer_list_name }},</a>
         </div>
         <div class="item-author text-sm text-ellipsis hide">
-          <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+          <a *ngFor="let singer of song.singers" [routerLink]="['/singer/song', singer.id]" class="text-muted">
             {{ singer.singer_name }},
           </a>
         </div>

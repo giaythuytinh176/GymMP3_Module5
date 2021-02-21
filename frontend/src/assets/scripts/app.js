@@ -7,7 +7,7 @@
       folded: false,
       container: false,
       color: 'primary',
-      bg: 'grey'
+      bg: ''
     }
   };
 

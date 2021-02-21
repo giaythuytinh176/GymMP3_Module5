@@ -21,7 +21,7 @@
             <circle cx="24" cy="24" fill="#000000" r="3"/>
           </svg>
 
-          <img alt="." class="hide" src="images/logo.png">
+          <img alt="." class="hide" src="assets/images/logo.png">
           <span class="hidden-folded inline">pulse</span>
         </a>
         <!-- / brand -->
@@ -66,12 +66,11 @@
                 <div class="item-action m-b">
                   <!--                  <a href="#" class="btn btn-sm rounded primary">Upload</a>-->
                   <a [routerLink]="['/user/edit-profile']" class="btn btn-sm rounded primary" href="#">Edit Profile</a>
-                  &nbsp;
                   <a [routerLink]="['/user/change-password']" class="btn btn-sm rounded white" href="#">Change
                     Password</a>
                 </div>
                 <div class="block clearfix m-b">
-                  <span>9</span> <span class="text-muted">Albums</span>, <span>23</span>
+                  <span>9</span> <span class="text-muted">Albums</span>, <span>{{ songs.length || 0 }}</span>
                   <span class="text-muted">Tracks</span>
                 </div>
               </div>
@@ -125,8 +124,10 @@
                         </div>
                         <div class="item-info">
                           <div class="item-overlay bottom text-right">
+                            <a (click)="openDialogEditPlaylist(playlist, userinfo.id)" title="Edit playlist"><i class="small material-icons">
+                              edit </i></a>
                             <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
-                            <a (click)="openDialogDeletePlaylist(playlist.id, playlist.name_playlist, userinfo.id)">
+                            <a (click)="openDialogDeletePlaylist(playlist.id, playlist.name_playlist, userinfo.id)" title="Delete playlist">
                               <i class="small material-icons"> delete </i> </a>
                           </div>
                           <div class="item-title text-ellipsis">
@@ -153,7 +154,7 @@
                     <div class="col-xs-4 col-sm-4 col-md-3">
                       <div class="item r" data-id="item-10" data-src="http://api.soundcloud.com/tracks/237514750/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                         <div class="item-media ">
-                          <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b9.jpg');"></a>
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b9.jpg');"></a>
                           <div class="item-overlay center">
                             <button class="btn-playpause">Play</button>
                           </div>
@@ -228,7 +229,7 @@
                 <div class="col-xs-12">
                   <div class="item r" data-id="item-3" data-src="http://api.soundcloud.com/tracks/79031167/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                     <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b2.jpg');"></a>
+                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b2.jpg');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-title text-ellipsis">
@@ -245,7 +246,7 @@
                 <div class="col-xs-12">
                   <div class="item r" data-id="item-1" data-src="http://api.soundcloud.com/tracks/269944843/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                     <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b0.jpg');"></a>
+                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b0.jpg');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-title text-ellipsis">
@@ -262,7 +263,7 @@
                 <div class="col-xs-12">
                   <div class="item r" data-id="item-12" data-src="http://api.soundcloud.com/tracks/174495152/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                     <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b11.jpg');"></a>
+                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b11.jpg');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-title text-ellipsis">
@@ -279,7 +280,7 @@
                 <div class="col-xs-12">
                   <div class="item r" data-id="item-11" data-src="http://api.soundcloud.com/tracks/218060449/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                     <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b10.jpg');"></a>
+                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b10.jpg');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-title text-ellipsis">
@@ -296,7 +297,7 @@
                 <div class="col-xs-12">
                   <div class="item r" data-id="item-6" data-src="http://api.soundcloud.com/tracks/236107824/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                     <div class="item-media ">
-                      <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b5.jpg');"></a>
+                      <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b5.jpg');"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-title text-ellipsis">
@@ -477,7 +478,7 @@
                     <div class="col-xs-12">
                       <div class="item r" data-id="item-9" data-src="http://api.soundcloud.com/tracks/264094434/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                         <div class="item-media ">
-                          <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b8.jpg');"></a>
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b8.jpg');"></a>
                         </div>
                         <div class="item-info">
                           <div class="item-title text-ellipsis">
@@ -496,7 +497,7 @@
                     <div class="col-xs-12">
                       <div class="item r" data-id="item-2" data-src="http://api.soundcloud.com/tracks/259445397/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                         <div class="item-media ">
-                          <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b1.jpg');"></a>
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b1.jpg');"></a>
                         </div>
                         <div class="item-info">
                           <div class="item-title text-ellipsis">
@@ -515,7 +516,7 @@
                     <div class="col-xs-12">
                       <div class="item r" data-id="item-7" data-src="http://api.soundcloud.com/tracks/245566366/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                         <div class="item-media ">
-                          <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b6.jpg');"></a>
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b6.jpg');"></a>
                         </div>
                         <div class="item-info">
                           <div class="item-title text-ellipsis">
@@ -534,7 +535,7 @@
                     <div class="col-xs-12">
                       <div class="item r" data-id="item-11" data-src="http://api.soundcloud.com/tracks/218060449/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">
                         <div class="item-media ">
-                          <a class="item-media-content" href="track.detail.html" style="background-image: url('images/b10.jpg');"></a>
+                          <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b10.jpg');"></a>
                         </div>
                         <div class="item-info">
                           <div class="item-title text-ellipsis">
@@ -583,7 +584,7 @@
                     <div class="col-xs-12">
                       <div class="item">
                         <div class="item-media rounded ">
-                          <a class="item-media-content" href="artist.detail.html" style="background-image: url('images/b1.jpg');"></a>
+                          <a class="item-media-content" href="artist.detail.html" style="background-image: url('assets/images/b1.jpg');"></a>
                         </div>
                         <div class="item-info ">
                           <div class="item-title text-ellipsis">

@@ -21,10 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/search', 'SongController@search');
 
 Route::post('/search-playlist', 'PlaylistController@search');
-Route::get('playlist/lastest','PlaylistController@getLastestPlaylist');
-Route::get('playlist/song-to-last-playlist/{id}','PlaylistController@getSongToLastPlaylist');
-Route::get('playlist/detail-playlist/{id}','PlaylistController@getDetailLastestPlaylist');
-
+Route::get('playlist/lastest', 'PlaylistController@getLastestPlaylist');
+Route::get('playlist/song-to-last-playlist/{id}', 'PlaylistController@getSongToLastPlaylist');
+Route::get('playlist/detail-playlist/{id}', 'PlaylistController@getDetailLastestPlaylist');
 
 
 Route::prefix('singer')->group(function () {
@@ -46,6 +45,8 @@ Route::prefix('song')->group(function () {
     Route::get('/moved/list', 'SongController@allMovedSongs');
     Route::get('/lastest', 'SongController@getLastestSong');
     Route::get('/showmore', 'SongController@showMoreSong');
+    Route::get('/guest/{id}', 'SongController@showidsong');
+    Route::get('/guest/list/{id}', 'SongController@getSongSameSinger');
 
 });
 
@@ -94,12 +95,15 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::get('/id/song-id-v2/{id}', 'SongController@singersInfo');
         // for test
         Route::get('/name/song-id/{id}', 'SongController@findSingerBySongID');
+        Route::post('/add/song', 'SingerController@addSingerToSong');
+        Route::post('/delete/song', 'SingerController@deleteSingerFromSong');
 
     });
 
     Route::prefix('playlist')->group(function () {
         Route::get('/list', 'PlaylistController@index');
         Route::post('/create', 'PlaylistController@store');
+        Route::post('/update/{id}', 'PlaylistController@update');
         Route::get('/showlist/{id}', 'PlaylistController@show');
         Route::get('/{id}', 'PlaylistController@getInfo');
         Route::delete('/{id}', 'PlaylistController@destroy');

@@ -34,7 +34,6 @@ export class DialogCreateAlbumComponent implements OnInit {
     private albumService: AlbumService,
     public firebaseDialogAlbum: FirebaseDialogAlbumComponent,
   ) {
-    // console.log(data);
   }
 
   ngOnInit(): void {

@@ -37,7 +37,6 @@ export class FirebaseMP3Component implements OnInit {
 
   handleFileInput($event: any) {
     this.fileToUpload = $event.target.files[0];
-    // console.log(this.fileToUpload);
     if (this.fileToUpload.type.split('/')[0] !== 'audio') {
       console.error('unsupported file type');
     }
@@ -60,7 +59,6 @@ export class FirebaseMP3Component implements OnInit {
     // Totally optional metadata
     const customMetadata = {app: 'My AngularFire-powered PWA!'};
     this.task = this.storage.upload(filePath, this.fileToUpload, {customMetadata});
-    // console.log(this.task);
 
     // observe percentage changes
     this.uploadPercent = this.task.percentageChanges();
@@ -76,15 +74,11 @@ export class FirebaseMP3Component implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.toastr.success('Uploaded Mp3 File Successfully!');
-              this.fb = url;
-              console.log(url);
+              this.fb = url + '?t=' + new Date().getTime();
             }
-            // console.log(this.fb);
-            // console.log(1111);
           });
         }),
         tap(snap => {
-          // console.log(snap)
           if (snap.bytesTransferred === snap.totalBytes) {
             // Update firestore on completion
             this.db.collection('photos').add({filePath, size: snap.totalBytes});
@@ -93,7 +87,6 @@ export class FirebaseMP3Component implements OnInit {
       )
       .subscribe(url => {
         if (url) {
-          // console.log(url);
         }
       });
   }

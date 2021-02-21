@@ -37,7 +37,6 @@ export class FirebaseDialogSingerComponent implements OnInit {
 
   handleFileInput($event: any) {
     this.fileToUpload = $event.target.files[0];
-    // console.log(this.fileToUpload);
     if (this.fileToUpload.type.split('/')[0] !== 'image') {
       console.error('unsupported file type');
     }
@@ -76,7 +75,7 @@ export class FirebaseDialogSingerComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.toastr.success('Uploaded Image Successfully!');
-              this.fb = url;
+              this.fb = url + '?t=' + new Date().getTime();
             }
             // console.log(this.fb);
             // console.log(1111);

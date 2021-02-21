@@ -22,6 +22,5 @@ export class ListSingerComponent implements OnInit {
 
   ngOnInit(): void {
     this.allsingers = this.route.snapshot.data.getAllSingers.data;
-    console.log(this.allsingers);
   }
 }

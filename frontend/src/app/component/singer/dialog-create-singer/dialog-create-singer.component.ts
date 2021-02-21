@@ -22,7 +22,7 @@ export class DialogCreateSingerComponent implements OnInit {
 
   createSingerDialogForm: FormGroup;
   shake: any;
-  singer: Singer;
+  singer: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogCreateSingerComponent>,
@@ -34,7 +34,6 @@ export class DialogCreateSingerComponent implements OnInit {
     private singerService: SingerService,
     public firebaseDialogSinger: FirebaseDialogSingerComponent,
   ) {
-    // console.log(data);
   }
 
   ngOnInit(): void {
@@ -45,12 +44,17 @@ export class DialogCreateSingerComponent implements OnInit {
   createSingerSubmit(): void {
     if (this.createSingerDialogForm.valid) {
       this.createSingerDialogForm.value.image = this.firebaseDialogSinger.fb;
-      this.singer = new Singer(
-        this.createSingerDialogForm.value.singer_name,
-        this.createSingerDialogForm.value.image,
-        this.createSingerDialogForm.value.description,
-      );
-      // console.log(this.singer);
+      this.singer = {
+        singer_name: this.createSingerDialogForm.value.singer_name,
+        image: this.createSingerDialogForm.value.image,
+        description: this.createSingerDialogForm.value.description,
+        date_of_birth: this.createSingerDialogForm.value.date_of_birth,
+        gender: this.createSingerDialogForm.value.gender,
+        music_genre: this.createSingerDialogForm.value.music_genre,
+        story: this.createSingerDialogForm.value.story,
+        band: this.createSingerDialogForm.value.band,
+      };
+      //  console.log(this.singer);
       this.createSinger(this.singer);
     }
   }
@@ -89,6 +93,11 @@ export class DialogCreateSingerComponent implements OnInit {
       singer_name: ['', [Validators.required]],
       image: ['', [Validators.required]],
       description: ['', [Validators.required]],
+      date_of_birth: [''],
+      gender: [''],
+      music_genre: [''],
+      story: [''],
+      band: [''],
     });
   }
 
@@ -103,6 +112,11 @@ export interface DialogDataCreateSinger {
   singer_name: string;
   image: string;
   description: string;
+  date_of_birth: string;
+  gender: string;
+  music_genre: string;
+  story: string;
+  band: string;
 }
 
 

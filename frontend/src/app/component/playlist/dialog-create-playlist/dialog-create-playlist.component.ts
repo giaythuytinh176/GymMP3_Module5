@@ -25,8 +25,6 @@ export class DialogCreatePlaylistComponent implements OnInit {
   user_id: number;
   status: string;
 
-  // @Input('cdkTextareaAutosize') enabled = false;
-
   constructor(
     public dialogRef: MatDialogRef<DialogCreatePlaylistComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogDataCreatePlaylist,

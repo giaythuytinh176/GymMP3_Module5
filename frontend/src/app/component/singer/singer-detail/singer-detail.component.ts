@@ -4,6 +4,7 @@ import {Singer} from 'src/app/model/singer/singer';
 import {Song} from 'src/app/model/song/song';
 import {SingerService} from 'src/app/services/singer/singer.service';
 import {SongService} from 'src/app/services/song/song.service';
+import {Track} from 'ngx-audio-player';
 
 @Component({
   selector: 'app-singer-detail',
@@ -15,6 +16,7 @@ export class SingerDetailComponent implements OnInit {
   singer: Singer;
   songOfSinger: Song[];
   auth: boolean;
+  tracks1: Track[];
 
   constructor(
     private songService: SongService,
@@ -27,19 +29,21 @@ export class SingerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.singer = this.route.snapshot.data.getSingerInfor;
     this.songOfSinger = this.route.snapshot.data.getShowSongSinger;
+    console.log(this.songOfSinger);
+
     this.id = +this.route.snapshot.paramMap.get('id');
-    // console.log(this.singer);
-    // console.log(this.songOfSinger);
-    // console.log(this.id);
+    this.loadTrackPlaylist();
+
   }
 
-  // getSongOfSong(): void {
-  //   this.singerService.getShowSongSinger(this.id)
-  //     .subscribe((data: any) => {
-  //       this.songOfSinger = data;
-  //       console.log(data);
-  //     }, error => {
-  //       console.log(error);
-  //     });
-  // }
+  loadTrackPlaylist(): void {
+    this.tracks1 = this.songOfSinger.map((data) => {
+      return {
+        title: data.nameSong,
+        link: data.mp3Url,
+        artist: data.author,
+      };
+    });
+  }
+
 }

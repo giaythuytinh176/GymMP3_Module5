@@ -126,7 +126,7 @@ export class UpdateSongComponent implements OnInit {
       nameSong: ['', [Validators.required]],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      // views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       avatarUrl: [''],
       mp3Url: [''],
       oldAvatar: [this.oldAvatar],
@@ -337,6 +337,7 @@ export class UpdateSongComponent implements OnInit {
 
     this.song.category_id = this.updateMusicForm.value.myControl_category.id;
     this.song.album_id = this.updateMusicForm.value.myControl_album.id;
+    this.song.views = this.views;
     // console.log(this.song);
     // Check if array
     if (this.updateMusicForm.value.myControl_singer instanceof Array) {
@@ -351,8 +352,8 @@ export class UpdateSongComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogSinger(singer_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateSingerComponent, {
-      width: '15%',
-      height: '40%',
+      width: '35%',
+      height: '50%',
       data: {
         singer_name,
       }
@@ -375,7 +376,7 @@ export class UpdateSongComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogCategory(category_name: string): void {
     const dialogRef = this.dialog.open(CreateCategoryDialogComponent, {
-      width: '15%',
+      width: '25%',
       height: '30%',
       data: {
         category_name,
@@ -399,7 +400,7 @@ export class UpdateSongComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogAlbum(album_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateAlbumComponent, {
-      width: '15%',
+      width: '25%',
       height: '30%',
       data: {
         album_name,

@@ -13,6 +13,7 @@ const TOKEN_KEY = 'AuthToken';
 export class PlaylistService {
 
   apiCreatePlaylist = environment.apiUrl + '/playlist/create';
+  apiEditPlaylist = environment.apiUrl + '/playlist/update';
   apiListPlaylist = environment.apiUrl + '/playlist/list';
   apiShowListPlaylist = environment.apiUrl + '/playlist/showlist';
   apiPlaylistInfo = environment.apiUrl + '/playlist';
@@ -68,7 +69,7 @@ export class PlaylistService {
     return this.http.delete(`${this.apiSongOfDeletePlaylist}/${playlist_id}`, httpHeader);
   }
 
-  getAllSongsExceptInPlaylist(listSong: Song[],): Observable<Song[]> {
+  getAllSongsExceptInPlaylist(listSong: Song[]): Observable<Song[]> {
     return this.http.post<Song[]>(`${this.apiGetAllSongsExceptInPlaylist}`, {listSong: JSON.stringify(listSong)}, this.httpJson);
   }
 
@@ -82,6 +83,12 @@ export class PlaylistService {
 
   createPlaylist(pl: Playlist): Observable<Playlist> {
     return this.http.post<Playlist>(this.apiCreatePlaylist, pl, this.httpJson);
+  }
+
+  editPlaylist(pl: Playlist, id: number): Observable<Playlist> {
+    // chuyen doi chuoi tu object sang string thi moi gui du lieu duoc
+    const obj = {playlist: JSON.stringify(pl)};
+    return this.http.post<Playlist>(`${this.apiEditPlaylist}/${id}`, obj, this.httpJson);
   }
 
   getPlaylistByUserID(id: number): Observable<Playlist[]> {
@@ -105,7 +112,7 @@ export class PlaylistService {
   }
 
   getShowSongsToLastPlaylist(playlist_id: number): Observable<Song[]> {
-      return this.http.get<Song[]>(`${this.apiGetShowSongsToLastPlaylist}/${playlist_id}`);
+    return this.http.get<Song[]>(`${this.apiGetShowSongsToLastPlaylist}/${playlist_id}`);
   };
 
   getDetailPlaylist(id: number): Observable<Playlist> {

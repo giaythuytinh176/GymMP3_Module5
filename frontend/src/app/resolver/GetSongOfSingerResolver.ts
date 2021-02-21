@@ -27,7 +27,6 @@ export class GetSongOfSingerResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Singer[]> | Promise<any> | any {
-    // console.log(route.params.id);
     return this.singerService.getShowSongSinger(route.params.id).pipe(
       catchError(error => {
           this.router.navigateByUrl('/404');

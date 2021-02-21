@@ -215,7 +215,7 @@ export class CreateSongComponent implements OnInit {
       mp3Url: ['', [Validators.required]],
       describes: ['', [Validators.required]],
       author: ['', [Validators.required]],
-      views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      // views: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       myControl_singer: ['', [Validators.required]],
       myControl_category: ['', Validators.required],
       myControl_album: ['', Validators.required],
@@ -224,7 +224,6 @@ export class CreateSongComponent implements OnInit {
 
   createSong(song: Song): void {
     this.songService.createSong(song).subscribe((data: any) => {
-        // console.log(data);
         if (data.error || data.status) {
           this.token.signOut();
           this.toastr.warning('You must login to create song.');
@@ -234,7 +233,6 @@ export class CreateSongComponent implements OnInit {
           this.routes.navigate(['/user/profile', this.userinfo.id]);
         }
       }, error => {
-        // console.log(error);
         this.toastr.warning('Something wrong.');
       }
     );
@@ -242,14 +240,13 @@ export class CreateSongComponent implements OnInit {
 
   createSongSubmit(): void {
     if (this.createMusicForm.valid) {
-      console.log(this.createMusicForm.value);
       this.createMusicForm.value.avatarUrl = this.firebaseCreateSong.fb;
       this.createMusicForm.value.mp3Url = this.firebaseMP3CreateSong.fb;
       this.song = this.createMusicForm.value;
       this.song.category_id = this.createMusicForm.value.myControl_category.id;
       this.song.album_id = this.createMusicForm.value.myControl_album.id;
-      // console.log(this.song);
       this.song.user_id = this.userinfo.id;
+      this.song.views = 1;
 
       if (this.createMusicForm.value.myControl_singer instanceof Array) {
         // Stringify to JSon
@@ -266,8 +263,8 @@ export class CreateSongComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogSinger(singer_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateSingerComponent, {
-      width: '15%',
-      height: '40%',
+      width: '35%',
+      height: '50%',
       data: {
         singer_name,
       }
@@ -275,7 +272,6 @@ export class CreateSongComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log('result', result);
       if (result === undefined) {
       } else if (result.valid) {
         this.notFoundSinger = false;
@@ -290,7 +286,7 @@ export class CreateSongComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogCategory(category_name: string): void {
     const dialogRef = this.dialog.open(CreateCategoryDialogComponent, {
-      width: '15%',
+      width: '25%',
       height: '30%',
       data: {
         category_name,
@@ -299,7 +295,6 @@ export class CreateSongComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log('result', result);
       if (result === undefined) {
       } else if (result.valid) {
         this.notFoundCategory = false;
@@ -314,7 +309,7 @@ export class CreateSongComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   openDialogAlbum(album_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateAlbumComponent, {
-      width: '15%',
+      width: '25%',
       height: '30%',
       data: {
         album_name,
@@ -323,7 +318,6 @@ export class CreateSongComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log('result', result);
       if (result === undefined) {
       } else if (result.valid) {
         this.notFoundAlbum = false;

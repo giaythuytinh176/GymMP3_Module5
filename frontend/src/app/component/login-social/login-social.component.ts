@@ -38,9 +38,6 @@ export class LoginSocialComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      // console.log('token', this.token);
-      // console.log('error', this.error);
-      // console.log('action', this.action);
       if (this.token) {
         this.tokenStorage.saveLogin('true');
         this.tokenStorage.saveToken(this.token);

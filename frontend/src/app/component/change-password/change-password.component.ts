@@ -53,7 +53,6 @@ export class ChangePasswordComponent implements OnInit, OnChanges, AfterContentC
   }
 
   ngAfterContentChecked(): void {
-    // console.log(11111);
     if (this.ChangePassForm.value.password !== this.ChangePassForm.value.new_password) {
       this.isSamePass = false;
     }

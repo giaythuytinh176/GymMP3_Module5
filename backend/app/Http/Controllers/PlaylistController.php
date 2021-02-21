@@ -108,7 +108,27 @@ class PlaylistController extends Controller
 
     public function update(Request $request, Playlist $playlist)
     {
-        //
+        $obj = json_decode($request->playlist, true);
+        $validator = Validator::make($obj, [
+            'name_playlist' => 'required|string',
+            'description' => 'required|string',
+            'user_id' => 'required|integer',
+            'view' => 'required|integer',
+            'status' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $playlist = Playlist::find($request->id);
+        $playlist->fill($obj);
+//        $playlist->name_playlist = $obj['name_playlist'];
+//        $playlist->description = $obj['description'];
+//        $playlist->user_id = $obj['user_id'];
+//        $playlist->view = $obj['user_id'];
+//        $playlist->status = $obj['status'];
+        $playlist->save();
+        return response()->json(compact(['playlist']), 200);
     }
 
     public function destroy(Request $request, UserController $userController)
@@ -199,9 +219,9 @@ class PlaylistController extends Controller
     {
         // $data = Playlist::latest()->paginate(4)->toArray();
         $data = DB::table('playlists')->select('playlists.*', 'users.username')
-        ->join('users','playlists.user_id', '=','users.id')
-        ->where('playlists.status', '=', 'on')
-        ->latest()->paginate(4)->toArray();
+            ->join('users', 'playlists.user_id', '=', 'users.id')
+            ->where('playlists.status', '=', 'on')
+            ->latest()->paginate(4)->toArray();
         $lastRecordData = $data['data'];
         return response()->json(compact('lastRecordData'));
     }
@@ -209,13 +229,13 @@ class PlaylistController extends Controller
     public function getSongToLastPlaylist($id)
     {
         $playlist = Playlist::with('songs')
-        ->select('playlists.*','users.username')
-        ->join('users','users.id','=','playlists.user_id')
-        ->where([
-            ['playlists.status', '=', 'on'],
-            ['playlists.id', '=', $id],
-        ])
-        ->first()->toArray();
+            ->select('playlists.*', 'users.username')
+            ->join('users', 'users.id', '=', 'playlists.user_id')
+            ->where([
+                ['playlists.status', '=', 'on'],
+                ['playlists.id', '=', $id],
+            ])
+            ->first()->toArray();
         return response()->json($playlist['songs']);
     }
 
@@ -223,14 +243,14 @@ class PlaylistController extends Controller
     {
         // $data = Playlist::latest()->paginate(4)->toArray();
         $data = DB::table('playlists')->select('playlists.*', 'users.username')
-        ->join('users','playlists.user_id', '=','users.id')
-        ->where([
-            ['playlists.status', '=', 'on'],
-            ['playlists.id', '=', $id],
-        ])
-        ->first();
+            ->join('users', 'playlists.user_id', '=', 'users.id')
+            ->where([
+                ['playlists.status', '=', 'on'],
+                ['playlists.id', '=', $id],
+            ])
+            ->first();
         return response()->json($data);
     }
 
-    
+
 }

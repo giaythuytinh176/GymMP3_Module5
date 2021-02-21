@@ -37,7 +37,6 @@ export class FirebaseEditProfileComponent implements OnInit {
 
   handleFileInput($event: any) {
     this.fileToUpload = $event.target.files[0];
-    // console.log(this.fileToUpload);
     if (this.fileToUpload.type.split('/')[0] !== 'image') {
       console.error('unsupported file type');
     }
@@ -60,7 +59,6 @@ export class FirebaseEditProfileComponent implements OnInit {
     // Totally optional metadata
     const customMetadata = {app: 'My AngularFire-powered PWA!'};
     this.task = this.storage.upload(filePath, this.fileToUpload, {customMetadata});
-    // console.log(this.task);
 
     // observe percentage changes
     this.uploadPercent = this.task.percentageChanges();
@@ -76,10 +74,8 @@ export class FirebaseEditProfileComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.toastr.success('Uploaded Image Successfully!');
-              this.fb = url;
+              this.fb = url + '?t=' + new Date().getTime();
             }
-            // console.log(this.fb);
-            // console.log(1111);
           });
         }),
         tap(snap => {

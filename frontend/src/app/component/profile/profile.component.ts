@@ -14,6 +14,7 @@ import {PlaylistService} from 'src/app/services/playlist/playlist.service';
 import {Playlist} from 'src/app/model/playlist/playlist';
 import {DialogCreatePlaylistComponent} from '../playlist/dialog-create-playlist/dialog-create-playlist.component';
 import {DialogDeletePlaylistComponent} from '../playlist/dialog-delete-playlist/dialog-delete-playlist.component';
+import {DialogEditPlaylistComponent} from "../playlist/dialog-edit-playlist/dialog-edit-playlist.component";
 
 @Component({
   selector: 'app-profile',
@@ -48,14 +49,12 @@ export class ProfileComponent implements OnInit {
   }
 
   getPlaylistByUSerId(): void {
-    // console.log(this.playlists);
     this.playlistService.getPlaylistByUserID(this.userinfo.id)
       .subscribe((data: any) => {
         if (data.status) {
           this.token.signOut();
           this.routes.navigate(['/user/login']);
         } else {
-          console.log(data);
           this.playlists = data;
         }
       }, error => {
@@ -66,7 +65,6 @@ export class ProfileComponent implements OnInit {
   deletePlaylist(id: number, user_id: number): void {
     this.playlistService.deletePlaylist(id, user_id).subscribe(
       data => {
-        // console.log(data);
         this.getPlaylistByUSerId();
         this.toastr.success('Deleted playlist successfully!');
       }, error => console.log(error)
@@ -87,14 +85,32 @@ export class ProfileComponent implements OnInit {
       if (result) {
         this.deletePlaylist(id, user_id);
       }
-      console.log(result);
+    });
+  }
+
+  // tslint:disable-next-line:variable-name
+  openDialogEditPlaylist(playlist: Playlist, user_id: number): void {
+    const dialogRef = this.dialog.open(DialogEditPlaylistComponent, {
+      width: '35%',
+      height: '50%',
+      data: {playlist: playlist, user_id: user_id},
+      // panelClass: 'custom-dialog',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.title = result;
+      if (result) {
+        console.log(result);
+
+      }
     });
   }
 
   openDialogPlaylist(user_id: number): void {
     const dialogRef = this.dialog.open(DialogCreatePlaylistComponent, {
-      width: '15%',
-      height: '35%',
+      width: '35%',
+      height: '50%',
       data: {
         user_id,
       },
@@ -103,10 +119,8 @@ export class ProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log('result', result);
       if (result === undefined) {
       } else if (result.valid) {
-        console.log(result);
         this.getPlaylistByUSerId();
         // this.notFoundCategory = false;
         // this.createMusicForm.get('myControl_category').reset();
