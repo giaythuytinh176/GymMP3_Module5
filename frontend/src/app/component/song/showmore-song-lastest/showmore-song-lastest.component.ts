@@ -23,7 +23,7 @@ export class ShowmoreSongLastestComponent implements OnInit {
 
   getShowmoreSongLastest(): void {
     this.songService.getShowmoreSongLastest().subscribe((data: any) => {
-      this.showmoreSongLastest = data.lastRecordData;
+      this.showmoreSongLastest = data;
     });
   }
 

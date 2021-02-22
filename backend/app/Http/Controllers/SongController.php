@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MovedSong;
+use App\Models\Playlist;
 use App\Models\Singer;
 use App\Models\Song;
 use Illuminate\Database\Eloquent\Builder;
@@ -139,14 +140,13 @@ class SongController extends Controller
     public function allSongs()
     {
         // limit 10 bai hat va random khi tra ve
-        $data = Song::with('singers')->inRandomOrder()->limit(10)->get()->toArray();
-//        dd($data);
+        $data = Song::with('singers')->inRandomOrder()->limit(9)->get()->toArray();
         return response()->json(compact('data'), 200);
     }
 
     public function allSongsByID($id)
     {
-        $res = Song::with('singers')->get()->toArray();
+        $res = Song::with('singers')->orderByDesc('id')->get()->toArray();
         $data = array_filter($res, function ($row) use ($id) {
             return $row['user_id'] === (int)$id;
         });
@@ -285,9 +285,16 @@ class SongController extends Controller
         }
 
         $song = Song::findOrFail($request->id);
-        $song->singers()->detach();
+//        $song->playlists()->detach();
+//        $song->singers()->detach();
+//        $song->song_comments()->delete();
+//        $song->songlikes()->delete();
+        DB::table("song_playlist")->where("song_id", $request->id)->delete();
+        DB::table("song_singer")->where("song_id", $request->id)->delete();
+        DB::table("song_comments")->where("song_id", $request->id)->delete();
+        DB::table("song_likes")->where("song_id", $request->id)->delete();
         $song->delete();
-        return response()->json($song);
+        return response()->json($song, 200);
     }
 
     public function destroyMoved(Request $request, UserController $userController)
@@ -307,7 +314,7 @@ class SongController extends Controller
         $movedSong = MovedSong::findOrFail($request->id);
         $movedSong->singers()->detach();
         $movedSong->delete();
-        return response()->json($movedSong);
+        return response()->json($movedSong, 200);
     }
 
     public function getUserIDbyMovedSongID($song_id)
@@ -346,14 +353,14 @@ class SongController extends Controller
 
     public function getLastestSong()
     {
-        $data = Song::latest()->paginate(10)->toArray();
+        $data = Song::with('singers')->latest()->paginate(12)->toArray();
         $lastRecordData = $data['data'];
-        return response()->json(compact('lastRecordData'));
+        return response()->json($lastRecordData, 200);
     }
 
     public function showMoreSong()
     {
-        $lastRecordData = Song::limit(10)->offset(10)->latest('id')->get();;
-        return response()->json(compact('lastRecordData'));
+        $lastRecordData = Song::with('singers')->limit(12)->offset(12)->latest('id')->get();;
+        return response()->json($lastRecordData, 200);
     }
 }

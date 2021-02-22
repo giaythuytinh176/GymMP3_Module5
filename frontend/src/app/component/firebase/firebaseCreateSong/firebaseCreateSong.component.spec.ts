@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {FirebaseCreateSongComponent} from './firebase.component';
+import {FirebaseCreateSongComponent} from './firebaseCreateSong.component';
 
 describe('FirebaseComponent', () => {
   let component: FirebaseCreateSongComponent;

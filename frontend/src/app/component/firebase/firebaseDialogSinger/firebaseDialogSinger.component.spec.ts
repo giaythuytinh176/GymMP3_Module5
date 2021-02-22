@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {FirebaseDialogSingerComponent} from './firebaseDialogSinger.component';
 
 
-describe('FirebaseComponent', () => {
+describe('FirebaseDialogSingerComponent', () => {
   let component: FirebaseDialogSingerComponent;
   let fixture: ComponentFixture<FirebaseDialogSingerComponent>;
 

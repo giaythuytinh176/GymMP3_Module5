@@ -144,8 +144,13 @@ export class PlaylistDetailComponent implements OnInit {
           // this.router.navigate(['/user/playlist/this.id']);
         }
       }, error => {
-        // console.log(error);
-        this.toastr.warning('Something wrong.');
+        console.log(error.error);
+        if (error.error.over20songs) {
+          this.toastr.warning(error.error.over20songs);
+        }
+        else {
+          this.toastr.warning('Something wrong.');
+        }
       }
     );
   }

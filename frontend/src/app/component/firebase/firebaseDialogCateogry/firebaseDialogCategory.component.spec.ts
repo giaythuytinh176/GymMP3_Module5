@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {FirebaseDialogCategoryComponent} from './firebaseDialogCategory.component';
 
 
-describe('FirebaseComponent', () => {
+describe('FirebaseDialogCategoryComponent', () => {
   let component: FirebaseDialogCategoryComponent;
   let fixture: ComponentFixture<FirebaseDialogCategoryComponent>;
 

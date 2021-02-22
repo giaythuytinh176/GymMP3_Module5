@@ -51,13 +51,19 @@ export class TracksComponent implements OnInit {
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
   }
 
+  reloadComponent(): void {
+    this.routes.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.routes.onSameUrlNavigation = 'reload';
+    this.routes.navigate([this.routes.url]);
+  }
+
   deleteSong(id: number, user_id: number): void {
     this.songService.deleteSong(id, user_id).subscribe(
       data => {
         // console.log(data);
         this.getSongByUserID();
         this.toastr.success('Deleted song successfully!');
-        this.routes.navigate(['/user/profile', this.userinfo.id]);
+        // this.routes.navigate(['/user/profile', this.userinfo.id]);
       }, error => console.log(error)
     );
   }

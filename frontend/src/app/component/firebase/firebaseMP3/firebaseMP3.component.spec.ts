@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FirebaseMP3Component} from './firebaseMP3.component';
 
-describe('FirebaseComponent', () => {
+describe('FirebaseMP3Component', () => {
   let component: FirebaseMP3Component;
   let fixture: ComponentFixture<FirebaseMP3Component>;
 

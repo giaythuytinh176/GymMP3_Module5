@@ -22,11 +22,6 @@
             {{ singer.singer_name }},
           </a>
         </div>
-        <div class="item-author text-sm text-ellipsis hide">
-          <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
-            {{ singer.singer_name }},
-          </a>
-        </div>
         <div class="item-meta text-sm text-muted">
           <span class="item-meta-category"><a class="label" href="browse.html">Soul</a></span>
           <span class="item-meta-date text-xs">02.04.2016</span>
