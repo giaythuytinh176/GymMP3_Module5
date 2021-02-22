@@ -40,7 +40,7 @@
   </div>
 
   <div class="row-col">
-    <div class="col-lg-4 b-r no-border-md">
+    <div class="col-lg-6 b-r no-border-md">
       <div class="padding">
 
         <h6 class="m-b">
@@ -342,7 +342,7 @@
 
       </div>
     </div>
-    <div class="col-lg-4 w-xxl w-auto-md">
+    <div class="col-lg-3 w-xxl w-auto-md">
       <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
         <h6 class="text text-muted">Song Suggestion</h6>
         <div class="row item-list item-list-sm m-b">
@@ -372,12 +372,10 @@
                   </a>
                 </div>
                 <div class="item-author text-sm text-ellipsis">
-                  <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                  <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
                     {{ singer.singer_name }},
                   </a>
-
                 </div>
-
               </div>
             </div>
           </div>
@@ -440,9 +438,9 @@
         <p class="text-muted text-xs p-b-lg">&copy; Copyright 2021</p>
       </div>
     </div>
-    <div class="col-lg-4 w-xxl w-auto-md">
+    <div class="col-lg-3 w-xxl w-auto-md">
       <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
-        <h6 class="text text-muted">Top 10 Likes</h6>
+        <h6 class="text text-muted">Top 5 Likes</h6>
         <div class="row item-list item-list-sm m-b">
           <div *ngFor="let song of getLikesTop10" class="col-xs-12">
             <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
@@ -470,10 +468,9 @@
                   </a>
                 </div>
                 <div class="item-author text-sm text-ellipsis">
-                  <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                  <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
                     {{ singer.singer_name }},
                   </a>
-
                 </div>
 
               </div>

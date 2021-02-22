@@ -1,3 +1,4 @@
+<app-search-song></app-search-song>
 <div class="page-content">
   <div class="row-col">
     <div class="col-lg-9 b-r no-border-md">
@@ -17,7 +18,7 @@
     </div>
     <div class="col-lg-3 w-xxl w-auto-md">
       <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
-        <h6 class="text text-muted">Top 10 Likes</h6>
+        <h6 class="text text-muted">Top 5 Likes</h6>
         <div class="row item-list item-list-sm m-b">
           <div *ngFor="let song of getLikesTop10" class="col-xs-12">
             <div class="item r" [attr.data-id]="song.id" [attr.data-src]="song.mp3Url">
@@ -77,116 +78,88 @@
       </div>
     </div>
   </div>
-  <div class="padding p-b-0">
-    <div class="page-title m-b">
-      <h1 class="inline m-a-0">New Playlist</h1>
-    </div>
-    <!-- <div class="row row-sm item-masonry item-info-overlay"> -->
 
-    <div *ngFor="let playlist of lastestPlaylist" class="col-sm-3 col-xs-6">
-      <div class="item r">
-        <div class="item-media ">
-          <a [routerLink]="['/playlist', playlist.id]" class="item-media-content"
-             style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
-        </div>
-        <div class="item-info">
-          <div class="item-overlay bottom text-right">
-            <!-- <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a> -->
-            <!-- <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a> -->
-            <div class="dropdown-menu pull-right black lt"></div>
-          </div>
-          <div class="item-title text-ellipsis">
-            <a [routerLink]="['/playlist', playlist.id]" style="color: black;">{{playlist.name_playlist}}</a>
-          </div>
-          <div class="item-author text-sm text-ellipsis ">
-            <a [routerLink]="['/playlist', playlist.id]" class="text-muted"
-               style="color: black!important">{{playlist.username}}</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="row-col">
     <div class="col-lg-9 b-r no-border-md">
       <div class="padding">
         <div class="page-title m-b">
-          <h1 class="inline m-a-0">Browse</h1>
-          <div class="dropdown inline">
-            <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">
-              All
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item active" href="#">
-                All
-              </a>
-              <a class="dropdown-item" href="#">
-                acoustic
-              </a>
-              <a class="dropdown-item" href="#">
-                ambient
-              </a>
-              <a class="dropdown-item" href="#">
-                blues
-              </a>
-              <a class="dropdown-item" href="#">
-                classical
-              </a>
-              <a class="dropdown-item" href="#">
-                country
-              </a>
-              <a class="dropdown-item" href="#">
-                electronic
-              </a>
-              <a class="dropdown-item" href="#">
-                emo
-              </a>
-              <a class="dropdown-item" href="#">
-                folk
-              </a>
-              <a class="dropdown-item" href="#">
-                hardcore
-              </a>
-              <a class="dropdown-item" href="#">
-                hip hop
-              </a>
-              <a class="dropdown-item" href="#">
-                indie
-              </a>
-              <a class="dropdown-item" href="#">
-                jazz
-              </a>
-              <a class="dropdown-item" href="#">
-                latin
-              </a>
-              <a class="dropdown-item" href="#">
-                metal
-              </a>
-              <a class="dropdown-item" href="#">
-                pop
-              </a>
-              <a class="dropdown-item" href="#">
-                pop punk
-              </a>
-              <a class="dropdown-item" href="#">
-                punk
-              </a>
-              <a class="dropdown-item" href="#">
-                reggae
-              </a>
-              <a class="dropdown-item" href="#">
-                rnb
-              </a>
-              <a class="dropdown-item" href="#">
-                rock
-              </a>
-              <a class="dropdown-item" href="#">
-                soul
-              </a>
-              <a class="dropdown-item" href="#">
-                world
-              </a>
-            </div>
-          </div>
+          <h1 class="inline m-a-0">Random Song</h1>
+          <!--          <div class="dropdown inline">-->
+          <!--            <button class="btn btn-sm no-bg h4 m-y-0 v-b dropdown-toggle text-primary" data-toggle="dropdown">-->
+          <!--              All-->
+          <!--            </button>-->
+          <!--            <div class="dropdown-menu">-->
+          <!--              <a class="dropdown-item active" href="#">-->
+          <!--                All-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                acoustic-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                ambient-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                blues-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                classical-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                country-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                electronic-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                emo-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                folk-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                hardcore-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                hip hop-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                indie-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                jazz-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                latin-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                metal-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                pop-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                pop punk-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                punk-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                reggae-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                rnb-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                rock-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                soul-->
+          <!--              </a>-->
+          <!--              <a class="dropdown-item" href="#">-->
+          <!--                world-->
+          <!--              </a>-->
+          <!--            </div>-->
+          <!--          </div>-->
         </div><!-- !isLoading -->
         <div *ngIf="!isLoading else loadingTEMP" class="jscroll-loading-center" data-ui-jp="jscroll" data-ui-options="{
             autoTrigger: true,
@@ -216,7 +189,7 @@
                       <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
                     </div>
                     <div class="item-author text-sm text-ellipsis">
-                      <a *ngFor="let singer of song.singers" class="text-muted" href="artist.detail.html">
+                      <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
                         {{ singer.singer_name }},
                       </a>
                     </div>
@@ -229,6 +202,39 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+
+  <app-search-playlist></app-search-playlist>
+
+  <div class="padding p-b-0">
+    <div class="page-title m-b">
+      <h1 class="inline m-a-0">New Playlist</h1>
+    </div>
+    <!-- <div class="row row-sm item-masonry item-info-overlay"> -->
+
+    <div *ngFor="let playlist of lastestPlaylist" class="col-sm-3 col-xs-6">
+      <div class="item r">
+        <div class="item-media ">
+          <a [routerLink]="['/playlist', playlist.id]" class="item-media-content"
+             style="background-image: url('https://photo-zmp3.zadn.vn/album_default.png');"></a>
+        </div>
+        <div class="item-info">
+          <div class="item-overlay bottom text-right">
+            <!-- <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a> -->
+            <!-- <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a> -->
+            <div class="dropdown-menu pull-right black lt"></div>
+          </div>
+          <div class="item-title text-ellipsis">
+            <a [routerLink]="['/playlist', playlist.id]" style="color: black;">{{playlist.name_playlist}}</a>
+          </div>
+          <div class="item-author text-sm text-ellipsis ">
+            <a [routerLink]="['/playlist', playlist.id]" class="text-muted"
+               style="color: black!important">{{playlist.username}}</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

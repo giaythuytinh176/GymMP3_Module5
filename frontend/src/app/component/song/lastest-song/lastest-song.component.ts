@@ -24,7 +24,7 @@ export class LastestSongComponent implements OnInit {
 
   getLastestSongs(): void {
     this.songService.getLastestSongs().subscribe((data: any) => {
-      this.lastestSong = data?.lastRecordData;
+      this.lastestSong = data;
     });
   }
 

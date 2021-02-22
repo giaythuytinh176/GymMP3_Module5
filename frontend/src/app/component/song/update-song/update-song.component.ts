@@ -347,6 +347,19 @@ export class UpdateSongComponent implements OnInit {
     }
   }
 
+  reloadComponent(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([this.router.url]);
+  }
+
+  reloadComponent2(): void {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   // tslint:disable-next-line:variable-name
   openDialogSinger(singer_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateSingerComponent, {
@@ -366,6 +379,7 @@ export class UpdateSongComponent implements OnInit {
         this.updateMusicForm.get('myControl_singer').reset();
         this.singerService.getAllSingers().subscribe((res: any) => {
           this.singers = res.data;
+          this.reloadComponent();
         });
       }
     });

@@ -82,11 +82,14 @@ export class CreateSongComponent implements OnInit {
 
     this.albums = this.route.snapshot.data.getAlbums.data;
     this.categories = this.route.snapshot.data.getCategories.data;
-    this.singers = this.route.snapshot.data.getSingers.data;
+    // this.singers = this.route.snapshot.data.getSingers.data;
 
+    this.singerService.getAllSingers().subscribe((res: any) => {
+      this.singers = res.data;
+      this.filteredOption_singer();
+    }, error => console.log(error));
     this.filteredOption_category();
     this.filteredOption_album();
-    this.filteredOption_singer();
   }
 
   filteredOption_singer(): void {
@@ -260,6 +263,12 @@ export class CreateSongComponent implements OnInit {
     }
   }
 
+  reloadComponent(): void {
+    this.routes.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.routes.onSameUrlNavigation = 'reload';
+    this.routes.navigate([this.routes.url]);
+  }
+
   // tslint:disable-next-line:variable-name
   openDialogSinger(singer_name: string): void {
     const dialogRef = this.dialog.open(DialogCreateSingerComponent, {
@@ -278,6 +287,7 @@ export class CreateSongComponent implements OnInit {
         this.createMusicForm.get('myControl_singer').reset();
         this.singerService.getAllSingers().subscribe((res: any) => {
           this.singers = res.data;
+          this.reloadComponent();
         });
       }
     });

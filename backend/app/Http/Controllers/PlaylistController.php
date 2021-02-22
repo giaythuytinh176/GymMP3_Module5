@@ -63,7 +63,7 @@ class PlaylistController extends Controller
 
     public function getSongInfoByID($id)
     {
-        return DB::table('songs')->where('id', $id)->first();
+        return Song::with('singers')->where('id', $id)->first();
     }
 
     public function store(Request $request)
@@ -154,14 +154,19 @@ class PlaylistController extends Controller
     public function createSong($song_id, $playlist_id)
     {
         $pl = Playlist::find($playlist_id);
-        $pivot = $pl->songs()->where('song_id', $song_id)->exists();
-        $playlist = false;
-        if (!$pivot) {
-            $playlist = DB::table('song_playlist')
-                ->insert(['song_id' => $song_id, 'playlist_id' => $playlist_id]);
+        $countSongOnPlaylist = $pl->songs()->count();
+        if ($countSongOnPlaylist >= 20) {
+            return response()->json(['over20songs' => 'You can not add more than 20 songs per playlist.'], 400);
+        } else {
+            $pivot = $pl->songs()->where('song_id', $song_id)->exists();
+            $playlist = false;
+            if (!$pivot) {
+                $playlist = DB::table('song_playlist')
+                    ->insert(['song_id' => $song_id, 'playlist_id' => $playlist_id]);
 //            $playlist = $pl->songs()->attach($song_id); // not show true even added to pivot
+            }
+            return response()->json(['pl' => $playlist, 'exist' => $pivot], 200);
         }
-        return response()->json(['pl' => $playlist, 'exist' => $pivot], 200);
     }
 
     public function showSongPlaylist($playlist_id)

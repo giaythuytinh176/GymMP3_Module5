@@ -42,6 +42,12 @@ export class ProfileComponent implements OnInit {
   ) {
   }
 
+  reloadComponent(): void {
+    this.routes.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.routes.onSameUrlNavigation = 'reload';
+    this.routes.navigate([this.routes.url]);
+  }
+
   ngOnInit(): void {
     this.userinfo = this.route.snapshot.data.getUserInfo.user;
     this.songs = this.route.snapshot.data.getSongByUserID;

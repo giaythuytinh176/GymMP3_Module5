@@ -14,7 +14,6 @@ import {PlaylistService} from 'src/app/services/playlist/playlist.service';
 })
 export class AllListSongComponent implements OnInit, OnDestroy {
 
-  allsongs$: Observable<Song[]>;
   allsongs: Song[];
   getLikesTop10: Song[];
   lastestPlaylist: Playlist[];

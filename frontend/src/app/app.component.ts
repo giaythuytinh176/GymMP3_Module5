@@ -23,19 +23,21 @@ import {PlaylistDetailComponent} from './component/playlist/playlist-detail/play
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'frontend';
   audio: any;
 
   // Sets initial value to true to show loading spinner on first load
   loading = true;
+  mySubscription;
 
   // https://stackoverflow.com/questions/37069609/show-loading-screen-when-navigating-between-routes-in-angular-2
   // https://stackoverflow.com/questions/42048142/angular-2-resolver-with-loading-indicator
   constructor(
     private router: Router,
   ) {
-    this.router.events.subscribe((e: RouterEvent) => {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.mySubscription = this.router.events.subscribe((e: RouterEvent) => {
       this.navigationInterceptor(e);
     });
   }
@@ -83,4 +85,9 @@ export class AppComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
 }

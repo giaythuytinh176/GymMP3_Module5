@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {FirebaseDialogAlbumComponent} from './firebaseDialogAlbum.component';
 
 
-describe('FirebaseComponent', () => {
+describe('FirebaseDialogAlbumComponent', () => {
   let component: FirebaseDialogAlbumComponent;
   let fixture: ComponentFixture<FirebaseDialogAlbumComponent>;
 

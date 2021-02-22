@@ -119,6 +119,7 @@ const routes: Routes = [
       {
         useHash: true,
         preloadingStrategy: PreloadAllModules,
+        onSameUrlNavigation: 'reload',
       }
     ),
   ],
