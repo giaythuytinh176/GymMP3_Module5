@@ -1,0 +1,8 @@
+<svg height="32" viewBox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="24" cy="24" fill="rgba(255,255,255,0.2)" r="24"/>
+  <circle class="brand-color" cx="24" cy="24" fill="#1c202b" r="22"/>
+  <circle cx="24" cy="24" fill="#ffffff" r="10"/>
+  <circle class="brand-animate" cx="13" cy="13" fill="#ffffff" r="2"/>
+  <path d="M 14 24 L 24 24 L 14 44 Z" fill="#FFFFFF"/>
+  <circle cx="24" cy="24" fill="#000000" r="3"/>
+</svg>

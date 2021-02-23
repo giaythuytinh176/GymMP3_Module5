@@ -1,0 +1,18 @@
+.fa {
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fa-thumbs-up {
+  color: black;
+}
+
+.fa-thumbs-down {
+  color: #bababa;
+}
+
+.fa:hover {
+  transform: scale(1.2);
+}
+

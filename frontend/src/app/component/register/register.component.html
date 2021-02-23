@@ -1,0 +1,132 @@
+<div class="page-title m-b">
+  <h1 class="inline m-a-0" style="padding-left: 50px">Register</h1>
+</div>
+
+<div class="b-t" style="margin-top: 10px">
+  <div class="center-block w-xxl w-auto-xs p-y-md text-center">
+    <div class="p-a-md">
+      <div>
+        <button (click)="loginSocial.goToLoginUrlFacebook()" class="btn btn-block indigo text-white m-b-sm">
+          <i class="fa fa-facebook pull-left"></i>
+          Sign up with Facebook
+        </button>
+        <!--        <button class="btn btn-block red text-white">-->
+        <!--          <i class="fa fa-google-plus pull-left"></i>-->
+        <!--          Sign up with Google+-->
+        <!--        </button>-->
+      </div>
+      <div class="m-y text-sm">
+        OR
+      </div>
+      <form [formGroup]="registerForm">
+
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Username:</mat-label>
+            <!--          #checkUsername (input)="check$.next(checkUsername.value)" -->
+            <input #register (input)="onInput(register.value)" [class.input-invalid]="registerForm.get('username')!.invalid && registerForm.get('username')!.touched" [class.input-valid]="registerForm.get('username')!.valid && registerForm.get('username')!.touched" class="form-control" formControlName="username" matInput placeholder="Username" type="text">
+            <div *ngIf="registerForm.get('username')!.invalid && registerForm.get('username')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+              <div *ngIf="registerForm.get('username').hasError('required')">
+                <div [@shake]="shake">Username is <strong>required.</strong>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="existUserMess" style="margin-top: 10px;color: red; text-align: left !important;">
+              <div [@shake]="shake">The username already <strong>exists!.</strong>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Phone:</mat-label>
+            <input [class.input-invalid]="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched" [class.input-valid]="registerForm.get('phone')!.valid && registerForm.get('phone')!.touched" class="form-control" formControlName="phone" matInput placeholder="Phone" type="text">
+            <div *ngIf="registerForm.get('phone')!.invalid && registerForm.get('phone')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+              <div *ngIf="registerForm.get('phone').hasError('required')">
+                <div [@shake]="shake">Phone is <strong>required.</strong>
+                </div>
+              </div>
+              <div *ngIf="registerForm.get('phone').hasError('pattern')">
+                <div [@shake]="shake">Phone must start with <strong>0 followed by 9 or 10 digits</strong>.
+                </div>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Password:</mat-label>
+            <input [class.input-invalid]="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" [class.input-valid]="registerForm.get('password')!.valid && registerForm.get('password')!.touched" [errorStateMatcher]="matcher" [type]="hidePassword ? 'password' : 'text'"
+                   class="form-control" formControlName="password" matInput placeholder="Password">
+            <button (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword" mat-icon-button matSuffix>
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <div *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')!.touched" style="margin-top: 10px;color: red; text-align: left !important;">
+              <div *ngIf="registerForm.get('password').hasError('required')">
+                <div [@shake]="shake">Password is <strong>required.</strong>
+                </div>
+              </div>
+              <div *ngIf="registerForm.get('password').hasError('minlength')">
+                <div [@shake]="shake">Password must be at least <strong>6 characters long.</strong>
+                </div>
+              </div>
+              <div *ngIf="registerForm.get('password').hasError('maxlength')">
+                <div [@shake]="shake">Password can be max <strong>10 characters long.</strong>
+                </div>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Password confirmation:</mat-label>
+            <input [class.input-invalid]="(registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched) || registerForm.hasError('passwordnotmatch')" [class.input-valid]="registerForm.get('password_confirmation')!.valid && registerForm.get('password_confirmation')!.touched && !registerForm.hasError('passwordnotmatch')" [errorStateMatcher]="matcher" [type]="hideConfirmPassword ? 'password' : 'text'"
+                   class="form-control" formControlName="password_confirmation" matInput placeholder="Password Confirmation">
+            <button (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword" mat-icon-button matSuffix>
+              <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <div style="margin-top: 10px;color: red; text-align: left !important;">
+              <div *ngIf="registerForm.hasError('passwordnotmatch')">
+                <div [@shake]="shake">Passwords do <strong>not match.</strong>
+                </div>
+              </div>
+              <div *ngIf="registerForm.get('password_confirmation')!.invalid && registerForm.get('password_confirmation')!.touched">
+                <div *ngIf="registerForm.get('password_confirmation').hasError('required')">
+                  <div [@shake]="shake">Password confirmation is <strong>required.</strong>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="registerForm.get('password_confirmation').hasError('minlength')">
+                <div [@shake]="shake">Password confirmation must be at least <strong>6 characters long.</strong>
+                </div>
+              </div>
+              <div *ngIf="registerForm.get('password_confirmation').hasError('maxlength')">
+                <div [@shake]="shake">Password confirmation can be max <strong>10 characters long.</strong>
+                </div>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="m-b-md text-sm">
+          <span class="text-muted">By clicking Sign Up, I agree to the</span>
+          <a href="#"> Terms of service</a>
+          <span class="text-muted"> and</span>
+          <a href="#"> Policy Privacy.</a>
+        </div>
+        <button (click)="registerFormSubmit()" [disabled]="!registerForm.valid" class="btn btn-md black p-x-lg" type="submit">
+          Sign
+          Up
+        </button>
+
+      </form>
+      <div class="p-y-sm text-center">
+        <div>Already have an account? <a [routerLink]="['/user/login']" class="text-primary _600" href="signin.html">Sign
+          in</a></div>
+      </div>
+    </div>
+  </div>
+</div>

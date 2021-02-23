@@ -1,1 +1,93 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*html, body { height: 100%; }*/
+/*body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
+
+.input-error {
+  border: red 1px solid;
+}
+
+.input-invalid {
+  border: 1px solid red;
+}
+
+.input-valid {
+  border: 1px solid green;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/*:-ms-input-placeholder { !* Internet Explorer 10-11 *!*/
+/*  !*color: #FFFFFFDE !important;*!*/
+/*  font-weight: bold;*/
+/*  font-size: 14px;*/
+/*}*/
+
+/*::-ms-input-placeholder { !* Microsoft Edge *!*/
+/*  !*color: #FFFFFFDE !important;*!*/
+/*  font-weight: bold;*/
+/*  font-size: 14px;*/
+/*}*/
+
+/*::-webkit-input-placeholder { !* WebKit, Blink, Edge *!*/
+/*  !*color: #FFFFFFDE !important;*!*/
+/*  font-weight: bold;*/
+/*}*/
+
+/*:-moz-placeholder { !* Mozilla Firefox 4 to 18 *!*/
+/*  !*color: #FFFFFFDE !important;*!*/
+/*  font-weight: bold;*/
+/*  opacity: 1;*/
+/*}*/
+
+/*::-moz-placeholder { !* Mozilla Firefox 19+ *!*/
+/*  !*color: #FFFFFFDE !important;*!*/
+/*  font-weight: bold;*/
+/*  opacity: 1;*/
+/*}*/
+
+/*::placeholder { !* Most modern browsers support this now. *!*/
+/*  !*color: #FFFFFFDE !important;*!*/
+/*  opacity: 1; !* Firefox *!*/
+/*  font-weight: bold;*/
+/*  font-size: 14px;*/
+/*}*/
+
+.xoaytron {
+  animation: 3s rotate infinite linear;
+}
+
+.ic-gif-playing-white {
+  background-image: url(https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/icons/icon-playing.gif)
+}
+
+/*.btn-playpause .is-playing {*/
+/*  background-image: url(https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/icons/icon-playing.gif)*/
+/*}*/
+/*.is-playing*/
+.mejs-track-artwork {
+  /*animation: 5s rotate infinite linear;*/
+  border-radius: 50%;
+}
+
+/*.item.r.active .item-media-content {*/
+/*  animation: 7s rotate infinite linear;*/
+/*  border-radius: 50%;*/
+/*}*/
+
+@keyframes rotate {
+  100% {
+    transform: rotate(1turn)
+  }
+  /* or 360deg*/
+}

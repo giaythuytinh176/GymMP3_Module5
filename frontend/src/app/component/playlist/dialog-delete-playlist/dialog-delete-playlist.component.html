@@ -1,0 +1,7 @@
+<div class="mat-typography" mat-dialog-content>
+  <p>Do you want to delete <strong>{{ data.name_playlist }}</strong> playlist?</p>
+</div>
+<div align="center" mat-dialog-actions>
+  <button (click)="onNoClick()" color="basic" mat-stroked-button>Cancel</button>
+  <button [mat-dialog-close]="data.id" cdkFocusInitial color="primary" mat-button>Delete</button>
+</div>

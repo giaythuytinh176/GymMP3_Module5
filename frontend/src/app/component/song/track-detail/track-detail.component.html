@@ -1,0 +1,226 @@
+<!-- ############ PAGE START-->
+<div class="pos-rlt">
+  <div [ngStyle]="{'background-image': 'url(' + songInfo.avatarUrl + ')'}" class="page-bg" data-stellar-ratio="2"></div>
+</div>
+<div class="page-content">
+  <div class="padding b-b">
+    <div class="row-col">
+      <div class="col-sm w w-auto-xs m-b">
+        <div class="item w r">
+          <div class="item-media">
+            <div [ngStyle]="{'background-image': 'url(' + songInfo.avatarUrl + ')'}" class="item-media-content"></div>
+
+          </div>
+          <div>
+            Author: {{ songInfo.author }}<br>
+            Singer:
+            <a *ngFor="let singer of songInfo.singers" [routerLink]="['/singer/song', singer.id]" class="text-muted">
+              {{ singer.singer_name }},
+            </a><br>
+            Category: {{ songInfo.category }}<br>
+            Album: {{ songInfo.album }}<br>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="p-l-md no-padding-xs">
+          <div class="page-title">
+            <h1 class="inline">{{ songInfo.nameSong }}</h1>
+          </div>
+          <pre class="item-desc text-ellipsis text-muted" data-ui-toggle-class="text-ellipsis">
+               {{ songInfo.describes }}
+          </pre>
+          <div class="item-author text-sm text-ellipsis">
+            <mat-form-field class="example-chip-list">
+              <mat-label>Singer</mat-label>
+              <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip
+                  (removed)="removeSinger(sgs)"
+                  *ngFor="let sgs of singerOfSong"
+                  [removable]="removable"
+                  [selectable]="selectable">
+                  {{sgs}}<a href=""></a>
+                  <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input
+                  #sinterInput
+                  (matChipInputTokenEnd)="addSinger($event)"
+                  [formControl]="singerCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  placeholder="New singer...">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let sgs of filteredSingers | async" [value]="sgs">
+                  {{sgs}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="item-action m-b">
+            <a class="btn btn-icon white rounded btn-share pull-right" data-target="#share-modal" data-toggle="modal"><i class="fa fa-share-alt"></i></a>
+            <button class="btn-playpause text-primary m-r-sm"></button>
+            <span class="text-muted">2356</span>
+            <a class="btn btn-icon rounded btn-favorite"><i class="fa fa-heart-o"></i></a>
+            <span class="text-muted">232</span> &nbsp;
+            <app-song-like [songIdInput]="id"></app-song-like> &nbsp;
+            <div class="inline dropdown m-l-xs">
+              <a class="btn btn-icon rounded btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+              <div class="dropdown-menu pull-right black lt"></div>
+            </div>
+          </div>
+          <div class="item-meta">
+            <a class="btn btn-xs rounded white">Pop</a> <a class="btn btn-xs rounded white">Happy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-col">
+    <div class="col-lg-9 b-r no-border-md">
+      <div class="padding">
+
+        <h5 class="m-b">List of Song with the same Singer</h5>
+        <h6 class="m-b">
+          <span class="text-muted">by</span>
+          <a class="item-author _600" data-pjax href="artist.detail.html">Rachel Platten</a>
+          <span class="text-muted text-sm">- {{ songSameSinger.length || 0 }} song, 50 min 32 sec</span>
+        </h6>
+        <div class="row item-list item-list-xs item-list-li m-b" id="tracks">
+          <div *ngFor="let song of songSameSinger" class="col-xs-12">
+            <div [attr.data-id]="song.id" [attr.data-src]="song.mp3Url" class="item r">
+              <div class="item-media ">
+                <a [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]" class="item-media-content"></a>
+                <div class="item-overlay center">
+                  <button class="btn-playpause">Play</button>
+                </div>
+              </div>
+              <div class="item-info">
+                <div class="item-overlay bottom text-right">
+                  <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>
+                  <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>
+                  <div class="dropdown-menu pull-right black lt"></div>
+                </div>
+                <div class="item-title text-ellipsis">
+                  <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
+                </div>
+                <div class="item-author text-sm text-ellipsis hide">
+                  <a class="text-muted" href="artist.detail.html">{{ song.author }}</a>
+                </div>
+                <div class="item-meta text-sm text-muted">
+                  <span class="item-meta-right">5:05</span>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <app-ngx-audio [listTracks]="tracks1"></app-ngx-audio>
+          </div>
+        </div>
+        <!--        <h5 class="m-b">From Rachel</h5>-->
+        <!--        <div class="row m-b">-->
+        <!--          <div class="col-xs-6 col-sm-6 col-md-3">-->
+        <!--            <div class="item r" data-id="item-12" data-src="http://api.soundcloud.com/tracks/174495152/stream?client_id=a10d44d431ad52868f1bce6d36f5234c">-->
+        <!--              <div class="item-media ">-->
+        <!--                <a class="item-media-content" href="track.detail.html" style="background-image: url('assets/images/b11.jpg');"></a>-->
+        <!--                <div class="item-overlay center">-->
+        <!--                  <button class="btn-playpause">Play</button>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--              <div class="item-info">-->
+        <!--                <div class="item-overlay bottom text-right">-->
+        <!--                  <a class="btn-favorite" href="#"><i class="fa fa-heart-o"></i></a>-->
+        <!--                  <a class="btn-more" data-toggle="dropdown" href="#"><i class="fa fa-ellipsis-h"></i></a>-->
+        <!--                  <div class="dropdown-menu pull-right black lt"></div>-->
+        <!--                </div>-->
+        <!--                <div class="item-title text-ellipsis">-->
+        <!--                  <a href="track.detail.html">Happy ending</a>-->
+        <!--                </div>-->
+        <!--                <div class="item-author text-sm text-ellipsis hide">-->
+        <!--                  <a class="text-muted" href="artist.detail.html">Postiljonen</a>-->
+        <!--                </div>-->
+        <!--                <div class="item-meta text-sm text-muted">-->
+        <!--            		          <span class="item-meta-stats text-xs ">-->
+        <!--            		          	<i class="fa fa-play text-muted"></i> 860-->
+        <!--            		          	<i class="fa fa-heart m-l-sm text-muted"></i> 240-->
+        <!--            		          </span>-->
+        <!--                </div>-->
+
+
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <app-song-comment></app-song-comment>
+
+      </div>
+    </div>
+    <div class="col-lg-3 w-xxl w-auto-md">
+      <div class="padding" data-ui-jp="stick_in_parent" style="bottom: 60px;">
+        <h6 class="text text-muted">Top 5 Likes</h6>
+        <div class="row item-list item-list-sm m-b">
+          <div *ngFor="let song of getLikesTop10" class="col-xs-12">
+            <div class="item r" [attr.data-id]="song.id" [attr.data-src]="song.mp3Url">
+              <div class="item-media ">
+                <a class="item-media-content" [ngStyle]="{'background-image': 'url(' + song.avatarUrl + ')'}" [routerLink]="['/track', song.id]"></a>
+              </div>
+              <div class="item-info">
+                <div class="item-overlay bottom text-right">
+                  <app-song-like [songIdInput]="song.id"></app-song-like>
+                  <a href="#" class="btn-favorite"><i class="fa fa-heart-o"></i></a>
+                  <a href="#" class="btn-more" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
+                  <div class="dropdown-menu pull-right black lt"></div>
+                </div>
+                <div class="item-title text-ellipsis">
+                  <a [routerLink]="['/track', song.id]">{{ song.nameSong }}</a>
+                </div>
+                <div class="item-author text-sm text-ellipsis">
+                  <a *ngFor="let singer of song.singers" class="text-muted" [routerLink]="['/singer/song', singer.id]">
+                    {{ singer.singer_name }},
+                  </a>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <h6 class="text text-muted">Go mobile</h6>
+        <div class="btn-groups">
+          <a class="btn btn-sm dark lt m-r-xs" href="" style="width: 135px">
+                <span class="pull-left m-r-sm">
+                  <i class="fa fa-apple fa-2x"></i>
+                </span>
+            <span class="clear text-left l-h-1x">
+                  <span class="text-muted text-xxs">Download on the</span>
+                  <b class="block m-b-xs">App Store</b>
+                </span>
+          </a>
+          <a class="btn btn-sm dark lt" href="" style="width: 133px">
+                <span class="pull-left m-r-sm">
+                  <i class="fa fa-play fa-2x"></i>
+                </span>
+            <span class="clear text-left l-h-1x">
+                  <span class="text-muted text-xxs">Get it on</span>
+                  <b class="block m-b-xs m-r-xs">Google Play</b>
+                </span>
+          </a>
+        </div>
+        <div class="b-b m-y"></div>
+        <div class="nav text-sm _600">
+          <a class="nav-link text-muted m-r-xs" href="#">About</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Contact</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Legal</a>
+          <a class="nav-link text-muted m-r-xs" href="#">Policy</a>
+        </div>
+        <p class="text-muted text-xs p-b-lg">&copy; Copyright 2021</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ############ PAGE END-->

@@ -8,17 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Playlist extends Model
 {
     use HasFactory;
-    protected $fillable=[
+
+    protected $fillable = [
         'name_playlist',
-        'category_name',
         'description',
-        'current_number_songs',
-        'create_day',
         'user_id',
-        'last_update',
         'view',
+        'status',
     ];
 
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
-
+    function songs()
+    {
+        return $this->belongsToMany(Song::class, 'song_playlist', 'playlist_id', 'song_id');
+    }
 }

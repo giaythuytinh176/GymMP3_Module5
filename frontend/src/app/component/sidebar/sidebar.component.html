@@ -1,0 +1,144 @@
+<nav class="scroll nav-stacked nav-active-primary">
+
+  <ul class="nav" data-ui-nav>
+    <li *ngIf="isLoggedIn" class="nav-header hidden-folded">
+      <span class="text-xs text-muted">Welcome, {{ user.username }}</span>
+    </li>
+    <li>
+      <a [routerLink]="['/browse']" href="browse.html">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      sort
+                    </i>
+                  </span>
+        <span class="nav-text">Browse</span>
+      </a>
+    </li>
+    <!--    <li>-->
+    <!--      <a [routerLink]="['/lastest-songs']" href="lastest-song.html">-->
+    <!--                  <span class="nav-icon">-->
+    <!--                    <i class="material-icons">-->
+    <!--                      sort-->
+    <!--                    </i>-->
+    <!--                  </span>-->
+    <!--        <span class="nav-text">Lastest Songs</span>-->
+    <!--      </a>-->
+    <!--    </li>-->
+<!--    <li>-->
+<!--      <a [routerLink]="['/search']">-->
+<!--                      <span class="nav-icon">-->
+<!--                        <i class="material-icons">-->
+<!--                          search-->
+<!--                        </i>-->
+<!--                      </span>-->
+<!--        <span class="nav-text">Search</span>-->
+<!--      </a>-->
+<!--    </li>-->
+    <!--    <li>-->
+    <!--      <a [routerLink]="['/search-playlist']">-->
+    <!--                  <span class="nav-icon">-->
+    <!--                    <i class="material-icons">-->
+    <!--                      search-->
+    <!--                    </i>-->
+    <!--                  </span>-->
+    <!--        <span class="nav-text">Search Playlist</span>-->
+    <!--      </a>-->
+    <!--    </li>-->
+    <li>
+      <a [routerLink]="['/singer/list']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      list
+                    </i>
+                  </span>
+        <span class="nav-text">Singer</span>
+      </a>
+    </li>
+    <li *ngIf="isLoggedIn">
+      <a [routerLink]="['/user/profile', user?.id]">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                        person
+                    </i>
+                  </span>
+        <span class="nav-text">Profile</span>
+      </a>
+    </li>
+    <li *ngIf="isLoggedIn">
+      <a [routerLink]="['/user/create-song']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                        add
+                    </i>
+                  </span>
+        <span class="nav-text">Add Song</span>
+      </a>
+    </li>
+    <li *ngIf="!isLoggedIn">
+      <a [routerLink]="['/user/login']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                        login
+                    </i>
+                  </span>
+        <span class="nav-text">Login</span>
+      </a>
+    </li>
+    <li *ngIf="!isLoggedIn">
+      <a [routerLink]="['/user/signup']">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                        app_registration
+                    </i>
+                  </span>
+        <span class="nav-text">Signup</span>
+      </a>
+    </li>
+    <li *ngIf="isLoggedIn">
+      <a (click)="loginComponent.signOut()">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      logout
+                    </i>
+                  </span>
+        <span class="nav-text">Logout</span>
+      </a>
+    </li>
+    <li class="nav-header hidden-folded m-t">
+      <span class="text-xs text-muted">Your collection</span>
+    </li>
+    <li>
+      <a [routerLink]="['/user/profile', user?.id]" href="profile.html#tracks">
+                  <span class="nav-label">
+                    <b class="label">8</b>
+                  </span>
+        <span class="nav-icon">
+                    <i class="material-icons">
+                      list
+                    </i>
+                  </span>
+        <span class="nav-text">Tracks</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/user/profile', user?.id]" href="profile.html#playlists">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      queue_music
+                    </i>
+                  </span>
+        <span class="nav-text">Playlists</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/user/profile', user?.id]" href="profile.html#likes">
+                  <span class="nav-icon">
+                    <i class="material-icons">
+                      favorite_border
+                    </i>
+                  </span>
+        <span class="nav-text">Likes</span>
+      </a>
+    </li>
+  </ul>
+</nav>

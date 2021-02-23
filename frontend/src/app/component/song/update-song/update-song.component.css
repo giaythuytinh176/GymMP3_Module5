@@ -1,0 +1,61 @@
+/*.thumbnail {*/
+/*  background-color: black;*/
+/*  width: 80px;*/
+/*  height: 80px;*/
+/*  display: inline-block; !* makes it fit in like an <img> *!*/
+/*  background-size: cover; !* or contain *!*/
+/*  background-position: center center;*/
+/*  background-repeat: no-repeat;*/
+/*}*/
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
+  color: darkred;
+}
+
+
+/*:-ms-input-placeholder { !* Internet Explorer 10-11 *!*/
+/*  color: rgba(37, 31, 31, 0.87) !important;*/
+/*  !*font-weight: bold;*!*/
+/*  font-size: 14px;*/
+/*}*/
+
+/*::-ms-input-placeholder { !* Microsoft Edge *!*/
+/*  color: rgba(37, 31, 31, 0.87) !important;*/
+/*  !*font-weight: bold;*!*/
+/*  font-size: 14px;*/
+/*}*/
+
+/*input {*/
+/*  font-size: 18px;*/
+/*}*/
+
+/*::-webkit-input-placeholder { !* WebKit, Blink, Edge *!*/
+/*  color: rgba(37, 31, 31, 0.87) !important;*/
+/*  !*font-weight: bold;*!*/
+/*}*/
+
+/*:-moz-placeholder { !* Mozilla Firefox 4 to 18 *!*/
+/*  color: rgba(37, 31, 31, 0.87) !important;*/
+/*  !*font-weight: bold;*!*/
+/*  opacity: 1;*/
+/*}*/
+
+/*::-moz-placeholder { !* Mozilla Firefox 19+ *!*/
+/*  color: rgba(37, 31, 31, 0.87) !important;*/
+/*  !*font-weight: bold;*!*/
+/*  opacity: 1;*/
+/*}*/
+
+/*::placeholder { !* Most modern browsers support this now. *!*/
+/*  color: rgba(37, 31, 31, 0.87) !important;*/
+/*  opacity: 1; !* Firefox *!*/
+/*  !*font-weight: bold;*!*/
+/*  font-size: 14px;*/
+/*}*/
