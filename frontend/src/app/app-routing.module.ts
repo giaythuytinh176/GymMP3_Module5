@@ -39,10 +39,10 @@ const routes: Routes = [
       getLikesTop10: GetLikesTop10Resolver,
     }
   },
-  {
-    path: 'search',
-    component: SearchSongComponent,
-  },
+  // {
+  //   path: 'search',
+  //   component: SearchSongComponent,
+  // },
   {
     path: 'playlist/:id',
     component: ShowSongsLastPlaylistComponent,

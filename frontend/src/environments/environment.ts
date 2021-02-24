@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8000/api',
-  apiLoginFacebookSocial: 'http://localhost:8000/redirect/facebook',
-  // #apiUrl: 'http://codegym.ap.ngrok.io/api',
-  // #apiLoginFacebookSocial: 'http://codegym.ap.ngrok.io/redirect/facebook',
+  // apiUrl: 'http://localhost:8000/api',
+  // apiLoginFacebookSocial: 'http://localhost:8000/redirect/facebook',
+  apiUrl: 'http://codegym.ap.ngrok.io/api',
+  apiLoginFacebookSocial: 'http://codegym.ap.ngrok.io/redirect/facebook',
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig: {

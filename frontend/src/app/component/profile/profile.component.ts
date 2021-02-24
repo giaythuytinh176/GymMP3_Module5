@@ -15,6 +15,7 @@ import {Playlist} from 'src/app/model/playlist/playlist';
 import {DialogCreatePlaylistComponent} from '../playlist/dialog-create-playlist/dialog-create-playlist.component';
 import {DialogDeletePlaylistComponent} from '../playlist/dialog-delete-playlist/dialog-delete-playlist.component';
 import {DialogEditPlaylistComponent} from '../playlist/dialog-edit-playlist/dialog-edit-playlist.component';
+import {SongLikeService} from "../../services/like/song-like.service";
 
 @Component({
   selector: 'app-profile',
@@ -39,6 +40,7 @@ export class ProfileComponent implements OnInit {
               private playlistService: PlaylistService,
               public dialog: MatDialog,
               public createPlaylist: CreatePlaylistComponent,
+              public likeSongService: SongLikeService,
   ) {
   }
 
@@ -54,6 +56,13 @@ export class ProfileComponent implements OnInit {
     this.playlists = this.route.snapshot.data.getPlaylistByUSerID;
     this.getLikesTop10 = this.route.snapshot.data.getLikesTop10;
 
+  }
+
+  getLikesTop(): void {
+    this.likeSongService.getTop10Likes().subscribe((data: any) => {
+      console.log('top', data);
+      this.getLikesTop10 = data;
+    }, error => console.log(error));
   }
 
   getPlaylistByUSerId(): void {

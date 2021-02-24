@@ -22,7 +22,7 @@ export class SongService {
   };
   private API_URL_CREATE = environment.apiUrl + '/song/create';
   private API_URL_CREATE_MOVED = environment.apiUrl + '/song/moved/create';
-  private apiListSongUser = environment.apiUrl + '/song/user/list';
+  private apiListSongUser = environment.apiUrl + '/song/user/listv2';
   private apiListSongV2User = environment.apiUrl + '/song/user/listv2';
   private updateSongUrl = environment.apiUrl + '/song';
   private getSongDetail = environment.apiUrl + '/song/guest';
