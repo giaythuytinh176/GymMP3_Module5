@@ -29,13 +29,13 @@ class SocialAuthController extends Controller
 
         $data = SocialAccountService::createOrGetUser($socialite, $social);
         if (!empty($data['error'])) {
-            #return redirect()->to('http://gymmp3.ap.ngrok.io/#/user/login-facebook?error=' . $data['error']);
-            return redirect()->to('http://localhost:4200/#/user/login-facebook?error=' . $data['error']);
+            return redirect()->to('http://c0920k1.jp.ngrok.io/#/user/login-facebook?error=' . $data['error']);
+            #return redirect()->to('http://localhost/gymmp3/#/user/login-facebook?error=' . $data['error']);
         } else {
             // auth()->login($data['data']);
             $token = JWTAuth::fromUser($data['data']);
-            #$redirectUrl = 'http://gymmp3.ap.ngrok.io/#/user/login-facebook?token=' . $token . '&action=' . $data['status'];
-            $redirectUrl = 'http://localhost:4200/#/user/login-facebook?token=' . $token . '&action=' . $data['status'];
+            $redirectUrl = 'http://c0920k1.jp.ngrok.io/#/user/login-facebook?token=' . $token . '&action=' . $data['status'];
+            #$redirectUrl = 'http://localhost/gymmp3/#/user/login-facebook?token=' . $token . '&action=' . $data['status'];
 //            dd($redirectUrl);
             return redirect()->to($redirectUrl);
         }

@@ -1,6 +1,8 @@
 php artisan serve --host=ip --port=8880
 ng s --host ip --port 80  --disable-host-check
- ng build --prod --aot --outputHashing=all
+// with custom directory
+ ng build --prod --aot --outputHashing=all --base-href=/gymmp3/
+
 
 .htaccess to fix url not found
 RewriteEngine On
@@ -9,4 +11,4 @@ RewriteEngine On
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
     RewriteRule ^ - [L]
     # If the requested resource doesn't exist, use index.html
-RewriteRule ^ /index.html
+RewriteRule ^ /gymmp3/index.html

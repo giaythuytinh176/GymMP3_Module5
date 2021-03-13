@@ -3,11 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  // apiUrl: 'http://localhost:8000/api',
-  // apiLoginFacebookSocial: 'http://localhost:8000/redirect/facebook',
-  apiUrl: 'http://codegym.ap.ngrok.io/api',
-  apiLoginFacebookSocial: 'http://codegym.ap.ngrok.io/redirect/facebook',
+  production: true,
+  apiUrl: 'https://c0920k1.jp.ngrok.io/gymmp3-backend/api',
+  apiLoginFacebookSocial: 'https://c0920k1.jp.ngrok.io/gymmp3-backend/redirect/facebook',
+  // apiUrl: 'http://codegym.ap.ngrok.io/api',
+  // apiLoginFacebookSocial: 'http://codegym.ap.ngrok.io/redirect/facebook',
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig: {
